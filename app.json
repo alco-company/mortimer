@@ -1,0 +1,11 @@
+# app.json
+{
+  "name": "staging.greybox.speicher.ltd",
+  "description": "Staging Greybox Speicher",
+  "keywords": [],
+  "scripts": {
+    "dokku": {
+      "postdeploy": "bundle exec rake db:migrate"
+    }
+  }
+}

@@ -23,6 +23,7 @@ default: &default
 
 development:
   <<: *default
+  host: localhost
   database: greybox_development
 
   # The specified database role being used to connect to postgres.
@@ -79,8 +80,16 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+staging:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
+  # database: greybox_production
+  # username: greybox
+  # password: <%= ENV["GREYBOX_DATABASE_PASSWORD"] %>
+
 production:
   <<: *default
-  database: greybox_production
-  username: greybox
-  password: <%= ENV["GREYBOX_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
+  # database: greybox_production
+  # username: greybox
+  # password: <%= ENV["GREYBOX_DATABASE_PASSWORD"] %>

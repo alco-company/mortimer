@@ -440,3 +440,13 @@ $ tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/asse
 Done in 89ms.
 ✨  Done in 0.52s.
 √ greybox % 
+
+
+
+## Configuration
+
+### Staging environment
+
+https://nts.strzibny.name/creating-staging-environments-in-rails/ 
+
+
