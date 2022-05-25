@@ -42,6 +42,10 @@ In the REFERENCES you will find a lot of people, resources, etc
 * always type * in search and lookup fields to have SPEICHER start presenting all the available items
 * 
 
+* use PostCSS processing (perhaps) - see speicher/hours/src/postss.config.js 
+* add paper_trail to abstract_resource - see speicher/hours/src/app/controllers/abstract_resources_controller.rb
+* change user_time_zone in ApplicationController to use current_user's timezone - once we have added the User Model
+* 
 
 ## DONE
 
@@ -52,6 +56,11 @@ In the REFERENCES you will find a lot of people, resources, etc
 * 07:42 dashboard
 * 09:34 application layout
 * 09:51 hotwire reload - https://github.com/kirillplatonov/hotwire-livereload
+* 10:15 add Tailwind plugins typography and forms
+* 10:35 add view_component
+* 12:21 add paper_trail
+* 12:52 start adding features to ApplicationController - cache_buster, switch_locale, user_time_zone
+* 12:58 add locale
 * 
 
 ### 2022-05-24
