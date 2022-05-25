@@ -47,9 +47,12 @@ In the REFERENCES you will find a lot of people, resources, etc
 * change user_time_zone in ApplicationController to use current_user's timezone - once we have added the User Model
 * 
 
+! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
 ## DONE
 
 ### 2022-05-25
+
+TIL - atm we have to run `dokku repo:purge-cache staging.greybox.speicher.ltd` on docker.alco.company to successfully push new deploys!
 
 07:30 here we go again
 
@@ -62,7 +65,12 @@ In the REFERENCES you will find a lot of people, resources, etc
 * 12:52 start adding features to ApplicationController - cache_buster, switch_locale, user_time_zone
 * 12:58 add locale
 * 13:24 add Redis Key Value Store - run a docker-compose -d in the 'above' folder
-* 13:49 add sidekiq 
+* 13:49 add sidekiq - https://www.pedroalonso.net/blog/hosting-rails-in-dokku
+* --- got slightly burnt by assets.debug=true in config/assets.rb (but all is good, I believe) -- 
+* --- well only so much, now: ...redis_store (cannot load such file -- active_support/cache/redis_store) ---
+* 18:03 add the RAILS_MASTER_KEY to the envs - https://dev.to/raaynaldo/the-power-of-rails-master-key-36fh
+* 18:07 add storage directory - 
+* 19:00 add background/queue worker for handset
 
 ### 2022-05-24
 
