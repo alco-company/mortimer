@@ -61,7 +61,8 @@ In the REFERENCES you will find a lot of people, resources, etc
 * 12:21 add paper_trail
 * 12:52 start adding features to ApplicationController - cache_buster, switch_locale, user_time_zone
 * 12:58 add locale
-* 
+* 13:24 add Redis Key Value Store - run a docker-compose -d in the 'above' folder
+* 13:49 add sidekiq 
 
 ### 2022-05-24
 
