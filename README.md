@@ -449,4 +449,16 @@ Done in 89ms.
 
 https://nts.strzibny.name/creating-staging-environments-in-rails/ 
 
+ 1006  git remote rename gitserver greybox
+1109  git commit -m 'added x86_64-Linux platform'
+ 1113  dokku letsencrypt:add staging.greybox.speicher.ltd
+ 1114  dokku letsencrypt:enable staging.greybox.speicher.ltd
+ 1115  dokku config:set --no-restart staging.greybox.speicher.ltd DOKKU_LETSENCRYPT_EMAIL=walther@takiro.net
+ 1116  dokku letsencrypt:enable staging.greybox.speicher.ltd
+ 1117  dokku letsencrypt:cron-job --add
+ 1118  pwd
+ 1119  clear
+ 
+ ### Add Sidekiq
 
+ 
