@@ -42,9 +42,9 @@ In the REFERENCES you will find a lot of people, resources, etc
 * always type * in search and lookup fields to have SPEICHER start presenting all the available items
 * 
 
-* use PostCSS processing (perhaps) - see speicher/hours/src/postss.config.js 
 * add paper_trail to abstract_resource - see speicher/hours/src/app/controllers/abstract_resources_controller.rb
 * change user_time_zone in ApplicationController to use current_user's timezone - once we have added the User Model
+* use github actions (or gitlab equivalent) to do automagic deploys on git push to staging/production branches
 * 
 
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
@@ -73,6 +73,12 @@ TIL - atm we have to run `dokku repo:purge-cache staging.greybox.speicher.ltd` o
 * 19:00 add background/queue worker for handset
 * 22:35 add pagy - best pagination out there
 * 22:37 add the abstract_resources_controller and the speicher_controller
+* 23:42 add CHECKS
+
+this is done
+
+* use PostCSS processing (perhaps) - see speicher/hours/src/postss.config.js 
+
 
 ### 2022-05-24
 
