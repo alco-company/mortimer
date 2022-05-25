@@ -51,6 +51,8 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 * 07:42 dashboard
 * 09:34 application layout
+* 09:51 hotwire reload - https://github.com/kirillplatonov/hotwire-livereload
+* 
 
 ### 2022-05-24
 
@@ -59,7 +61,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 * 10:30 now (most) forms work as intended
 * 10:40 cont' building first docker site
 * 18:24 gave up on pushing current build to docker.alco.company - starting all over :(
-* 22:41 ok - first deploy to staging.greybox.speicher.ltd HUZZA
+* 22:41 ok - first deploy to staging.greybox.speicher.ltd HUZZA - https://dokku.com/docs/deployment/application-deployment/
 * 22:47 done
 
 ### 2022-05-23
