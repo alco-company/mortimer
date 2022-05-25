@@ -141,6 +141,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.6-x86_64-linux)
       racc (~> 1.4)
+    pagy (5.10.1)
+      activesupport
     paper_trail (12.3.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
@@ -247,6 +249,7 @@ DEPENDENCIES
   hotwire-livereload
   jbuilder
   jsbundling-rails
+  pagy (~> 5.10)
   paper_trail
   pg (~> 1.1)
   puma (~> 5.0)

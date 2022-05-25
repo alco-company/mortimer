@@ -71,6 +71,8 @@ TIL - atm we have to run `dokku repo:purge-cache staging.greybox.speicher.ltd` o
 * 18:03 add the RAILS_MASTER_KEY to the envs - https://dev.to/raaynaldo/the-power-of-rails-master-key-36fh
 * 18:07 add storage directory - 
 * 19:00 add background/queue worker for handset
+* 22:35 add pagy - best pagination out there
+* 22:37 add the abstract_resources_controller and the speicher_controller
 
 ### 2022-05-24
 
