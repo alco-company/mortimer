@@ -45,6 +45,13 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## DONE
 
+### 2022-05-25
+
+07:30 here we go again
+
+* 07:42 dashboard
+* 09:34 application layout
+
 ### 2022-05-24
 
 06:43 rainy morning - after a bad dream - huh, not the ideal start
