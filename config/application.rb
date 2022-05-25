@@ -22,8 +22,14 @@ module Greybox
 
     # Since we're using Redis for Sidekiq, we might as well use Redis to back
     # our cache store. This keeps our application stateless as well.
-    config.cache_store = :redis_cache_store, ENV['CACHE_URL'],
-                         { namespace: 'hours::cache' }    
+    config.cache_store = :redis_cache_store, { url: ENV['CACHE_URL'],
+
+      connect_timeout:    30,  # Defaults to 20 seconds
+      read_timeout:       0.2, # Defaults to 1 second
+      write_timeout:      0.2, # Defaults to 1 second
+      reconnect_attempts: 1,   # Defaults to 0
+      
+    }    
 
 
     # config.time_zone = "Central Time (US & Canada)"
