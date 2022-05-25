@@ -16,7 +16,27 @@ module Greybox
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
+
+    # background job executioner
+    config.active_job.queue_adapter = :sidekiq
+
+    # Since we're using Redis for Sidekiq, we might as well use Redis to back
+    # our cache store. This keeps our application stateless as well.
+    config.cache_store = :redis_store, ENV['CACHE_URL'],
+                         { namespace: 'hours::cache' }    
+
+
     # config.time_zone = "Central Time (US & Canada)"
+    #
+
+    # we'll add a few in there, eventually
     # config.eager_load_paths << Rails.root.join("extras")
+    #
+    config.eager_load_paths << Rails.root.join("lib")
+
+    #
+    # previewing the components
+    config.view_component.preview_paths << "#{Rails.root}/test/components/previews"
+
   end
 end
