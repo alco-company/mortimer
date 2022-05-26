@@ -10,5 +10,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
+  get '/check.txt', to: proc {[200, {}, ['check_ok']]}
+
   root to: "dashboards#landing"
 end

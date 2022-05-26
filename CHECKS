@@ -1,4 +1,5 @@
-WAIT=10                         # wait 10 seconds
-TIMEOUT=5                       # set timeout to 5 seconds
-ATTEMPTS=6                      # try 6 times
-/check_deploy deploy_successful # Call /check_deploy and verify it replies 'deploy_successful'
+WAIT=10
+TIMEOUT=5
+ATTEMPTS=6
+
+/  check_ok
