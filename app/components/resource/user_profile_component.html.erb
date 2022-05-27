@@ -1,0 +1,25 @@
+<!--
+  Dropdown menu, show/hide based on menu state.
+
+  Entering: "transition ease-out duration-100"
+    From: "transform opacity-0 scale-95"
+    To: "transform opacity-100 scale-100"
+  Leaving: "transition ease-in duration-75"
+    From: "transform opacity-100 scale-100"
+    To: "transform opacity-0 scale-95"
+-->
+<div class="hidden <%= @container_classes %>" role="menu" aria-orientation="vertical" aria-labelledby="<%= @labelledby %>" tabindex="-1">
+  <div class="py-1" role="none">
+    <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-0">View profile</a>
+    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-2">Notifications</a>
+  </div>
+  <div class="py-1" role="none">
+    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-3">Get desktop app</a>
+    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-4">Support</a>
+  </div>
+  <div class="py-1" role="none">
+    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-5">Logout</a>
+  </div>
+</div>

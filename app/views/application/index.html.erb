@@ -1,0 +1,45 @@
+<!-- Page title & actions -->
+<div 
+  data-controller="list-item-actions"
+  data-action="speicherMessage@window->form#handleMessages"
+  class="max-w-full lg:max-w-screen-2xl mx-auto sm:px-6 lg:px-8" >
+
+  <%= render_component "resource/index_header", form_id: "resource_form", title: raw_t("#{resource_class}.index"), description: raw_t("#{resource_class}.index_description"), breadcrumbs: @breadcrumbs, current: Current do %>
+    <div class="md:mt-7 justify-end flex">
+      <div class="w-full">
+        <%= form_with url: "", method: :get, data: { turbo_frame: resources_target, turbo_action: 'advance' } do |form| %>
+          <%= search_field :q, params[:q] %>
+        <% end %>
+      </div>
+
+      <div class="ml-4 mt-1 shrink-0">
+        <!-- <button data-extended-slideover-target="button" data-turbo-frame="form_slideover" data-switchboard-url-param="<%= new_resource_url %>" data-action="switchboard#newForm" type="button" class="button new-button inline-block select-none">
+          <%#= t("#{resource_class}.new_button") %>
+        </button>-->
+        <%= link_to t("#{resource_class}.new_button"), new_resource_url, class: "button new-button inline-block select-none", data: { form_sleeve_target: "button",  switchboard_url_param: "#{new_resource_url}", action: "switchboard#newForm", 'turbo-frame': 'form_slideover' } %>
+        <%#= link_to t("#{resource_class}.new_button"), new_resource_url, class: "button new-button inline-block select-none", data: { form_sleeve_target: "button", action: "extended-slideover#toggle", 'turbo-frame': 'form_slideover' } %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+
+<!-- Projects table (small breakpoint and up) -->
+<div class="hidden mt-8 sm:block">
+  <div class="align-middle inline-block min-w-full border-b border-gray-200">
+
+    <%= turbo_stream_from resources_target  %>
+    <div class="mt-4 flex flex-col">
+      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 align-middle inline-block min-w-full max-w-full lg:max-w-screen-2xl  sm:px-6 lg:px-8">
+          <%= render partial: "index" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- this footer could hold stuff we'd like to push in anycase! -->
+<footer class="hidden fixed bottom-0 left-0 right-0 h-10 bg-slate-50">SPEICHER</footer>

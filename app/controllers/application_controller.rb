@@ -3,6 +3,32 @@ class ApplicationController < ActionController::Base
   before_action :set_cache_buster
 
   #
+  # TODO activate when ready for production!
+  # rescue_from Exception, with: :handle_all_errors
+
+  # 
+  # This is essential to all controllers which is
+  # why it gets included on the ApplicationController
+  # and not the AbstractResourcesController - by inheriting
+  # from the ApplicationController you may skip some of the
+  # automagic - but authentication cannot be skipped; you can
+  # override this, however, on controllers by calling 
+  # skip_before_action :authenticate_user!
+  #
+  # TODO - enable before production - before_action :authenticate_user! #, except: :index
+  include Authentication
+
+  #
+  # this include will assign the client platform
+  # and case on iPad, iPhone|Android, and more
+  # and set the request.variant accordingly
+  #
+  # assign the client platform and thus allow
+  # us to cater for platforms like iPhone, iPad, Android, Windows, Linux
+  #
+  include ClientControl
+
+  #
   # handling locale
   #
   around_action :switch_locale

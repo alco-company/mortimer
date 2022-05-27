@@ -53,7 +53,7 @@ gem "bootsnap", require: false
 
 gem "view_component"
 gem 'paper_trail'
-
+gem 'browser'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -81,3 +81,7 @@ end
 gem "sidekiq", "~> 6.4"
 
 gem "pagy", "~> 5.10"
+
+gem "bcrypt", "~> 3.1"
+
+gem "ancestry", "~> 4.1"

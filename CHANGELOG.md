@@ -50,6 +50,42 @@ In the REFERENCES you will find a lot of people, resources, etc
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
 ## DONE
 
+### 2022-05-27
+
+a very late start - drove by Hedemannsgade to pick up Ajs
+
+* 09:30 cont' with components - Navigation::Sidebar
+* 09:47 Resource::Form
+* 11:04 shared/notifications
+* 12:15 Navigation::Menu and Navigation::Search
+* 13:10 Navigation::SuperUser
+* 15:30 Jytte Berg - email issue
+* 16:13 add resource_control, expand abstract_resources_controller, breadcrumb, parent_control, and more
+* 16:23 add Current and abstract_resource.rb
+* 16:44 add login/signup routes
+* 16:45 add SessionsController
+* 19:30 add Account
+* 19:50 add Calendar
+* 19:58 add Participant
+* 19:58 add User
+* 20:15 add Ancestry gem for tree-like relations between same-objects, like father-son
+* 20:46 db:reset
+* 21:37 add Authorization
+
+
+### 2022-05-26
+
+late start - it's 'Kr Himmelfartsdag' after all
+
+* 15:05 redo that CHECKS thing
+* 15:42 navigation - please - see tailwindui.com
+* 15:48 start with components
+* 16:46 setting client_control (variant templating) - https://reinteractive.com/posts/191-variants-with-ruby-on-rails 
+* 18:23 let 'browser' decide - https://github.com/fnando/browser
+* 18:48 add shared/takiro
+  
+19:05 done for now
+
 ### 2022-05-25
 
 TIL - atm we have to run `dokku repo:purge-cache staging.greybox.speicher.ltd` on docker.alco.company to successfully push new deploys!

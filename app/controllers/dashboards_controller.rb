@@ -1,5 +1,8 @@
-class DashboardsController < ApplicationController
-  before_action :set_dashboard, only: %i[ show edit update destroy landing ]
+class DashboardsController < SpeicherController
+
+  skip_before_action :authenticate_user!, only: :landing
+  skip_before_action :set_resource, only: :landing 
+  before_action :find_landing, only: :landing
 
   #
   # when someone accesses the application with no endpoint
@@ -11,70 +14,30 @@ class DashboardsController < ApplicationController
     end
   end
 
-  # GET /dashboards or /dashboards.json
-  def index
-    @dashboards = Dashboard.all
-  end
-
-  # GET /dashboards/1 or /dashboards/1.json
-  def show
-  end
-
-  # GET /dashboards/new
-  def new
-    @dashboard = Dashboard.new
-  end
-
-  # GET /dashboards/1/edit
-  def edit
-  end
-
-  # POST /dashboards or /dashboards.json
-  def create
-    @dashboard = Dashboard.new(dashboard_params)
-
-    respond_to do |format|
-      if @dashboard.save
-        format.html { redirect_to dashboard_url(@dashboard), notice: "Dashboard was successfully created." }
-        format.json { render :show, status: :created, location: @dashboard }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @dashboard.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /dashboards/1 or /dashboards/1.json
-  def update
-    respond_to do |format|
-      if @dashboard.update(dashboard_params)
-        format.html { redirect_to dashboard_url(@dashboard), notice: "Dashboard was successfully updated." }
-        format.json { render :show, status: :ok, location: @dashboard }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @dashboard.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /dashboards/1 or /dashboards/1.json
-  def destroy
-    @dashboard.destroy
-
-    respond_to do |format|
-      format.html { redirect_to dashboards_url, notice: "Dashboard was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_dashboard
-      @dashboard = Dashboard.find(params[:id]) rescue nil
-      #
-      # TODO use find_landing once the User Model has been introduces
-      #
-      @dashboard ||= Dashboard.new(
+
+    # Only allow a list of trusted parameters through.
+    def dashboard_params
+      params.require(:dashboard).permit(:name, :layout, :body)
+    end
+
+
+    # Find the proper landing for this request - when possible
+    def find_landing
+      unless user_signed_in?
+        @dashboard = Dashboard.find(params[:lid]) rescue nil
+        @dashboard ||= new_dashboard
+      else
+        if current_account != current_user.account
+          @dashboard = current_account.dashboard rescue new_dashboard
+        else
+          @dashboard = (current_user.profile.dashboard rescue false) || (current_user.account.dashboard rescue false) || new_dashboard
+        end
+      end
+    end
+
+    def new_dashboard
+      Dashboard.new(
         layout: "application", 
         name: "dashboard not found!", 
         body: %(
@@ -86,24 +49,18 @@ class DashboardsController < ApplicationController
         )
       )
     end
-
-    # Only allow a list of trusted parameters through.
-    def dashboard_params
-      params.require(:dashboard).permit(:name, :layout, :body)
+    
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def resource_params
+      params.require(:dashboard).permit(:name, :layout, :body, :theme_primary_color, :theme_secondary_color, :theme_accented_color, :theme_styles)
     end
 
-
-    # Find the proper landing for this request - when possible
-    def find_landing
-      unless user_signed_in?
-        @dashboard = Dashboard.find params[:lid] rescue nil
-        @dashboard ||= Dashboard.new layout: "application", name: "default landing", body: "<div style='margin: 2rem'><h1>Standard instrumentpanel</h1><p>Ret det <a style='color: #345678' href='/dashboards'>her</a></p></div>"
+    def find_resources_queried options
+      # get <selectize> lookups
+      if request.format.symbol==:json
+        Dashboard.search Dashboard.all, params[:q]
       else
-        if current_account != current_user.account
-          @dashboard = current_account.dashboard rescue Dashboard.new( name: "N/A", layout: "application")
-        else
-          @dashboard = (current_user.profile.dashboard rescue false) || (current_user.account.dashboard rescue false) || Dashboard.new( name: "N/A", layout: "application")
-        end
+        Dashboard.search Dashboard.all, params[:q]
       end
     end
 

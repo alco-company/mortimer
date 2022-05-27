@@ -5,6 +5,7 @@ class CreateDashboards < ActiveRecord::Migration[7.0]
       t.string :layout
       t.text :body
 
+      t.datetime "deleted_at"
       t.timestamps
     end
   end

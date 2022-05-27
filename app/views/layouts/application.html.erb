@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full bg-white">
   <head>
     <title>S P E I C H E R</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -15,26 +15,29 @@
     <% end %>
   </head>
 
-  <body>
-    <%#= render Sidebar::MobileComponent.new current: Current %>
-    <div class="flex flex-col flex-1">
-      <%#= render Topbar::Component.new( current_user: Current.user, placeholder: raw( t('topbar.search'))) %>
-      <main>
-        <div class="py-6">
+  <body class="h-full">
+    <div class="min-h-full">
+
+      <!-- Static sidebar for desktop -->
+      <%= render Navigation::SidebarComponent.new current: nil %>
+
+      <!-- Main column -->
+      <div class="lg:pl-64 flex flex-col">
+        <main class="flex-1">
           <%= yield %>
-        </div>
-      </main>
-
-      <%= turbo_frame_tag 'form_slideover' do %>
-        <%#= render Resource::FormComponent.new %>
-      <% end %>
-
-      <div id="modal_content"></div>
-
+        </main>
+      </div>
     </div>
 
-    <%#= render "shared/takiro" %>
-    <%#= render partial: "shared/notifications" %>
+    <!-- Primary Data Entry Form - slide-over from right -->
+    <%= turbo_frame_tag 'form_slideover' do %>
+      <%= render Resource::FormComponent.new %>
+    <% end %>
+
+    <div id="modal_content"></div>
+
+    <%= render "shared/takiro" %>
+    <%= render partial: "shared/notifications" %>
     <div id="unauthorized"></div>
   </body>
 </html>
