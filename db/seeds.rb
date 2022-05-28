@@ -13,3 +13,7 @@ alco = Account.create name: "ALCO", dashboard: d1, calendar: cal1
 
 cal2 = Calendar.create name: "ALCO monitor's kalender"
 whd = Participant.create account: alco, name: "Uberspeicher", state: 'confirmed', calendar: cal2, participantable: User.create(  user_name: "Überspeicher", account: alco, email: "monitor@speicher.ltd", password: "ad1411bd2803wd2208", password_confirmation: "ad1411bd2803wd2208", confirmed_at: DateTime.now )
+
+services = %w( Products StockedProducts Stocks Suppliers StockLocations Employees PunchClocks Roles Teams )
+sg = { "Products" => "pim", "StockedProducts" => "wms", "Stocks" => "wms", "StockLocations" => "wms", "Suppliers" => "scm", "Employees" => "hr", "Roles" => "hr", "Teams" => "hr", "PunchClocks" => "hr" }
+services.each{ |s| Service.create name: s, menu_label: s.underscore, index_url: "/#{s.underscore}", service_group: sg[s] }

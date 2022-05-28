@@ -1,5 +1,5 @@
 <nav id="menulist_<%= @id %>" class="<%= @nav_classes %>">
-  <%= render Navigation::SuperUserComponent.new current: nil if @current && @current.user.is_a_superuser %>
+  <%= render Navigation::SuperUserComponent.new current: nil if @current && @current.user && @current.user.is_a_god? %>
 
   <% if @current %>
     <!-- Current: " text-gray-700", Default: "text-indigo-100 hover:bg-indigo-600" -->
@@ -26,7 +26,7 @@
         <%= t ".#{service.menu_label}" %>
       </a>
 
-    <% end if @current %>
+    <% end if @current && @current.account %>
   </div>
   <!--
   <div class="mt-8">

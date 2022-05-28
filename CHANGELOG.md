@@ -52,6 +52,12 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ### 2022-05-27
 
+a very very late start - almost finished my tax records for 2021
+
+* 10:58 sidebar show/hide
+
+### 2022-05-27
+
 a very late start - drove by Hedemannsgade to pick up Ajs
 
 * 09:30 cont' with components - Navigation::Sidebar
@@ -71,6 +77,9 @@ a very late start - drove by Hedemannsgade to pick up Ajs
 * 20:15 add Ancestry gem for tree-like relations between same-objects, like father-son
 * 20:46 db:reset
 * 21:37 add Authorization
+* 22:02 deploy staging 
+* 22:10 dokku ps:stop staging.greybox.speicher.ltd - dokku run staging.greybox.speicher.ltd rails db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1 - dokku ps:start staging.greybox.speicher.ltd
+* 22:18 add Service
 
 
 ### 2022-05-26

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_27_181623) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_27_203036) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_181623) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dashboard_id"], name: "index_accounts_on_dashboard_id"
+  end
+
+  create_table "accounts_services", id: false, force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "service_id", null: false
+    t.index ["account_id", "service_id"], name: "index_accounts_services_on_account_id_and_service_id"
+    t.index ["service_id", "account_id"], name: "index_accounts_services_on_service_id_and_account_id"
   end
 
   create_table "calendars", force: :cascade do |t|
@@ -54,6 +61,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_181623) do
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_participants_on_account_id"
     t.index ["participantable_type", "participantable_id"], name: "index_participants_on_participantable"
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.string "menu_label"
+    t.string "index_url"
+    t.string "service_model"
+    t.string "service_group"
+    t.string "state"
+    t.text "menu_icon"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

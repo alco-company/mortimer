@@ -1,0 +1,57 @@
+<%= form_with(model: service) do |form| %>
+  <% if service.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h2>
+
+      <ul>
+        <% service.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :menu_label, style: "display: block" %>
+    <%= form.text_field :menu_label %>
+  </div>
+
+  <div>
+    <%= form.label :index_url, style: "display: block" %>
+    <%= form.text_field :index_url %>
+  </div>
+
+  <div>
+    <%= form.label :service_model, style: "display: block" %>
+    <%= form.text_field :service_model %>
+  </div>
+
+  <div>
+    <%= form.label :service_group, style: "display: block" %>
+    <%= form.text_field :service_group %>
+  </div>
+
+  <div>
+    <%= form.label :state, style: "display: block" %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div>
+    <%= form.label :menu_icon, style: "display: block" %>
+    <%= form.text_area :menu_icon %>
+  </div>
+
+  <div>
+    <%= form.label :deleted_at, style: "display: block" %>
+    <%= form.datetime_field :deleted_at %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
