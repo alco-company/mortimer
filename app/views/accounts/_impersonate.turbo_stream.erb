@@ -1,0 +1,10 @@
+<turbo-stream target="breadcrumb_strip" action="replace">
+  <template>
+    <%= render_component 'breadcrumb', breadcrumbs: @breadcrumbs, current: Current %>
+  </template>
+</turbo-stream>
+<turbo-stream target="menulist_mobile" action="replace">
+  <template>
+    <%= render Menu::Component.new id: "menulist_mobile", current: Current, navclass: "flex-1 px-2 pb-4 space-y-1", text: "text-sm" %>
+  </template>
+</turbo-stream>

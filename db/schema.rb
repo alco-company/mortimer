@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_27_203036) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_29_193234) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,30 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_203036) do
     t.index ["participantable_type", "participantable_id"], name: "index_participants_on_participantable"
   end
 
+  create_table "roleables", force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.string "roleable_type", null: false
+    t.bigint "roleable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_roleables_on_role_id"
+    t.index ["roleable_type", "roleable_id"], name: "index_roleables_on_roleable"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "name"
+    t.string "ancestry"
+    t.string "context"
+    t.integer "position"
+    t.string "state"
+    t.string "role"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_roles_on_account_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.string "name"
     t.string "menu_label"
@@ -104,5 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_203036) do
 
   add_foreign_key "accounts", "dashboards"
   add_foreign_key "participants", "accounts"
+  add_foreign_key "roleables", "roles"
+  add_foreign_key "roles", "accounts"
   add_foreign_key "users", "accounts"
 end

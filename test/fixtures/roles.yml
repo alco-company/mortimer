@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account: one
+  name: MyString
+  ancestry: MyString
+  context: MyString
+  position: 1
+  state: MyString
+  role: MyString
+  deleted_at: 2022-05-29 21:30:26
+
+two:
+  account: two
+  name: MyString
+  ancestry: MyString
+  context: MyString
+  position: 1
+  state: MyString
+  role: MyString
+  deleted_at: 2022-05-29 21:30:26

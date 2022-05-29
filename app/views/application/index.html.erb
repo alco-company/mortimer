@@ -26,11 +26,12 @@
 
 <!-- Projects table (small breakpoint and up) -->
 <div class="hidden mt-8 sm:block">
-  <div class="align-middle inline-block min-w-full border-b border-gray-200">
+  <div class="align-middle inline-block min-w-full ">
 
     <%= turbo_stream_from resources_target  %>
     <div class="mt-4 flex flex-col">
-      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <!-- better for mobile <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8"> -->
+      <div class="-my-2 overflow-x-auto">
         <div class="py-2 align-middle inline-block min-w-full max-w-full lg:max-w-screen-2xl  sm:px-6 lg:px-8">
           <%= render partial: "index" %>
         </div>

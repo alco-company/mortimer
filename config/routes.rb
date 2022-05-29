@@ -1,14 +1,44 @@
 Rails.application.routes.draw do
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+  
+  concern :modalable do
+    collection do
+      get 'modal'
+    end
+  end
+  
+  concern :selectable do
+    collection do
+      get 'lookup'
+      post 'selected'
+    end
+  end
+  
+  concern :cloneable do
+    member do
+      get 'clonez'
+    end
+  end
+  
+  concern :exportable do
+    collection do 
+      get "export_selection"
+      get "export"
+    end
+  end
+
+  resources :roles
   resources :services
   resources :users
   resources :participants
   resources :calendars
-  resources :accounts
+  resources :accounts, concerns: [:cloneable, :modalable] do
+    post "impersonate", to: "accounts#impersonate"
+  end
 
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
 
-  
   resources :dashboards
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,42 +1,66 @@
-<%= form_with(model: account) do |form| %>
-  <% if account.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
+<%= form_with model: resource, url: resource_url, id: "resource_form", data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
+  <div class="flex-1 relative"
+    data-controller="form"
+    data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"
+    >
+    <!-- Header -->
+    <%= render_component "form_header", resource: resource, title: form_header_title, description: form_header_description %>
 
-      <ul>
-        <% account.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <!-- Divider container -->
+    <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+
+        <!-- Name -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="account-name" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".name" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2">
+            <%= form.text_field :name, 
+              required: true, 
+              data: { 'form-target' => 'focus' },
+              class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+            <div class="text-sm text-red-800" >
+              <%= resource.errors.where(:name).map( &:full_message).join( "og ") %>
+            </div>
+          </div>
+        </div>
+
+        <!--  Services -->
+        <div class="px-4 divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+          <div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t(".services_title") %></h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t(".services_description") %></p>
+          </div>
+          <div class="space-y-6 sm:space-y-5 divide-y divide-gray-200">
+            <div class="pt-6 sm:pt-5">
+              <% Service.all.pluck(:service_group).uniq.each do |service_group| %>
+                <div role="group" aria-labelledby="label-email">
+                  <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                    <div>
+                      <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700" id="label-email"><%= t(".#{service_group}") %></div>
+                    </div>
+                    <div class="mt-4 sm:mt-0 sm:col-span-2">
+                      <div class="max-w-lg space-y-4">
+                        <% Service.where(service_group: service_group).each do |service| %>
+                            <%= render_component "service", service: service, checked: resource.services.pluck(:name).include?( service.name ) %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+
+
+
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :dashboard_id, style: "display: block" %>
-    <%= form.text_field :dashboard_id %>
   </div>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :state, style: "display: block" %>
-    <%= form.text_field :state %>
-  </div>
-
-  <div>
-    <%= form.label :calender_id, style: "display: block" %>
-    <%= form.number_field :calender_id %>
-  </div>
-
-  <div>
-    <%= form.label :deleted_at, style: "display: block" %>
-    <%= form.datetime_field :deleted_at %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= render_component "action_button", resource: resource, delete_url: resource_url(resource), deleteable: (resource != current_user.account) %>
+  
 <% end %>
