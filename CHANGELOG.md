@@ -50,6 +50,13 @@ In the REFERENCES you will find a lot of people, resources, etc
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
 ## DONE
 
+### 2022-05-29
+
+after a relaxing weekend celebrating Mie's mother and father
+
+* 17:10 userprofile dropdown
+* 21:24 login/loogut
+
 ### 2022-05-27
 
 a very very late start - almost finished my tax records for 2021

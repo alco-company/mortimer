@@ -8,18 +8,26 @@
     From: "transform opacity-100 scale-100"
     To: "transform opacity-0 scale-95"
 -->
-<div class="hidden <%= @container_classes %>" role="menu" aria-orientation="vertical" aria-labelledby="<%= @labelledby %>" tabindex="-1">
+<div 
+  data-controller="resource--user-profile-component"
+  data-action="speicherMessage@window->resource--user-profile-component#handleMessages"
+  data-resource--user-account-component-target="userprofile"
+  class=" <%= @container_classes %>" 
+  role="menu" 
+  aria-orientation="vertical" 
+  aria-labelledby="<%= @labelledby %>" 
+  tabindex="-1">
   <div class="py-1" role="none">
     <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-0">View profile</a>
-    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-2">Notifications</a>
+    <%#= link_to t( :my_profile ), edit_profile_path( @current_user.id), data: {action: "click->topbar--user-profile-component#toggle click->switchboard#toggleFormSleeve", 'turbo-frame': 'form_slideover' }, class: "block py-2 px-4 text-sm text-gray-700", role: "menuitem", tabindex: "-1", id:"user-menu-item-0"  %>
+    <!--<a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-2">Notifications</a>-->
   </div>
   <div class="py-1" role="none">
-    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-3">Get desktop app</a>
-    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-4">Support</a>
+    <!--<a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-3">Get desktop app</a>
+    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-4">Support</a>-->
   </div>
   <div class="py-1" role="none">
-    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-5">Logout</a>
+    <%= button_to t( :sign_off ), logout_path, data: { turbo: "false", action: "click->resource--user-profile-component#hide"}, class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900"  %>
   </div>
 </div>
