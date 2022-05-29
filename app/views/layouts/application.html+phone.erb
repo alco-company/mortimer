@@ -15,32 +15,10 @@
     <% end %>
   </head>
 
-  <body>
-
-    <!--
-      This example requires Tailwind CSS v2.0+ 
-      
-      This example requires some changes to your config:
-      
-      ```
-      // tailwind.config.js
-      module.exports = {
-        // ...
-        plugins: [
-          // ...
-          require('@tailwindcss/forms'),
-        ],
-      }
-      ```
-    -->
-    <!--
-      This example requires updating your template:
-
-      ```
-      <html class="h-full bg-white">
-      <body class="h-full">
-      ```
-    -->
+  <body 
+    id="switchboard" 
+    data-controller="switchboard"
+    class="h-full">
     <div class="min-h-full">
       <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
       <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true">

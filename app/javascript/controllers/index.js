@@ -4,3 +4,8 @@
 
 import { application } from "./application"
 
+import FormSleeveController from "./form_sleeve_controller.js"
+application.register("form-sleeve", FormSleeveController)
+
+import SwitchboardController from "./switchboard_controller.js"
+application.register("switchboard", SwitchboardController)
