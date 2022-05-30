@@ -1,70 +1,23 @@
-class ServicesController < ApplicationController
-  before_action :set_service, only: %i[ show edit update destroy ]
+class ServicesController < SpeicherController
 
-  # GET /services or /services.json
-  def index
-    @services = Service.all
-  end
+  private 
 
-  # GET /services/1 or /services/1.json
-  def show
-  end
-
-  # GET /services/new
-  def new
-    @service = Service.new
-  end
-
-  # GET /services/1/edit
-  def edit
-  end
-
-  # POST /services or /services.json
-  def create
-    @service = Service.new(service_params)
-
-    respond_to do |format|
-      if @service.save
-        format.html { redirect_to service_url(@service), notice: "Service was successfully created." }
-        format.json { render :show, status: :created, location: @service }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @service.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /services/1 or /services/1.json
-  def update
-    respond_to do |format|
-      if @service.update(service_params)
-        format.html { redirect_to service_url(@service), notice: "Service was successfully updated." }
-        format.json { render :show, status: :ok, location: @service }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @service.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /services/1 or /services/1.json
-  def destroy
-    @service.destroy
-
-    respond_to do |format|
-      format.html { redirect_to services_url, notice: "Service was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_service
-      @service = Service.find(params[:id])
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def resource_params
+      params.require(:service).permit(:name,:menu_label,:index_url,:state,:service_model,:service_group,:menu_icon)
     end
 
-    # Only allow a list of trusted parameters through.
-    def service_params
-      params.require(:service).permit(:name, :menu_label, :index_url, :service_model, :service_group, :state, :menu_icon, :deleted_at)
+    #
+    # implement on every controller where search makes sense
+    # geet's called from resource_control.rb 
+    #
+    def find_resources_queried options
+      Service.search Service.all, params[:q]
+      # get <selectize> lookups
+      # if request.format.symbol==:json
+      #   Dashboard.search Dashboard.all, params[:q]
+      # else
+      #   Dashboard.search Dashboard.all, params[:q]
+      # end
     end
 end

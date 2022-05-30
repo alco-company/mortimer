@@ -1,42 +1,18 @@
-<div id="<%= dom_id service %>">
-  <p>
-    <strong>Name:</strong>
-    <%= service.name %>
-  </p>
-
-  <p>
-    <strong>Menu label:</strong>
-    <%= service.menu_label %>
-  </p>
-
-  <p>
-    <strong>Index url:</strong>
-    <%= service.index_url %>
-  </p>
-
-  <p>
-    <strong>Service model:</strong>
-    <%= service.service_model %>
-  </p>
-
-  <p>
-    <strong>Service group:</strong>
-    <%= service.service_group %>
-  </p>
-
-  <p>
-    <strong>State:</strong>
-    <%= service.state %>
-  </p>
-
-  <p>
-    <strong>Menu icon:</strong>
-    <%= service.menu_icon %>
-  </p>
-
-  <p>
-    <strong>Deleted at:</strong>
-    <%= service.deleted_at %>
-  </p>
-
-</div>
+<tr id="<%= dom_id resource %>"  data-controller="list-item">
+  <%= render_component "resource/list_checkbox", resource: resource %>
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+    <%= resource.name %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+    <%= resource.menu_label %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+    <%= resource.service_group %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= record_state resource %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+    <%= render EditComponent.new resource: resource, url: edit_resource_url(resource) %>
+  </td>
+</tr>  

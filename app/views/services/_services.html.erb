@@ -1,0 +1,28 @@
+<turbo-stream target="account_services_mobile" action="replace">
+  <template>
+    <div id="account_services_mobile">
+      <% Current.account.services.each do |service| %>
+
+        <a href="<%= service.index_url %>" class="text-gray-700 hover:bg-gray-300 group flex items-center px-2 py-2 <%= @text %> font-medium rounded-md">
+          <%= raw service.menu_icon %>
+          <%= service.menu_label %>
+        </a>
+
+      <% end %>
+    </div>
+  </template>
+</turbo-stream>
+<turbo-stream target="account_services_desktop" action="replace">
+  <template>
+    <div id="account_services_desktop">
+      <% Current.account.services.each do |service| %>
+
+        <a href="<%= service.index_url %>" class="text-gray-700 hover:bg-gray-300 group flex items-center px-2 py-2 <%= @text %> font-medium rounded-md">
+          <%= raw service.menu_icon %>
+          <%= service.menu_label %>
+        </a>
+
+      <% end %>
+    </div>
+  </template>
+</turbo-stream>
