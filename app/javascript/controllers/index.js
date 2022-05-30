@@ -4,8 +4,17 @@
 
 import { application } from "./application"
 
+import FormController from "./form_controller.js"
+application.register("form", FormController)
+
 import FormSleeveController from "./form_sleeve_controller.js"
 application.register("form-sleeve", FormSleeveController)
 
+import ListController from "./list_controller.js"
+application.register("list", ListController)
+
 import SwitchboardController from "./switchboard_controller.js"
 application.register("switchboard", SwitchboardController)
+
+import UiModalController from "./ui_modal_controller.js"
+application.register("ui-modal", UiModalController)

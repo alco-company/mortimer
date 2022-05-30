@@ -7,11 +7,20 @@ class Account < AbstractResource
   has_many :participants, inverse_of: :account 
   has_many :assets, inverse_of: :account
 
-  belongs_to :calendar
+  belongs_to :calendar, optional: true
   has_and_belongs_to_many :services
   accepts_nested_attributes_for :services, allow_destroy: true
 
   belongs_to :dashboard, optional: true
+
+  before_create :create_dashboard_if_missing
+
+  def create_dashboard_if_missing 
+    if dashboard.nil?
+      d = Dashboard.create( name: name, layout: "application") 
+      self.dashboard = d
+    end
+  end
 
   def signed_services=srv 
     self.services.delete_all

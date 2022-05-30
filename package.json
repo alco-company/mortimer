@@ -4,6 +4,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo-rails": "^7.1.3",
+    "@rails/request.js": "^0.0.6",
     "autoprefixer": "^10.4.7",
     "el-transition": "^0.0.7",
     "esbuild": "^0.14.39",

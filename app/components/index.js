@@ -3,6 +3,9 @@
 
 import { application } from "../javascript/controllers/application"
 
+import Navigation__MobileSidebarComponentController from "./navigation/mobile_sidebar_component_controller.js"
+application.register("navigation--mobile-sidebar-component", Navigation__MobileSidebarComponentController)
+
 import Navigation__SidebarComponentController from "./navigation/sidebar_component_controller.js"
 application.register("navigation--sidebar-component", Navigation__SidebarComponentController)
 
