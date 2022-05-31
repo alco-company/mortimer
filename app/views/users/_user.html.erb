@@ -1,52 +1,21 @@
-<div id="<%= dom_id user %>">
-  <p>
-    <strong>Account:</strong>
-    <%= user.account_id %>
-  </p>
-
-  <p>
-    <strong>User name:</strong>
-    <%= user.user_name %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= user.email %>
-  </p>
-
-  <p>
-    <strong>Confirmed at:</strong>
-    <%= user.confirmed_at %>
-  </p>
-
-  <p>
-    <strong>Password digest:</strong>
-    <%= user.password_digest %>
-  </p>
-
-  <p>
-    <strong>Unconfirmed email:</strong>
-    <%= user.unconfirmed_email %>
-  </p>
-
-  <p>
-    <strong>Remember token:</strong>
-    <%= user.remember_token %>
-  </p>
-
-  <p>
-    <strong>Session token:</strong>
-    <%= user.session_token %>
-  </p>
-
-  <p>
-    <strong>Logged in at:</strong>
-    <%= user.logged_in_at %>
-  </p>
-
-  <p>
-    <strong>On task since at:</strong>
-    <%= user.on_task_since_at %>
-  </p>
-
-</div>
+<tr id="<%= dom_id resource %>"  data-controller="list-item">
+  <%= render_component "resource/list_checkbox", resource: resource %>
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+    <%= resource.user_name %>
+  </td>
+  <td class="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.email %>
+  </td>
+  <td class="hidden lg:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= display_time resource.logged_in_at %>
+  </td>
+  <td class="hidden lg:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= display_time resource.created_at %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= record_state resource %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+    <%= render_component "edit", resource: resource, url: edit_resource_url(resource) %>
+  </td>
+</tr>  

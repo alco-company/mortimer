@@ -4,12 +4,12 @@ one:
   dashboard: one
   name: MyString
   state: MyString
-  calender_id: 1
+  calendar: one
   deleted_at: 2022-05-27 17:12:21
 
 two:
   dashboard: two
   name: MyString
   state: MyString
-  calender_id: 1
+  calendar: two
   deleted_at: 2022-05-27 17:12:21

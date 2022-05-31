@@ -151,6 +151,10 @@ class User < AbstractResource
     (teams.map( &:roles ).flatten + roles).uniq
   end
 
+  def all_tasks
+    (teams.map( &:task ).flatten ).uniq
+  end
+
   private
 
     def downcase_email 
