@@ -53,7 +53,7 @@
         <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-purple-500-mark-gray-700-text.svg" alt="Workflow">
       </div>
       <div class="mt-5 flex-1 h-0 overflow-y-auto">
-        <%= render Navigation::MenuComponent.new current: nil, nav_classes: "px2", link_classes: "bg-gray-100 text-gray-900 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md" %>
+        <%= render_component "navigation/menu", current: @current, nav_classes: "px2", link_classes: "bg-gray-100 text-gray-900 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md" %>
       </div>
     </div>
 
