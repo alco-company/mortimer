@@ -1,0 +1,10 @@
+<%= turbo_stream.update @target do %>
+  <% cp=0; @resources.each do |item| %>
+    <li id="<%= item.id %>" 
+          data-action="click->resource--combo-component#tap"
+          data-resource--combo-component-target="item" 
+          class="cp_<%= cp+=1 %> <%= @element_classes %> <%= @selected_classes if item.selected?(@values) %>" >
+          <span class="rounded mx-1 my-1 font-normal block truncate "> <%= item.name %> </span>
+    </li>
+  <% end %>
+<% end %>

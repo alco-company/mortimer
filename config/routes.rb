@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :products
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
@@ -29,7 +30,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :events
+  resources :suppliers, concerns: [:cloneable, :modalable]
+  # resources :events
   resources :tasks, concerns: [:cloneable, :modalable]
   resources :teams, concerns: [:cloneable, :modalable]
   resources :roles, concerns: [:cloneable, :modalable, :selectable]
