@@ -13,6 +13,12 @@ application.register("form-sleeve", FormSleeveController)
 import ListController from "./list_controller.js"
 application.register("list", ListController)
 
+import ListItemActionsController from "./list_item_actions_controller.js"
+application.register("list-item-actions", ListItemActionsController)
+
+import ListItemController from "./list_item_controller.js"
+application.register("list-item", ListItemController)
+
 import SwitchboardController from "./switchboard_controller.js"
 application.register("switchboard", SwitchboardController)
 

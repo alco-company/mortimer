@@ -36,12 +36,12 @@ export default class ListController extends Controller {
   focusList(){
     document.getElementById("form-sleeve").classList.add("hidden")
     try{
-      console.log(this.element.querySelectorAll("input[type=checkbox]")[this.cursorPositionValue])
       this.element.querySelectorAll("input[type=checkbox]")[this.cursorPositionValue].focus()
     } catch( err ){
       this.element.querySelectorAll("#toggle-all-rows")[0].focus()
     }
     console.log('focusing')
+    this.listAwaitingFocus = false
   }
 
   // we got the ok from authorization - now open the form
@@ -202,7 +202,6 @@ export default class ListController extends Controller {
     }
 
     if(e.detail.message==='Submitted' && e.detail.sender==='form'){
-      history.back()
       this.focusList()
     }
 
@@ -230,6 +229,7 @@ export default class ListController extends Controller {
     if(e.detail.message==='refocus cursor_position'){
       if ( this.listAwaitingFocus === true ){
         if (e.detail.sender === 'ui-modal') {
+          history.back()
           try{
             document.getElementById('modal_content').innerHTML=""
             document.getElementById('action-buttons').classList.add('hidden')
