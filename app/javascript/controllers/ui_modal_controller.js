@@ -53,7 +53,6 @@ export default class UiModalController extends Controller {
       });
     }
     this.close(true)
-    history.back()
   }
 
   open() {

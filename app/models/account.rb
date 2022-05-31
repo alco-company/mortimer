@@ -32,6 +32,7 @@ class Account < AbstractResource
   # get's called from controller specific find_resources_queried
   #
   def self.search_by_model_fields lot, query
+    say query
     default_scope.where "name like '%#{query}%' "
   end
 
@@ -43,5 +44,21 @@ class Account < AbstractResource
   def excluded_associations_from_cloning
     []
   end
+
+
+    # 
+    # methods supporting broadcasting 
+    #
+    def broadcast_create
+      broadcast_prepend_later_to model_name.plural, target: "#{self.class.to_s.underscore}_list", partial: self, locals: { resource: self }
+    end
+
+    def broadcast_update 
+      if self.deleted_at.nil? 
+        broadcast_replace_later_to model_name.plural, partial: self, locals: { resource: self }
+      else 
+        broadcast_remove_to model_name.plural, target: self
+      end
+    end
 
 end

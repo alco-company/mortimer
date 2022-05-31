@@ -341,8 +341,8 @@ class AbstractResourcesController < ApplicationController
         begin        
           resource.save
           respond_to do |format|
-            format.turbo_stream { head :no_content }
-            format.html { head :no_content }
+            format.turbo_stream { head :ok }
+            format.html { head :ok }
             format.json { render json: resource }
           end
         rescue => exception
@@ -366,8 +366,8 @@ class AbstractResourcesController < ApplicationController
           render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
         else
           respond_to do |format|
-            format.turbo_stream { head :no_content }
-            format.html { head :no_content }
+            format.turbo_stream { head :ok }
+            format.html { head :ok }
             format.json { render json: resource }
           end
         end

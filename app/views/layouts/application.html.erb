@@ -22,7 +22,7 @@
     <div class="min-h-full">
 
       <!-- Static sidebar for desktop -->
-      <%= render Navigation::SidebarComponent.new current: Current %>
+      <%= render_component "navigation/sidebar", current: Current %>
 
       <!-- Main column -->
       <div class="lg:pl-64 flex flex-col">
@@ -34,7 +34,7 @@
 
     <!-- Primary Data Entry Form - slide-over from right -->
     <%= turbo_frame_tag 'form_slideover' do %>
-      <%= render Resource::FormComponent.new %>
+      <%= render_component "resource/form" %>
     <% end %>
 
     <div id="modal_content"></div>

@@ -54,6 +54,7 @@ module Authentication
   private
 
   def current_user
+    say "1"
     Current.user ||= if session[:current_user_session_token].present?
       User.unscoped.find_by(session_token: session[:current_user_session_token])
     elsif cookies.permanent.encrypted[:remember_token].present?
@@ -62,11 +63,19 @@ module Authentication
   end
 
   def current_account
-    Current.account ||= if !session[:current_account].nil?
-      (Account.find session[:current_account] rescue nil)
-    else
-      (current_user.account rescue nil)
+    Current.account ||= set_current_account
+    say "2 #{Current.account.nil?}"
+    Current.account
+  end
+
+  def set_current_account
+    if !session[:current_account].nil?
+      session[:current_account] = Account.find( session[:current_account]) rescue nil
     end
+    if session[:current_account].nil?
+      session[:current_account] = current_user.account rescue nil
+    end
+    session[:current_account]
   end
 
   def user_signed_in?

@@ -50,6 +50,32 @@ In the REFERENCES you will find a lot of people, resources, etc
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
 ## DONE
 
+### 2022-05-31
+
+early rise - feelin' good after yesterdays training session
+
+* 06:05 on with the refactor of menu, it's hotwire giving me a hard time, I'm afraid
+* 08:25 refactor role and services
+* 10:51 deploy current 
+* 
+
+
+### 2022-05-30
+
+monday bloody monday
+
+* 06:45 get a hold on all the javascript components/controllers
+* 09:10 mobile sidebar
+* 11:12 form elements
+* 11:55 delete dialog
+* 12:47 add service after refactor
+* 13:13 role refactor
+* 16:18 menu refactor
+* 17:10 paused to train
+* 18:30 back on the subject
+
+22:45 done
+
 ### 2022-05-29
 
 after a relaxing weekend celebrating Mie's mother and father
