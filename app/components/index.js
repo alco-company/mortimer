@@ -9,6 +9,9 @@ application.register("navigation--mobile-sidebar-component", Navigation__MobileS
 import Navigation__SidebarComponentController from "./navigation/sidebar_component_controller.js"
 application.register("navigation--sidebar-component", Navigation__SidebarComponentController)
 
+import Resource__ComboComponentController from "./resource/combo_component_controller.js"
+application.register("resource--combo-component", Resource__ComboComponentController)
+
 import Resource__UserAccountComponentController from "./resource/user_account_component_controller.js"
 application.register("resource--user-account-component", Resource__UserAccountComponentController)
 
