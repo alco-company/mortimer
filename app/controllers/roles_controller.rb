@@ -1,70 +1,46 @@
-class RolesController < ApplicationController
-  before_action :set_role, only: %i[ show edit update destroy ]
+class RolesController < SpeicherController
 
-  # GET /roles or /roles.json
-  def index
-    @roles = Role.all
-  end
-
-  # GET /roles/1 or /roles/1.json
-  def show
-  end
-
-  # GET /roles/new
-  def new
-    @role = Role.new
-  end
-
-  # GET /roles/1/edit
-  def edit
-  end
-
-  # POST /roles or /roles.json
-  def create
-    @role = Role.new(role_params)
-
+  def lookup 
+    @target=params[:target]
+    @values=params[:values].split(',')
+    @element_classes=params[:element_classes]
+    @selected_classes=params[:selected_classes]
     respond_to do |format|
-      if @role.save
-        format.html { redirect_to role_url(@role), notice: "Role was successfully created." }
-        format.json { render :show, status: :created, location: @role }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @role.errors, status: :unprocessable_entity }
+      format.turbo_stream
+    end
+  end
+
+  private 
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    # Parameters: {"authenticity_token"=>"[FILTERED]", "role"=>{"account_id"=>"2", "name"=>"k", "context"=>"k", "role"=>{"0"=>"on", "1"=>"on", "2"=>"on", "3"=>"on", "4"=>"on", "5"=>"on", "6"=>"on", "7"=>"on", "8"=>"on"}}}
+    def resource_params
+      params[:role][:role] = set_role
+      params.require(:role).permit(:account_id, :name, :ancestry, :context, :position, :state, :role)
+    end
+
+    #
+    # implement on every controller where search makes sense
+    # geet's called from resource_control.rb 
+    #
+    def find_resources_queried options
+      Role.search Role.all, params[:q]
+      # get <selectize> lookups
+      # if request.format.symbol==:json
+      #   Dashboard.search Dashboard.all, params[:q]
+      # else
+      #   Dashboard.search Dashboard.all, params[:q]
+      # end
+    end
+
+    def set_role 
+      r = []
+      Role::AUTHORIZATIONS.each_with_index do |v,k|
+        res = params[:role][:role][k.to_s]=='on' ? v[0] : '-'
+        r.push(res) 
       end
-    end
-  end
-
-  # PATCH/PUT /roles/1 or /roles/1.json
-  def update
-    respond_to do |format|
-      if @role.update(role_params)
-        format.html { redirect_to role_url(@role), notice: "Role was successfully updated." }
-        format.json { render :show, status: :ok, location: @role }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @role.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /roles/1 or /roles/1.json
-  def destroy
-    @role.destroy
-
-    respond_to do |format|
-      format.html { redirect_to roles_url, notice: "Role was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_role
-      @role = Role.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def role_params
-      params.require(:role).permit(:account_id, :name, :ancestry, :context, :position, :state, :role, :deleted_at)
+      r.join()
+    rescue
+      "---------"
     end
 end

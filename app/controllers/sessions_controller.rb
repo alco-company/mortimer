@@ -21,6 +21,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    say (current_user.participant.to_json rescue "N/A")
     forget(current_user)
     logout
     redirect_to root_path, status: :see_other, notice: raw_t('.signed_out')
