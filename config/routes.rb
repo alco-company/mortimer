@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :events
+  resources :tasks, concerns: [:cloneable, :modalable]
+  resources :teams, concerns: [:cloneable, :modalable]
   resources :roles, concerns: [:cloneable, :modalable, :selectable]
   resources :services, concerns: [:cloneable, :modalable, :selectable]
   resources :users, concerns: [:cloneable, :modalable]

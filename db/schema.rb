@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_29_193234) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_31_123016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_193234) do
     t.index ["service_id", "account_id"], name: "index_accounts_services_on_service_id_and_account_id"
   end
 
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.string "assignable_type", null: false
+    t.bigint "assignable_id", null: false
+    t.string "assignable_role"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable"
+    t.index ["event_id"], name: "index_assignments_on_event_id"
+  end
+
   create_table "calendars", force: :cascade do |t|
     t.string "name"
     t.datetime "deleted_at"
@@ -46,6 +58,37 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_193234) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "eventable_type", null: false
+    t.bigint "eventable_id", null: false
+    t.bigint "calendar_id", null: false
+    t.string "name"
+    t.string "state"
+    t.integer "position"
+    t.string "ancestry"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.integer "minutes_spent"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_events_on_account_id"
+    t.index ["calendar_id"], name: "index_events_on_calendar_id"
+    t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable"
+  end
+
+  create_table "participant_teams", force: :cascade do |t|
+    t.bigint "participant_id", null: false
+    t.bigint "team_id", null: false
+    t.string "team_role", default: "member"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["participant_id"], name: "index_participant_teams_on_participant_id"
+    t.index ["team_id"], name: "index_participant_teams_on_team_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -100,6 +143,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_193234) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.integer "duration"
+    t.datetime "planned_start_at"
+    t.datetime "planned_end_at"
+    t.string "location"
+    t.string "purpose"
+    t.text "recurring_ical"
+    t.datetime "recurring_end_at"
+    t.boolean "full_day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.bigint "task_id"
+    t.bigint "calendar_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_teams_on_calendar_id"
+    t.index ["task_id"], name: "index_teams_on_task_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "user_name"
@@ -127,8 +193,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_193234) do
   end
 
   add_foreign_key "accounts", "dashboards"
+  add_foreign_key "assignments", "events"
+  add_foreign_key "events", "accounts"
+  add_foreign_key "events", "calendars"
+  add_foreign_key "participant_teams", "participants"
+  add_foreign_key "participant_teams", "teams"
   add_foreign_key "participants", "accounts"
   add_foreign_key "roleables", "roles"
   add_foreign_key "roles", "accounts"
+  add_foreign_key "teams", "calendars"
+  add_foreign_key "teams", "tasks"
   add_foreign_key "users", "accounts"
 end
