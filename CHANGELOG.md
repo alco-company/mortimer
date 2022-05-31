@@ -57,7 +57,8 @@ early rise - feelin' good after yesterdays training session
 * 06:05 on with the refactor of menu, it's hotwire giving me a hard time, I'm afraid
 * 08:25 refactor role and services
 * 10:51 deploy current 
-* 
+* 12:18 on with user, task, team
+* 19:25 deploying events, teams, tasks
 
 
 ### 2022-05-30

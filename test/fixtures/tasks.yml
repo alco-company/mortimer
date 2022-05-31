@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  duration: 1
+  planned_start_at: 2022-05-31 13:19:36
+  planned_end_at: 2022-05-31 13:19:36
+  location: MyString
+  purpose: MyString
+  recurring_ical: MyText
+  recurring_end_at: 2022-05-31 13:19:36
+  full_day: false
+
+two:
+  duration: 1
+  planned_start_at: 2022-05-31 13:19:36
+  planned_end_at: 2022-05-31 13:19:36
+  location: MyString
+  purpose: MyString
+  recurring_ical: MyText
+  recurring_end_at: 2022-05-31 13:19:36
+  full_day: false
