@@ -1,70 +1,65 @@
-class ParticipantsController < ApplicationController
-  before_action :set_participant, only: %i[ show edit update destroy ]
+class ParticipantsController < DelegatedController
 
-  # GET /participants or /participants.json
-  def index
-    @participants = Participant.all
-  end
-
-  # GET /participants/1 or /participants/1.json
-  def show
-  end
-
-  # GET /participants/new
-  def new
-    @participant = Participant.new
-  end
-
-  # GET /participants/1/edit
-  def edit
-  end
-
-  # POST /participants or /participants.json
-  def create
-    @participant = Participant.new(participant_params)
-
-    respond_to do |format|
-      if @participant.save
-        format.html { redirect_to participant_url(@participant), notice: "Participant was successfully created." }
-        format.json { render :show, status: :created, location: @participant }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @participant.errors, status: :unprocessable_entity }
+  #
+  # The create_resource is an override to make sure Event is the 'base' entity
+  # being created
+  #
+  def create_resource
+    render head: 401 and return unless @authorized
+    resource.participantable = resource_class.new if resource.participantable.nil?
+    unless resource.valid? 
+      render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
+    else
+      begin        
+        resource.save
+        head :no_content
+      rescue => exception
+        resource.errors.add(:base, exception)
+        render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
       end
     end
   end
 
-  # PATCH/PUT /participants/1 or /participants/1.json
-  def update
-    respond_to do |format|
-      if @participant.update(participant_params)
-        format.html { redirect_to participant_url(@participant), notice: "Participant was successfully updated." }
-        format.json { render :show, status: :ok, location: @participant }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @participant.errors, status: :unprocessable_entity }
+  def update_resource
+    render head: 401 and return unless @authorized
+    return if params.include? "edit_all"
+    begin        
+      unless resource.update resource_params
+        resource.participantable = resource_class.new if resource.participantable.nil?
+        render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
       end
+    rescue => exception
+      resource.errors.add(:base, exception)
+      render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
     end
+  
   end
 
-  # DELETE /participants/1 or /participants/1.json
-  def destroy
-    @participant.destroy
-
-    respond_to do |format|
-      format.html { redirect_to participants_url, notice: "Participant was successfully destroyed." }
-      format.json { head :no_content }
-    end
+  def delete_it
+    return resource.update(deleted_at: DateTime.now) if params[:purge].blank?
+    resource.destroy
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_participant
-      @participant = Participant.find(params[:id])
-    end
+  # def create_resource
+  #   render head: 401 and return unless @authorized
+  #   resource = Participant.new(resource_params)
+  
+  #   unless resource.valid? 
+  #     render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
+  #   else
+  #     resource.save
+  #   end
+  # end
 
-    # Only allow a list of trusted parameters through.
-    def participant_params
-      params.require(:participant).permit(:account_id, :calendar_id, :participantable_id, :participantable_type, :name, :state, :ancestry, :deleted_at)
-    end
+
+  # def delete_resource
+  #   render head: 401 and return unless @authorized
+  #   element = resource.participantable
+  #   unless delete_it
+  #     render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
+  #   else
+  #     render turbo_stream: turbo_stream.remove( element ), status: 303
+  #   end
+  # end
+
 end
