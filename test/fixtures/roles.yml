@@ -1,4 +1,3 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   account: one
@@ -8,14 +7,67 @@ one:
   position: 1
   state: MyString
   role: MyString
-  deleted_at: 2022-05-29 21:30:26
 
 two:
-  account: two
+  account: one
   name: MyString
   ancestry: MyString
   context: MyString
   position: 1
   state: MyString
   role: MyString
-  deleted_at: 2022-05-29 21:30:26
+
+is_god: 
+  account: one
+  name: All actions everywhere
+  ancestry: MyString
+  context: 
+  position: 1
+  state: MyString
+  role: ISNECUDPF
+
+all_products:
+  account: one
+  name: All actions on products suppliers and accounts/:1
+  ancestry: MyString
+  context: product supplier account/:1
+  position: 1
+  state: MyString
+  role: ISNECUDPF
+
+es_roles_users:
+  account: one
+  name: Edit and Show Roles and Users
+  ancestry: MyString
+  context: role user
+  position: 1
+  state: MyString
+  role: -S-E-----
+
+endpoint_one:
+  account: one
+  name: Edit and Show Roles and Users
+  ancestry: MyString
+  context: endpoint Role
+  position: 1
+  state: MyString
+  role: -S-E-----
+
+endpoint_two:
+  account: one
+  name: Edit and Show Roles and Users
+  ancestry: MyString
+  context: User endpoint
+  position: 1
+  state: MyString
+  role: -SNE-----
+
+not_account:
+  account: two
+  name: Edit and Show Roles and Users
+  ancestry: MyString
+  context: User endpoint
+  position: 1
+  state: MyString
+  role: -SNE-----
+
