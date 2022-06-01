@@ -17,7 +17,7 @@ class StockItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create stock_item" do
     assert_difference("StockItem.count") do
-      post stock_items_url, params: { stock_item: { batch_number: @stock_item.batch_number, batch_unit: @stock_item.batch_unit, expire_at: @stock_item.expire_at, quantity: @stock_item.quantity, stock_id: @stock_item.stock_id, stocked_location_id: @stock_item.stocked_location_id, stocked_product_id: @stock_item.stocked_product_id } }
+      post stock_items_url, params: { stock_item: { batch_number: @stock_item.batch_number, batch_unit: @stock_item.batch_unit, expire_at: @stock_item.expire_at, quantity: @stock_item.quantity, stock_id: @stock_item.stock_id, stock_location_id: @stock_item.stock_location_id, stocked_product_id: @stock_item.stocked_product_id } }
     end
 
     assert_redirected_to stock_item_url(StockItem.last)
@@ -34,7 +34,7 @@ class StockItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update stock_item" do
-    patch stock_item_url(@stock_item), params: { stock_item: { batch_number: @stock_item.batch_number, batch_unit: @stock_item.batch_unit, expire_at: @stock_item.expire_at, quantity: @stock_item.quantity, stock_id: @stock_item.stock_id, stocked_location_id: @stock_item.stocked_location_id, stocked_product_id: @stock_item.stocked_product_id } }
+    patch stock_item_url(@stock_item), params: { stock_item: { batch_number: @stock_item.batch_number, batch_unit: @stock_item.batch_unit, expire_at: @stock_item.expire_at, quantity: @stock_item.quantity, stock_id: @stock_item.stock_id, stock_location_id: @stock_item.stock_location_id, stocked_product_id: @stock_item.stocked_product_id } }
     assert_redirected_to stock_item_url(@stock_item)
   end
 

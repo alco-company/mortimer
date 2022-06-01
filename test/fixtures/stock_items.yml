@@ -3,7 +3,7 @@
 one:
   stock: one
   stocked_product: one
-  stocked_location: one
+  stock_location: one
   batch_number: MyString
   expire_at: 2022-06-01 21:09:24
   quantity: 1
@@ -12,7 +12,7 @@ one:
 two:
   stock: two
   stocked_product: two
-  stocked_location: two
+  stock_location: two
   batch_number: MyString
   expire_at: 2022-06-01 21:09:24
   quantity: 1

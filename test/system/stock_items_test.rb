@@ -19,7 +19,7 @@ class StockItemsTest < ApplicationSystemTestCase
     fill_in "Expire at", with: @stock_item.expire_at
     fill_in "Quantity", with: @stock_item.quantity
     fill_in "Stock", with: @stock_item.stock_id
-    fill_in "Stocked location", with: @stock_item.stocked_location_id
+    fill_in "Stocked location", with: @stock_item.stock_location_id
     fill_in "Stocked product", with: @stock_item.stocked_product_id
     click_on "Create Stock item"
 
@@ -36,7 +36,7 @@ class StockItemsTest < ApplicationSystemTestCase
     fill_in "Expire at", with: @stock_item.expire_at
     fill_in "Quantity", with: @stock_item.quantity
     fill_in "Stock", with: @stock_item.stock_id
-    fill_in "Stocked location", with: @stock_item.stocked_location_id
+    fill_in "Stocked location", with: @stock_item.stock_location_id
     fill_in "Stocked product", with: @stock_item.stocked_product_id
     click_on "Update Stock item"
 

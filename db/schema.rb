@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_01_125802) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_01_211531) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -169,6 +169,35 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_01_125802) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "stock_item_transactions", force: :cascade do |t|
+    t.bigint "stocked_product_id", null: false
+    t.bigint "stock_location_id", null: false
+    t.bigint "stock_item_id", null: false
+    t.integer "quantity"
+    t.string "unit"
+    t.string "barcodes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_item_id"], name: "index_stock_item_transactions_on_stock_item_id"
+    t.index ["stock_location_id"], name: "index_stock_item_transactions_on_stock_location_id"
+    t.index ["stocked_product_id"], name: "index_stock_item_transactions_on_stocked_product_id"
+  end
+
+  create_table "stock_items", force: :cascade do |t|
+    t.bigint "stock_id", null: false
+    t.bigint "stocked_product_id", null: false
+    t.bigint "stock_location_id", null: false
+    t.string "batch_number"
+    t.datetime "expire_at"
+    t.integer "quantity"
+    t.string "batch_unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_id"], name: "index_stock_items_on_stock_id"
+    t.index ["stock_location_id"], name: "index_stock_items_on_stock_location_id"
+    t.index ["stocked_product_id"], name: "index_stock_items_on_stocked_product_id"
+  end
+
   create_table "stock_locations", force: :cascade do |t|
     t.bigint "stock_id", null: false
     t.string "location_barcode"
@@ -177,6 +206,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_01_125802) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["stock_id"], name: "index_stock_locations_on_stock_id"
+  end
+
+  create_table "stocked_products", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "stock_id", null: false
+    t.bigint "stock_location_id", null: false
+    t.integer "quantity"
+    t.string "stock_unit"
+    t.datetime "consolidated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_stocked_products_on_product_id"
+    t.index ["stock_id"], name: "index_stocked_products_on_stock_id"
+    t.index ["stock_location_id"], name: "index_stocked_products_on_stock_location_id"
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -255,7 +298,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_01_125802) do
   add_foreign_key "products", "suppliers"
   add_foreign_key "roleables", "roles"
   add_foreign_key "roles", "accounts"
+  add_foreign_key "stock_item_transactions", "stock_items"
+  add_foreign_key "stock_item_transactions", "stock_locations"
+  add_foreign_key "stock_item_transactions", "stocked_products"
+  add_foreign_key "stock_items", "stock_locations"
+  add_foreign_key "stock_items", "stocked_products"
+  add_foreign_key "stock_items", "stocks"
   add_foreign_key "stock_locations", "stocks"
+  add_foreign_key "stocked_products", "products"
+  add_foreign_key "stocked_products", "stock_locations"
+  add_foreign_key "stocked_products", "stocks"
   add_foreign_key "teams", "calendars"
   add_foreign_key "teams", "tasks"
   add_foreign_key "users", "accounts"
