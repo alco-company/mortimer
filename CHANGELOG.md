@@ -50,6 +50,15 @@ In the REFERENCES you will find a lot of people, resources, etc
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
 ## DONE
 
+
+### 2022-06-01
+
+first day of summer - and we are yet to sleep outside this year
+
+* 06:35 off to the races - cont' with products (the Supplier Combo is acting up)
+* 10:48 products working - yeah
+* 
+
 ### 2022-05-31
 
 early rise - feelin' good after yesterdays training session
@@ -59,6 +68,10 @@ early rise - feelin' good after yesterdays training session
 * 10:51 deploy current 
 * 12:18 on with user, task, team
 * 19:25 deploying events, teams, tasks
+* 19:58 adding assets and suppliers
+* 22:40 pushing forward with products
+
+23:30 I was clearly done
 
 
 ### 2022-05-30

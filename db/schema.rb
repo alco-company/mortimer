@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_31_123016) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_31_181209) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,6 +30,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_31_123016) do
     t.bigint "service_id", null: false
     t.index ["account_id", "service_id"], name: "index_accounts_services_on_account_id_and_service_id"
     t.index ["service_id", "account_id"], name: "index_accounts_services_on_service_id_and_account_id"
+  end
+
+  create_table "assets", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "assetable_type", null: false
+    t.bigint "assetable_id", null: false
+    t.bigint "calendar_id"
+    t.string "name"
+    t.string "state"
+    t.integer "position"
+    t.string "ancestry"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_assets_on_account_id"
+    t.index ["assetable_type", "assetable_id"], name: "index_assets_on_assetable"
+    t.index ["calendar_id"], name: "index_assets_on_calendar_id"
+    t.index ["name"], name: "index_assets_on_name"
   end
 
   create_table "assignments", force: :cascade do |t|
@@ -143,6 +161,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_31_123016) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "suppliers", force: :cascade do |t|
+    t.string "product_resource"
+    t.string "gtin_prefix"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.integer "duration"
     t.datetime "planned_start_at"
@@ -193,6 +218,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_31_123016) do
   end
 
   add_foreign_key "accounts", "dashboards"
+  add_foreign_key "assets", "accounts"
+  add_foreign_key "assets", "calendars"
   add_foreign_key "assignments", "events"
   add_foreign_key "events", "accounts"
   add_foreign_key "events", "calendars"
