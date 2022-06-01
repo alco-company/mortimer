@@ -66,6 +66,7 @@ first day of summer - and we are yet to sleep outside this year
 * 17:30 paused to train
 * 19:45 voted YES to drop the danish EU defense reservation
 * 20:43 on with stock_location
+* 20:46 on with stocked_product
 * 
 
 ### 2022-05-31

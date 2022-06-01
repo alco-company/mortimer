@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_01_121440) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_01_125802) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -169,6 +169,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_01_121440) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "stock_locations", force: :cascade do |t|
+    t.bigint "stock_id", null: false
+    t.string "location_barcode"
+    t.boolean "open_shelf"
+    t.integer "shelf_size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_id"], name: "index_stock_locations_on_stock_id"
+  end
+
   create_table "stocks", force: :cascade do |t|
     t.string "access_token"
     t.datetime "last_heart_beat_at"
@@ -245,6 +255,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_01_121440) do
   add_foreign_key "products", "suppliers"
   add_foreign_key "roleables", "roles"
   add_foreign_key "roles", "accounts"
+  add_foreign_key "stock_locations", "stocks"
   add_foreign_key "teams", "calendars"
   add_foreign_key "teams", "tasks"
   add_foreign_key "users", "accounts"

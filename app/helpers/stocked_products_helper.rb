@@ -1,0 +1,2 @@
+module StockedProductsHelper
+end
