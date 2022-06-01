@@ -1,0 +1,73 @@
+<%= form_with model: resource, url: url_for(resource.assetable), id: "resource_form", data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
+  <%= form.fields_for :assetable do |stock| %>
+    <%= form.hidden_field :account_id, value: current_account.id %>
+    <%= form.hidden_field :assetable_type, value: "Stock" %>
+    <div class="flex-1 relative "
+      data-controller="form"
+      data-form-clipboard-prefix-value="localhost:3000/pos<%= resource_url(resource.assetable) %>"
+      data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"    
+      >
+      <!-- Header -->
+      <%= render_component "resource/form_header", resource: resource, title: form_header_title, description: form_header_description %>
+
+      <!-- Divider container -->
+      <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+
+        <!-- Name -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".name" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2">
+            <%= form.text_field :name, 
+              required: true, 
+              data: { "form-target" => "focus" },
+              class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+            <div class="text-sm text-red-800" >
+              <%= resource.errors.where(:name).map( &:full_message).join( "og ") %>
+            </div>
+          </div>
+        </div>
+
+        <!-- last_heart_beat_at -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="last_heart_beat_at" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".last_heart_beat_at" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2">
+            <%= display_time stock.object.last_heart_beat_at %>
+          </div>
+        </div>
+
+        <!-- access_token -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="access_token" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".access_token" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2 flex">
+            <%#= stock.hidden_field :access_token %>
+            <%= stock.text_field :access_token, disabled: true, class: "disabled  w-full shrink shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+            <button class="grow ml-1" type="button" data-action="form#copy_text" >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>            
+            </button>
+            <div class="text-sm text-red-800" >
+              <%= resource.errors.where(:access_token).map( &:full_message).join( "og ") %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+
+  <%= render_component "action_button", resource: resource, delete_url: resource_url(resource.assetable), deleteable: true %>
+
+<% end %>

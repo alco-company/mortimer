@@ -57,7 +57,10 @@ first day of summer - and we are yet to sleep outside this year
 
 * 06:35 off to the races - cont' with products (the Supplier Combo is acting up)
 * 10:48 products working - yeah
-* 
+* 10:57 deploy staging version
+* 12:31 combo_values_for_* missing on product
+* 13:20 modable missing on product
+* 13:34 stocked_products
 
 ### 2022-05-31
 
