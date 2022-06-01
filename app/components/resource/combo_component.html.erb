@@ -13,11 +13,7 @@
   <label for="combo" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
     <%= @label %>
   </label>
-  <%= @form.select @attr, 
-    options_from_collection_for_select(@items,"id","name",{selected: ([@values].flatten.any? ? [@values].flatten.pluck(:id) : nil)}), 
-    {},
-    { multiple: true, class: "hidden", data: { resource__combo_component_target: "select"}}
-    %>
+  <%= helpers.build_form_select @form, @attr, @items, @values, @is_multi %>
   <div class="relative mt-1 col-span-2">
     <% if ( @is_drop || @is_search || @is_add ) %>
       <input 

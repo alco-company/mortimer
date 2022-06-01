@@ -35,6 +35,7 @@ class Product < AbstractResource
   end
 
   def combo_values_for_supplier_id 
+    return [{id: nil, name: ''}] if supplier.nil?
     [{id: supplier.id, name: supplier.name}]
   end
   

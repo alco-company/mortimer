@@ -273,11 +273,18 @@ class AbstractResourcesController < ApplicationController
     end
 
     def add_resource
-      # render head: 401 and return unless @authorized
+      set_new
       render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } )
       # 29/5/2019 removed - using ancestry instead!
       # resource.parent_id = params[:parent_id] if resource.respond_to? :parent_id
     end
+
+    #
+    # set_new - implement on your controller if some processing is required
+    # in order to present a 'new' record
+    def set_new      
+    end
+
 
     #
     # generically we cannot but update the `:dynamic_attributes` attribute

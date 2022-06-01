@@ -140,7 +140,7 @@ export default class ComboComponentController extends Controller {
                 params.append('add', this.isAddValue ? "true" : "false")
                 params.append('q',query)
                 if (query=="*")
-                    params.append('items',500)
+                    params.append('items',50)
                 
                 get(`${this.urlValue}/lookup?${params}`, {
                     responseKind: "turbo-stream"

@@ -60,10 +60,10 @@ class Supplier < AbstractResource
     default_scope.where "participants.name like '%#{query}%' "
   end
 
-  def selected? values
-    return false if values.blank?
-    values.to_s.split(' ').include? self.id
-  end
+  # def selected? values
+  #   return false if values.blank?
+  #   values.to_s.split(' ').include? self.id
+  # end
 
     
   #
