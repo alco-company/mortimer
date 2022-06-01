@@ -4,6 +4,14 @@ class Service < AbstractResource
 
   has_and_belongs_to_many :accounts
 
+  #
+  # default_scope returns all posts that have not been marked for deletion yet
+  # define default_scope on model if different
+  #
+  def self.default_scope
+    where(deleted_at: nil)
+  end
+
 
   #
   # implement on every model where search makes sense

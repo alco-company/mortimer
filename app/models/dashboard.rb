@@ -4,6 +4,14 @@ class Dashboard < AbstractResource
   validates :layout, presence: true
 
   #
+  # default_scope returns all posts that have not been marked for deletion yet
+  # define default_scope on model if different
+  #
+  def self.default_scope
+    where(deleted_at: nil)
+  end
+
+  #
   # used by clone_from method on abstract_resource
   # to exclude has_many associations which should not be cloned
   # when making a copy of some instance of a model

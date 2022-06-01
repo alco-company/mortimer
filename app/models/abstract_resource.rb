@@ -9,6 +9,14 @@ class AbstractResource < ApplicationRecord
   after_destroy_commit :broadcast_destroy
 
   #
+  # default_scope returns all posts that have not been marked for deletion yet
+  # define default_scope on model if different
+  #
+  def self.default_scope
+    Sidekiq.server? ? where(deleted_at: nil) : where(deleted_at: nil, account: Current.account)
+  end
+
+  #
   # used for debugging
   def say msg 
     Rails.logger.info "----------------------------------------------------------------------"
@@ -40,15 +48,6 @@ class AbstractResource < ApplicationRecord
     # default_scope.where "name like '%#{query}%' "
   end
 
-
-
-
-  #
-  # default_scope returns all posts that have not been marked for deletion yet
-  #
-  def self.default_scope
-    where(deleted_at: nil)
-  end
 
   def valid_attributes?(*attributes)
     attributes.each do |attribute|

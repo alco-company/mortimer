@@ -15,13 +15,6 @@ class Participant < AbstractResource
 
   accepts_nested_attributes_for :roles
 
-  #
-  # default_scope returns all posts that have not been marked for deletion yet
-  #
-  def self.default_scope
-    where(deleted_at: nil)
-  end
-
   def roles= rs 
     roles.delete_all
     rs.each{ |r| Roleable.create( role: Role.find(r), roleable: self) unless r.blank? }

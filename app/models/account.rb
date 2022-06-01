@@ -22,6 +22,14 @@ class Account < AbstractResource
     end
   end
 
+  #
+  # default_scope returns all posts that have not been marked for deletion yet
+  # define default_scope on model if different
+  #
+  def self.default_scope
+    where(deleted_at: nil)
+  end
+
   def signed_services=srv 
     self.services.delete_all
     srv.keys.each{|k| self.services << Service.find(k)}
