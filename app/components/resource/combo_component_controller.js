@@ -26,7 +26,7 @@ export default class ComboComponentController extends Controller {
             .filter(option => option.selected)
             .map(option => option.value)
         this.updateSelect()
-        this.shouldUpdateInputValue = !(this.isAddValue || this.isSearchValue)
+        this.shouldUpdateInputValue = this.isDropValue //!(this.isAddValue || this.isSearchValue)
         console.log(`isSingle ${this.isSingleValue}`)
         console.log(`isMulti ${this.isMultiValue}`)
         console.log(`isDrop ${this.isDropValue}`)
@@ -133,7 +133,7 @@ export default class ComboComponentController extends Controller {
         try {            
             if( (query=='*') || (query.length>1 && query !== '  ') ){
                 let params = new URLSearchParams()
-                params.append('stimulus_controller', 'combo--component')
+                params.append('stimulus_controller', 'resource--combo-component')
                 params.append('stimulus_lookup_target', "selectOptions")
                 params.append('lookup_target', this.selectOptionsTarget.id)
                 params.append('values', this.selectedValue)
@@ -180,6 +180,8 @@ export default class ComboComponentController extends Controller {
                 const response = await get(`${this.urlValue}?ids=${this.selectedValue.join(',')}`, { responseKind: "json" })
                 if (response.ok){
                     const elems = await response.json
+                    console.log(`got this back from the server ${elems}`)
+
                     const names = elems.map( e => e.name )
                     const tags = elems.map( e => [e.id,e.name])
                     this.updateInput(names)
@@ -205,6 +207,7 @@ export default class ComboComponentController extends Controller {
     // update the input form control
     //
     updateInput(values){
+        console.log(`trying to updateInput with ${values} - but should I update? ${this.shouldUpdateInputValue}`)
         if ( this.shouldUpdateInputValue ) {
             try {            
                 this.inputTarget.value = values.join(', ')
