@@ -16,6 +16,6 @@
     <%= record_state resource %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-    <%= render EditComponent.new resource: resource, url: edit_resource_url(resource) %>
+    <%= render_component "edit", resource: resource, url: edit_resource_url(resource) %>
   </td>
 </tr>  
