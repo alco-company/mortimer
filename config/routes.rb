@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  resources :stock_item_transactions
-  resources :stock_items
-  resources :stocked_products
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
-  
+
+  # concerns ----
   concern :modalable do
     collection do
       get 'modal'
@@ -32,6 +30,31 @@ Rails.application.routes.draw do
     end
   end
 
+  # resources ----
+
+
+  resources :products, concerns: [:cloneable, :modalable, :selectable] do
+    resources :stock_locations
+    resources :stock_items
+    resources :stock_item_transactions
+    resources :stocked_products, concerns: :modalable
+  end
+  
+
+  resources :stock_item_transactions
+
+  resources :stock_items, concerns:  [:cloneable, :modalable, :exportable] do
+    resources :stock_item_transactions
+  end
+  
+  resources :stocked_products
+
+  resources :stocked_products, concerns: [:cloneable, :modalable] do
+    resources :stock_items, concerns: [:cloneable, :modalable] 
+    resources :stock_item_transactions, concerns: [:cloneable, :modalable]
+  end
+
+
   resources :stocks, concerns: [:cloneable, :modalable, :selectable] do
     member do
       get :re_stock
@@ -39,11 +62,30 @@ Rails.application.routes.draw do
     end
     resources :stock_locations, concerns: [:cloneable, :modalable] 
     
+    resources :stocked_products, concerns: :modalable
+    resources :stock_locations, concerns: [:cloneable, :modalable] do
+      resources :stock_item_transactions, concerns: [:cloneable, :modalable] 
+      resources :stock_items, concerns: :modalable do
+        resources :stock_item_transactions
+      end
+    end
+
+    resources :stock_item_transactions, concerns: [:cloneable, :modalable] 
+    
   end
   
-  resources :stock_locations, concerns: [:cloneable, :modalable] 
-  resources :products, concerns: [:cloneable, :modalable, :selectable]
-  resources :suppliers, concerns: [:cloneable, :modalable, :selectable]
+  resources :stock_locations, concerns: [:cloneable, :modalable] do
+    resources :stock_item_transactions, concerns: [:cloneable, :modalable] 
+    resources :stock_items, concerns: :modalable do
+      resources :stock_item_transactions
+    end
+  end
+
+
+  resources :suppliers, concerns: [:cloneable, :modalable, :selectable] do
+    resources :products
+  end
+
   # resources :events
   resources :tasks, concerns: [:cloneable, :modalable]
   resources :teams, concerns: [:cloneable, :modalable]

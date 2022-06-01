@@ -49,7 +49,7 @@ class Supplier < AbstractResource
     id = Supplier.all.pluck(:id, :gtin_prefix).select{ |k,v| barcode[4,7].match(Regexp.new(v)) ? k : nil  }.compact.flatten[0] rescue nil
     return id unless id 
     Supplier.find(id)
-    # Supplier.find_by company_barcode_prefix: prefix
+    # Supplier.find_by gtin_prefix: prefix
   end
 
   #

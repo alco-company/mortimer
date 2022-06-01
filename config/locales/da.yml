@@ -322,7 +322,7 @@ da:
   suppliers:
     index_columns:
       name: Navn
-      company_barcode_prefix: GTIN firma præfix
+      gtin_prefix: GTIN firma præfix
       state: Status
     form:
       new: "Ny leverandør"
@@ -331,7 +331,7 @@ da:
       edit_description: "Du kan rette en allerede oprettet leverandør her."
       name: "Navn"
       product_resource: "Sti til leverandørens produktoversigt"
-      company_barcode_prefix: GTIN firma præfix
+      gtin_prefix: GTIN firma præfix
       
   User:
     index: "Oversigt over brugere"

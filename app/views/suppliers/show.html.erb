@@ -3,7 +3,7 @@
   data-controller="tabs"  
   data-tabs-active-tab="border-indigo-500 text-indigo-600" 
   >
-  <%= render_component "show_header", 
+  <%= render_component "resource/show_header", 
       title: resource.name, 
       breadcrumbs: @breadcrumbs, 
       current: Current, 
@@ -42,8 +42,8 @@
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= resource.name %></dd>
           </div>
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500"><%= t '.company_barcode_prefix' %></dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= resource.company_barcode_prefix %></dd>
+            <dt class="text-sm font-medium text-gray-500"><%= t '.gtin_prefix' %></dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= resource.gtin_prefix %></dd>
           </div>
         </dl>
       </div>
