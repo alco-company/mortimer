@@ -1,1 +1,1 @@
-json.array! @suppliers, partial: "suppliers/supplier", as: :supplier
+json.array! @resources, partial: "suppliers/supplier", as: :supplier
