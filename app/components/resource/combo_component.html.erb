@@ -14,7 +14,7 @@
     <%= @label %>
   </label>
   <%= @form.select @attr, 
-    options_from_collection_for_select(@items,"id","name",{selected: [@values].flatten.any? ? [@values].flatten.pluck(:id) : nil}), 
+    options_from_collection_for_select(@items,"id","name",{selected: ([@values].flatten.any? ? [@values].flatten.pluck(:id) : nil)}), 
     {},
     { multiple: true, class: "hidden", data: { resource__combo_component_target: "select"}}
     %>

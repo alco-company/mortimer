@@ -34,6 +34,10 @@ class Product < AbstractResource
     Product.all.joins(:asset)
   end
 
+  def combo_values_for_supplier_id 
+    [{id: supplier.id, name: supplier.name}]
+  end
+  
   def get_stocked_product s, sl, prod, parm
     sp = prod.stocked_products.where(stock: s).first 
     if sp.nil?

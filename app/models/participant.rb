@@ -20,6 +20,10 @@ class Participant < AbstractResource
     rs.each{ |r| Roleable.create( role: Role.find(r), roleable: self) unless r.blank? }
   end
 
+  def combo_values_for_roles
+    roles
+  end
+
   def teams= ts 
     teams.delete_all
     ts.each{ |t| ParticipantTeam.create( team: Team.find(t), participant: self) unless t.blank? }

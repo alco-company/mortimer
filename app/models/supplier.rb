@@ -30,7 +30,7 @@ class Supplier < AbstractResource
     end
     s
   end
-  
+
   def self.find_by_prefix barcode 
     #
     # this really should go through all 

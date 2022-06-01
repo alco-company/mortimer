@@ -41,7 +41,8 @@ class Resource::ComboComponent < ViewComponent::Base
       @url = url || ""
       @partial = partial || @url
       @lookup_target = lookup_target || "#{@url.underscore}".gsub('/','')
-      @values = values || @form.object.send(attr)
+      @values = values 
+      @values ||= @form.object.send("combo_values_for_#{attr}") 
       @items = items || []
 
       type_s = type.to_s
