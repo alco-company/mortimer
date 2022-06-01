@@ -1,0 +1,18 @@
+<tr id="<%= dom_id resource %>"  data-controller="list-item">
+  <%= render_component "resource/list_checkbox", resource: resource %>
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+    <%= link_to resource.event.name, stock_item_transaction_path(resource), data: { turbo_frame: "_top" } %>
+  </td>
+  <td class="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= display_time resource.created_at %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= record_state resource.event %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= "1 pll, %s / %s" % [resource.quantity, resource.unit] %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+    <%= render_component "edit", resource: resource, url: edit_resource_url(resource) %>
+  </td>
+</tr>  

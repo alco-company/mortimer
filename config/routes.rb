@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :stock_item_transactions
   resources :stock_items
   resources :stocked_products
 

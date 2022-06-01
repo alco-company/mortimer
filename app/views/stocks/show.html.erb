@@ -10,7 +10,7 @@
       tabs: [ 
         {id: "info_tab", url: "#info", label: t('.info'), action: "click->tabs#change" },
         {id: "stock_locations_tab", url: stock_stock_locations_url(resource), label: t('.stock_locations'), action: "click->tabs#change" },
-        {id: "stock_transactions_tab", url: stock_stock_transactions_url(resource), label: t('.stock_transactions'), action: "click->tabs#change" },
+        {id: "stock_item_transactions_tab", url: stock_stock_item_transactions_url(resource), label: t('.stock_item_transactions'), action: "click->tabs#change" },
         {id: "stocked_products_tab", url: stock_stocked_products_url(resource), label: t('.stocked_products'), action: "click->tabs#change" }
       ] do %>
     <div class="md:mt-7 justify-end flex">
@@ -34,8 +34,8 @@
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
       <div class="px-4 py-5 sm:px-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t '.stock_transaction' %></h3>
-        <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t '.stock_transaction.description' %></p>
+        <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t '.stock_item_transaction' %></h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t '.stock_item_transaction.description' %></p>
       </div>
       <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
         <dl class="sm:divide-y sm:divide-gray-200">
@@ -77,9 +77,9 @@
     <% end %>
   </div>
 
-  <div id="stock_transactions_tab" class="hidden shadow overflow-hidden border-b border-gray-200 sm:rounded-lg" data-tabs-target="panel">
-    <%= turbo_stream_from "stock_transactions"  %>
-    <%= turbo_frame_tag "stock_transactions", loading: "lazy", src: stock_stock_transactions_url(resource) do %>
+  <div id="stock_item_transactions_tab" class="hidden shadow overflow-hidden border-b border-gray-200 sm:rounded-lg" data-tabs-target="panel">
+    <%= turbo_stream_from "stock_item_transactions"  %>
+    <%= turbo_frame_tag "stock_item_transactions", loading: "lazy", src: stock_stock_item_transactions_url(resource) do %>
       <span class="py-2 px2">
         <%= t('loading') %>
       </span>

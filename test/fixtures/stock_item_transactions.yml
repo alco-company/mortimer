@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stocked_product: one
+  stock_location: one
+  stock_item: one
+  quantity: 1
+  unit: MyString
+  barcodes: MyString
+
+two:
+  stocked_product: two
+  stock_location: two
+  stock_item: two
+  quantity: 1
+  unit: MyString
+  barcodes: MyString

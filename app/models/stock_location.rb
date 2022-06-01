@@ -3,7 +3,7 @@ class StockLocation < AbstractResource
 
   belongs_to :stock
   has_many :stock_items
-  has_many :stock_transactions, inverse_of: :stock_location
+  has_many :stock_item_transactions, inverse_of: :stock_location
 
   def self.default_scope
     StockLocation.all.joins(:asset)
@@ -15,10 +15,10 @@ class StockLocation < AbstractResource
   end
   
   def self.get_by field, s, parm 
-    self.find_by(field => parm["location"]) || self.create_for_stock_transaction( s, parm)
+    self.find_by(field => parm["location"]) || self.create_for_stock_item_transaction( s, parm)
   end
   
-  def self.create_for_stock_transaction s, parm
+  def self.create_for_stock_item_transaction s, parm
     begin      
       acc = s.account
       Asset.create( 
@@ -37,8 +37,8 @@ class StockLocation < AbstractResource
 
 
   def nbr_pallets
-    return 0 if stock_transactions.empty?
-    q = stock_transactions.pluck :state
+    return 0 if stock_item_transactions.empty?
+    q = stock_item_transactions.pluck :state
     p = 0
     q.each{ |s| case s when 'RECEIVE'; p+=1 when 'SHIP'; p-=1 end } if q.any?
     p
@@ -47,7 +47,7 @@ class StockLocation < AbstractResource
   end
 
   def quantity
-    st = stock_transactions.pluck( :state, :quantity).compact
+    st = stock_item_transactions.pluck( :state, :quantity).compact
     qt = 0
     st.each{ |s,q| case s when 'RECEIVE'; qt+=q when 'SHIP'; qt-=(q||0) end } if st.any?
     qt

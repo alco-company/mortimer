@@ -8,7 +8,7 @@ class StockItem < AbstractResource
 
   belongs_to :stocked_product
   belongs_to :stock_location
-  has_many :stock_transactions
+  has_many :stock_item_transactions
 
   def self.default_scope
     StockItem.all.joins(:asset)
@@ -23,7 +23,7 @@ class StockItem < AbstractResource
       if si 
         si.update_attribute :quantity, (si.quantity + parm["nbrcont"].to_i)
       else
-        si = self.create_for_stock_transaction( s, sp, sl, parm)
+        si = self.create_for_stock_item_transaction( s, sp, sl, parm)
       end
       si
     rescue => exception
@@ -39,13 +39,13 @@ class StockItem < AbstractResource
     if si 
       si.update_attribute :quantity, (si.quantity - st.quantity)
     else
-      si = self.create_for_stock_transaction( s, sp, sl, parm)
+      si = self.create_for_stock_item_transaction( s, sp, sl, parm)
       si.update_attribute :quantity, 0
     end
     si
   end
 
-  def self.create_for_stock_transaction s, sp, sl, parm 
+  def self.create_for_stock_item_transaction s, sp, sl, parm 
     acc = s.account
     Asset.create( 
       account_id: acc.id, 
@@ -62,7 +62,7 @@ class StockItem < AbstractResource
   end
 
   def nbr_pallets
-    q = stock_transactions.pluck :state
+    q = stock_item_transactions.pluck :state
     p = 0
     q.each{ |s| case s when 'RECEIVE'; p+=1 when 'SHIP'; p-=1 end } if q.any?
     p

@@ -32,7 +32,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 * checkbox on stock to scan 93___ own barcode manual entry of quantity
 * checkbox on stock to manual entry of quantity on GTIN EAN14
 * checkbox on stock to manual entry of best-before on GTIN EAN14
-* stock_transaction_processing_job has to start every 2 minute to check if any items to process - ajob for whenever
+* stock_item_transaction_processing_job has to start every 2 minute to check if any items to process - ajob for whenever
   * https://medium.com/swlh/automate-tasks-in-rails-using-the-whenever-gem-46f9708ab002
   * https://dokku.com/docs/processes/scheduled-cron-tasks/
   * 
@@ -67,7 +67,8 @@ first day of summer - and we are yet to sleep outside this year
 * 19:45 voted YES to drop the danish EU defense reservation
 * 20:43 on with stock_location
 * 20:46 on with stocked_product
-* 
+* 21:03 and then the stock_item (batch)
+* 23:12 and then stock_item_transaction
 
 ### 2022-05-31
 
@@ -336,7 +337,7 @@ paused at 20:15
   * set config/cable.yml pointing to correct redis
   * add .env.development (and possibly .env.production)
   * 11:57 redis running/connected
-  * add background job with `x rails g job stock_transaction_processing --queue=transactions
+  * add background job with `x rails g job stock_item_transaction_processing --queue=transactions
   * 14:00 background job works - and queue gets going - now we need the job to "do it's do"
   * 20:00 quit
 

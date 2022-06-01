@@ -106,7 +106,7 @@ function pullQueueData(){
       url = `${urlUrl}?api_key=${apiKey}`
       post_data = {}
       data.forEach( (v,k) => post_data[k]=v ) 
-      postQueueTransaction(url, urlMethod, urlHeaders, { stock_transaction: post_data }, data)
+      postQueueTransaction(url, urlMethod, urlHeaders, { stock_item_transaction: post_data }, data)
       postMessage({ queueSize: queue.length }); 
     } else { i=5 }
     i++; data=null

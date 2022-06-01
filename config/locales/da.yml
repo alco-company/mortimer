@@ -63,7 +63,7 @@ da:
     stock_items: "Serier/Batch"
     stocked_products: Lagervarer
     stock_locations: "Lagerlokationer"
-    stock_transactions: "Lagerbevægelser"
+    stock_item_transactions: "Lagerbevægelser"
     suppliers: "Leverandører"
     users: 'Brugere'
 
@@ -205,7 +205,7 @@ da:
       info: Generelt 
       stocked_products: Lagervarer
       stock_locations: Lager lokationer 
-      stock_transactions: Lager bevægelser
+      stock_item_transactions: Lager bevægelser
 
   PunchClock: 
     index: "Oversigt over stempelure"
@@ -265,7 +265,7 @@ da:
       name: "Navn"
     show: 
       stock_locations: "Lagerlokationer"
-      stock_transactions: Lager bevægelser
+      stock_item_transactions: Lager bevægelser
       stocked_products: Lager varer
       edit: 
         stock_locations: "Redigér lokationer"
@@ -296,7 +296,7 @@ da:
     index_columns:
       name: Navn
 
-  StockTransaction:
+  StockItemTransaction:
     index: "Oversigt over lager bevægelser"
     index_description: "Oversigten viser dig de lager bevægelser, der er oprettet i Speicher."
     new_button: Ny lager bevægelse
@@ -304,7 +304,7 @@ da:
       title: "Slet lager bevægelse: %{name}"
       description: "Er du sikker på at du vil slette denne lager bevægelse?"
 
-  stock_transactions:
+  stock_item_transactions:
     index_columns:
       name: Palle ID
       scanned_at: Skannet den

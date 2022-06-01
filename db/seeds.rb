@@ -23,7 +23,7 @@ role_types = {
   user: { name: 'users and teams', context: 'users teams', role: 'ISNECUDPF' },  
   role: { name: 'role', context: 'roles', role: 'ISNECUDPF' },  
   pim: { name: 'pim', context: 'suppliers products', role: 'ISNECUDPF' },  
-  stock: { name: 'stock', context: 'stocked_products stocks stock_items stock_locations stock_transactions', role: 'ISNECUDPF' },  
+  stock: { name: 'stock', context: 'stocked_products stocks stock_items stock_locations stock_item_transactions', role: 'ISNECUDPF' },  
   time: { name: 'enter_leave', context: 'employees punch_clocks enter_leaves', role: 'ISNECUDPF' }, 
 }
 roles = {}

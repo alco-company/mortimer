@@ -4,17 +4,17 @@ class Product < AbstractResource
   belongs_to :supplier
   has_many :stocked_products, dependent: :destroy
   has_many :stock_locations, through: :stocked_products
-  has_many :stock_transactions, through: :stocked_products
+  has_many :stock_item_transactions, through: :stocked_products
 
   def self.default_scope
     Product.all.joins(:asset)
   end
 
   def self.get_by field, s, parm 
-    self.find_by(field => parm["ean14"]) || self.create_for_stock_transaction( s, parm)
+    self.find_by(field => parm["ean14"]) || self.create_for_stock_item_transaction( s, parm)
   end
 
-  def self.create_for_stock_transaction s, parm 
+  def self.create_for_stock_item_transaction s, parm 
     acc = s.account
     sup = Supplier.create_for_product(acc, parm)
     prod = Product.create!( supplier: sup, supplier_barcode: parm["ean14"] )
@@ -42,20 +42,20 @@ class Product < AbstractResource
   def get_stocked_product s, sl, prod, parm
     sp = prod.stocked_products.where(stock: s).first 
     if sp.nil?
-      sp = StockedProduct.create_for_stock_transaction( s, prod, sl, parm)
+      sp = StockedProduct.create_for_stock_item_transaction( s, prod, sl, parm)
     end
     sp
   end
 
   def nbr_pallets
-    q = stock_transactions.pluck :state
+    q = stock_item_transactions.pluck :state
     p = 0
     q.each{ |s| case s when 'RECEIVE'; p+=1 when 'SHIP'; p-=1 end } if q.any?
     p
   end
 
   def quantity
-    st = stock_transactions.pluck( :state, :quantity).compact
+    st = stock_item_transactions.pluck( :state, :quantity).compact
     qt = 0
     st.each{ |s,q| case s when 'RECEIVE'; qt+=q when 'SHIP'; qt-=(q||0) end } if st.any?
     qt

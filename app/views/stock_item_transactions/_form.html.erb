@@ -1,0 +1,47 @@
+<%= form_with(model: stock_item_transaction) do |form| %>
+  <% if stock_item_transaction.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(stock_item_transaction.errors.count, "error") %> prohibited this stock_item_transaction from being saved:</h2>
+
+      <ul>
+        <% stock_item_transaction.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :stocked_product_id, style: "display: block" %>
+    <%= form.text_field :stocked_product_id %>
+  </div>
+
+  <div>
+    <%= form.label :stock_location_id, style: "display: block" %>
+    <%= form.text_field :stock_location_id %>
+  </div>
+
+  <div>
+    <%= form.label :stock_item_id, style: "display: block" %>
+    <%= form.text_field :stock_item_id %>
+  </div>
+
+  <div>
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div>
+    <%= form.label :unit, style: "display: block" %>
+    <%= form.text_field :unit %>
+  </div>
+
+  <div>
+    <%= form.label :barcodes, style: "display: block" %>
+    <%= form.text_field :barcodes %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

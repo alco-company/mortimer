@@ -9,7 +9,6 @@
       current: Current, 
       tabs: [ 
         {id: "info_tab", url: "#info", label: t('.info'), action: "click->tabs#change" },
-        {id: "stock_item_transaction_tab", url: stock_item_stock_item_transactions_url(resource), label: t('.stock_item_transactions'), action: "click->tabs#change" },
       ] do %>
     <div class="md:mt-7 justify-end flex">
       <div class="w-full">
@@ -19,7 +18,7 @@
       </div>
 
       <div class="ml-4 mt-1 shrink-0">
-        <%= link_to t("#{resource_class}.new_button"), new_stock_item_url(), class: "button new-button inline-block select-none", data: { form_sleeve_target: "button", action: "click->extended-slideover#toggle", 'turbo-frame': 'form_slideover' } %>
+        <%= link_to t("#{resource_class}.new_button"), new_stock_item_transaction_url(), class: "button new-button inline-block select-none", data: { form_sleeve_target: "button", action: "click->extended-slideover#toggle", 'turbo-frame': 'form_slideover' } %>
       </div>
       <%# <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Share</button> %>
       
@@ -29,12 +28,11 @@
   <% end %>
   <div id="info_tab" class="hidden py-4 px-4 " data-tabs-target="panel">
 
-
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
       <div class="px-4 py-5 sm:px-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t '.stock_item' %></h3>
-        <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t '.stock_item.description' %></p>
+        <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t '.stock_item_transaction' %></h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t '.stock_item_transaction.description' %></p>
       </div>
       <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
         <dl class="sm:divide-y sm:divide-gray-200">
@@ -55,20 +53,16 @@
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= link_to resource.stock_location.name, stock_location_url(resource.stock_location) %></dd>
           </div>
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500"><%= t '.batch_number' %></dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= resource.batch_number %> </dd>
+            <dt class="text-sm font-medium text-gray-500"><%= t '.stock_item' %></dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= link_to resource.stock_item.name, stock_item_url(resource.stock_item) %></dd>
           </div>
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500"><%= t '.quantity_pallets' %></dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= resource.nbr_pallets %> <%= t('.pallets') %> </dd>
+            <dt class="text-sm font-medium text-gray-500"><%= t 'nbr_of_pallets' %></dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">1 <%= t('pallet') %></dd>
           </div>
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt class="text-sm font-medium text-gray-500"><%= t '.quantity_unit' %></dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= resource.quantity %> <%= resource.unit %> </dd>
-          </div>
-          <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500"><%= t '.expire_at' %></dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= display_time resource.expire_at %> </dd>
           </div>
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt class="text-sm font-medium text-gray-500"><%= t '.created_at' %></dt>
@@ -78,19 +72,12 @@
             <dt class="text-sm font-medium text-gray-500"><%= t '.updated_at' %></dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= display_time resource.updated_at %> </dd>
           </div>
+          <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500"><%= t '.scanned_barcodes' %></dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= resource.barcodes %> </dd>
+          </div>
         </dl>
       </div>
     </div>
-
-
   </div>
-
-
-  <div id="stock_item_transaction_tab" class="hidden shadow overflow-hidden border-b border-gray-200 sm:rounded-lg" data-tabs-target="panel">
-    <%= turbo_stream_from "stock_item_transactions"  %>
-    <%= turbo_frame_tag "stock_item_transactions", loading: "lazy", src: stock_item_stock_item_transactions_url(resource) do %>
-      <%= t('loading') %>
-    <% end %>
-  </div>
-
 </div>

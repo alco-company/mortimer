@@ -10,14 +10,14 @@ class StockedProduct < AbstractResource
   belongs_to :stock
   belongs_to :stock_location
 
-  has_many :stock_transactions, dependent: :destroy
+  has_many :stock_item_transactions, dependent: :destroy
   has_many :stock_items, dependent: :destroy
 
   def self.default_scope
     StockedProduct.all.joins(:asset)
   end
 
-  def self.create_for_stock_transaction s, p, sl, parm
+  def self.create_for_stock_item_transaction s, p, sl, parm
     acc = s.account
     say "here with #{s}, #{p}, #{sl}, #{parm}"
     say "and what about #{p.asset}"
@@ -34,14 +34,14 @@ class StockedProduct < AbstractResource
   end
 
   def nbr_pallets
-    q = stock_transactions.pluck :state
+    q = stock_item_transactions.pluck :state
     p = 0
     q.each{ |s| case s when 'RECEIVE'; p+=1 when 'SHIP'; p-=1 end } if q.any?
     p
   end
 
   def quantity
-    st = stock_transactions.pluck( :state, :quantity).compact
+    st = stock_item_transactions.pluck( :state, :quantity).compact
     qt = 0
     st.each{ |s,q| case s when 'RECEIVE'; qt+=q when 'SHIP'; qt-=(q||0) end } if st.any?
     qt

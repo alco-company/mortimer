@@ -5,7 +5,7 @@ class Stock  < AbstractResource
 
   has_many :stock_locations
   has_many :stocked_products
-  has_many :stock_transactions, through: :stock_locations
+  has_many :stock_item_transactions, through: :stock_locations
   #
   # default_scope returns all posts that have not been marked for deletion yet
   #
@@ -15,14 +15,14 @@ class Stock  < AbstractResource
   end
 
   def nbr_pallets
-    q = stock_transactions.pluck :state
+    q = stock_item_transactions.pluck :state
     p = 0
     q.each{ |s| case s when 'RECEIVE'; p+=1 when 'SHIP'; p-=1 end } if q.any?
     p
   end
 
   def quantity
-    st = stock_transactions.pluck( :state, :quantity).compact
+    st = stock_item_transactions.pluck( :state, :quantity).compact
     qt = 0
     st.each{ |s,q| case s when 'RECEIVE'; qt+=q when 'SHIP'; qt-=(q||0) end } if st.any?
     qt

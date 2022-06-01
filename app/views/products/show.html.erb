@@ -11,7 +11,7 @@
         {id: "info_tab", url: "#info", label: t('.info'), action: "click->tabs#change" },
         {id: "stocked_products_tab", url: product_stocked_products_url(resource), label: t('.stocked_products'), action: "click->tabs#change" },
         {id: "stock_locations_tab", url: product_stock_locations_url(resource), label: t('.stock_locations'), action: "click->tabs#change" },
-        {id: "stock_transactions_tab", url: product_stock_transactions_url(resource), label: t('.stock_transactions'), action: "click->tabs#change" }
+        {id: "stock_item_transactions_tab", url: product_stock_item_transactions_url(resource), label: t('.stock_item_transactions'), action: "click->tabs#change" }
         # {id: "documents_tab", url: product_documents_url(resource), label: t('.documents'), action: "click->tabs#change" }
       ] do %>
     <div class="md:mt-7 justify-end flex">
@@ -90,9 +90,9 @@
     <% end %>
   </div>
 
-  <div id="stock_transactions_tab" class="hidden shadow overflow-hidden border-b border-gray-200 sm:rounded-lg" data-tabs-target="panel">
-    <%= turbo_stream_from "stock_transactions"  %>
-    <%= turbo_frame_tag "stock_transactions", loading: "lazy", src: product_stock_transactions_url(resource) do %>
+  <div id="stock_item_transactions_tab" class="hidden shadow overflow-hidden border-b border-gray-200 sm:rounded-lg" data-tabs-target="panel">
+    <%= turbo_stream_from "stock_item_transactions"  %>
+    <%= turbo_frame_tag "stock_item_transactions", loading: "lazy", src: product_stock_item_transactions_url(resource) do %>
       <span class="py-2 px2">
         <%= t('loading') %>
       </span>
