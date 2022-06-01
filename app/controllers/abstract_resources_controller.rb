@@ -307,7 +307,7 @@ class AbstractResourcesController < ApplicationController
     end
 
     #
-    # will be serviced by application/lookup.turbo_stream.erb and views/[resource]/_lookup.html.erb
+    # will be serviced by application/lookup.turbo_stream.erb and views/[resource]/_lookup.turbo_stream.erb
     # and because concerns/resource_control takes care of actually getting the content
     # no real code is needed in this method
     #

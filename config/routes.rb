@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :suppliers, concerns: [:cloneable, :modalable]
+  resources :suppliers, concerns: [:cloneable, :modalable, :selectable]
   # resources :events
   resources :tasks, concerns: [:cloneable, :modalable]
   resources :teams, concerns: [:cloneable, :modalable]

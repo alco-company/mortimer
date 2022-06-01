@@ -7,7 +7,7 @@ module Eventable
     has_many :assignments
     accepts_nested_attributes_for :assignments, reject_if: :all_blank, allow_destroy: true
 
-    delegate :name, :account, :state, to: :event
+    delegate :name, :account, :state, :deleted_at, to: :event
 
     def delegated_from
       self.event
