@@ -1,0 +1,18 @@
+<th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+  <%= table_header_checkbox  %>
+</th>
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+  <%= sort_link_to t('.name'), :name, data: { turbo_action: "advance"} %>
+</th>
+<th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+  <%= sort_link_to t('.location_barcode'), :location_barcode, data: { turbo_action: "advance"} %>
+</th>
+<th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+  <%= t('.quantity_pallets') %>
+</th>
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+  <%= sort_link_to t('.state'), :state, data: { turbo_action: "advance"} %>
+</th>
+<th scope="col" class="relative px-6 py-3">
+  <span class="sr-only">Edit</span>
+</th>

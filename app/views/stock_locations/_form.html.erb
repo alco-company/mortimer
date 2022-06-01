@@ -1,0 +1,101 @@
+<%  %>
+<%= form_with model: resource, url: form_stock_location_url(resource), id: "resource_form", data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
+  <%= form.fields_for :assetable do |asset_form| %>
+    <%= form.hidden_field :account_id, value: current_account.id %>
+    <%= asset_form.hidden_field :stock_id, value: resource.assetable.stock_id %>
+    <%= form.hidden_field :assetable_type, value: "StockLocation" %>
+    <div class="flex-1 relative "
+      data-controller="form"
+      data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"    
+      >
+      <!-- Header -->
+      <%= render_component "resource/form_header", resource: resource, title: form_header_title, description: form_header_description %>
+
+      <!-- Divider container -->
+      <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+
+        <!--  Stock_id -->
+        <div class="px-4 divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+          <div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t(".stock_title") %></h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t(".stock_description") %></p>
+            <div class="pt-6 sm:pt-5">
+              <%= render_component "resource/combo", form: asset_form, attr: :stock_id, label: t('.stock'), type: :single_drop_search, url: "/stocks" %>
+            </div>
+            <div class="text-sm text-red-800" >
+              <%= form.object.errors.where(:stock_id).map( &:full_message).join( "og ") %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Name -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".name" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2">
+            <%= form.text_field :name, 
+              required: true, 
+              data: { "form-target" => "focus" },
+              class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+            <div class="text-sm text-red-800" >
+              <%= resource.errors.where(:name).map( &:full_message).join( "og ") %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Location_barcode -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="location_barcode" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".location_barcode" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2">
+            <%= asset_form.text_field :location_barcode, required: false, class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+            <div class="text-sm text-red-800" >
+              <%= resource.errors.where(:location_barcode).map( &:full_message).join( "og ") %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shelf_size -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="shelf_size" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".shelf_size" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2">
+            <%= asset_form.text_field :shelf_size, required: false, class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+            <div class="text-sm text-red-800" >
+              <%= resource.errors.where(:shelf_size).map( &:full_message).join( "og ") %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Open_shelf -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="open_shelf" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".open_shelf" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2">
+            <%= asset_form.text_field :open_shelf, required: false, class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+            <div class="text-sm text-red-800" >
+              <%= resource.errors.where(:open_shelf).map( &:full_message).join( "og ") %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+
+
+  <%= render_component "action_button", resource: resource, delete_url: form_stock_location_url(resource), deleteable: true %>
+
+<% end %>

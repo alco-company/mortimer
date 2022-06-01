@@ -61,6 +61,12 @@ first day of summer - and we are yet to sleep outside this year
 * 12:31 combo_values_for_* missing on product
 * 13:20 modable missing on product
 * 13:34 stocked_products
+* 14:43 stock
+* 15:05 stock_location
+* 17:30 paused to train
+* 19:45 voted YES to drop the danish EU defense reservation
+* 20:43 on with stock_location
+* 
 
 ### 2022-05-31
 
