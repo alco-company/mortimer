@@ -8,7 +8,7 @@ one:
   service_group: MyString
   state: MyString
   menu_icon: MyText
-  deleted_at: 2022-05-27 22:30:36
+  deleted_at: 
 
 two:
   name: MyString
@@ -18,4 +18,4 @@ two:
   service_group: MyString
   state: MyString
   menu_icon: MyText
-  deleted_at: 2022-05-27 22:30:36
+  deleted_at: 

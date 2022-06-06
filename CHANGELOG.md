@@ -45,11 +45,30 @@ In the REFERENCES you will find a lot of people, resources, etc
 * add paper_trail to abstract_resource - see speicher/hours/src/app/controllers/abstract_resources_controller.rb
 * change user_time_zone in ApplicationController to use current_user's timezone - once we have added the User Model
 * use github actions (or gitlab equivalent) to do automagic deploys on git push to staging/production branches
-* 
+* use current_page? to set proper classes on links in the menu
+* use class_names to that same ends 
 
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
 ## DONE
 
+
+### 2022-06-03
+
+a late start - overslept 'til 07:36
+
+* 08:45 cont' debugging POS output
+* 15:15 POS RECEIVE is 90% done
+* 
+
+### 2022-06-02
+
+a somewhat late start - enjoyed a full 6hrs of sleep
+
+* 08:15 starting to import the POS specific code
+* 11:17 POS running - now start debugging the output
+* 18:30 stopped - to go home and prepare for TOPGUN Maverick
+
+00:15 good night 
 
 ### 2022-06-01
 
@@ -64,7 +83,7 @@ first day of summer - and we are yet to sleep outside this year
 * 14:43 stock
 * 15:05 stock_location
 * 17:30 paused to train
-* 19:45 voted YES to drop the danish EU defense reservation
+* 19:45 voted YES to drop the danish EU defense reservation - and the final say was a YES
 * 20:43 on with stock_location
 * 20:46 on with stocked_product
 * 21:03 and then the stock_item (batch)

@@ -2,14 +2,14 @@
 
 one:
   dashboard: one
-  name: MyString
+  name: Account 1
   state: MyString
   calendar: one
-  deleted_at: 2022-05-27 17:12:21
+  deleted_at: 
 
 two:
   dashboard: two
-  name: MyString
+  name: Account 2
   state: MyString
   calendar: two
-  deleted_at: 2022-05-27 17:12:21
+  deleted_at: 

@@ -19,7 +19,7 @@ class StockItemTransaction  < AbstractResource
     
   def self.create_pos_transaction params
     parm=params["stock_item_transaction"]
-    s = Stock.find(params["stock_id"])
+    s = Stock.unscoped.find(params["stock_id"])
     case parm["direction"]
     when "RECEIVE"; self.create_adding_transaction(s, parm)
     when "SHIP","SCRAP"; self.create_subtracting_transaction( s, parm)
@@ -32,7 +32,7 @@ class StockItemTransaction  < AbstractResource
   end
 
   def self.delete_pos_transaction params 
-    st=StockItemTransaction.find(params[:id])
+    st=StockItemTransaction.unscoped.find(params[:id])
     return false unless st and st.event.update(deleted_at: DateTime.now)
     true
   end
@@ -41,11 +41,15 @@ class StockItemTransaction  < AbstractResource
 
     def self.create_adding_transaction s, parm 
       StockItemTransaction.transaction do
+        a = Asset.unscoped.where(assetable: s).first
+        acc = Account.find a.account_id
+        Current.account = Asset.unscoped.where(assetable: s).first.account
         begin 
           prod = Product.get_by :supplier_barcode, s, parm
           sl = StockLocation.get_by :location_barcode, s, parm
           sp = prod.get_stocked_product s, sl, prod, parm
           si = StockItem.add_quantity( s, sp, sl, parm)
+          puts "----- #{si.id}"
           self.create_transaction s, sl, sp, si, parm, parm["nbrcont"], parm["unit"]
         rescue ActiveRecord::StatementInvalid
           raise ActiveRecord::Rollback
@@ -55,16 +59,24 @@ class StockItemTransaction  < AbstractResource
     end
 
     def self.create_subtracting_transaction s, parm 
-      begin
-        st = Event.where( name: parm["sscs"], state: "RECEIVE" ).last.eventable  
-        si = StockItem.subtract_quantity( s, st, parm)
-        self.create_transaction s, st.stock_location, st.stocked_product, si, parm, st.quantity, st.unit
+      StockItemTransaction.transaction do
+        Current.account = Asset.where(assetable: s).first.account
+        begin
+          st = Event.where( name: parm["sscs"], state: "RECEIVE" ).last.eventable  
+          si = StockItem.subtract_quantity( s, st, parm)
+          self.create_transaction s, st.stock_location, st.stocked_product, si, parm, st.quantity, st.unit
+        end
       end
     end
 
     def self.create_inventory_transaction(s, parm)
-      st = Event.where( name: parm["sscs"] ).last.eventable
-      self.create_transaction s, st.stock_location, st.stocked_product, si, parm
+      StockItemTransaction.transaction do
+        Current.account = Asset.where(assetable: s).first.account
+        begin
+          st = Event.where( name: parm["sscs"] ).last.eventable
+          self.create_transaction s, st.stock_location, st.stocked_product, si, parm
+        end
+      end
     end
 
     def self.create_transaction s, sl, sp, si, parm, q, u

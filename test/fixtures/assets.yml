@@ -2,20 +2,32 @@
 
 one:
   account: one
-  assetable: one
-  calendar: one
-  name: MyString
-  state: MyString
+  assetable_type: Product
+  assetable_id: 1
+  name: Product
+  state: Ok
   position: 1
-  ancestry: MyString
-  deleted_at: 2022-05-31 20:00:46
+  ancestry: Noone
+  deleted_at: 
+  calendar: one
 
 two:
   account: two
-  assetable: two
-  calendar: two
-  name: MyString
-  state: MyString
+  assetable_type: Product
+  assetable_id: 2
+  name: Product
+  state: Ok
   position: 1
-  ancestry: MyString
-  deleted_at: 2022-05-31 20:00:46
+  ancestry: Noone
+  deleted_at: 
+  calendar: one
+
+stock_one:
+  account: one
+  assetable: one (Stock)
+  name: Stock1
+  state: Ok
+  position: 1
+  ancestry: Noone
+  deleted_at: 
+  calendar: one

@@ -3,9 +3,9 @@
 one:
   task: one 
   calendar: one
-  deleted_at: 2022-05-31 13:11:41
+  deleted_at: 
 
 two:
   task: two 
   calendar: two 
-  deleted_at: 2022-05-31 13:11:41
+  deleted_at: 

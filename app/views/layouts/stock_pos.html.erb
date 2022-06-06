@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html class="h-full">
+  <head>
+    <title>App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%# now should be handled by the next 'tag' (javascript_importmap_tags) = javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%# importmap disabled to enable hotwire-livereload %>
+    <%#= javascript_importmap_tags %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= yield :head %>
+    <% if Rails.env.development? %>
+      <%= javascript_include_tag "hotwire-livereload", defer: true %>
+    <% end %>
+  </head>
+
+  <body>
+
+    <div>
+
+      <!-- Canvas-->
+      <div class="flex flex-col flex-1">
+
+
+        <main>
+          <div class="py-6">
+            <%= yield %>
+          </div>
+        </main>
+
+      </div>
+
+    </div>
+
+    <%= render "shared/takiro" %>
+
+  </body>    
+
+
+</html>
+
+

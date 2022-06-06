@@ -24,6 +24,7 @@
 
 * [How To GraphQL](https://www.howtographql.com/)
 * [Sidekiq and Redis example](https://www.digitalocean.com/community/tutorials/how-to-add-sidekiq-and-redis-to-a-ruby-on-rails-application)
+* [A Goldchest of Rails tips and tricks](https://til.hashrocket.com/rails)
 
 https://blog.alco.dk/2021/03/18/tailwind-hotwire-more/
 

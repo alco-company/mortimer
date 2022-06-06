@@ -15,6 +15,9 @@ class AbstractResource < ApplicationRecord
   def self.default_scope
     Sidekiq.server? ? where(deleted_at: nil) : where(deleted_at: nil, account: Current.account)
   end
+  # def self.default_scope
+  #   all #Sidekiq.server? ? where(deleted_at: nil) : where(deleted_at: nil, account: Current.account)
+  # end
 
   #
   # used for debugging

@@ -8,7 +8,7 @@ one:
   name: MyString
   state: MyString
   ancestry: MyString
-  deleted_at: 2022-05-27 19:51:22
+  deleted_at: 
 
 two:
   account: two
@@ -18,4 +18,4 @@ two:
   name: MyString
   state: MyString
   ancestry: MyString
-  deleted_at: 2022-05-27 19:51:22
+  deleted_at: 

@@ -6,6 +6,7 @@
 class StockItem < AbstractResource
   include Assetable
 
+  belongs_to :stock
   belongs_to :stocked_product
   belongs_to :stock_location
   has_many :stock_item_transactions
@@ -19,7 +20,7 @@ class StockItem < AbstractResource
   #
   def self.add_quantity( s, sp, sl, parm)
     begin      
-      si = self.find_by( stocked_product_id: sp.id, stock_location: sl.id, batch_number: parm["batchnbr"])
+      si = self.unscoped.find_by( stocked_product_id: sp.id, stock_location: sl.id, batch_number: parm["batchnbr"])
       if si 
         si.update_attribute :quantity, (si.quantity + parm["nbrcont"].to_i)
       else
@@ -46,19 +47,25 @@ class StockItem < AbstractResource
   end
 
   def self.create_for_stock_item_transaction s, sp, sl, parm 
-    acc = s.account
-    Asset.create( 
-      account_id: acc.id, 
-      name: parm["batchnbr"], 
-      assetable: StockItem.create( 
-        stocked_product_id: sp.id, 
-        stock_location_id: sl.id, 
-        batch_number: parm["batchnbr"], 
-        quantity: parm["nbrcont"],
-        unit: parm["unit"],
-        expire_at: StockItem.parse_yymmdd( parm["expr"] || parm["sell"])
-      )
-    ).assetable
+    begin      
+      acc = Asset.unscoped.where( assetable: s).first.account
+      Asset.create( 
+        account_id: acc.id, 
+        name: parm["batchnbr"], 
+        assetable: StockItem.create( 
+          stock_id: s.id,
+          stocked_product_id: sp.id, 
+          stock_location_id: sl.id, 
+          batch_number: parm["batchnbr"], 
+          quantity: parm["nbrcont"],
+          batch_unit: parm["unit"],
+          expire_at: StockItem.parse_yymmdd( parm["expr"] || parm["sell"])
+        )
+      ).assetable
+    rescue => exception      
+      puts exception 
+      nil
+    end 
   end
 
   def nbr_pallets

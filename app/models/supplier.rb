@@ -14,13 +14,14 @@ class Supplier < AbstractResource
   end
 
   def self.create_for_product account, parm 
+    say account.to_json
     s = Supplier.find_by_prefix parm["ean14"]
     unless s 
       #
       # search the https://gepir.gs1.org/index.php/search-by-gtin somwhow to find the correct supplier
       #
       sup = Supplier.create!( gtin_prefix: parm["ean14"][4,4])
-      cal = Calendar.create!( name: parm["ean14"], account: account)
+      cal = Calendar.create!( name: parm["ean14"] )
       participant = Participant.create! name: parm["ean14"], 
         account: account,
         calendar: cal,

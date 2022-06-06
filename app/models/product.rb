@@ -15,7 +15,8 @@ class Product < AbstractResource
   end
 
   def self.create_for_stock_item_transaction s, parm 
-    acc = s.account
+    acc = Asset.unscoped.where(assetable: s).first.account
+    say "asset id: #{acc.id}"
     sup = Supplier.create_for_product(acc, parm)
     prod = Product.create!( supplier: sup, supplier_barcode: parm["ean14"] )
     a= Asset.create!( 

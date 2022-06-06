@@ -1,0 +1,70 @@
+<% content_for :head do %>
+  <script>
+    window.App = {};
+    App.webWorker = new Worker("/stock_pos_worker_5.js");
+  </script>
+<% end %>
+
+<div 
+  data-controller="stock-pos" 
+  data-stock-pos-queue-url-value="/pos<%= resource_url(resource.assetable) %>/stock_item_transactions"
+  data-stock-pos-queue-method-value='POST'
+  data-stock-pos-queue-headers-value='{ "Content-Type": "application/json", "X-CSRF-Token": "__TOKEN__" }'
+  data-stock-pos-queue-frequency-value="30000"
+  data-stock-pos-api-key-value="<%= resource.assetable.access_token %>"
+  data-stock-pos-stock-id-value="<%= resource.assetable.id %>"
+  data-stock-pos-heartbeat-url-value="/pos<%= resource_url(resource.assetable) %>/heartbeat.json"
+  data-stock-pos-heartbeat-frequency-value="300000"
+  class="min-h-screen bg-gray-900 py-6 flex flex-col justify-center relative overflow-hidden sm:py-12"
+  >
+  <div class="absolute inset-0 bg-speicher_logo opacity-5 bg-no-repeat bg-cover [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+  <div class="relative px-6 pt-10 pb-8 bg-white shadow-xl ring-1 ring-gray-900/5 sm:max-w-lg sm:mx-auto sm:rounded-lg sm:px-10">
+  <div data-stock-pos-target="broken" class="hidden absolute left-0 top-0 sm:rounded-t-lg w-full bg-red-600 text-red-100 px-4 py-2 pl-12">FORBINDELSE TIL SERVEREN AFBRUDT</div>
+  <div data-stock-pos-target="reloadWarning" class="hidden absolute left-0 top-0 sm:rounded-t-lg w-full bg-yellow-600 text-yellow-100 px-4 py-2 pl-12">GENINDLÆSER SNART!</div>
+    <div class="max-w-md mx-auto">
+      <div class="divide-y divide-gray-300/50">
+        <div class="pb-8 text-base leading-7 text-gray-300 grid grid-cols-2">
+          <p class="text-mdfont-semibold text-gray-400 pl-2">
+            <span data-stock-pos-target="barcodeIconSSCS" class="hidden material-symbols-outlined">bento</span>
+            <span data-stock-pos-target="barcodeIconEAN14" class="hidden material-symbols-outlined">inventory_2</span>
+            <span data-stock-pos-target="barcodeIconLOC" class="hidden material-symbols-outlined">pin_drop</span>
+          </p>
+          <ul class="list-none mt-0 p-0 text-sm mb-2">
+            <li data-stock-pos-target="barcode" ></li>
+            <li data-stock-pos-target="types" ></li>
+          </ul>
+          <input 
+            data-action="keydown->stock-pos#keydownHandler"
+            data-stock-pos-target="focus" 
+            type="text" 
+            placeholder="scan..." 
+            class=" rounded-lg col-span-2 text-[50px] w-full border-0 focus:ring-0 focus:border-0 focus:outline-none" 
+            />
+          <div data-stock-pos-target="scanset" class="text-gray-300 col-span-2 w-full text-[20px] border-0"></div>
+        </div>
+      </div>
+      <h3 class="pl-2 text-lg text-gray-400">Opsamlet/behandlet af server:</h3>
+      <div class="pl-2 pr-2 grid grid-cols-2  justify-items-stretch">
+        <p> Produkt</p>
+        <p class="justify-self-end">Enhed</p>
+      </div>
+      <div class="shadow-sm hover:shadow-lg">
+        <%= turbo_stream_from "pos_stock_item_transactions" %>
+        <ul id="pos_stock_transaction_list" class="max-h-72 overflow-y-scroll overflow-x-hidden"></ul>
+        <div class="mt-3">
+          <a href="#" data-stock-pos-target="queueButton" data-action="stock-pos#empty_queue"  class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Køen er tom</a>
+        </div>
+      </div>
+
+      <%# operations %>
+      <div class="max-h-20 mt-4 flex justify-center">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <span class="relative z-0 inline-flex shadow-sm rounded-md">
+          <button data-stock-pos-target="receiveButton" data-action="stock-pos#receive_goods" type="button" class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">Varemodtagelse</button>
+          <button data-stock-pos-target="inventoryButton" data-action="stock-pos#do_inventory" type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">Optælling</button>
+          <button data-stock-pos-target="shipButton" data-action="stock-pos#ship_goods" type="button" class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">Vare udlevering</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

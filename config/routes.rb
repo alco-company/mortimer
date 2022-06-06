@@ -30,6 +30,19 @@ Rails.application.routes.draw do
     end
   end
 
+  # POS ----
+
+  scope module: :pos, path: 'pos', as: 'pos' do 
+    resources :employees
+    resources :stocks do
+      member do
+        get :heartbeat
+      end
+      resources :stock_item_transactions
+    end
+  end
+  
+
   # resources ----
 
 
@@ -102,7 +115,6 @@ Rails.application.routes.draw do
   resources :dashboards, concerns: [:cloneable, :modalable] 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-
   # user sign-in, -out, and -up
   post "sign_up", to: "users#create"
   get "sign_up", to: "users#sign_up"
@@ -114,7 +126,8 @@ Rails.application.routes.draw do
   resources :confirmations, only: [:create, :edit, :new], param: :confirmation_token
   resources :passwords, only: [:create, :edit, :new, :update], param: :password_reset_token
 
-
+  # this next endpoint is meant for dokku to use upon start
+  # to verify that the service did infact start up as expected
   get '/check.txt', to: proc {[200, {}, ['check_ok']]}
 
   root to: "dashboards#landing"

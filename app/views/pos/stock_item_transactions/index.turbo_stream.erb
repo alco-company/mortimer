@@ -1,0 +1,9 @@
+<turbo-stream target="pos_stock_item_transactions" action="replace">
+  <template>
+    <ul role="list" class="-my-5 divide-y divide-gray-200">
+      <% resources.each do |resource| %>
+        <%= render partial: "stock_item_transaction", locals: { resource: resource } %>
+      <% end if resources %>
+    </ul>
+  </template>
+</turbo-stream>
