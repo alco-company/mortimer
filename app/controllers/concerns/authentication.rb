@@ -20,6 +20,7 @@ module Authentication
     reset_session
     user.regenerate_session_token
     user.update_attribute :logged_in_at, Time.now
+    session[:current_account] = user.account.id
     session[:current_user_session_token] = user.reload.session_token
   end
   
@@ -66,14 +67,11 @@ module Authentication
     Current.account
   end
 
-  def set_current_account
-    if !session[:current_account].nil?
-      session[:current_account] = Account.find( session[:current_account]) rescue nil
-    end
-    if session[:current_account].nil?
-      session[:current_account] = current_user.account rescue nil
-    end
-    session[:current_account]
+  def set_current_account    
+    say "Current.account #{session[:current_account]}"
+    return Account.find( session[:current_account]) if session[:current_account].present? and !session[:current_account].nil?
+    return Account.find( (session[:current_account] = Current.user.account.id) ) if Current.user and !Current.user.nil?
+    (session[:current_account] = nil)
   end
 
   def user_signed_in?

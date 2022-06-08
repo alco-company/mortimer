@@ -59,6 +59,9 @@ In the REFERENCES you will find a lot of people, resources, etc
 * 06:45 stock_item_transactions list on stocks
 * 11:15 add QRCode to Stock
 * 12:45 start deploying to staging - beta 1
+* 13:30 testing deploy
+* 15:44 remove issue with missing current_account
+* 15:50 deploy beta 2
 
 ### 2022-06-07
 
