@@ -1,8 +1,9 @@
-class StockItemTransactionsController < ApplicationController
+class StockItemTransactionsController < EventsController
 
   def set_resource_class
     @resource_class= StockItemTransaction
   end
+
 
   private 
 
