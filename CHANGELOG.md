@@ -52,6 +52,26 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-06-08
+
+04:30 Sent Anne off on a conference
+
+* 06:45 stock_item_transactions list on stocks
+* 11:15 add QRCode to Stock
+* 12:45 start deploying to staging - beta 1
+
+### 2022-06-07
+
+all day in Thisted - didn't get a single line added :(
+
+### 2022-06-06
+
+back from a holiday well spent in our summer cottage at the sea
+
+* 18:30 started on SHIP stock_item_transactions
+
+21:00 totally waisted - 
+
 ### 2022-06-03
 
 a late start - overslept 'til 07:36

@@ -85,3 +85,5 @@ gem "pagy", "~> 5.10"
 gem "bcrypt", "~> 3.1"
 
 gem "ancestry", "~> 4.1"
+
+gem "rqrcode", "~> 2.1"
