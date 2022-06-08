@@ -62,6 +62,8 @@ In the REFERENCES you will find a lot of people, resources, etc
 * 13:30 testing deploy
 * 15:44 remove issue with missing current_account
 * 15:50 deploy beta 2
+* 19:10 error on logout from staging
+* 
 
 ### 2022-06-07
 

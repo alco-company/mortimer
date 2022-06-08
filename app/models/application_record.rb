@@ -1,9 +1,7 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
-
   has_paper_trail ignore: [:fulltext]
-
 
   # SearchEngine implements class methods for searching
   # self.search_fulltext

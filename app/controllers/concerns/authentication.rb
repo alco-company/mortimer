@@ -40,6 +40,7 @@ module Authentication
 
   def forget(user)
     cookies.delete :remember_token
+    Current.account = session[:current_account] = user.account.id
     user.regenerate_remember_token
   end  
 

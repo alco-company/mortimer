@@ -1,4 +1,6 @@
 class User < AbstractResource
+  has_paper_trail ignore: [:remember_token,:session_token]
+  
   include Participantable
 
   CONFIRMATION_TOKEN_EXPIRATION = 10.minutes

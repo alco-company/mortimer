@@ -623,4 +623,16 @@ To gitserver.alco.dk:speicher/greybox.git
  * [new branch]      staging -> staging
 Branch 'staging' set up to track remote branch 'staging' from 'greybox'.
 √ src % git remote add staging dokku@docker.alco.company:staging.greybox.speicher.ltd
-√ src %
+√ src % git push staging
+```
+## Setup access to Postgres DB from outside the container
+
+[access Postgres from outside](https://stackoverflow.com/questions/34851335/accessing-postgres-database-inside-dokku-container-from-outside)
+
+```
+➜  ~ dokku postgres:expose greybox
+ !     Service is already started
+-----> Service greybox exposed on port(s) 20712
+```
+## Access Rails, and NgINX logfiles 
+
