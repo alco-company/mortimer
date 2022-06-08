@@ -6,6 +6,7 @@ class Stock  < AbstractResource
   has_many :stock_locations
   has_many :stocked_products
   has_many :stock_item_transactions, through: :stock_locations
+
   #
   # default_scope returns all posts that have not been marked for deletion yet
   #

@@ -27,7 +27,7 @@ class StockItemTransaction  < AbstractResource
     else raise "direction parameter (#{parms["direction"]}) is not implemented!"
     end
   rescue RuntimeError => err
-    say "RUNTIME ERROR: (StockItemTransaction) #{err.message}"
+    say "[stock_item_transaction] Error: (StockItemTransaction) #{err.message}"
     false
   end
 
@@ -49,7 +49,6 @@ class StockItemTransaction  < AbstractResource
           sl = StockLocation.get_by :location_barcode, s, parm
           sp = prod.get_stocked_product s, sl, prod, parm
           si = StockItem.add_quantity( s, sp, sl, parm)
-          puts "----- #{si.id}"
           self.create_transaction s, sl, sp, si, parm, parm["nbrcont"], parm["unit"]
         rescue ActiveRecord::StatementInvalid
           raise ActiveRecord::Rollback
@@ -96,7 +95,6 @@ class StockItemTransaction  < AbstractResource
             unit: u
           ) 
         )
-        # say "stock_item_transaction #{e.name}"
         sp.update_attribute :updated_at, DateTime.now
         e.eventable
       rescue => err 

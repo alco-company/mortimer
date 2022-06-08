@@ -13,6 +13,10 @@ class StockLocation < AbstractResource
     return [{id: nil, name: ''}] if stock.nil?
     [{id: stock.id, name: stock.name}]
   end
+
+  def self.all_locations_in_stock stock 
+    StockLocation.where(stock: stock).pluck :id
+  end
   
   def self.get_by field, s, parm 
     self.find_by(field => parm["location"]) || self.create_for_stock_item_transaction( s, parm)
