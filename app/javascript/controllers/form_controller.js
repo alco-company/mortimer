@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class FormController extends Controller {
-  static targets = [ "focus" ]
+  static targets = [ "focus", "copytext" ]
   static values = {
     clipboardPrefix: String
   }
@@ -17,7 +17,7 @@ export default class FormController extends Controller {
   }
 
   copy_text(e){
-    let copyField = document.getElementById("asset_assetable_attributes_access_token");
+    let copyField = this.copytextTarget//document.getElementById("asset_assetable_attributes_access_token");
     console.log( this.clipboardPrefixValue )
     
     /* Select the text field */

@@ -63,6 +63,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 * 15:44 remove issue with missing current_account
 * 15:50 deploy beta 2
 * 19:10 error on logout from staging
+* 19:50 transactions do not show up on staging
 * 
 
 ### 2022-06-07
