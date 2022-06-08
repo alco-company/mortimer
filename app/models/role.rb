@@ -46,12 +46,10 @@ class Role < AbstractResource
   # endpoint = product | role | user | ..
   #
   def can action, endpoint
-    # say "testing whether role (#{name}) allows User #{Current.user.id} to #{action} against #{endpoint}"
     return false unless ((context==' ') || (context.split(' ').include?( endpoint )))
     return false if (role =~ Regexp.new( action.to_s[0].upcase)).nil?
     true
   rescue => err
-    # say "ar--- role error #{err}"
     false
   end
 end

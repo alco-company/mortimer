@@ -19,8 +19,8 @@ class StockedProduct < AbstractResource
 
   def self.create_for_stock_item_transaction s, p, sl, parm
     acc = s.account
-    say "here with #{s}, #{p}, #{sl}, #{parm}"
-    say "and what about #{p.asset}"
+    # say "here with #{s}, #{p}, #{sl}, #{parm}"
+    # say "and what about #{p.asset}"
     Asset.create( 
       account_id: acc.id, 
       name: "%s (%s)" % [p.name, parm["batchnbr"]], 

@@ -49,7 +49,7 @@
         </div>
 
         <!-- Assignments -->
-        <% say "assignments count: #{ resource.assignments.size }" %>
+        <% # say "assignments count: #{ resource.assignments.size }" %>
         <%= form.fields_for :assignments do |assign_form| %>
           <%= assign_form.hidden_field :assignable_type %>
           <%= assign_form.hidden_field :assignable_id %>

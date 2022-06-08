@@ -292,6 +292,7 @@ module ResourceControl
   # find resources on parent
   #
   def find_parent_resources options 
+    say resources_name
     policy_scope(parent.send(resources_name))
   end
 

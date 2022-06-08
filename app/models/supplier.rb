@@ -14,7 +14,7 @@ class Supplier < AbstractResource
   end
 
   def self.create_for_product account, parm 
-    say account.to_json
+    # say account.to_json
     s = Supplier.find_by_prefix parm["ean14"]
     unless s 
       #

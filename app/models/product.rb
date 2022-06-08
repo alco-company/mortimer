@@ -16,7 +16,6 @@ class Product < AbstractResource
 
   def self.create_for_stock_item_transaction s, parm 
     acc = Asset.unscoped.where(assetable: s).first.account
-    say "asset id: #{acc.id}"
     sup = Supplier.create_for_product(acc, parm)
     prod = Product.create!( supplier: sup, supplier_barcode: parm["ean14"] )
     a= Asset.create!( 
@@ -24,7 +23,6 @@ class Product < AbstractResource
       name: parm["ean14"], 
       assetable: prod
     )
-    say "asset id: #{a.id}"
     Product.find a.assetable.id
   end
   #

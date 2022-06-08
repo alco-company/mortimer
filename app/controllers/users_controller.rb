@@ -35,7 +35,7 @@ class UsersController < ParticipantsController
     else
       Current.errors = resource.errors
       render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
-      say Current.errors.to_json
+      say "[users_controller] Errors: #{Current.errors.to_json}"
     end
   end
 

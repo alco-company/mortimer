@@ -40,7 +40,6 @@ class Account < AbstractResource
   # get's called from controller specific find_resources_queried
   #
   def self.search_by_model_fields lot, query
-    say query
     default_scope.where "name like '%#{query}%' "
   end
 
