@@ -27,58 +27,59 @@ class StockItemTransaction  < AbstractResource
     else raise "direction parameter (#{parms["direction"]}) is not implemented!"
     end
   rescue RuntimeError => err
-    say "[stock_item_transaction] Error: (StockItemTransaction) #{err.message}"
+    Rails.logger.info "[stock_item_transaction] Error: (StockItemTransaction) #{err.message}"
     false
   end
-
+  
   def self.delete_pos_transaction params 
     st=StockItemTransaction.unscoped.find(params[:id])
     return false unless st and st.event.update(deleted_at: DateTime.now)
     true
   end
-
+  
   private 
-
-    def self.create_adding_transaction s, parm 
-      StockItemTransaction.transaction do
-        a = Asset.unscoped.where(assetable: s).first
-        acc = Account.find a.account_id
-        Current.account = Asset.unscoped.where(assetable: s).first.account
-        begin 
-          prod = Product.get_by :supplier_barcode, s, parm
-          sl = StockLocation.get_by :location_barcode, s, parm
-          sp = prod.get_stocked_product s, sl, prod, parm
-          si = StockItem.add_quantity( s, sp, sl, parm)
-          self.create_transaction s, sl, sp, si, parm, parm["nbrcont"], parm["unit"]
-        rescue ActiveRecord::StatementInvalid
-          raise ActiveRecord::Rollback
-          false
-        end    
+  
+  def self.create_adding_transaction s, parm 
+    StockItemTransaction.transaction do
+      Current.account = Asset.unscoped.where(assetable: s).first.account
+      begin 
+        prod = Product.unscoped.get_by :supplier_barcode, s, parm
+        sl = StockLocation.unscoped.get_by :location_barcode, s, parm
+        sp = prod.get_stocked_product s, sl, prod, parm
+        si = StockItem.add_quantity( s, sp, sl, parm)
+        self.create_transaction s, sl, sp, si, parm, parm["nbrcont"], parm["unit"]
+      rescue ActiveRecord::StatementInvalid
+        Rails.logger.info "[stock_item_transaction] create_adding_transaction: (StatementInvalid)"
+        raise ActiveRecord::Rollback
+        false
+      end    
+    end
+  end
+  
+  def self.create_subtracting_transaction s, parm 
+    StockItemTransaction.transaction do
+      Current.account = Asset.where(assetable: s).first.account
+      begin
+        st = Event.unscoped.where( name: parm["sscs"], state: "RECEIVE" ).last.eventable  
+        si = StockItem.subtract_quantity( s, st, parm)
+        self.create_transaction s, st.stock_location, st.stocked_product, si, parm, st.quantity, st.unit
       end
     end
-
-    def self.create_subtracting_transaction s, parm 
-      StockItemTransaction.transaction do
-        Current.account = Asset.where(assetable: s).first.account
-        begin
-          st = Event.where( name: parm["sscs"], state: "RECEIVE" ).last.eventable  
-          si = StockItem.subtract_quantity( s, st, parm)
-          self.create_transaction s, st.stock_location, st.stocked_product, si, parm, st.quantity, st.unit
-        end
+  end
+  
+  def self.create_inventory_transaction(s, parm)
+    StockItemTransaction.transaction do
+      Current.account = Asset.where(assetable: s).first.account
+      begin
+        st = Event.unscoped.where( name: parm["sscs"] ).last.eventable
+        self.create_transaction s, st.stock_location, st.stocked_product, si, parm
+      rescue => error
+        Rails.logger.info "[stock_item_transaction] create_inventory_transaction: (#{error})"
       end
     end
-
-    def self.create_inventory_transaction(s, parm)
-      StockItemTransaction.transaction do
-        Current.account = Asset.where(assetable: s).first.account
-        begin
-          st = Event.where( name: parm["sscs"] ).last.eventable
-          self.create_transaction s, st.stock_location, st.stocked_product, si, parm
-        end
-      end
-    end
-
-    def self.create_transaction s, sl, sp, si, parm, q, u
+  end
+  
+  def self.create_transaction s, sl, sp, si, parm, q, u
       begin
         acc = s.account
         e = Event.create( 
@@ -98,6 +99,7 @@ class StockItemTransaction  < AbstractResource
         sp.update_attribute :updated_at, DateTime.now
         e.eventable
       rescue => err 
+        Rails.logger.info "[stock_item_transaction] create_transaction: (#{err})"
         raise ActiveRecord::Rollback
         nil
       end
