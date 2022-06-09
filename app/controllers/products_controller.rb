@@ -13,7 +13,8 @@ class ProductsController  < AssetsController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      params[:asset][:assetable_attributes][:supplier_id] = params[:asset][:assetable_attributes][:supplier_id].compact_blank!.join
+      supplier = params[:asset][:assetable_attributes][:supplier_id]
+      params[:asset][:assetable_attributes][:supplier_id] = supplier.is_a?(Array) ? supplier.compact_blank!.join : supplier
       params.require(:asset).permit(:assetable_type, :name, :account_id, assetable_attributes: [ :id, :supplier_id, :supplier_barcode ] )
     end
 

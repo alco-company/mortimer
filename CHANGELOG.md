@@ -52,6 +52,13 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-06-09
+
+07:40 ready - kind'a - to attack another day
+
+* 09:16 off to the 'Kirkekontoret'
+* 13:07 fixed supplier_id as string on products/new
+
 ### 2022-06-08
 
 04:30 Sent Anne off on a conference
@@ -64,7 +71,8 @@ In the REFERENCES you will find a lot of people, resources, etc
 * 15:50 deploy beta 2
 * 19:10 error on logout from staging
 * 19:50 transactions do not show up on staging
-* 
+
+02:05 - roasted
 
 ### 2022-06-07
 
