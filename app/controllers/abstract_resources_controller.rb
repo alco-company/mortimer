@@ -127,7 +127,7 @@ class AbstractResourcesController < ApplicationController
   # and along the way it also sets a @sorting_direction variable for the current (field) sorting
   #
   def index
-    authorize(:index) ? respond_with(:index) : not_authorized
+    authorize(:index) ? respond_with(:index) : not_authorized(true)
   end
 
   #

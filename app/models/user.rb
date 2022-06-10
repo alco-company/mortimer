@@ -136,12 +136,20 @@ class User < AbstractResource
   def can action, endpoint 
     return true if is_a_god?
     self.all_roles.each{ |r| return true if r.can( action, endpoint) }
+    say "no roles allow #{action} on #{endpoint}"
     false
   rescue
     say "User #{self.id} failed checking if #{action} against #{endpoint} is authorized"
     false
   end
 
+  def can_list_service? service
+    can :index, service.index_url.split("/").last.singularize
+  end
+
+  def can_impersonate?
+    is_a_god?
+  end
   #
   # by birth 
   #
