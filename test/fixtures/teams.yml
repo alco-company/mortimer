@@ -2,10 +2,8 @@
 
 one:
   task: one 
-  calendar: one
   deleted_at: 
 
 two:
   task: two 
-  calendar: two 
   deleted_at: 

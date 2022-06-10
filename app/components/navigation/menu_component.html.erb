@@ -10,10 +10,10 @@
 
   <div id="account_<%= @id %>_services" class="space-y-1">
     <% @current.account.services.each do |service| %>
-      <% helpers.say "kan #{@current.user.name} #{service.index_url} #{@current.user.can_list_service? service}" %>
+      <% active = request.fullpath == service.index_url %>
       <% if @current.user.can_list_service? service %>
         <!-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-600 hover:text-gray-900 hover:bg-gray-50" -->
-        <a href="<%= service.index_url %>" class="<%= @link_classes %>" aria-current="page">
+        <a href="<%= service.index_url %>" class="<%= @link_classes %><%= active ? " bg-gray-200 text-gray-900" : "" %>" aria-current="page">
           <!--
             Heroicon name: outline/home
 

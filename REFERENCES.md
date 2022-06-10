@@ -163,3 +163,8 @@ https://boringrails.com/articles/tailwind-style-css-transitions-with-stimulusjs/
 ### Optimising Bulk Import Speed in Rails
 
 https://www.twnsnd.com/posts/how_i_100xd_bulk_import_speed_in_rails_with_some_gnarly_sql.html
+
+### SSO with Azure AD 
+
+https://medium.com/committed-engineers/setup-azure-ad-oauth-2-0-with-ruby-on-rails-and-devise-39848e3ed532 
+

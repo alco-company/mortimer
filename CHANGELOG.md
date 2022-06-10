@@ -56,6 +56,9 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 06:39 kickin' and mostly alive - will need to see a doctor regarding my left eye though
 
+* 06:48 role not handled well enogh
+* 10:56 job processing outside current account
+* 18:30 show active menu item
 * 
 
 ### 2022-06-09

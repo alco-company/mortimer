@@ -46,6 +46,7 @@ da:
   loading: "Indlæser..."
   delete: Slet
   cancel: Fortryd
+  update: Opdatér
   add: Tilføj
   RECEIVE: Modtaget
   SHIP: Udleveret
