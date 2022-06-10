@@ -99,8 +99,8 @@ module Pos
       end
     
       def token_approved
-        stock = Stock.unscoped.find params["stock_id"]
-        stock.access_token == params["api_key"]
+        @stock = Stock.unscoped.find params["stock_id"]
+        @stock.access_token == params["api_key"]
       rescue
         false
       end
@@ -110,7 +110,7 @@ module Pos
         # TODO - make sure two accounts do not mix their transactions !!
         # 
         st_id=REDIS.incr('stock_item_transactions_id') 
-        REDIS.set( "stock_item_transactions:%d" % st_id, JSON.generate(resource_params.to_unsafe_h) ) 
+        REDIS.set( ("stock_item_transactions:%d" % st_id), JSON.generate(resource_params.to_unsafe_h) ) 
         unless REDIS.get('stock_item_transaction_processing_job')
           REDIS.set "stock_item_transaction_processing_job", true
           StockItemTransactionProcessingJob.perform_later

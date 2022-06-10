@@ -37,15 +37,6 @@ class Event < AbstractResource
   end
 
   #
-  # default_scope returns all posts that have not been marked for deletion yet
-  #
-  def self.default_scope
-    where(deleted_at: nil, account: Current.account)
-  end
-
-
-
-  #
   # called by resource_control when creating new resources
   # for the #new action
   def self.new_rec r

@@ -42,11 +42,16 @@ class StockItemTransaction  < AbstractResource
   def self.create_adding_transaction s, parm 
     StockItemTransaction.transaction do
       Current.account = Asset.unscoped.where(assetable: s).first.account
+      Rails.logger.info "----> Current.account #{Current.account.to_json}"
       begin 
         prod = Product.unscoped.get_by :supplier_barcode, s, parm
+        say "----> Product #{prod.to_json}"
         sl = StockLocation.unscoped.get_by :location_barcode, s, parm
+        say "----> StockLocation #{sl.to_json}"
         sp = prod.get_stocked_product s, sl, prod, parm
+        say "----> StockedProduct #{sp.to_json}"
         si = StockItem.add_quantity( s, sp, sl, parm)
+        say "----> StockItem #{si.to_json}"
         self.create_transaction s, sl, sp, si, parm, parm["nbrcont"], parm["unit"]
       rescue ActiveRecord::StatementInvalid
         Rails.logger.info "[stock_item_transaction] create_adding_transaction: (StatementInvalid)"
@@ -99,6 +104,8 @@ class StockItemTransaction  < AbstractResource
             unit: u
           ) 
         )
+        say "----> StockItemTransaction (event) #{e.to_json}"
+        say "----> StockItemTransaction #{e.eventable.to_json}"
         sp.update_attribute :updated_at, DateTime.now
         e.eventable
       rescue => err 
@@ -112,6 +119,7 @@ class StockItemTransaction  < AbstractResource
     # methods supporting broadcasting 
     #
     def broadcast_create
+      say "----> broadcast (self) #{self.to_json}"
       broadcast_prepend_later_to model_name.plural, target: "#{self.class.to_s.underscore}_list", partial: self, locals: { resource: self }
       broadcast_prepend_later_to "pos_stock_item_transactions", target: "pos_stock_item_transaction_list", partial: "pos/stock_item_transactions/stock_item_transaction", locals: { resource: self }
     end

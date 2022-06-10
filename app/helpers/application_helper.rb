@@ -1,6 +1,7 @@
 module ApplicationHelper
 
   def say msg 
+    return unless Rails.env.development?
     Rails.logger.info msg 
   end
 
