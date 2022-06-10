@@ -3,7 +3,7 @@ class Role < AbstractResource
 
   belongs_to :account
 
-  validates :name, presence: true, uniqueness: true 
+  validates :name, presence: true
   validates :role, presence: true 
 
 
