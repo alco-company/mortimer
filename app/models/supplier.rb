@@ -95,3 +95,63 @@ class Supplier < AbstractResource
   end
 
 end
+
+
+
+
+# Company name Lindholm Biler A/S
+# Domain	lindholmbiler.dk lindholmleasing.dk
+# Numeric ID	263840
+# VAT ID	DK32768040
+# Parent numeric ID	241741
+
+# Language	Danish
+# Sales Manager	-
+# Marketplaces ALCO Company ApS Marketplace
+# CreateUserIdService	false
+# Attachments	-
+
+# Contract ID	0010579565
+# Customer ID	
+# Company contract end date	
+
+# Reference number	
+# Terms of payments	
+# 30 days
+# VAT %	
+# 25
+# Crefo number
+
+# Address	
+# Gl. Århusvej 241B
+# City	
+# Viborg
+# Country	
+# Denmark
+# Zip code	
+# 8800
+# Email	
+# jn@lindholmbiler.dk
+# Contact phone	
+# Contact person	
+# Technical contact	
+# Technical Account Manager	
+# Technical contact email
+
+# payment details
+# Billing start date	
+# 2017-05-10 06:05 (UTC)
+# Currency	
+# DKK
+# Bank name	
+# Bank Identifier Code	
+# SWIFT code	
+# Account number	
+# IBAN	
+# Account name	
+# Branch code	
+# Registration number
+
+# demographics
+# Industry	
+# Employee amount

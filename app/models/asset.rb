@@ -7,6 +7,11 @@ class Asset < AbstractResource
   delegated_type :assetable, types: %w[ Employee Product Stock StockLocation PunchClock ], dependent: :destroy
   accepts_nested_attributes_for :assetable
 
+  before_create :create_calendar_if_missing
+  def create_calendar_if_missing 
+    self.calendar = account.calendar || Calendar.create( name: account.name) if calendar.nil?
+  end
+
   #
   # called by resource_control when creating new resources
   # for the #new action

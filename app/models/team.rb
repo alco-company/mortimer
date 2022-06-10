@@ -2,7 +2,6 @@ class Team  < AbstractResource
   include Participantable
 
   belongs_to :task, optional: true
-  belongs_to :calendar, optional: true
 
   has_many :participant_teams
   has_many :participants, through: :participant_teams

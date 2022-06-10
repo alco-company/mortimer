@@ -14,12 +14,17 @@ class Account < AbstractResource
   belongs_to :dashboard, optional: true
 
   before_create :create_dashboard_if_missing
+  before_create :create_calendar_if_missing
 
   def create_dashboard_if_missing 
     if dashboard.nil?
       d = Dashboard.create( name: name, layout: "application") 
       self.dashboard = d
     end
+  end
+
+  def create_calendar_if_missing 
+    self.calendar = Calendar.create( name: name) if calendar.nil?
   end
 
   #

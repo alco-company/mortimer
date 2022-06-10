@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_01_211531) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_09_184921) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -252,11 +252,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_01_211531) do
 
   create_table "teams", force: :cascade do |t|
     t.bigint "task_id"
-    t.bigint "calendar_id"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["calendar_id"], name: "index_teams_on_calendar_id"
     t.index ["task_id"], name: "index_teams_on_task_id"
   end
 
@@ -308,7 +306,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_01_211531) do
   add_foreign_key "stocked_products", "products"
   add_foreign_key "stocked_products", "stock_locations"
   add_foreign_key "stocked_products", "stocks"
-  add_foreign_key "teams", "calendars"
   add_foreign_key "teams", "tasks"
   add_foreign_key "users", "accounts"
 end

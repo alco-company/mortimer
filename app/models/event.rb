@@ -31,12 +31,9 @@ class Event < AbstractResource
   accepts_nested_attributes_for :eventable, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :assignments, reject_if: :all_blank, allow_destroy: true
 
-  before_create :attach_account_calendar_if_missing
-
-  def attach_account_calendar_if_missing 
-    if self.calendar.nil?
-      self.calendar = self.account.calendar
-    end
+  before_create :create_calendar_if_missing
+  def create_calendar_if_missing 
+    self.calendar = account.calendar || Calendar.create( name: account.name) if calendar.nil?
   end
 
   #

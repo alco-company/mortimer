@@ -9,8 +9,8 @@ module Assetable
   included do
     has_one :asset, as: :assetable, touch: true, dependent: :destroy
 
-    delegate :name, :account, :state, :deleted_at, to: :asset
-
+    delegate :name, :calendar, :account, :state, :deleted_at, to: :asset
+  
     def delegated_from
       self.asset
     end

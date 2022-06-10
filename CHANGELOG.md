@@ -52,12 +52,20 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-06-10
+
+06:39 kickin' and mostly alive - will need to see a doctor regarding my left eye though
+
+* 
+
 ### 2022-06-09
 
 07:40 ready - kind'a - to attack another day
 
 * 09:16 off to the 'Kirkekontoret'
 * 13:07 fixed supplier_id as string on products/new
+* 19:46 redo the calendar_id, optional
+* 21:05 error in adding users - SystemStackError - stack level too deep
 
 ### 2022-06-08
 

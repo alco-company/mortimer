@@ -15,6 +15,12 @@ class Participant < AbstractResource
 
   accepts_nested_attributes_for :roles
 
+  before_create :create_calendar_if_missing
+
+  def create_calendar_if_missing 
+    self.calendar = account.calendar || Calendar.create( name: account.name) if calendar.nil?
+  end
+
   def roles= rs 
     roles.delete_all
     rs.each{ |r| Roleable.create( role: Role.find(r), roleable: self) unless r.blank? }

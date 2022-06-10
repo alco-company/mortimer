@@ -78,7 +78,9 @@ class StockItemTransaction  < AbstractResource
       end
     end
   end
-  
+
+  # create_transaction: (PG::NotNullViolation: ERROR:  null value in column "calendar_id" of relation "events" violates not-null constraint
+  # 2022-06-09T13:20:45.729958238Z app[worker.1]: DETAIL:  Failing row contains (1, 2, StockItemTransaction, 1, null, 123456789012345675, RECEIVE, null, null, null, null, null, null, 2022-06-09 13:20:45.725922, 2022-06-09 13:20:45.725922).
   def self.create_transaction s, sl, sp, si, parm, q, u
       begin
         acc = s.account
@@ -87,6 +89,7 @@ class StockItemTransaction  < AbstractResource
           # depending upon the Stock.stock_unit_identifier name: parm["ean14"], 
           name: parm["sscs"], # identifier = sscs -> pallet
           state: parm["direction"], 
+          calendar_id: s.calendar || acc.calendar,
           eventable: StockItemTransaction.create( 
             barcodes: parm["barcode"], 
             stocked_product_id: sp.id, 

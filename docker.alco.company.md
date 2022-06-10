@@ -630,9 +630,9 @@ Branch 'staging' set up to track remote branch 'staging' from 'greybox'.
 [access Postgres from outside](https://stackoverflow.com/questions/34851335/accessing-postgres-database-inside-dokku-container-from-outside)
 
 ```
-➜  ~ dokku postgres:expose greybox
- !     Service is already started
------> Service greybox exposed on port(s) 20712
+root@srv005415:~# dokku postgres:expose greybox 10.85.130.8:5432
+-----> Service greybox exposed on port(s) [container->host]: 5432->10.85.130.8:5432
 ```
+
 ## Access Rails, and NgINX logfiles 
 

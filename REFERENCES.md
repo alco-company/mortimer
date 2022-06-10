@@ -151,3 +151,15 @@ https://github.com/dokku/dokku-mysql
 
 https://github.com/johnsorrentino/dokku-rails-cheatsheet 
 
+### Event streaming
+
+using Kafka https://www.honeybadger.io/blog/event-streaming-rails-kafka/ 
+
+
+### Tailwind style CSS transitions with StimulusJS
+
+https://boringrails.com/articles/tailwind-style-css-transitions-with-stimulusjs/
+
+### Optimising Bulk Import Speed in Rails
+
+https://www.twnsnd.com/posts/how_i_100xd_bulk_import_speed_in_rails_with_some_gnarly_sql.html
