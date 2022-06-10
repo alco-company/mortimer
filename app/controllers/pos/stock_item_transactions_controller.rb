@@ -43,6 +43,7 @@ module Pos
     skip_before_action :set_paper_trail_whodunnit
 
     skip_before_action :set_resource
+    skip_before_action :set_ancestry
     skip_before_action :set_resources
 
     def set_resource_class 

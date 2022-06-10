@@ -1,6 +1,8 @@
 class UsersController < ParticipantsController
   # skip_before_action :authenticate_user!, only: [:create, :new]
   skip_before_action :set_resource, only: :create
+  skip_before_action :breadcrumbs, only: :create
+  skip_before_action :set_ancestry, only: :create
   before_action :redirect_if_authenticated, only: [:create, :new]
   
   def set_resource_class
@@ -21,7 +23,7 @@ class UsersController < ParticipantsController
   def create
     @user = User.new(create_user_params)
     @user.account = current_account
-    @resource = Participant.new account: current_account, name: @user.user_name, participantable: @user
+    resource= Participant.new account: current_account, name: @user.user_name, participantable: @user
     if resource.valid?
       resource.save
       resource.participantable.send_confirmation_email! unless resource.participantable.confirmed? # params[:user][:confirmed_at]
@@ -87,6 +89,8 @@ class UsersController < ParticipantsController
       if params[:participant][:participantable_attributes][:confirmed_at]=='0'
         params[:participant][:participantable_attributes][:confirmed_at] = nil
       else
+        say resource.to_json 
+        say resource.participantable.to_json
         unless resource.participantable.confirmed? 
           params[:participant][:participantable_attributes][:confirmed_at]=DateTime.now 
         end

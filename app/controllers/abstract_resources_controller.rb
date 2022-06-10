@@ -41,12 +41,6 @@ class AbstractResourcesController < ApplicationController
   end  
 
   #
-  # this include makes sure that you can call User.current and Account.current
-  # whereever you like
-  #
-  # include SentientControl
-
-  #
   # this include builds the breadcrumbs
   #
   include Breadcrumbs

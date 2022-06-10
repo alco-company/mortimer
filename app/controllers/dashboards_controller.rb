@@ -2,6 +2,7 @@ class DashboardsController < SpeicherController
 
   skip_before_action :authenticate_user!, only: :landing
   skip_before_action :set_resource, only: :landing 
+  skip_before_action :set_ancestry, only: :landing
   before_action :find_landing, only: :landing
 
   #
