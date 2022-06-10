@@ -12,6 +12,8 @@ module ApplicationHelper
   
   def record_state rec 
     raw_t(rec.state)
+  rescue
+    'N/A'
   end
 
   def display_time dt 
