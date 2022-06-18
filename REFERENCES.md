@@ -168,3 +168,13 @@ https://www.twnsnd.com/posts/how_i_100xd_bulk_import_speed_in_rails_with_some_gn
 
 https://medium.com/committed-engineers/setup-azure-ad-oauth-2-0-with-ruby-on-rails-and-devise-39848e3ed532 
 
+### Using small Stimulus Self-Destruct Controllers
+
+https://boringrails.com/articles/self-destructing-stimulus-controllers/
+
+### Infinite scrolls - room for improvement
+
+https://www.bearer.com/blog/infinite-scrolling-pagination-hotwire ***
+https://stevepolito.design/blog/rails-infinite-scrolling-blog-roll/
+https://medium.com/wolox/infinite-scrolling-ruby-on-rails-3fcd3bac0f75
+https://gorails.com/episodes/infinite-scroll-stimulus-js

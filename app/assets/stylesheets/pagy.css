@@ -70,5 +70,23 @@
   .pagy-combo-nav-js .page.next.disabled {
     @apply text-gray-400 cursor-default;
   }
-    
+
+
+  .collapse-menu-anchor {
+    transition: transform 0.6s;
+    transform-origin: top;
+    transition-delay: 0.2s;
+    height: 200px;
+  }
+  .collapse-menu-anchor:not(:hover) {
+    /* transform: scaleY(0); */
+    transition: top 2s;
+  }
+  
+  .collapse-menu-anchor:hover {
+    /* transform: scaleY(1); */
+    /* display: inline-block */
+    top: -120px;
+  }
+  
 }

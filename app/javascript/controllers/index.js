@@ -18,6 +18,9 @@ application.register('popover', Popover)
 import ContentLoaderController from "./content_loader_controller.js"
 application.register("content-loader", ContentLoaderController)
 
+import PaginationController from "./pagination_controller.js"
+application.register("pagination", PaginationController)
+
 import FlagController from "./flag_controller.js"
 application.register("flag", FlagController)
 

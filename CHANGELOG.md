@@ -52,6 +52,19 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-06-18
+
+08:30 ouch - gettin' behind - but what to do?
+
+* cleaning up infinite scroll - looks good so far
+* 
+
+### 2022-06-15
+
+07:10 finally saw that doctor - and it turned out to be necessary to have surgery 
+
+* testing scan on staging
+
 ### 2022-06-10
 
 06:39 kickin' and mostly alive - will need to see a doctor regarding my left eye though
