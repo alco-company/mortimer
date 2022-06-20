@@ -31,6 +31,7 @@
 
 da:
   you_must_login_to_access_this: "Du er nødt til at logge ind for at tilgå denne side!"
+  your_credentials_dont_match: "Dine brugeroplysninger blev ikke fundet - CSRF fejl!"
   record_not_found: "(404) Den post, du bad om, blev desværre ikke fundet"
   not_authorized: "(401) Den post/den handling, du bad om, har du desværre ikke adgang til!"
   dashboard: "oversigt"

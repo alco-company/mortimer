@@ -56,7 +56,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 06:05 stayin' at home - not feeling to safe in the traffic
 
-* testing out some redirect's when token is not there (should go to login) - bury it for now :(
+* testing out some redirect's when token is not there - [should go to login](https://github.com/hotwired/turbo/issues/605) :(
 * testing navigation errors on links like /stock_locations/:id - https://github.com/rails/rails/issues/39566 
 * 
 

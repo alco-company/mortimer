@@ -9,11 +9,13 @@ module Authentication
     helper_method :current_user
     helper_method :user_signed_in?
     helper_method :current_account
+
+    rescue_from ActionController::InvalidAuthenticityToken, with: :redirect_to_login
   end
 
   def authenticate_user!
     store_location
-    redirect_to login_path, alert: t('you_must_login_to_access_this') unless user_signed_in?
+    redirect_to login_path, status: :see_other, alert: t('you_must_login_to_access_this') unless user_signed_in?
   end
 
   def login(user)
@@ -55,32 +57,36 @@ module Authentication
 
   private
 
-  def current_user
-    Current.user ||= if session[:current_user_session_token].present?
-      User.unscoped.find_by(session_token: session[:current_user_session_token])
-    elsif cookies.permanent.encrypted[:remember_token].present?
-      User.unscoped.find_by(remember_token: cookies.permanent.encrypted[:remember_token])
+    def redirect_to_login
+      redirect_to login_path, status: :see_other, alert: t('your_credentials_dont_match')
     end
-  end
 
-  def current_account
-    Current.account ||= set_current_account
-    Current.account
-  end
+    def current_user
+      Current.user ||= if session[:current_user_session_token].present?
+        User.unscoped.find_by(session_token: session[:current_user_session_token])
+      elsif cookies.permanent.encrypted[:remember_token].present?
+        User.unscoped.find_by(remember_token: cookies.permanent.encrypted[:remember_token])
+      end
+    end
 
-  def set_current_account    
-    say "Current.account #{session[:current_account]}"
-    return Account.find( session[:current_account]) if session[:current_account].present? and !session[:current_account].nil?
-    return Account.find( (session[:current_account] = Current.user.account.id) ) if Current.user and !Current.user.nil?
-    (session[:current_account] = nil)
-  end
+    def current_account
+      Current.account ||= set_current_account
+      Current.account
+    end
 
-  def user_signed_in?
-    Current.user.present?
-  end
+    def set_current_account    
+      say "Current.account #{session[:current_account]}"
+      return Account.find( session[:current_account]) if session[:current_account].present? and !session[:current_account].nil?
+      return Account.find( (session[:current_account] = Current.user.account.id) ) if Current.user and !Current.user.nil?
+      (session[:current_account] = nil)
+    end
 
-  def user_is_admin? 
-    true
-  end
+    def user_signed_in?
+      Current.user.present?
+    end
+
+    def user_is_admin? 
+      true
+    end
 
 end

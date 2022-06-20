@@ -6,7 +6,8 @@ export default class SwitchboardController extends Controller {
   connect() {
     super.connect()
     document.documentElement.addEventListener("turbo:before-fetch-response", function (e){
-      // window.dispatchEvent( new CustomEvent("speicherMessage", { detail: { message: 'authorization', value: e.detail.fetchResponse.response.status }}) )
+      if(e.detail.fetchResponse.response.redirected==true && /login$/.test(e.detail.fetchResponse.response.url))
+        window.location.href=e.detail.fetchResponse.response.url
     })
   }
   
