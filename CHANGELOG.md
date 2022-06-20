@@ -52,12 +52,20 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-06-20
+
+06:05 stayin' at home - not feeling to safe in the traffic
+
+* testing out some redirect's when token is not there (should go to login) - bury it for now :(
+* testing navigation errors on links like /stock_locations/:id - https://github.com/rails/rails/issues/39566 
+* 
+
 ### 2022-06-18
 
 08:30 ouch - gettin' behind - but what to do?
 
 * cleaning up infinite scroll - looks good so far
-* 
+  
 
 ### 2022-06-15
 

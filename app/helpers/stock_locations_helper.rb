@@ -8,9 +8,12 @@ module StockLocationsHelper
     end
   end
 
-  def link_to_location resource, options
-    return link_to( resource.asset.name, stock_stock_location_url(resource.stock,resource), options) if parent?
-    link_to resource.asset.name, stock_location_url(resource), options
+  def link_to_stock_location resource, options
+    if parent?
+      link_to( resource.asset.name, stock_stock_location_url(resource.stock,resource), options) 
+    else
+      link_to( resource.asset.name, stock_location_url(resource))
+    end
   end
 
   def edit_location_href resource 
