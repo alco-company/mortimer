@@ -15,6 +15,14 @@ class Stock  < AbstractResource
     Stock.all.joins(:asset)
   end
 
+  #
+  # implement on every model where search makes sense
+  # get's called from controller specific find_resources_queried
+  #
+  def self.search_by_model_fields lot, query
+    default_scope.where "assets.name ilike '%#{query}%' "
+  end
+
   def nbr_pallets
     q = stock_item_transactions.pluck :state
     p = 0

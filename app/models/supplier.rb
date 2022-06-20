@@ -58,7 +58,7 @@ class Supplier < AbstractResource
   # get's called from controller specific find_resources_queried
   #
   def self.search_by_model_fields lot, query
-    default_scope.where "participants.name like '%#{query}%' "
+    default_scope.where "participants.name ilike '%#{query}%' "
   end
 
   # def selected? values
