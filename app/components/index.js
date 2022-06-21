@@ -3,6 +3,9 @@
 
 import { application } from "../javascript/controllers/application"
 
+import Navigation__TopbarComponentController from "./navigation/topbar_component_controller.js"
+application.register("navigation--topbar-component", Navigation__TopbarComponentController)
+
 import Navigation__MobileSidebarComponentController from "./navigation/mobile_sidebar_component_controller.js"
 application.register("navigation--mobile-sidebar-component", Navigation__MobileSidebarComponentController)
 

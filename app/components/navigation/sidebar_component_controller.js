@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import { enter, leave } from "el-transition"
 
 export default class SidebarComponentController extends Controller {
-  static targets = [ ]
+  static targets = [ "sidebar" ]
 
   connect() {
     super.connect()
@@ -17,23 +17,25 @@ export default class SidebarComponentController extends Controller {
         .replace(/^\w/, c => c.toLowerCase())
       })(this.identifier)] = this;
 
-    // leave(this.menuTarget)
+    leave(this.sidebarTarget)
   }
 
   close(event) {
     // leave(this.menuTarget)
   }
 
-  toggle() {
-    // if ( this.menuTarget.classList.contains('hidden') ) {
-    //   enter(this.menuTarget)
-    // } else {
-    //   leave(this.menuTarget)
-    // }
+  openSidebar() {
+    enter(this.sidebarTarget)
   }
 
   handleMessages(e) {
     console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
+
+    if(e.detail.message==='open sidebar'){
+      this.openSidebar()
+    }
+
+
   }
 
 }

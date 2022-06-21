@@ -33,7 +33,6 @@ export default class FormController extends Controller {
     
     if (e.key === 'Enter') {
       e.preventDefault()
-      console.log('submit form')
       window.dispatchEvent( new CustomEvent("speicherMessage", {
         detail: {
           message: 'submit form'

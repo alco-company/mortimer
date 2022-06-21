@@ -52,13 +52,22 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-06-21
+
+07:15 will try my luck on the roads, I guess
+
+* building for the mobile devices
+* 18:57 - mostly done - depstag'ing this far
+
+
 ### 2022-06-20
 
 06:05 stayin' at home - not feeling to safe in the traffic
 
 * testing out some redirect's when token is not there - [should go to login](https://github.com/hotwired/turbo/issues/605) :(
 * testing navigation errors on links like /stock_locations/:id - https://github.com/rails/rails/issues/39566 
-* 
+
+18:45 Basta
 
 ### 2022-06-18
 

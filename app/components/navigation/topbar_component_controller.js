@@ -1,12 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
-import { enter, leave } from "el-transition"
 
-export default class UserProfileComponentController extends Controller {
-  static targets = [ "userprofile" ]
+export default class TopbarComponentController extends Controller {
 
   connect() {
     super.connect()
-
     document.querySelector('#switchboard')[
       (str => {
       return str
@@ -17,23 +14,27 @@ export default class UserProfileComponentController extends Controller {
         .join('')
         .replace(/^\w/, c => c.toLowerCase())
       })(this.identifier)] = this;
-      leave(this.userprofileTarget)
+
   }
 
-  hide(event) {
-    console.log('logout')
+  openSidebar(e){
+    window.dispatchEvent( new CustomEvent("speicherMessage", {
+      detail: {
+        message: 'open sidebar'
+      }
+    }))
   }
 
-  openUserProfile(){
-    enter(this.userprofileTarget)
+  toggleUsermenu(e){
+    window.dispatchEvent( new CustomEvent("speicherMessage", {
+      detail: {
+        message: 'open user profile'
+      }
+    }))
   }
 
   handleMessages(e) {
     console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
-
-    if(e.detail.message==='open user profile'){
-      this.openUserProfile()
-    }
   }
 
 }

@@ -41,7 +41,7 @@
 
     <div id="modal_content"></div>
 
-    <%= render "shared/takiro" %>
+    <%= render partial: "shared/takiro", locals: {size: 'phone'} %>
     <%= render partial: "shared/notifications" %>
     <div id="unauthorized"></div>
   </body>

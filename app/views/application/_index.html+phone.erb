@@ -1,35 +1,37 @@
-<div class="mt-10 sm:hidden">
-  <div class="px-4 sm:px-6">
-    <h2 class="text-gray-500 text-xs font-medium uppercase tracking-wide">Projects</h2>
-  </div>
+<div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
   <%= turbo_frame_tag resources_target do %>
-    <ul
-      data-controller="list flag" 
+    <table 
+      data-controller="list flag pagination" 
       data-list-url-value="<%= resources_url %>"
-      data-action="keydown->list#keydownHandler keyup->list#keyupHandler speicherMessage@window->list#handleMessages speicherMessage@window->flag#handleMessages"
-      role="list" 
-      id="<%= resource_class.to_s.underscore %>_list" 
-      class="mt-3 border-t border-gray-200 divide-y divide-gray-100">
-      <%= render partial: "index_columns", locals: {resource: resource} %>
-      <li>
-        <a href="#" class="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6">
-          <span class="flex items-center truncate space-x-3">
-            <span class="w-2.5 h-2.5 flex-shrink-0 rounded-full bg-pink-600" aria-hidden="true"></span>
-            <span class="font-medium truncate text-sm leading-6">
-              GraphQL API
-              <span class="truncate font-normal text-gray-500">in Engineering</span>
-            </span>
-          </span>
-          <!-- Heroicon name: solid/chevron-right -->
-          <svg class="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-          </svg>
-        </a>
-      </li>
-      <% resources.each do |rec| %>
-        <%= render partial: resource_class.to_s.underscore, locals: { resource: rec } %>
-      <% end if resources %>
-    </ul>
+      data-pagination-url-value="<%= resources_url %>"
+      data-pagination-page-value="<%= 2 %>"
+      data-action="scroll@window->pagination#scroll keydown->list#keydownHandler keyup->list#keyupHandler speicherMessage@window->list#handleMessages speicherMessage@window->flag#handleMessages"
+      class="min-w-full max-w-full lg:max-w-screen-2xl divide-y divide-gray-200"
+      >
+      <thead class="bg-gray-50">
+        <tr>
+          <%= render partial: "index_columns", locals: {resource: resource} %>
+        </tr>
+      </thead>
+      <tbody 
+        id="<%= resource_class.to_s.underscore %>_list" 
+        class="bg-white divide-y divide-gray-200"
+        >
+        <% resources.each do |rec| %>
+          <%= render partial: resource_class.to_s.underscore, locals: { resource: rec } %>
+        <% end if resources %>
+        <% if (((params[:page].to_i + 1) rescue 1) > @pagy.pages) %>
+          <tr class="hidden" data-pagination-target="noRecords"><td>no more records</td></tr>
+        <% end %>
+      </tbody>
+      <tfoot id="pagination_foot" class="bg-gray-50 pl-4 pr-4 z-10">
+        <tr>
+          <td data-pagination-target="pagy" class="pl-4 pr-4" colspan=10><%== pagy_nav(@pagy) %></td>
+        </tr>
+        <tr>
+          <td class="pl-4 pr-4 text-center" colspan=10><%== pagy_info(@pagy, i18n_key: "activerecord.models.#{resource_name}" ) %></td>
+        </tr>
+      </tfoot>
+    </table>
   <% end %>
 </div>
-
