@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+ssh docker4 repo:purge-cache staging.greybox.speicher.ltd
+git push staging

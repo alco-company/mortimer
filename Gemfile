@@ -87,3 +87,5 @@ gem "bcrypt", "~> 3.1"
 gem "ancestry", "~> 4.1"
 
 gem "rqrcode", "~> 2.1"
+
+gem "rubocop", "~> 1.30"
