@@ -18,7 +18,7 @@
       <% end %>
     </div>
     <div class="ml-4 flex items-center md:ml-6">
-      <% if @current.user.can_view_notifications? %>
+      <% if (@current.user.can_view_notifications? rescue false) %>
         <button type="button" class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <span class="sr-only">View notifications</span>
           <!-- Heroicon name: outline/bell -->
