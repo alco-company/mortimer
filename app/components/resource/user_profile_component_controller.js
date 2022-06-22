@@ -18,21 +18,29 @@ export default class UserProfileComponentController extends Controller {
         .replace(/^\w/, c => c.toLowerCase())
       })(this.identifier)] = this;
       leave(this.userprofileTarget)
+    }
+    
+  hideUserProfile(event) {
+    // Ignore event if clicked within element
+    // if(this.element === event.target || this.element.contains(event.target)) return;
+
+    // leave(this.userprofileTarget)
   }
 
-  hide(event) {
-    console.log('logout')
-  }
-
-  openUserProfile(){
-    enter(this.userprofileTarget)
+  toggleUserProfile(e) {
+    e.preventDefault()
+    if ( this.userprofileTarget.classList.contains('hidden') ) {
+      enter(this.userprofileTarget)
+    } else {
+      leave(this.userprofileTarget)
+    }
   }
 
   handleMessages(e) {
     console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
 
-    if(e.detail.message==='open user profile'){
-      this.openUserProfile()
+    if(e.detail.message==='toggle user profile'){
+      this.toggleUserProfile()
     }
   }
 

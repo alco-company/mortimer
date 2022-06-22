@@ -20,7 +20,7 @@ export default class MobileSidebarComponentController extends Controller {
     leave(this.mobilesidebarTarget)
   }
 
-  closeMobileSidebar(e){
+  closeMobileSidebar(event){
     leave(this.mobilesidebarTarget)
   }
   
@@ -40,10 +40,14 @@ export default class MobileSidebarComponentController extends Controller {
     // }
   }
 
+  bing() {
+    console.log('bing')
+  }
+
   handleMessages(e) {
     // console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
 
-    if(e.detail.message==='open sidebar'){
+    if(e.detail.message==='open mobile sidebar'){
       this.openSidebar()
     }
 

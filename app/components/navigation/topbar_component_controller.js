@@ -17,21 +17,30 @@ export default class TopbarComponentController extends Controller {
 
   }
 
-  openSidebar(e){
+  closeSidebar(e){
     window.dispatchEvent( new CustomEvent("speicherMessage", {
       detail: {
-        message: 'open sidebar'
+        message: 'close mobile sidebar',
+        event: e
       }
     }))
   }
 
-  toggleUsermenu(e){
+  openSidebar(e){
     window.dispatchEvent( new CustomEvent("speicherMessage", {
       detail: {
-        message: 'open user profile'
+        message: 'open mobile sidebar'
       }
     }))
   }
+
+  // toggleUsermenu(e){
+  //   window.dispatchEvent( new CustomEvent("speicherMessage", {
+  //     detail: {
+  //       message: 'toggle user profile'
+  //     }
+  //   }))
+  // }
 
   handleMessages(e) {
     console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)

@@ -10,12 +10,14 @@
   <div class="mt-6 h-0 flex-1 flex flex-col overflow-y-auto">
     <!-- User account dropdown -->
     <%= helpers.render_component "resource/user_account", current: @current %>
-    <!-- Sidebar Search -->
-    <div class="px-3 mt-5">
-      <%= helpers.render_component "navigation/search", container_classes: "mt-1 relative rounded-md shadow-sm", search_placeholder: t(".search") %>
-    </div>
-    <!-- Navigation -->
-    
-    <%= helpers.render_component "navigation/menu", current: @current, nav_classes: "px-3 mt-6", link_classes: "bg-gray-100 hover:bg-gray-200 text-gray-500 group flex items-center px-2 py-2 text-sm font-medium rounded-md" %>
+    <% unless @current.user.nil? %>
+      <!-- Sidebar Search -->
+      <div class="px-3 mt-5">
+        <%= helpers.render_component "navigation/search", container_classes: "mt-1 relative rounded-md shadow-sm", search_placeholder: t(".search") %>
+      </div>
+      <!-- Navigation -->
+      
+      <%= helpers.render_component "navigation/menu", current: @current, nav_classes: "px-3 mt-6", link_classes: "bg-gray-100 hover:bg-gray-200 text-gray-500 group flex items-center px-2 py-2 text-sm font-medium rounded-md" %>
+    <% end %>
   </div>
 </div>
