@@ -52,7 +52,7 @@
       <%= render_component "navigation/sidebar", current: Current %>
 
       <!-- Main part -->
-      <div class="md:pl-64 flex flex-col flex-1">
+      <div class="lg:pl-64 flex flex-col flex-1">
         <!-- Topbar header -->
         <div class="lg:hidden">
           <%= render_component "navigation/topbar", current: Current, placeholder: t('search') %>
@@ -63,6 +63,18 @@
         </main>
       </div>
     </div>
+
+    <%= turbo_frame_tag 'form_slideover' do %>
+      <%= render_component "resource/form"
+      # Resource::FormComponent.new 
+      %>
+    <% end %>
+
+    <div id="modal_content"></div>
+
+    <%= render partial: "shared/takiro", locals: {size: 'phone'} %>
+    <%= render partial: "shared/notifications" %>
+    <div id="unauthorized"></div>
 
 
   </body>
