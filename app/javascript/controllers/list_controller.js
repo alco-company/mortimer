@@ -94,6 +94,7 @@ export default class ListController extends Controller {
   // and ordinary letters a-z as well
   //
   keyupHandler(e){
+    console.log("up " + e.key);
   }
 
   keydownHandler(e){    
@@ -101,7 +102,7 @@ export default class ListController extends Controller {
     if( e.stopPropagation ) e.stopPropagation();
 
     switch(e.key){
-      // console.log("up " + e.key);
+      // console.log("down " + e.key);
       // if (e.key === 'Escape') {
       //     this.hideOptions()
       //     return

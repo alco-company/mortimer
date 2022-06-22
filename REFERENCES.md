@@ -180,3 +180,6 @@ https://stevepolito.design/blog/rails-infinite-scrolling-blog-roll/
 https://medium.com/wolox/infinite-scrolling-ruby-on-rails-3fcd3bac0f75
 https://gorails.com/episodes/infinite-scroll-stimulus-js
 
+### The AbortController 
+
+https://whistlr.info/2022/abortcontroller-is-your-friend/ 

@@ -52,6 +52,13 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-06-22
+
+08:45 a really slow start - Anne was in a bad shape this morning - luckily recovered during the day <3
+
+* a (lot actually) loose ends on mobile
+* 22:15 depstag'ing again
+
 ### 2022-06-21
 
 07:15 will try my luck on the roads, I guess

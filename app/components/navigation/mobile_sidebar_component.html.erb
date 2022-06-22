@@ -56,7 +56,23 @@
         <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-purple-500-mark-gray-700-text.svg" alt="Workflow">
       </div>
       <div class="mt-5 flex-1 h-0 overflow-y-auto">
-        <%= helpers.render_component "navigation/menu", current: @current, nav_classes: "px2", link_classes: "bg-gray-100 text-gray-900 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md" %>
+        <% if @current.nil? || @current.user.nil? %>
+          <button type="button" class="group w-full bg-gray-100 rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500" id="options-menu-button" aria-expanded="false" aria-haspopup="true">
+            <span 
+              class="flex w-full justify-between items-center">
+                <span class="flex min-w-0 items-center justify-between space-x-3">
+                  <!--<img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" alt="">-->
+                  <span class="pl-7 flex-1 flex flex-col min-w-0">
+                    <!--<span class="text-gray-900 text-sm font-medium truncate">Login</span>-->
+                    <a href="/login" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900" > Login </a>
+                    <%#= button_to t( :sign_on ), login_path, data: { turbo: "false", action: "click->resource--user-profile-component#hide"}, class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900"  %>
+                  </span>
+                </span>
+            </span>
+          </button>
+        <% else %>
+          <%= helpers.render_component "navigation/menu", current: @current, nav_classes: "px2", link_classes: "bg-gray-100 text-gray-900 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md" %>
+        <% end %>
       </div>
     </div>
 

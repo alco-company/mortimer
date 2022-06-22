@@ -1,6 +1,8 @@
 require "test_helper"
 
-
+#
+# http://www.barcode-generator.org/
+#
 # Product barcode
 # Application Identifiers:
 #

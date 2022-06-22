@@ -1,0 +1,7 @@
+<li id="<%= dom_id resource %>" data-controller="list-item">
+  <%= build_account_name resource %>
+  <%= resource.dashboard.name rescue 'N/A'%>
+  <%= display_time resource.created_at %>
+  <%= record_state resource %>
+  <%= render_component "edit", resource: resource, url: edit_resource_url(resource) %>
+</li>
