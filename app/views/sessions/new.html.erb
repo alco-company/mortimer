@@ -83,14 +83,14 @@
             <div>
               <label for="user_name" class="block text-sm font-medium text-gray-700"> <%= t('.user_name') %></label>
               <div class="mt-1">
-                <%= form.text_field :user_name, required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+                <%= form.text_field :user_name, required: true, autocomplete: "off", class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
               </div>
             </div>
 
             <div class="space-y-1">
               <label for="password" class="block text-sm font-medium text-gray-700"> <%= t('.password') %> </label>
               <div class="mt-1">
-                <%= form.password_field :password, autocomplete: "current-password", required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+                <%= form.password_field :password, autocomplete: "off", required: true, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
               </div>
             </div>
 
