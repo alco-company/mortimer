@@ -1,5 +1,5 @@
-class AbstractResource < ApplicationRecord 
-  self.abstract_class=true
+class AbstractResource < ApplicationRecord
+  self.abstract_class = true
 
   #
   # default broadcasts - implement customized on model - if necessary!
@@ -21,22 +21,21 @@ class AbstractResource < ApplicationRecord
 
   #
   # used for debugging
-  def say msg 
-    Rails.logger.info "----------------------------------------------------------------------"
+  def say(msg)
+    Rails.logger.info '----------------------------------------------------------------------'
     Rails.logger.info msg
-    Rails.logger.info "----------------------------------------------------------------------"
+    Rails.logger.info '----------------------------------------------------------------------'
   end
 
-  def self.say msg 
+  def self.say(msg)
     new.say msg
   end
-
 
   #
   # called by resource_control when creating new resources
   # for the #new action
-  def self.new_rec _r
-    self.new
+  def self.new_rec(_r)
+    new
   end
   #
   # abstract class methods - implement on models!
@@ -46,11 +45,10 @@ class AbstractResource < ApplicationRecord
   # implement on every model where search makes sense
   # get's called from controller specific find_resources_queried
   #
-  def search_by_model_fields lot, query
+  def search_by_model_fields(_lot, _query)
     raise "you need to implement def search on the #{model_name} model - because it does not use dynamic_attributes!"
     # default_scope.where "name like '%#{query}%' "
   end
-
 
   def valid_attributes?(*attributes)
     attributes.each do |attribute|
@@ -61,47 +59,45 @@ class AbstractResource < ApplicationRecord
     errors.none?
   end
 
-
   def clone_from
-    assocs = self.class.reflect_on_all_associations(:has_many).map(&:name).reject{ |v| excluded_associations_from_cloning.push(:versions).include? v }
+    assocs = self.class.reflect_on_all_associations(:has_many).map(&:name).reject do |v|
+      excluded_associations_from_cloning.push(:versions).include? v
+    end
     deep_clone include: assocs
   end
 
   def excluded_associations_from_cloning
-    raise "You need to implement this on your model!"
+    raise 'You need to implement this on your model!'
   end
-
 
   #
   # used by breadcrumb - and probably other "common" tools
   #
   def name
-    self.attributes["name"]
-  rescue
-    raise "implement name method on the #{self.class.to_s} model"
+    attributes['name']
+  rescue StandardError
+    raise "implement name method on the #{self.class} model"
   end
 
   private
 
-    # 
-    # methods supporting broadcasting 
-    #
-    def broadcast_create
-      broadcast_prepend_later_to model_name.plural, target: "#{self.class.to_s.underscore}_list", partial: self, locals: { resource: self }
-    end
+  #
+  # methods supporting broadcasting
+  #
+  def broadcast_create
+    broadcast_prepend_later_to model_name.plural, target: "#{self.class.to_s.underscore}_list", partial: self,
+                                                  locals: { resource: self }
+  end
 
-    def broadcast_update 
-      if self.deleted_at.nil? 
-        broadcast_replace_later_to model_name.plural, partial: self, locals: { resource: self }
-      else 
-        broadcast_remove_to model_name.plural, target: self
-      end
+  def broadcast_update
+    if deleted_at.nil?
+      broadcast_replace_later_to model_name.plural, partial: self, locals: { resource: self }
+    else
+      broadcast_remove_to model_name.plural, target: self
     end
+  end
 
-    def broadcast_destroy
-      after_destroy_commit { broadcast_remove_to self, partial: self, locals: {resource: self} }
-    end
-    #
-    #
-
+  def broadcast_destroy
+    after_destroy_commit { broadcast_remove_to self, partial: self, locals: { resource: self } }
+  end
 end

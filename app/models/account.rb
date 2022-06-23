@@ -1,10 +1,9 @@
 class Account < AbstractResource
-  
-  validates :name, presence: true, uniqueness: true 
+  validates :name, presence: true, uniqueness: true
 
   has_many :users, inverse_of: :account
   has_many :events, inverse_of: :account
-  has_many :participants, inverse_of: :account 
+  has_many :participants, inverse_of: :account
   has_many :assets, inverse_of: :account
 
   belongs_to :calendar, optional: true
@@ -16,15 +15,15 @@ class Account < AbstractResource
   before_create :create_dashboard_if_missing
   before_create :create_calendar_if_missing
 
-  def create_dashboard_if_missing 
+  def create_dashboard_if_missing
     if dashboard.nil?
-      d = Dashboard.create( name: name, layout: "application") 
+      d = Dashboard.create(name:, layout: 'application')
       self.dashboard = d
     end
   end
 
-  def create_calendar_if_missing 
-    self.calendar = Calendar.create( name: name) if calendar.nil?
+  def create_calendar_if_missing
+    self.calendar = Calendar.create(name:) if calendar.nil?
   end
 
   #
@@ -35,16 +34,16 @@ class Account < AbstractResource
     where(deleted_at: nil)
   end
 
-  def signed_services=srv 
-    self.services.delete_all
-    srv.keys.each{|k| self.services << Service.find(k)}
+  def signed_services=(srv)
+    services.delete_all
+    srv.keys.each { |k| services << Service.find(k) }
   end
 
   #
   # implement on every model where search makes sense
   # get's called from controller specific find_resources_queried
   #
-  def self.search_by_model_fields lot, query
+  def self.search_by_model_fields(_lot, query)
     default_scope.where "name like '%#{query}%' "
   end
 
@@ -57,21 +56,20 @@ class Account < AbstractResource
     []
   end
 
+  #
+  # methods supporting broadcasting
+  #
+  def broadcast_create
+    broadcast_prepend_later_to model_name.plural, target: "#{self.class.to_s.underscore}_list", partial: self,
+                                                  locals: { resource: self, user_id: Current.user.id }
+  end
 
-    # 
-    # methods supporting broadcasting 
-    #
-    def broadcast_create
-      broadcast_prepend_later_to model_name.plural, target: "#{self.class.to_s.underscore}_list", partial: self, locals: { resource: self }
-      # broadcast_prepend_to model_name.plural, target: "#{self.class.to_s.underscore}_list", partial: self, locals: { resource: self }
+  def broadcast_update
+    if deleted_at.nil?
+      broadcast_replace_later_to model_name.plural, partial: self,
+                                                    locals: { resource: self, user_id: Current.user.id }
+    else
+      broadcast_remove_to model_name.plural, target: self
     end
-
-    def broadcast_update 
-      if self.deleted_at.nil? 
-        broadcast_replace_later_to model_name.plural, partial: self, locals: { resource: self }
-      else 
-        broadcast_remove_to model_name.plural, target: self
-      end
-    end
-
+  end
 end
