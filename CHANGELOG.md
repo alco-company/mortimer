@@ -6,6 +6,26 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## TODO 
 
+- job offering portal, application, interview, assessment, background check 
+- add manpower employees/interns/more
+- employees portal (to allowing employees a GDPR safe view on the information stored, links to refute, confirm, resign,more)
+- equipment/real estate/tools/cars/more (TCO, depreciation,identification,location,usage,more)
+- product (variant) design/calculation/planning - PIM work in a number of domains (graphics, patents/documents,more ) - collaboration
+- leads/supplier
+- purchase inquiries
+- 
+- call (to making notes/comments on phone calls, and uptake leads, and sales inquiries/orders)
+- lead/customer portal (to allow the lead/customer a GDPR safe view on their engagement with the company, recent offers, orders, invoices, more)
+- order confirmation
+- ..
+- picklist 
+- b/l aka receipt
+- freight/carrier documents
+- invoice
+
+all the documents should be pixel perfect 'on screen' as well as in print
+
+
 
 * radio_field
 * TODO: use has_secure_token to allow 'user-less' users access without logging in!
@@ -51,6 +71,12 @@ In the REFERENCES you will find a lot of people, resources, etc
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
 ## DONE
 
+
+### 2022-06-23
+
+07:15 with Anne back on track I can focus again
+
+* first major issue regression - Sidekiq cannot create broadcasts for accounts (only them) `secret = request.key_generator.generate_key`
 
 ### 2022-06-22
 
