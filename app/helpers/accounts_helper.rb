@@ -7,9 +7,9 @@ module AccountsHelper
     Current.user
   end
 
-  def build_account_name(resource, user = nil)
+  def build_account_name(resource, user_id = nil)
     user = begin
-      (User.unscoped.find user)
+      (User.unscoped.find user_id)
     rescue StandardError
       false
     end

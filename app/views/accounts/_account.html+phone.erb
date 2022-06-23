@@ -1,7 +1,19 @@
-<li id="<%= dom_id resource %>" data-controller="list-item">
-  <%= build_account_name resource %>
-  <%= resource.dashboard.name rescue 'N/A'%>
-  <%= display_time resource.created_at %>
-  <%= record_state resource %>
-  <%= render_component "edit", resource: resource, url: edit_resource_url(resource) %>
+<% user_id ||= (current_user.id rescue false) %>
+<li 
+  id="<%= dom_id resource %>" 
+  data-controller="list-item"
+  class="relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+  <div class="flex justify-between space-x-3">
+    <div class="min-w-0 flex-1">
+      <%= build_account_name resource, user_id %>
+    </div>
+    <time datetime="<%= display_time resource.created_at %>" class="flex-shrink-0 whitespace-nowrap text-sm text-gray-500"><%= display_time resource.created_at %></time>
+  </div>
+  <div class="mt-1">
+    <p class="line-clamp-2 text-sm text-gray-600">
+      <%= resource.dashboard.name rescue 'N/A'%>
+      <%= record_state resource %>
+      <%= render_component "edit", resource: resource, url: edit_resource_url(resource) %>
+    </p>
+  </div>
 </li>
