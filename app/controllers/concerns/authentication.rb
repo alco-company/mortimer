@@ -20,9 +20,9 @@ module Authentication
 
   def login(user)
     reset_session
+    Current.account = session[:current_account] = user.account.id
     user.regenerate_session_token
     user.update_attribute :logged_in_at, Time.now
-    session[:current_account] = user.account.id
     session[:current_user_session_token] = user.reload.session_token
   end
   
