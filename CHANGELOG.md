@@ -72,12 +72,21 @@ all the documents should be pixel perfect 'on screen' as well as in print
 ## DONE
 
 
+### 2022-06-24
+
+07:15 with Anne back on track I can focus (albeit still on one eye only) again
+
+* search Products
+
 ### 2022-06-23
 
 07:15 with Anne back on track I can focus again
 
 * first major issue regression - Sidekiq cannot create broadcasts for accounts (only them) `secret = request.key_generator.generate_key`
+* turned out to be Sidekiq not knowing who current_user is!!
+* 18:28 depstag'ing
 
+22:10 slept on the porch first time this year
 ### 2022-06-22
 
 08:45 a really slow start - Anne was in a bad shape this morning - luckily recovered during the day <3

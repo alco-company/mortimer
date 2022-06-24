@@ -10,6 +10,14 @@ class Product < AbstractResource
     Product.all.joins(:asset)
   end
 
+  #
+  # implement on every model where search makes sense
+  # get's called from controller specific find_resources_queried
+  #
+  def self.search_by_model_fields lot, query
+    default_scope.where "assets.name ilike '%#{query}%' "
+  end
+
   def self.get_by field, s, parm 
     self.find_by(field => parm["ean14"]) || self.create_for_stock_item_transaction( s, parm)
   end

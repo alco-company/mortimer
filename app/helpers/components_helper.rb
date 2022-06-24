@@ -2,7 +2,7 @@ module ComponentsHelper
   def raw_t msg
     t(msg).html_safe rescue msg
   end
-
+ 
   def search_field name, value, placeholder=''
     raw %(
       <div class="mt-1 relative rounded-md shadow-sm">
