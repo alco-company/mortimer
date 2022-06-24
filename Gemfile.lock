@@ -75,6 +75,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
+    brakeman (5.2.3)
     browser (5.3.1)
     builder (3.2.4)
     capybara (3.37.1)
@@ -272,6 +273,7 @@ DEPENDENCIES
   ancestry (~> 4.1)
   bcrypt (~> 3.1)
   bootsnap
+  brakeman
   browser
   capybara
   cssbundling-rails
