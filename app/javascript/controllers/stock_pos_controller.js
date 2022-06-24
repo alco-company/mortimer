@@ -1,6 +1,7 @@
 import { Application, Controller } from "@hotwired/stimulus"
 import { get } from "@rails/request.js"
 
+// 
 export default class StockPosController extends Controller {
   static targets = [ 
     "focus", 
@@ -32,6 +33,7 @@ export default class StockPosController extends Controller {
     // scanset holds an array of scan 
     // every scan is a Map/labeled array like { barcode: '123123...', ean14: 571234567890123, ... }
     this.scanset = [];
+    this.sscsset = [];
     this.direction = "";
     this.shouldReload = false;
     super.connect()
@@ -60,7 +62,7 @@ export default class StockPosController extends Controller {
 
   setPostStatus(status){
     if ( !"200 201".includes(status) ){
-      console.log(`we posted - but got ${status} back!`)
+      // console.log(`we posted - but got ${status} back!`)
     }
   }
 
@@ -69,7 +71,10 @@ export default class StockPosController extends Controller {
     this.queueButtonTarget.innerText = sizeStr
   }
 
+  // call the webworker to get it going
   webWorker(ctrl){
+
+    // first msg starts the background/webworker
     let msg = { 
       url: ctrl.queueUrlValue, 
       method: ctrl.queueMethodValue, 
@@ -89,9 +94,9 @@ export default class StockPosController extends Controller {
       App.webWorker.onmessage = function(e) {
         if ("reload" in e.data) { ctrl.setReload() }
         if ("reloadnow" in e.data) { window.location.reload() }
-        if ("link_down" in e.data) { ctrl.brokenTarget.classList.remove('hidden'); this.queueButtonTarget.classList.add("bg-red-500","text-white") }
-        if ("link_up" in e.data) { ctrl.brokenTarget.classList.add('hidden'); this.queueButtonTarget.classList.remove("bg-red-500","text-white") }
-        if ('response' in e.data) { console.log( e.data.response ) }
+        if ("link_down" in e.data) { ctrl.brokenTarget.classList.remove('hidden'); ctrl.queueButtonTarget.classList.add("bg-red-500","text-white") }
+        if ("link_up" in e.data) { ctrl.brokenTarget.classList.add('hidden'); ctrl.queueButtonTarget.classList.remove("bg-red-500","text-white") }
+        if ('response' in e.data) {}//{ console.log( e.data.response ); }
         if ('post' in e.data) { ctrl.setPostStatus(e.data["post"]) }
         if ('queueSize' in e.data) { ctrl.setQueueSize(e.data["queueSize"]) }
       }
@@ -102,7 +107,7 @@ export default class StockPosController extends Controller {
 
   copy_text(e){
     let copyField = document.getElementById("asset_assetable_attributes_access_token");
-    console.log( this.clipboardPrefixValue )
+    // console.log( this.clipboardPrefixValue )
     
     /* Select the text field */
     copyField.focus()
@@ -110,7 +115,7 @@ export default class StockPosController extends Controller {
     copyField.setSelectionRange(0, 99999); /* For mobile devices */
     navigator.clipboard.writeText(`${this.clipboardPrefixValue}?api_key=${copyField.value}`);
 
-    console.log(`Copied the text: ${copyField.value}`)    
+    // console.log(`Copied the text: ${copyField.value}`)    
   }
 
   shipScan(map){
@@ -180,6 +185,7 @@ export default class StockPosController extends Controller {
   }
 
   receive_goods(e){
+    this.sscsset = [];
     this.addGreen(this.receiveButtonTarget)
     this.removeGreen(this.inventoryButtonTarget)
     this.removeYellow(this.shipButtonTarget)
@@ -187,6 +193,7 @@ export default class StockPosController extends Controller {
     this.processScanset()
   }
   do_inventory(e){
+    this.sscsset = [];
     this.removeGreen(this.receiveButtonTarget)
     this.addGreen(this.inventoryButtonTarget)
     this.removeYellow(this.shipButtonTarget)
@@ -194,6 +201,7 @@ export default class StockPosController extends Controller {
     this.processScanset()
   }
   ship_goods(e){
+    this.sscsset = [];
     this.removeGreen(this.receiveButtonTarget)
     this.removeGreen(this.inventoryButtonTarget)
     this.addYellow(this.shipButtonTarget)
@@ -201,10 +209,43 @@ export default class StockPosController extends Controller {
     this.processScanset()
   }
 
+  isSscs(barcode){
+    var reg_sscs = /^00\d{18}/;
+    var result = reg_sscs.test(barcode)
+    console.log(`isSccs ${result}`)
+    return result;
+  }
+
+  sscsSetContains(barcode){
+    console.log(`looking for ${this.sscsset.filter( b => b === barcode )}`)
+    if (this.sscsset.filter( b => b === barcode ).length > 0)
+      return true;
+    console.log(`No SSCS code found on handset yet!`)
+    this.sscsset.push(barcode)
+    console.log(`But now it should! ${this.sscsset}`)
+    return false;
+  }
+
+  sscsBarcodeExist(barcode){
+    console.log('starting to test for SSCS')
+    if (this.isSscs(barcode) && this.sscsSetContains(barcode)) {
+      console.log(`SSCS ${barcode}`)
+      return true;
+    }
+    console.log(this.sscsset)
+    return false;
+  }
+
   keydownHandler(e){
     if (e.key === 'Enter') {
       e.preventDefault()
-      let scanMap = new Map([['barcode', e.srcElement.value]]);
+      let barcode=e.srcElement.value
+      if (this.sscsBarcodeExist(barcode)) {
+        this.focusTarget.value = ''
+        return false
+      }
+
+      let scanMap = new Map([['barcode', barcode]]);
       let decipheredScan = this.decipherBarcode( scanMap )
       if (this.prepScanset(decipheredScan)) {
         this.processScanset()
@@ -453,6 +494,7 @@ export default class StockPosController extends Controller {
   }
 
   tellMap(map, from){
+    return
     console.log(`Show Map ${from}----------------------------`)
     map.forEach( (v,i) => { console.log(`${i}: ${v} `)})
     console.log('Show Map ------------------------------ done')

@@ -77,6 +77,7 @@ all the documents should be pixel perfect 'on screen' as well as in print
 07:15 with Anne back on track I can focus (albeit still on one eye only) again
 
 * search Products
+* testing stock_item_transactions POS
 
 ### 2022-06-23
 
