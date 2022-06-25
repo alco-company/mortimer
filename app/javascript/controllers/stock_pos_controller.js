@@ -5,15 +5,22 @@ import { get } from "@rails/request.js"
 export default class StockPosController extends Controller {
   static targets = [ 
     "focus", 
-    "queueButton", 
-    "broken", 
-    "scanset",
+    "brokenError", 
     "reloadWarning", 
+    "queueIcon", 
+    "queueStatus", 
+    "queueCount", 
+    "scansetIcon",
+    "scansetCount",
+    "stepEAN14",
+    "stepSSCS",
+    "stepLOC",
     "barcodeIconSSCS",
     "barcodeIconEAN14",
     "barcodeIconLOC",
-    "barcode", 
-    "types", 
+    "barcodeTextSSCS",
+    "barcodeTextEAN14",
+    "barcodeTextLOC",
     "receiveButton", 
     "inventoryButton", 
     "shipButton" 
@@ -33,6 +40,7 @@ export default class StockPosController extends Controller {
     // scanset holds an array of scan 
     // every scan is a Map/labeled array like { barcode: '123123...', ean14: 571234567890123, ... }
     this.scanset = [];
+    this.totalScans = 0;
     this.sscsset = [];
     this.direction = "";
     this.shouldReload = false;
@@ -67,8 +75,7 @@ export default class StockPosController extends Controller {
   }
 
   setQueueSize(size){
-    let sizeStr = size < 1 ? "Køen er tom" : `Der står ${size} i kø`
-    this.queueButtonTarget.innerText = sizeStr
+    this.queueCountTarget.innerText = size
   }
 
   // call the webworker to get it going
@@ -94,8 +101,8 @@ export default class StockPosController extends Controller {
       App.webWorker.onmessage = function(e) {
         if ("reload" in e.data) { ctrl.setReload() }
         if ("reloadnow" in e.data) { window.location.reload() }
-        if ("link_down" in e.data) { ctrl.brokenTarget.classList.remove('hidden'); ctrl.queueButtonTarget.classList.add("bg-red-500","text-white") }
-        if ("link_up" in e.data) { ctrl.brokenTarget.classList.add('hidden'); ctrl.queueButtonTarget.classList.remove("bg-red-500","text-white") }
+        if ("link_down" in e.data) { ctrl.setConnectionError(ctrl) }
+        if ("link_up" in e.data) { ctrl.unsetConnectionError(ctrl)  }
         if ('response' in e.data) {}//{ console.log( e.data.response ); }
         if ('post' in e.data) { ctrl.setPostStatus(e.data["post"]) }
         if ('queueSize' in e.data) { ctrl.setQueueSize(e.data["queueSize"]) }
@@ -104,6 +111,18 @@ export default class StockPosController extends Controller {
       this.warn_to_reload("Fejl under indlæsning - prøv at genindlæse!")
     }
   }
+
+  setConnectionError(ctrl){
+    ctrl.brokenErrorTarget.classList.remove('hidden')
+    ctrl.queueIconTarget.classList.add("text-red-600")
+  }
+
+  unsetConnectionError(ctrl){
+    ctrl.brokenErrorTarget.classList.add('hidden')
+    ctrl.queueIconTarget.classList.remove("bg-red-500","text-white")
+  }
+
+
 
   copy_text(e){
     let copyField = document.getElementById("asset_assetable_attributes_access_token");
@@ -118,40 +137,68 @@ export default class StockPosController extends Controller {
     // console.log(`Copied the text: ${copyField.value}`)    
   }
 
+  grayIcon(elem){
+    elem.classList.remove('bg-green-500')
+    elem.classList.add('bg-gray-400')
+  }
+
+  greenIcon(elem){
+    elem.classList.add('bg-green-500')
+    elem.classList.remove('bg-gray-400')
+  }
+
+  // send this scan to the worker
   shipScan(map){
     map.set('unit', 'pallet')
     this.tellMap(map,'shipping')
-    try{App.webWorker.postMessage({ data: map })} catch(err){this.warn_to_reload('Kan ikke sende data - seneste indlæsninger kan være tabt!')}
-    this.barcodeIconSSCSTarget.classList.add('hidden')
-    this.barcodeIconEAN14Target.classList.add('hidden')
-    this.barcodeIconLOCTarget.classList.add('hidden')
+    try{App.webWorker.postMessage({ data: map })} catch(err){this.warn_to_reload('Kan ikke sende data - seneste indlæsninger kan være tabt!') }
+    this.grayIcon(this.barcodeIconSSCSTarget)
+    this.barcodeTextSSCSTarget.innerHTML=""
+    this.totalScans += 1
+    this.scansetCountTarget.innerText = this.totalScans
   }
-
+  
+  // send this scan to the worker
   receiveScan(map){
     map.set('unit', 'pallet')
     this.tellMap(map,'receiving')
     try{App.webWorker.postMessage({ data: map })} catch(err){this.warn_to_reload('Kan ikke sende data - seneste indlæsninger kan være tabt!')}
-    this.barcodeIconSSCSTarget.classList.add('hidden')
-    this.barcodeIconEAN14Target.classList.add('hidden')
-    this.barcodeIconLOCTarget.classList.add('hidden')
+    this.grayIcon(this.barcodeIconSSCSTarget)
+    this.grayIcon(this.barcodeIconEAN14Target)
+    this.grayIcon(this.barcodeIconLOCTarget)
+    this.barcodeTextEAN14Target.innerHTML=""
+    this.barcodeTextSSCSTarget.innerHTML=""
+    this.barcodeTextLOCTarget.innerHTML=""
   }
 
+  //
   // we queue the scans that are 'ready' - ie holds a SSCS, EAN14, and PRIV at least
+  // sending them off to the queue Worker eventually
+  //
   processScanset(){
-    let count=this.scanset.length
-    while(count>0){
-      let map = this.scanset.shift()
+
+    let processQueue = [],
+        map = null,
+        count = this.scanset.length
+
+    if (this.shouldReload) {
+      try{App.webWorker.postMessage({ loadondone: true })} catch(err){this.warn_to_reload('Kunne ikke aflevere besked - prøv at genindlæse!')}
+      this.focusTarget.classList.add('disabled')
+    }
+    if (count < 1)
+      return
+
+    while( typeof (map = this.scanset.pop()) !== 'undefined' ) {
       map.set('direction', this.direction)
       switch(true){
         case ((this.direction=='RECEIVE') && (map.get('sscs')!=undefined) && (map.get('ean14')!=undefined) && (map.get('location')!=undefined)): this.receiveScan(map); break;
         case ((this.direction=='SHIP') && (map.get('sscs')!=undefined)): this.shipScan(map); break;
-        default: this.scanset.unshift(map); this.tellMap(map,`processScanset - direction not set!! ${count}`)
+        default: processQueue.push(map); //this.tellMap(map,`processScanset - map not ready!! ${count}`)
       }
-      count--
     }
-    if (this.shouldReload) {
-      try{App.webWorker.postMessage({ loadondone: true })} catch(err){this.warn_to_reload('Kunne ikke aflevere besked - prøv at genindlæse!')}
-      this.focusTarget.classList.add('disabled')
+
+    while( typeof (map = processQueue.pop()) !== 'undefined' ) {
+      this.scanset.unshift(map)
     }
   }
 
@@ -176,63 +223,75 @@ export default class StockPosController extends Controller {
   }
 
   warn_to_reload(msg){
-    this.queueButtonTarget.innerText=msg
-    this.queueButtonTarget.classList.add("bg-red-500","text-white")
+    this.queueStatusTarget.innerText=msg
+    this.queueIconTarget.classList.add("bg-red-500","text-white")
+    this.focusTarget.classList.add('disabled')
   }
 
-  empty_queue(e){
+  emptyQueue(e){
+    // TODO: we should POST the logfile (incl all scans) first, to play it safe!
     window.location.reload()
   }
 
   receive_goods(e){
     this.sscsset = [];
+    this.totalScans = 0;
+    this.stepEAN14Target.classList.remove('hidden')
+    this.stepSSCSTarget.classList.remove('hidden')
+    this.stepLOCTarget.classList.remove('hidden')
     this.addGreen(this.receiveButtonTarget)
     this.removeGreen(this.inventoryButtonTarget)
     this.removeYellow(this.shipButtonTarget)
     this.direction = "RECEIVE"
     this.processScanset()
+    this.focusTarget.focus()
   }
   do_inventory(e){
     this.sscsset = [];
+    this.totalScans = 0;
+    this.stepEAN14Target.classList.add('hidden')
+    this.stepSSCSTarget.classList.remove('hidden')
+    this.stepLOCTarget.classList.add('hidden')
     this.removeGreen(this.receiveButtonTarget)
     this.addGreen(this.inventoryButtonTarget)
     this.removeYellow(this.shipButtonTarget)
     this.direction = "INVENTORY"
     this.processScanset()
+    this.focusTarget.focus()
+
   }
   ship_goods(e){
     this.sscsset = [];
+    this.totalScans = 0;
+    this.stepEAN14Target.classList.add('hidden')
+    this.stepSSCSTarget.classList.remove('hidden')
+    this.stepLOCTarget.classList.add('hidden')
     this.removeGreen(this.receiveButtonTarget)
     this.removeGreen(this.inventoryButtonTarget)
     this.addYellow(this.shipButtonTarget)
     this.direction = "SHIP"
     this.processScanset()
+    this.focusTarget.focus()
+
   }
 
   isSscs(barcode){
     var reg_sscs = /^00\d{18}/;
     var result = reg_sscs.test(barcode)
-    console.log(`isSccs ${result}`)
     return result;
   }
 
   sscsSetContains(barcode){
-    console.log(`looking for ${this.sscsset.filter( b => b === barcode )}`)
     if (this.sscsset.filter( b => b === barcode ).length > 0)
       return true;
-    console.log(`No SSCS code found on handset yet!`)
     this.sscsset.push(barcode)
-    console.log(`But now it should! ${this.sscsset}`)
     return false;
   }
 
   sscsBarcodeExist(barcode){
-    console.log('starting to test for SSCS')
     if (this.isSscs(barcode) && this.sscsSetContains(barcode)) {
-      console.log(`SSCS ${barcode}`)
       return true;
     }
-    console.log(this.sscsset)
     return false;
   }
 
@@ -251,7 +310,6 @@ export default class StockPosController extends Controller {
         this.processScanset()
         this.focusTarget.value = ''
       }
-      this.scansetTarget.innerText = `antal scannede paller ${this.scanset.length}`
     }
     if (e.key === 'Escape') {
       e.preventDefault()
@@ -362,7 +420,7 @@ export default class StockPosController extends Controller {
     
     let i=0
     scan.set( 'left', scan.get('barcode') )
-    this.barcodeTarget.innerText = scan.get('barcode')
+    // this.barcodeTarget.innerText = scan.get('barcode')
     while(scan.get('left').length > 0){
       i++
       switch(true){
@@ -391,17 +449,15 @@ export default class StockPosController extends Controller {
   // product = <span class="material-symbols-outlined">bento</span>
   // pallet = <span class="material-symbols-outlined">inventory_2</span>
   // location = <span class="material-symbols-outlined">pin_drop</span>
-  setIcon(){
+  setIcon(types){
     var reg_sscs = /sscs/,
         reg_ean14 = /ean14/,
         reg_location = /location/
 
-    let identified_barcode = this.typesTarget.innerText
-    
     switch(true){
-      case reg_sscs.test(identified_barcode):     this.barcodeIconSSCSTarget.classList.remove('hidden'); break;
-      case reg_ean14.test(identified_barcode):    this.barcodeIconEAN14Target.classList.remove('hidden'); break;
-      case reg_location.test(identified_barcode): this.barcodeIconLOCTarget.classList.remove('hidden'); break;
+      case reg_sscs.test(types):     this.greenIcon(this.barcodeIconSSCSTarget); break;
+      case reg_ean14.test(types):    this.greenIcon(this.barcodeIconEAN14Target); break;
+      case reg_location.test(types): this.greenIcon(this.barcodeIconLOCTarget); break;
     }
   }
 
@@ -412,8 +468,7 @@ export default class StockPosController extends Controller {
   setTypes(scan){
     let types=""; 
     scan.forEach( (v,k) => types += 'barcode left'.includes(k) ? '' : `${k}, ` )
-    this.typesTarget.innerText = types.slice(0,-2)
-    this.setIcon()
+    this.setIcon(types)
   }
   
   setScan( scan, type, start, size ){
@@ -434,7 +489,7 @@ export default class StockPosController extends Controller {
   // scan enters with all seen elements
   //
   prepScanset(scan){
-    let insertNewScanTuple = this.scanset.length < 1
+    let insertNewScanTuple = (this.scanset.length < 1)
     // what is the current scan?
     switch(true){
       case scan.has('sscs'):      return( this.setSSCS(scan,insertNewScanTuple)); break;
@@ -445,22 +500,46 @@ export default class StockPosController extends Controller {
     return false;
   }
 
+  // setSSCS adds a pallet barcode to either a new tuple or the first tuple with no pallet barcode
+  //
   setSSCS(scan,insertNewScanTuple){
     if (insertNewScanTuple && !this.shouldReload){
       this.scanset.unshift(scan)
-      this.tellMap(this.scanset[0], 'setSSCS new')
+      // this.tellMap(this.scanset[0], 'setSSCS new')
     } else {
-      if (this.scanset[0].has('sscs')) {
-        this.scanset.unshift(scan)
-        return true;
+      let processedQueue = [],
+          processingScan = scan,
+          map = null
+
+      // first tuple without SSCS
+      while( typeof (map = this.scanset.shift()) !== 'undefined' ) {
+        if ( processingScan !== null && !map.has('sscs') ){
+          this.tellMap(map, 'existing scanset tuple')
+          processingScan.forEach( (v,i) => { if ( !map.has(i) ) map.set(i, v) })
+          map.set( 'barcode', map.get('barcode') + ` ${processingScan.get('barcode')}`)
+          processingScan = null
+        } else {
+          processedQueue.push(processingScan)
+        }
+        processedQueue.push(map)
       }
-      scan.forEach( (v,i) => { if ( !this.scanset[0].has(i) ) this.scanset[0].set(i, v)  })
-      this.scanset[0].set( 'barcode', this.scanset[0].get('barcode') + ` ${scan.get('barcode')}`)
-      this.tellMap(this.scanset[0],`setSSCS existing `)
+      this.scanset = processedQueue
+      // this.tellMap(this.scanset[0],`setSSCS existing `)
     }
+    var txt = `<p>SSCS ${scan.get('sscs')}</p><p>serie/batch ${scan.get('batchnbr')} </p>`
+    this.totalScans = this.scanset.length
+    this.scansetCountTarget.innerText = this.totalScans
+    this.barcodeTextSSCSTarget.innerHTML = txt
     return true;
   }
   
+  // setProduct either inserts a new scan at the top of
+  // the scanset - or adds the ean14 scan to all current
+  // scans that do not have an ean14
+  // and then writes the content to the UI barcodeTextEAN14 element
+  // <p>1522050202057104261010293725</p>
+  // <p>bedst inden 22050202</p>
+  // <p>kolli ialt  25</p>
   setProduct(scan,insertNewScanTuple){
     if (insertNewScanTuple && !this.shouldReload){
       this.scanset.unshift(scan)
@@ -474,6 +553,8 @@ export default class StockPosController extends Controller {
         this.tellMap(this.scanset[entry], `setProduct existing ${entry}`)
       }
     }
+    var txt = `<p>ean14 ${scan.get('ean14')}</p><p> bedst inden ${scan.get('sell')}</p><p>antal kolli ${scan.get('nbrcont')}</p>`
+    this.barcodeTextEAN14Target.innerHTML = txt    
     return true;
   }
   
@@ -490,12 +571,12 @@ export default class StockPosController extends Controller {
         this.tellMap(this.scanset[entry], `setLocation existing ${entry}`)
       }
     }
+    this.barcodeTextLOCTarget.innerHTML = scan.get('barcode')
     return true;
   }
 
   tellMap(map, from){
-    return
-    console.log(`Show Map ${from}----------------------------`)
+    console.log(`Show Map ${from}-${this.scanset.length}---------------------------`)
     map.forEach( (v,i) => { console.log(`${i}: ${v} `)})
     console.log('Show Map ------------------------------ done')
   }

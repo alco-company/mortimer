@@ -27,7 +27,6 @@ module Pos
     def show 
       @resource= Asset.unscoped.where( assetable: Stock.unscoped.find( _id)).first
       Current.account = @resource.account
-      say "resource: #{resource.to_json}"
       redirect_to root_path and return unless token_approved
       render layout: "stock_pos"
     end

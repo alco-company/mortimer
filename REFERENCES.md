@@ -1,5 +1,10 @@
 # REFERENCES
 
+## Important CAVEATS
+
+[ActionCable Performance](https://ably.com/blog/rails-actioncable-the-good-and-the-bad) makes a Rails version of SPEICHER in a broader/scaleable scope
+impossible - thus heading the PETAL way really should be considered! Or things will have to be rebuilt twice - at least!
+
 ## People
 
 * Rails [David Heinemeier Hansson](https://basecamp.com/)

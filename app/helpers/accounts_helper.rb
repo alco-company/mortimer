@@ -11,9 +11,9 @@ module AccountsHelper
     user = begin
       (User.unscoped.find user_id)
     rescue StandardError
-      false
+      nil
     end
-    return resource.name unless user or !user.can_impersonate?
+    return resource.name if (user.nil? or !user.can_impersonate?)
 
     button_to resource.name, account_impersonate_path(resource)
   end
