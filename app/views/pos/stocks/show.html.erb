@@ -1,4 +1,10 @@
 <% content_for :head do %>
+  <meta name='viewport' content= 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta viewport= 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' mobileAppIOS= true>
+  <meta name="mobile-web-app-capable"  content= "yes">
+  <meta name="full-screen"  content="yes">
+  <meta name="browsermode"  content="application">
+  <meta name="screen-orientation"  content="portrait">
   <script>
     window.App = {};
     App.webWorker = new Worker("/stock_pos_worker_5.js");
