@@ -62,6 +62,7 @@ module Authentication
     end
 
     def current_user
+      say "Current.user (session_token) #{session[:current_user_session_token]}"
       Current.user ||= if session[:current_user_session_token].present?
         User.unscoped.find_by(session_token: session[:current_user_session_token])
       elsif cookies.permanent.encrypted[:remember_token].present?

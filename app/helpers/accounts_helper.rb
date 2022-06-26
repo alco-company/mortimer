@@ -3,13 +3,13 @@ module AccountsHelper
     Current.account
   end
 
-  def current_user
-    Current.user
-  end
+  # def current_user
+  #   Current.user
+  # end
 
   def build_account_name(resource)
     user = begin
-      (User.unscoped.find current_user)
+      Current.user
     rescue StandardError
       nil
     end
