@@ -8,7 +8,7 @@ class StockItemTransactionProcessingJob < ApplicationJob
       while keys && (looping>0)
         key = keys.shift
         parms = JSON.parse( REDIS.get(key) ) rescue nil
-        if parms && StockItemTransaction.create_pos_transaction( parms ) 
+        if parms && (StockItemTransaction.create_pos_transaction( parms ) rescue false)
           REDIS.del key 
         else
           looping -= 1

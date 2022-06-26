@@ -1,7 +1,11 @@
 import { Application, Controller } from "@hotwired/stimulus"
 import { get } from "@rails/request.js"
 
-// 
+// 1 Initialize
+// 2 Input
+// 3 Process Input
+// 4 Output
+// 5 Misc
 export default class StockPosController extends Controller {
   static targets = [ 
     "focus", 
@@ -36,16 +40,29 @@ export default class StockPosController extends Controller {
     apiKey: String,             // key to allow access
   }
 
+  //
+  // 1 Initialize/Connect
+  //
+  // first we initialize the handset - on every connect
   connect() {
     // scanset holds an array of scan 
     // every scan is a Map/labeled array like { barcode: '123123...', ean14: 571234567890123, ... }
     this.scanset = [];
+
     this.totalScans = 0;
+    //
+    // sscsset holds an array of scans of pallets - to 
+    // avoid the same pallet being scanned twice
     this.sscsset = [];
+
     this.direction = "";
     this.shouldReload = false;
     super.connect()
+
+    // turn on the (background)worker
     this.webWorker(this)
+
+    // focus the input field
     this.focus()
   }
 
@@ -58,6 +75,9 @@ export default class StockPosController extends Controller {
   focus() {
     this.focusTarget.focus()
   }
+
+  // -- initialize dependant functions
+
 
   setReload() {
     if (this.scanset.length < 1) {
@@ -72,10 +92,6 @@ export default class StockPosController extends Controller {
     if ( !"200 201".includes(status) ){
       // console.log(`we posted - but got ${status} back!`)
     }
-  }
-
-  setQueueSize(size){
-    this.queueCountTarget.innerText = size
   }
 
   // call the webworker to get it going
@@ -112,175 +128,73 @@ export default class StockPosController extends Controller {
     }
   }
 
-  setConnectionError(ctrl){
-    ctrl.brokenErrorTarget.classList.remove('hidden')
-    ctrl.queueIconTarget.classList.add("text-red-600")
-  }
-
-  unsetConnectionError(ctrl){
-    ctrl.brokenErrorTarget.classList.add('hidden')
-    ctrl.queueIconTarget.classList.remove("bg-red-500","text-white")
-  }
-
-
-
-  copy_text(e){
-    let copyField = document.getElementById("asset_assetable_attributes_access_token");
-    // console.log( this.clipboardPrefixValue )
-    
-    /* Select the text field */
-    copyField.focus()
-    copyField.select();
-    copyField.setSelectionRange(0, 99999); /* For mobile devices */
-    navigator.clipboard.writeText(`${this.clipboardPrefixValue}?api_key=${copyField.value}`);
-
-    // console.log(`Copied the text: ${copyField.value}`)    
-  }
-
-  grayIcon(elem){
-    elem.classList.remove('bg-green-500')
-    elem.classList.add('bg-gray-400')
-  }
-
-  greenIcon(elem){
-    elem.classList.add('bg-green-500')
-    elem.classList.remove('bg-gray-400')
-  }
-
-  // send this scan to the worker
-  shipScan(map){
-    map.set('unit', 'pallet')
-    this.tellMap(map,'shipping')
-    try{App.webWorker.postMessage({ data: map })} catch(err){this.warn_to_reload('Kan ikke sende data - seneste indlæsninger kan være tabt!') }
-    this.grayIcon(this.barcodeIconSSCSTarget)
-    this.barcodeTextSSCSTarget.innerHTML=""
-    this.totalScans += 1
-    this.scansetCountTarget.innerText = this.totalScans
-  }
-  
-  // send this scan to the worker
-  receiveScan(map){
-    map.set('unit', 'pallet')
-    this.tellMap(map,'receiving')
-    try{App.webWorker.postMessage({ data: map })} catch(err){this.warn_to_reload('Kan ikke sende data - seneste indlæsninger kan være tabt!')}
-    this.grayIcon(this.barcodeIconSSCSTarget)
-    this.grayIcon(this.barcodeIconEAN14Target)
-    this.grayIcon(this.barcodeIconLOCTarget)
-    this.barcodeTextEAN14Target.innerHTML=""
-    this.barcodeTextSSCSTarget.innerHTML=""
-    this.barcodeTextLOCTarget.innerHTML=""
-  }
 
   //
-  // we queue the scans that are 'ready' - ie holds a SSCS, EAN14, and PRIV at least
-  // sending them off to the queue Worker eventually
+  // 2 Input
   //
-  processScanset(){
+  // handle input - listen for keyboard - and functions for reacting to taps
 
-    let processQueue = [],
-        map = null,
-        count = this.scanset.length
-
-    if (this.shouldReload) {
-      try{App.webWorker.postMessage({ loadondone: true })} catch(err){this.warn_to_reload('Kunne ikke aflevere besked - prøv at genindlæse!')}
-      this.focusTarget.classList.add('disabled')
+  keydownHandler(e){
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      // let barcode=e.srcElement.value
+      this.handleBarcode(e.srcElement.value)
     }
-    if (count < 1)
-      return
-
-    while( typeof (map = this.scanset.pop()) !== 'undefined' ) {
-      map.set('direction', this.direction)
-      switch(true){
-        case ((this.direction=='RECEIVE') && (map.get('sscs')!=undefined) && (map.get('ean14')!=undefined) && (map.get('location')!=undefined)): this.receiveScan(map); break;
-        case ((this.direction=='SHIP') && (map.get('sscs')!=undefined)): this.shipScan(map); break;
-        default: processQueue.push(map); //this.tellMap(map,`processScanset - map not ready!! ${count}`)
-      }
-    }
-
-    while( typeof (map = processQueue.pop()) !== 'undefined' ) {
-      this.scanset.unshift(map)
+    if (e.key === 'Escape') {
+      e.preventDefault()
     }
   }
 
-  removeGreen(btn){
-    btn.classList.remove("bg-green-600","text-sm","font-medium","text-gray-100","hover:bg-green-500","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-green-400","focus:border-green-300")
-    btn.classList.add("bg-white","text-sm","font-medium","text-gray-700","hover:bg-gray-50","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-indigo-500","focus:border-indigo-500")
-  }
-
-  addGreen(btn){
-    btn.classList.remove("bg-white","text-sm","font-medium","text-gray-700","hover:bg-gray-50","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-indigo-500","focus:border-indigo-500")
-    btn.classList.add("bg-green-600","text-sm","font-medium","text-gray-100","hover:bg-green-500","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-green-400","focus:border-green-300")
-  }
-
-  removeYellow(btn){
-    btn.classList.remove("bg-yellow-600","text-sm","font-medium","text-gray-100","hover:bg-yellow-500","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-yellow-400","focus:border-yellow-300")
-    btn.classList.add("bg-white","text-sm","font-medium","text-gray-700","hover:bg-gray-50","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-indigo-500","focus:border-indigo-500")
-  }
-
-  addYellow(btn){
-    btn.classList.remove("bg-white","text-sm","font-medium","text-gray-700","hover:bg-gray-50","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-indigo-500","focus:border-indigo-500")
-    btn.classList.add("bg-yellow-600","text-sm","font-medium","text-gray-100","hover:bg-yellow-500","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-yellow-400","focus:border-yellow-300")
-  }
-
-  warn_to_reload(msg){
-    this.queueStatusTarget.innerText=msg
-    this.queueIconTarget.classList.add("bg-red-500","text-white")
-    this.focusTarget.classList.add('disabled')
-  }
-
+  // for now tapping the status row listing the queue in the background worker
+  // will reload the web app
   emptyQueue(e){
     // TODO: we should POST the logfile (incl all scans) first, to play it safe!
     window.location.reload()
   }
 
+  // button to setup operations for receiving goods
   receive_goods(e){
     this.sscsset = [];
     this.totalScans = 0;
-    this.stepEAN14Target.classList.remove('hidden')
-    this.stepSSCSTarget.classList.remove('hidden')
-    this.stepLOCTarget.classList.remove('hidden')
-    this.addGreen(this.receiveButtonTarget)
-    this.removeGreen(this.inventoryButtonTarget)
-    this.removeYellow(this.shipButtonTarget)
+    this.scanset = [];
+    this.resetReceivePath()
     this.direction = "RECEIVE"
     this.processScanset()
     this.focusTarget.focus()
   }
+
+  // button to setup operations for doing inventory
   do_inventory(e){
     this.sscsset = [];
     this.totalScans = 0;
-    this.stepEAN14Target.classList.add('hidden')
-    this.stepSSCSTarget.classList.remove('hidden')
-    this.stepLOCTarget.classList.add('hidden')
-    this.removeGreen(this.receiveButtonTarget)
-    this.addGreen(this.inventoryButtonTarget)
-    this.removeYellow(this.shipButtonTarget)
+    this.scanset = [];
+    this.resetInventoryPath()
     this.direction = "INVENTORY"
     this.processScanset()
     this.focusTarget.focus()
-
   }
+
+  // button to setup operations for shipping goods
   ship_goods(e){
     this.sscsset = [];
     this.totalScans = 0;
-    this.stepEAN14Target.classList.add('hidden')
-    this.stepSSCSTarget.classList.remove('hidden')
-    this.stepLOCTarget.classList.add('hidden')
-    this.removeGreen(this.receiveButtonTarget)
-    this.removeGreen(this.inventoryButtonTarget)
-    this.addYellow(this.shipButtonTarget)
+    this.scanset = [];
+    this.resetShipPath()
     this.direction = "SHIP"
     this.processScanset()
     this.focusTarget.focus()
-
   }
 
+  // -- input dependant functions
+
+  // function to test whether a particular barcode is a SSCS one
   isSscs(barcode){
     var reg_sscs = /^00\d{18}/;
     var result = reg_sscs.test(barcode)
     return result;
   }
 
+  // does the set contain this barcode
   sscsSetContains(barcode){
     if (this.sscsset.filter( b => b === barcode ).length > 0)
       return true;
@@ -288,6 +202,7 @@ export default class StockPosController extends Controller {
     return false;
   }
 
+  // test whether the current set of SSCS barcode scans contains this one
   sscsBarcodeExist(barcode){
     if (this.isSscs(barcode) && this.sscsSetContains(barcode)) {
       return true;
@@ -295,26 +210,36 @@ export default class StockPosController extends Controller {
     return false;
   }
 
-  keydownHandler(e){
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      let barcode=e.srcElement.value
-      if (this.sscsBarcodeExist(barcode)) {
-        this.focusTarget.value = ''
-        return false
-      }
-
-      let scanMap = new Map([['barcode', barcode]]);
-      let decipheredScan = this.decipherBarcode( scanMap )
-      if (this.prepScanset(decipheredScan)) {
-        this.processScanset()
-        this.focusTarget.value = ''
-      }
+  // what to think of this input?
+  handleBarcode(barcode){
+    if (this.sscsBarcodeExist(barcode)) {
+      this.focusTarget.value = ''
+      return false
     }
-    if (e.key === 'Escape') {
-      e.preventDefault()
-    }
+    this.processBarcode(barcode)
   }
+
+  //
+  // 3 Process Input
+  //
+  // process input - send good scans to the background worker
+  processBarcode(barcode){
+
+    let scanMap = new Map([['barcode', barcode]]);
+    let decipheredScan = this.decipherBarcode( scanMap )
+    if (decipheredScan.get('type')==='sscs'){
+      this.totalScans += 1
+      this.scansetCountTarget.innerText = this.totalScans      
+    }
+
+    if (this.prepScanset(decipheredScan)) {
+      this.processScanset()
+      this.focusTarget.value = ''
+    }
+
+  }
+
+  // - process dependant function
 
   //
   // decipherBarcode uses any downloaded masks to decide what a particlar
@@ -440,7 +365,11 @@ export default class StockPosController extends Controller {
       // failsafe ! Just in case we don't get a hit on all scan elements
       if(i > 10) return scan 
     }
-    this.setTypes(scan)
+    switch(true){
+      case scan.get('type')==='sscs':     this.setSSCS(scan);      break;
+      case scan.get('type')==='ean14':    this.setProduct(scan);   break;
+      case scan.get('type')==='location': this.setLocation(scan);  break;    
+    }
     return scan
   }
 
@@ -449,29 +378,21 @@ export default class StockPosController extends Controller {
   // product = <span class="material-symbols-outlined">bento</span>
   // pallet = <span class="material-symbols-outlined">inventory_2</span>
   // location = <span class="material-symbols-outlined">pin_drop</span>
-  setIcon(types){
+  setIcon(scan,type){
     var reg_sscs = /sscs/,
         reg_ean14 = /ean14/,
         reg_location = /location/
 
     switch(true){
-      case reg_sscs.test(types):     this.greenIcon(this.barcodeIconSSCSTarget); break;
-      case reg_ean14.test(types):    this.greenIcon(this.barcodeIconEAN14Target); break;
-      case reg_location.test(types): this.greenIcon(this.barcodeIconLOCTarget); break;
+      case reg_sscs.test(type):     this.greenIcon(this.barcodeIconSSCSTarget);     scan.set('type','sscs');break;
+      case reg_ean14.test(type):    this.greenIcon(this.barcodeIconEAN14Target);    scan.set('type','ean14');  break;
+      case reg_location.test(type): this.greenIcon(this.barcodeIconLOCTarget);      scan.set('type','location'); break;
     }
-  }
-
-  //
-  // each subscan (key) gets listed
-  // except barcode and left keys
-  //
-  setTypes(scan){
-    let types=""; 
-    scan.forEach( (v,k) => types += 'barcode left'.includes(k) ? '' : `${k}, ` )
-    this.setIcon(types)
+    return scan
   }
   
   setScan( scan, type, start, size ){
+    scan = this.setIcon(scan,type)
     if (size < 1){
       scan.set(type, scan.get('left').slice(start) );     
       scan.set( 'left', '');
@@ -489,46 +410,190 @@ export default class StockPosController extends Controller {
   // scan enters with all seen elements
   //
   prepScanset(scan){
-    let insertNewScanTuple = (this.scanset.length < 1)
-    // what is the current scan?
-    switch(true){
-      case scan.has('sscs'):      return( this.setSSCS(scan,insertNewScanTuple)); break;
-      case scan.has('ean14'):     return( this.setProduct(scan,insertNewScanTuple)); break;
-      case scan.has('location'):  return( this.setLocation(scan,insertNewScanTuple)); break;
+
+    let processedQueue = [],
+    processingScan = scan,
+    map = null
+
+    if (this.scanset.length<1){
+      this.scanset.push(scan)
+    } else {
+      while( typeof (map = this.scanset.shift()) !== 'undefined' ) {
+        if ( (processingScan !== null) && (!map.has( processingScan.get('type') )) ){
+          processingScan.forEach( (v,i) => { if ( !map.has(i) ) map.set(i, v) })
+          map.set( 'barcode', map.get('barcode') + ` ${processingScan.get('barcode')}`)
+          processedQueue.push(map)
+        } else {
+          processedQueue.push(map)
+          processedQueue.push(processingScan)
+        }
+      }
+      this.scanset = processedQueue.slice()
+      console.log(this.scanset)
     }
-    this.setPostStatus()
-    return false;
+
+    return true
+  }
+
+  //
+  // 4 Output
+  //
+  // handle output - send good scans to the background worker - and update the UI
+
+  //
+  // we queue the scans that are 'ready' - ie holds a SSCS, EAN14, and PRIV at least
+  // sending them off to the queue Worker eventually
+  //
+  processScanset(){
+
+    let processQueue = [],
+        map = null,
+        count = this.scanset.length
+
+    if (this.shouldReload) {
+      try{App.webWorker.postMessage({ loadondone: true })} catch(err){this.warn_to_reload('Kunne ikke aflevere besked - prøv at genindlæse!')}
+      this.focusTarget.classList.add('disabled')
+    }
+    if (count < 1)
+      return
+
+    while( typeof (map = this.scanset.pop()) !== 'undefined' ) {
+      map.set('direction', this.direction)
+      switch(true){
+        case ((this.direction=='RECEIVE') && this.receiveReady(map)): this.receiveScan(map); break;
+        case ((this.direction=='SHIP') && this.shipReady(map)): this.shipScan(map); break;
+        default: processQueue.push(map); //this.tellMap(map,`processScanset - map not ready!! ${count}`)
+      }
+    }
+
+    while( typeof (map = processQueue.pop()) !== 'undefined' ) {
+      this.scanset.unshift(map)
+    }
+  }
+
+  // - output dependant functions
+
+  receiveReady(map){
+    if ( map.get('location')!=undefined )
+    this.tellMap(map,'From ProcessScanset') 
+    return ((map.get('sscs')!=undefined) && (map.get('ean14')!=undefined) && (map.get('location')!=undefined))
+  }
+  
+  shipReady(map){
+    if ( map.get('location')!=undefined )
+      this.tellMap(map,'From ProcessScanset')
+    return (map.get('sscs')!=undefined)
+  }
+
+  // send this shipping scan to the worker
+  shipScan(map){
+    map.set('unit', 'pallet')
+    this.tellMap(map,'shipping')
+    try{App.webWorker.postMessage({ data: map })} catch(err){this.warn_to_reload('Kan ikke sende data - seneste indlæsninger kan være tabt!') }
+    this.resetShipPath()
+  }
+  
+  // send this receiving goods scan to the worker
+  receiveScan(map){
+    map.set('unit', 'pallet')
+    this.tellMap(map,'receiving')
+    try{App.webWorker.postMessage({ data: map })} catch(err){this.warn_to_reload('Kan ikke sende data - seneste indlæsninger kan være tabt!')}
+    this.resetReceivePath()
+  }
+
+  // ***** UI *****
+
+  resetReceivePath(){
+    this.stepEAN14Target.classList.remove('hidden')
+    this.stepSSCSTarget.classList.remove('hidden')
+    this.stepLOCTarget.classList.remove('hidden')
+
+    this.addGreen(this.receiveButtonTarget)
+    this.removeGreen(this.inventoryButtonTarget)
+    this.removeYellow(this.shipButtonTarget)
+
+    this.grayIcon(this.barcodeIconSSCSTarget)
+    this.grayIcon(this.barcodeIconEAN14Target)
+    this.grayIcon(this.barcodeIconLOCTarget)
+    this.barcodeTextEAN14Target.innerHTML=""
+    this.barcodeTextSSCSTarget.innerHTML=""
+    this.barcodeTextLOCTarget.innerHTML=""
+
+    this.scansetCountTarget.innerText = this.totalScans      
+  }
+
+  resetInventoryPath(){
+    this.stepSSCSTarget.classList.remove('hidden')
+    this.stepEAN14Target.classList.add('hidden')
+    this.stepLOCTarget.classList.add('hidden')
+
+    this.removeGreen(this.receiveButtonTarget)
+    this.addGreen(this.inventoryButtonTarget)
+    this.removeYellow(this.shipButtonTarget)
+
+    this.grayIcon(this.barcodeIconSSCSTarget)
+    this.barcodeTextSSCSTarget.innerHTML=""
+
+    this.scansetCountTarget.innerText = this.totalScans      
+  }
+
+  resetShipPath(){
+    this.stepSSCSTarget.classList.remove('hidden')
+    this.stepEAN14Target.classList.add('hidden')
+    this.stepLOCTarget.classList.add('hidden')
+
+    this.removeGreen(this.receiveButtonTarget)
+    this.removeGreen(this.inventoryButtonTarget)
+    this.addYellow(this.shipButtonTarget)
+
+    this.grayIcon(this.barcodeIconSSCSTarget)
+    this.barcodeTextSSCSTarget.innerHTML=""
+
+    this.scansetCountTarget.innerText = this.totalScans      
+  }
+
+  grayIcon(elem){
+    elem.classList.remove('bg-green-500')
+    elem.classList.add('bg-gray-400')
+  }
+
+  greenIcon(elem){
+    elem.classList.add('bg-green-500')
+    elem.classList.remove('bg-gray-400')
+  }
+
+  removeGreen(btn){
+    btn.classList.remove("bg-green-600","text-sm","font-medium","text-gray-100","hover:bg-green-500","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-green-400","focus:border-green-300")
+    btn.classList.add("bg-white","text-sm","font-medium","text-gray-700","hover:bg-gray-50","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-indigo-500","focus:border-indigo-500")
+  }
+
+  addGreen(btn){
+    btn.classList.remove("bg-white","text-sm","font-medium","text-gray-700","hover:bg-gray-50","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-indigo-500","focus:border-indigo-500")
+    btn.classList.add("bg-green-600","text-sm","font-medium","text-gray-100","hover:bg-green-500","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-green-400","focus:border-green-300")
+  }
+
+  removeYellow(btn){
+    btn.classList.remove("bg-yellow-600","text-sm","font-medium","text-gray-100","hover:bg-yellow-500","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-yellow-400","focus:border-yellow-300")
+    btn.classList.add("bg-white","text-sm","font-medium","text-gray-700","hover:bg-gray-50","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-indigo-500","focus:border-indigo-500")
+  }
+
+  addYellow(btn){
+    btn.classList.remove("bg-white","text-sm","font-medium","text-gray-700","hover:bg-gray-50","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-indigo-500","focus:border-indigo-500")
+    btn.classList.add("bg-yellow-600","text-sm","font-medium","text-gray-100","hover:bg-yellow-500","focus:z-10","focus:outline-none","focus:ring-1","focus:ring-yellow-400","focus:border-yellow-300")
+  }
+
+  warn_to_reload(msg){
+    this.queueStatusTarget.innerText=msg
+    this.queueIconTarget.classList.add("bg-red-500","text-white")
+    this.focusTarget.classList.add('disabled')
   }
 
   // setSSCS adds a pallet barcode to either a new tuple or the first tuple with no pallet barcode
   //
-  setSSCS(scan,insertNewScanTuple){
-    if (insertNewScanTuple && !this.shouldReload){
-      this.scanset.unshift(scan)
-      // this.tellMap(this.scanset[0], 'setSSCS new')
-    } else {
-      let processedQueue = [],
-          processingScan = scan,
-          map = null
-
-      // first tuple without SSCS
-      while( typeof (map = this.scanset.shift()) !== 'undefined' ) {
-        if ( processingScan !== null && !map.has('sscs') ){
-          this.tellMap(map, 'existing scanset tuple')
-          processingScan.forEach( (v,i) => { if ( !map.has(i) ) map.set(i, v) })
-          map.set( 'barcode', map.get('barcode') + ` ${processingScan.get('barcode')}`)
-          processingScan = null
-        } else {
-          processedQueue.push(processingScan)
-        }
-        processedQueue.push(map)
-      }
-      this.scanset = processedQueue
-      // this.tellMap(this.scanset[0],`setSSCS existing `)
-    }
+  // <p>123456789012345679</p>
+  // <p>serie/batch 123457</p>
+  setSSCS(scan){
     var txt = `<p>SSCS ${scan.get('sscs')}</p><p>serie/batch ${scan.get('batchnbr')} </p>`
-    this.totalScans = this.scanset.length
-    this.scansetCountTarget.innerText = this.totalScans
     this.barcodeTextSSCSTarget.innerHTML = txt
     return true;
   }
@@ -540,40 +605,35 @@ export default class StockPosController extends Controller {
   // <p>1522050202057104261010293725</p>
   // <p>bedst inden 22050202</p>
   // <p>kolli ialt  25</p>
-  setProduct(scan,insertNewScanTuple){
-    if (insertNewScanTuple && !this.shouldReload){
-      this.scanset.unshift(scan)
-      this.tellMap(this.scanset[0], 'setProduct new')
-    } else {
-      for (const entry in this.scanset){
-        if (!this.scanset[entry].has('ean14')){
-          scan.forEach( (v,i) => { if ( !this.scanset[entry].has(i) ) this.scanset[entry].set(i, v)  })
-          this.scanset[entry].set( 'barcode', this.scanset[entry].get('barcode') + ` ${scan.get('barcode')}`)
-        }
-        this.tellMap(this.scanset[entry], `setProduct existing ${entry}`)
-      }
-    }
+  setProduct(scan){
     var txt = `<p>ean14 ${scan.get('ean14')}</p><p> bedst inden ${scan.get('sell')}</p><p>antal kolli ${scan.get('nbrcont')}</p>`
     this.barcodeTextEAN14Target.innerHTML = txt    
     return true;
   }
   
-  setLocation(scan,insertNewScanTuple){
-    if (insertNewScanTuple && !this.shouldReload){
-      this.scanset.unshift(scan)
-      this.tellMap(this.scanset[0], 'setLocation new')
-    } else {
-      for (const entry in this.scanset){
-        if (!this.scanset[entry].has('location')){
-          scan.forEach( (v,i) => { if ( !this.scanset[entry].has(i) ) this.scanset[entry].set(i, v)  })
-          this.scanset[entry].set( 'barcode', this.scanset[entry].get('barcode') + ` ${scan.get('barcode')}`)
-        }
-        this.tellMap(this.scanset[entry], `setLocation existing ${entry}`)
-      }
-    }
+  setLocation(scan){
     this.barcodeTextLOCTarget.innerHTML = scan.get('barcode')
     return true;
   }
+
+  setQueueSize(size){
+    this.queueCountTarget.innerText = size
+  }
+
+  setConnectionError(ctrl){
+    ctrl.brokenErrorTarget.classList.remove('hidden')
+    ctrl.queueIconTarget.classList.add("text-red-600")
+  }
+
+  unsetConnectionError(ctrl){
+    ctrl.brokenErrorTarget.classList.add('hidden')
+    ctrl.queueIconTarget.classList.remove("bg-red-500","text-white")
+  }
+
+  //
+  // 5 Misc
+  //
+  // support functions like logging and more
 
   tellMap(map, from){
     console.log(`Show Map ${from}-${this.scanset.length}---------------------------`)
@@ -584,4 +644,6 @@ export default class StockPosController extends Controller {
   handleMessages(e){
     // console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
   }
+
+
 }
