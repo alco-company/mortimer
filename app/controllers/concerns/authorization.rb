@@ -13,7 +13,8 @@ module Authorization
     @authorized = true
     return @authorized if (Current.account != Current.user.account)
 
-    return @authorized = true if (Rails.env == 'test')
+    return @authorized if (Rails.env == 'test')
+    return @authorized if endpoint == 'profile' && resource.user == current_user
     return @authorized = true if (current_user && current_user.is_a_god?) # a real superuser - apparently they do exist!!
     return @authorized = false if endpoint=='account'
 

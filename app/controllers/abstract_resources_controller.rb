@@ -363,6 +363,10 @@ class AbstractResourcesController < ApplicationController
       # end
 
       begin        
+        say resource.to_json
+        say Current.account.to_json
+        say Current.user.to_json
+        say resource_params.to_json
         unless resource.update resource_params
           render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
         else

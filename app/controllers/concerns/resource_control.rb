@@ -48,7 +48,7 @@ module ResourceControl
   #
   # the 4 core resources are Event, Message, Participant, Asset
   # in which case calling for a resource will return the core resource
-  # provided the action is one of 'new', 'edit', or 'destroy'
+  # provided the action is one of 'new' 'edit', 'create', 'update', or 'destroy'
   #
   def resource
     @resource ||= (_id.nil? ? new_resource : resource_class.find(_id) )

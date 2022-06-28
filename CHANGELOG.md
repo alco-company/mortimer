@@ -1,6 +1,6 @@
 # CHANGELOG
 
-I started this in another project - hermes - which evolved into 'astronaut' which was a customer project further developed by [Michal Szymanski](https://github.com/michalsz); the basic idea on how to persist data is, however, the same - with 4/5 core entities: Event, Asset, Participant, Message, (and Document). The distinction between Message and Document isn't quite clear because I haven't decided on whether Documents really are a particular form of Messages, or entities in their own right, yet.
+I started this in another project - hermes - which evolved into 'astronaut' which was a bespoke customer project further developed by [Michal Szymanski](https://github.com/michalsz); the basic idea on how to persist data is, however, the same - with 4/5 core entities: Event, Asset, Participant, Message, (and Document). The distinction between Message and Document isn't quite clear because I haven't decided on whether Documents really are a particular form of Messages, or entities in their own right, yet.
 
 In the REFERENCES you will find a lot of people, resources, etc
 
@@ -22,8 +22,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 - b/l aka receipt
 - freight/carrier documents
 - invoice
-
-all the documents should be pixel perfect 'on screen' as well as in print
+- all the documents should be pixel perfect 'on screen' as well as in print
 
 
 
@@ -35,14 +34,12 @@ all the documents should be pixel perfect 'on screen' as well as in print
 * add user profile with some rudimentary settings and ability to fx switch to DarkMode !?
 * add Participant addressability - by means of basically one table :0 (URLs are not just webpages, but really any adressable resource!!)
 * add second **main feature** - documents (in all their glory and multiversatility, like notes, messages, contracts, SOP's, NDA's, invoices, orders, quotes, etc)
-* add third **main feature** - assets (products, work in progress, raw material, machinery, whiteboards, trucks, SIM cards, and more)
 * add Team - People are grouped into teams, either in a permanent position as fx a Sales rep in the Sales Team, or a temporary/matrix position as Data Analyst in the Finance Team/Department
 
 * make  H E R M E S  a PWA - use [Kevin Basset's Progressier](https://progressier.com/) &  https://dev.to/zippytyro/how-to-convert-any-website-webpage-into-an-installable-progressive-web-app-pwa-59ai
 * 
 * Connecting customer specific data through DT (Delegated Types)
 * use Chartkick.js for [Presentational Graphics](https://github.com/ankane/chartkick.js)
-* use [this recipe](https://levelup.gitconnected.com/how-to-add-file-upload-to-your-graphql-api-34d51e341f38) to add fileupload using GraphQL
 * fixing [issues with current_user](https://blog.cloud66.com/making-hotwire-and-devise-play-nicely-with-viewcomponents/) when using Hotwire
 * using imagekit.io to building the image library - remember new UI from TailwindUI
 
@@ -56,21 +53,32 @@ all the documents should be pixel perfect 'on screen' as well as in print
   * https://medium.com/swlh/automate-tasks-in-rails-using-the-whenever-gem-46f9708ab002
   * https://dokku.com/docs/processes/scheduled-cron-tasks/
   * 
-* when we have to add sidekiq - [here's how to do it](https://www.aloucaslabs.com/miniposts/how-to-install-sidekiq-to-a-ruby-on-rails-project-deployed-on-dokku-server) with Dokku, and further [read here](https://kukicola.io/posts/deploying-rails-6-application-with-dokku) too!
 
 * always type '?' in any inputfield (even if it cannot be presented - like checkboxes and radiobuttons) to get to the on screen documentation and help
 * always type * in search and lookup fields to have SPEICHER start presenting all the available items
 * 
 
-* add paper_trail to abstract_resource - see speicher/hours/src/app/controllers/abstract_resources_controller.rb
 * change user_time_zone in ApplicationController to use current_user's timezone - once we have added the User Model
 * use github actions (or gitlab equivalent) to do automagic deploys on git push to staging/production branches
-* use current_page? to set proper classes on links in the menu
-* use class_names to that same ends 
 
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
 ## DONE
 
+
+### 2022-06-28
+
+07:30 Nose been drippin' for a week - now it (finally turned into a full fleshed cold)
+
+* add time_zone and profile to user
+
+### 2022-06-27
+
+demoday at 11AM at Nordthy - went pretty well, perhaps saving the price model introduction which certainly could have been
+handled a lot better!
+
+### 2022-06-25/26
+
+using the better part of the weekend to prepare for demo day
 
 ### 2022-06-24
 
@@ -216,10 +224,12 @@ early rise - feelin' good after yesterdays training session
 * 10:51 deploy current 
 * 12:18 on with user, task, team
 * 19:25 deploying events, teams, tasks
-* 19:58 adding assets and suppliers
+* 19:58 adding assets and suppliers - add third **main feature** - assets (products, work in progress, machinery, tools, trucks, SIM cards, and more)
 * 22:40 pushing forward with products
 
 23:30 I was clearly done
+
+
 
 
 ### 2022-05-30
@@ -546,6 +556,9 @@ a huge gap because, for some reason I forgot to take notes! Big mistake!!
 * start fiddling with Hotwire
 
 23:30 - quit
+
+* when we have to add sidekiq - [here's how to do it](https://www.aloucaslabs.com/miniposts/how-to-install-sidekiq-to-a-ruby-on-rails-project-deployed-on-dokku-server) with Dokku, and further [read here](https://kukicola.io/posts/deploying-rails-6-application-with-dokku) too!
+
 
 ### 2021-03-12
 

@@ -69,6 +69,16 @@ da:
     suppliers: "Leverandører"
     users: 'Brugere'
 
+  navigation:
+    menu_component:
+      stocked_products: Lagervarer
+      Products: Varer
+      Stocks: Lagre
+      Suppliers: Leverandører
+      StockLocations: Lagerlokationer
+      Roles: Roller
+      Teams: Brugergrupper
+      
   topbar:
     search: "Søg overalt..."
 

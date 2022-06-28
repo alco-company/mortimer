@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-
+  
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
-
+  
   # concerns ----
   concern :modalable do
     collection do
@@ -29,9 +29,9 @@ Rails.application.routes.draw do
       get "export"
     end
   end
-
+  
   # POS ----
-
+  
   scope module: :pos, path: 'pos', as: 'pos' do 
     resources :employees
     resources :stocks do
@@ -42,10 +42,12 @@ Rails.application.routes.draw do
     end
   end
   
-
+  
   # resources ----
-
-
+  
+  resources :profiles
+  resources :time_zones, concerns: [:selectable ]
+  
   resources :products, concerns: [:cloneable, :modalable, :selectable] do
     resources :stock_locations
     resources :stock_items

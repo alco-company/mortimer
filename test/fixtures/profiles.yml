@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  time_zone: MyString
+  deleted_at: 2022-06-28 07:37:54
+
+two:
+  user: two
+  time_zone: MyString
+  deleted_at: 2022-06-28 07:37:54
