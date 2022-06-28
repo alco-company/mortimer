@@ -17,12 +17,13 @@
   <div class="relative mt-1 col-span-2">
     <% if ( @is_drop || @is_search || @is_add ) %>
       <input 
-        value="<%= [@values].flatten.pluck(:name).join(', ') rescue '' %>"
+        value="<%= helpers.combo_input_value @values %>"
         placeholder="Select value"
         autocomplete="off"
         id="combobox" 
         type="text" 
         data-resource--combo-component-target="input" 
+        data-form-target="<%= @focus ? "focus" : "" %>"
         data-action="blur->resource--combo-component#inOut focus->resource--combo-component#inOut keydown->resource--combo-component#keydownHandler keyup->resource--combo-component#keyupHandler"
         class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-12 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" 
         role="combobox" 

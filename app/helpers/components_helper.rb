@@ -24,10 +24,15 @@ module ComponentsHelper
         {},
         { multiple: true, class: "hidden", data: { resource__combo_component_target: "select"}}
     else
-      form.select attrib, 
-        options_from_collection_for_select(items,"id","name",{selected: ([values].flatten.any? ? [values].flatten.pluck(:id) : nil)}), 
-        {},
-        { class: "hidden", data: { resource__combo_component_target: "select"}}
+      form.hidden_field attrib, value: values, data: { resource__combo_component_target: "select"}
+    end
+  end
+
+  def combo_input_value value 
+    if [value].flatten.first.keys.include? :name
+      [value].flatten.pluck(:name).join(', ') rescue ''
+    else
+      [value].flatten.join(', ')
     end
   end
 end

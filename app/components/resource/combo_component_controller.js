@@ -21,12 +21,18 @@ export default class ComboComponentController extends Controller {
 
     connect() {
         super.connect()
-        let select = this.selectTarget
-        this.selectedValue = [...select.options]
+        
+        this.shouldUpdateInputValue = this.isDropValue //!(this.isAddValue || this.isSearchValue)
+        if (this.isMultiValue){
+            let select = this.selectTarget
+            this.selectedValue = [...select.options]
             .filter(option => option.selected)
             .map(option => option.value)
+        } else {
+            this.selectedValue.push(this.selectTarget.value)
+        }
         this.updateSelect()
-        this.shouldUpdateInputValue = this.isDropValue //!(this.isAddValue || this.isSearchValue)
+
         console.log(`isSingle ${this.isSingleValue}`)
         console.log(`isMulti ${this.isMultiValue}`)
         console.log(`isDrop ${this.isDropValue}`)
@@ -165,6 +171,7 @@ export default class ComboComponentController extends Controller {
                     this.selectedValue = []
                 } else {
                     this.selectedValue = [ id ]
+                    this.selectTarget.value = id
                 }
             }
         } catch (error) {
@@ -246,6 +253,8 @@ export default class ComboComponentController extends Controller {
     // build the options for a select form control
     //
     updateSelect(name) {
+        if (!this.isMultiValue)
+            return
         try {            
             this.selectTarget.innerHTML = "";
             if (this.selectedValue.length == 0) {

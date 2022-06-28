@@ -33,13 +33,14 @@ class Resource::ComboComponent < ViewComponent::Base
     #   form: form, attr: :roles, label: t('.roles'), type: :single_list, url: "/roles", partial: "/roles", values: resource.participantable.roles, items: Role.all
     # 
 
-    def initialize( form:, attr:, label: nil, type: :simple, url: nil, partial: nil, lookup_target: nil, values: nil, items: nil )
+    def initialize( form:, attr:, label: nil, type: :simple, focus: false, url: nil, partial: nil, lookup_target: nil, values: nil, items: nil )
       @form = form
       @attr = attr
       @label = label || t(attr)
       @type = type 
       @url = url || ""
       @partial = partial || @url
+      @focus = focus
       @lookup_target = lookup_target || "#{@url.underscore}".gsub('/','')
       @values = values 
       @values ||= @form.object.send("combo_values_for_#{attr}") 
