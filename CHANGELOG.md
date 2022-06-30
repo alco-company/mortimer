@@ -65,6 +65,17 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-06-30
+
+08:15 - with Ibumetin in the blood I can almost exist
+
+* cont' on time_zone - using https://nilssommer.de/articles/14-per-user-time-zone-configuration-in-rails
+* issue with all backgroundjobs not knowing of current_account / current_user
+
+### 2022-06-29
+
+scratch this one - shitty as h...
+
 ### 2022-06-28
 
 07:30 Nose been drippin' for a week - now it (finally turned into a full fleshed cold)

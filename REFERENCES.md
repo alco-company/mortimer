@@ -190,3 +190,8 @@ https://gorails.com/episodes/infinite-scroll-stimulus-js
 ### The AbortController 
 
 https://whistlr.info/2022/abortcontroller-is-your-friend/ 
+
+### TimeZones 
+
+https://nilssommer.de/articles/14-per-user-time-zone-configuration-in-rails
+https://thoughtbot.com/blog/its-about-time-zones

@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   # about handling date and timezone
   # https://nandovieira.com/working-with-dates-on-ruby-on-rails
   #
-  around_action :user_time_zone
+  around_action :user_time_zone, if: :current_user 
 
   private
 
@@ -67,9 +67,9 @@ class ApplicationController < ActionController::Base
     # TODO - add time_zone to profiles_controller - and a loookup - and a field on the user
     #
     def user_time_zone(&block)
-      (!current_user.nil? && current_user.respond_to?(:time_zone) && !current_user.time_zone.blank? ) ? 
-        Time.use_zone(current_user.time_zone, &block) : 
-        Time.use_zone('Europe/Copenhagen',&block)
+      current_user.time_zone.blank? ? 
+        Time.use_zone('Europe/Copenhagen',&block) :
+        Time.use_zone(current_user.time_zone, &block) 
     end
 
     # def handle_all_errors(e)

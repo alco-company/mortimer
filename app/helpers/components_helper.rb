@@ -29,6 +29,9 @@ module ComponentsHelper
   end
 
   def combo_input_value value 
+    if [value].flatten.first.is_a? String 
+      return [value].flatten.join(', ')
+    end
     if [value].flatten.first.keys.include? :name
       [value].flatten.pluck(:name).join(', ') rescue ''
     else
