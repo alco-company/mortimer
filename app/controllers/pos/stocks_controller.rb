@@ -38,7 +38,6 @@ module Pos
       Current.account = @resource.account
       redirect_to root_path and return unless token_approved
       Stock.unscoped.find(_id).update last_heart_beat_at: DateTime.current
-      end
     end
 
 
