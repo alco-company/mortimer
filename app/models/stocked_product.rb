@@ -54,7 +54,10 @@ class StockedProduct < AbstractResource
   #
   def broadcast_update
     if self.asset.deleted_at.nil? 
-      broadcast_replace_later_to 'stocked_product', partial: 'stocked_products/stocked_product', target: self, locals: {resource: self }
+      broadcast_replace_later_to 'stocked_product', 
+        partial: 'stocked_products/stocked_product', 
+        target: self, 
+        locals: {resource: self, user: Current.user }
     else 
       broadcast_remove_to 'stocked_product', target: self
     end

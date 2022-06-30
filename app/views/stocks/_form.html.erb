@@ -39,7 +39,7 @@
             </label>
           </div>
           <div class="sm:col-span-2">
-            <%= display_time stock.object.last_heart_beat_at %>
+            <%= display_time stock.object.last_heart_beat_at, Current.user %>
           </div>
         </div>
 

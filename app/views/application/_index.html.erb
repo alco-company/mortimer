@@ -18,7 +18,7 @@
         class="bg-white divide-y divide-gray-200"
         >
         <% resources.each do |rec| %>
-          <%= render partial: resource_class.to_s.underscore, locals: { resource: rec } %>
+          <%= render partial: resource_class.to_s.underscore, locals: { resource: rec, user: Current.user } %>
         <% end if resources %>
         <% if (((params[:page].to_i + 1) rescue 1) > @pagy.pages) %>
           <tr class="hidden" data-pagination-target="noRecords"><td>no more records</td></tr>

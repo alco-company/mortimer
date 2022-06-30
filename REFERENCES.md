@@ -195,3 +195,7 @@ https://whistlr.info/2022/abortcontroller-is-your-friend/
 
 https://nilssommer.de/articles/14-per-user-time-zone-configuration-in-rails
 https://thoughtbot.com/blog/its-about-time-zones
+
+### Multi tenancy
+
+https://blog.appsignal.com/2020/12/02/building-a-multi-tenant-ruby-on-rails-app-with-subdomains.html

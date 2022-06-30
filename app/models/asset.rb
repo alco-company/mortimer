@@ -23,7 +23,10 @@ class Asset < AbstractResource
   # will be called by "children" too - like Employees, Stocks, StockLocations, etc
   #
   def broadcast_create
-    broadcast_prepend_later_to self.assetable_type.underscore.pluralize, target: "#{self.assetable_class.to_s.underscore}_list", partial: self.assetable, locals: { resource: self.assetable }
+    broadcast_prepend_later_to self.assetable_type.underscore.pluralize, 
+      target: "#{self.assetable_class.to_s.underscore}_list", 
+      partial: self.assetable, 
+      locals: { resource: self.assetable, user: Current.user }
   end
   
   
@@ -32,7 +35,10 @@ class Asset < AbstractResource
   #
   def broadcast_update
     if self.deleted_at.nil? 
-      broadcast_replace_later_to self.assetable_type.underscore.pluralize, partial: self.assetable, target: self.assetable, locals: { resource: self.assetable }
+      broadcast_replace_later_to self.assetable_type.underscore.pluralize, 
+        partial: self.assetable, 
+        target: self.assetable, 
+        locals: { resource: self.assetable, user: Current.user }
     else 
       broadcast_remove_to self.assetable_type.underscore.pluralize, target: self.assetable
     end

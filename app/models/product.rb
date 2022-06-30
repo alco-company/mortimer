@@ -82,7 +82,10 @@ class Product < AbstractResource
   #
   def broadcast_update
     if self.asset.deleted_at.nil? 
-      broadcast_replace_later_to 'products', partial: self, target: self, locals: { resource: self }
+      broadcast_replace_later_to 'products', 
+        partial: self, 
+        target: self, 
+        locals: { resource: self, user: Current.user }
     else 
       broadcast_remove_to 'products', target: self
     end

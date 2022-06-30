@@ -24,7 +24,9 @@ class Service < AbstractResource
 
   def broadcast_update 
     if self.deleted_at.nil? 
-      broadcast_replace_later_to model_name.plural, partial: self, locals: { resource: self }
+      broadcast_replace_later_to model_name.plural, 
+        partial: self, 
+        locals: { resource: self, user: Current.user }
     else 
       broadcast_remove_to model_name.plural, target: self
     end

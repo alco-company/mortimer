@@ -36,7 +36,7 @@ class ParticipantsController < DelegatedController
   end
 
   def delete_it
-    return resource.update(deleted_at: DateTime.now) if params[:purge].blank?
+    return resource.update(deleted_at: DateTime.current) if params[:purge].blank?
     resource.destroy
   end
 

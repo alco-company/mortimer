@@ -17,9 +17,9 @@ module ApplicationHelper
     'N/A'
   end
 
-  def display_time dt 
+  def display_time dt, user 
     return "" if dt.blank?    
-    l dt.in_time_zone(Current.user.time_zone), format: :long
+    l dt.in_time_zone(user.time_zone), format: :long
   rescue 
     raw "<span class='hidden'>dt is empty or not a date nor a (date)time</span>"
   end

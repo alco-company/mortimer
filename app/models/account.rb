@@ -61,14 +61,14 @@ class Account < AbstractResource
   #
   def broadcast_create
     broadcast_prepend_later_to model_name.plural, target: "#{self.class.to_s.underscore}_list", partial: self,
-                                                  locals: { resource: self }
+                                                  locals: { resource: self, user: Current.user }
   rescue
   end
 
   def broadcast_update
     if deleted_at.nil?
       broadcast_replace_later_to model_name.plural, partial: self,
-                                                    locals: { resource: self }
+                                                    locals: { resource: self, user: Current.user }
     else
       broadcast_remove_to model_name.plural, target: self
     end

@@ -51,7 +51,10 @@ class Participant < AbstractResource
   # will be called by "children" too - like Employees, Stocks, StockLocations, etc
   #
   def broadcast_create
-    broadcast_prepend_later_to self.participantable_type.underscore.pluralize, target: "#{self.participantable_class.to_s.underscore}_list", partial: self.participantable, locals: {resource: self.participantable }
+    broadcast_prepend_later_to self.participantable_type.underscore.pluralize, 
+      target: "#{self.participantable_class.to_s.underscore}_list", 
+      partial: self.participantable, 
+      locals: {resource: self.participantable, user: Current.user }
   end
   
   
@@ -60,7 +63,10 @@ class Participant < AbstractResource
   #
   def broadcast_update
     if self.deleted_at.nil? 
-      broadcast_replace_later_to self.participantable_type.underscore.pluralize, partial: self.participantable, target: self.participantable, locals: {resource: self.participantable }
+      broadcast_replace_later_to self.participantable_type.underscore.pluralize, 
+        partial: self.participantable, 
+        target: self.participantable, 
+        locals: {resource: self.participantable, user: Current.user }
     else 
       broadcast_remove_to self.participantable_type.underscore.pluralize, target: self.participantable
     end

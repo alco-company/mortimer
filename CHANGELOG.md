@@ -7,6 +7,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## TODO 
 
 - job offering portal, application, interview, assessment, background check 
+- consider using https://github.com/unabridged/motion and|or https://avohq.io
 - add manpower employees/interns/more
 - employees portal (to allowing employees a GDPR safe view on the information stored, links to refute, confirm, resign,more)
 - equipment/real estate/tools/cars/more (TCO, depreciation,identification,location,usage,more)

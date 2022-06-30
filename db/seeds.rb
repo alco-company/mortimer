@@ -10,9 +10,12 @@
 d1 = Dashboard.create name: "ALCO's instrumentbrædt", layout: "application", body: "<div style='margin: 2rem'>This is the default<b>dashboard</b>!</div>"
 cal1 = Calendar.create name: "ALCO's kalender"
 alco = Account.create name: "ALCO", dashboard: d1, calendar: cal1
+Current.account = alco
 
 cal2 = Calendar.create name: "ALCO monitor's kalender"
-whd = Participant.create account: alco, name: "Uberspeicher", state: 'confirmed', calendar: cal2, participantable: User.create(  user_name: "Überspeicher", account: alco, email: "monitor@speicher.ltd", password: "ad1411bd2803wd2208", password_confirmation: "ad1411bd2803wd2208", confirmed_at: DateTime.now )
+whd = Participant.create account: alco, name: "Uberspeicher", state: 'confirmed', calendar: cal2, participantable: User.create(  user_name: "Überspeicher", account: alco, email: "monitor@speicher.ltd", password: "ad1411bd2803wd2208", password_confirmation: "ad1411bd2803wd2208", confirmed_at: DateTime.current )
+profile = Profile.create user: whd.participantable, time_zone: "Copenhagen"
+Current.user = whd.participantable
 
 services = %w( Products StockedProducts Stocks Suppliers StockLocations Employees PunchClocks Roles Teams )
 sg = { "Products" => "pim", "StockedProducts" => "wms", "Stocks" => "wms", "StockLocations" => "wms", "Suppliers" => "scm", "Employees" => "hr", "Roles" => "hr", "Teams" => "hr", "PunchClocks" => "hr" }

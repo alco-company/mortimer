@@ -47,7 +47,10 @@ class Event < AbstractResource
   # will be called by "children" too - like Employees, Stocks, StockLocations, etc
   #
   def broadcast_create
-    broadcast_prepend_later_to self.eventable_type.underscore.pluralize, target: "#{self.eventable_class.to_s.underscore}_list", partial: self.eventable, locals: { resource: self.eventable }
+    broadcast_prepend_later_to self.eventable_type.underscore.pluralize, 
+      target: "#{self.eventable_class.to_s.underscore}_list", 
+      partial: self.eventable, 
+      locals: { resource: self.eventable, user: Current.user }
   end
   
   
@@ -56,7 +59,10 @@ class Event < AbstractResource
   #
   def broadcast_update
     if self.deleted_at.nil? 
-      broadcast_replace_later_to self.eventable_type.underscore.pluralize, partial: self.eventable, target: self.eventable, locals: { resource: self.eventable }
+      broadcast_replace_later_to self.eventable_type.underscore.pluralize, 
+        partial: self.eventable, 
+        target: self.eventable, 
+        locals: { resource: self.eventable, user: Current.user }
     else 
       broadcast_remove_to self.eventable_type.underscore.pluralize, target: self.eventable
     end

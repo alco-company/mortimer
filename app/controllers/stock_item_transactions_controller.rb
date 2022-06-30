@@ -33,7 +33,7 @@ class StockItemTransactionsController < EventsController
       # when "INVENTORY"; 
       end
 
-      return resource.update(deleted_at: DateTime.now) if params[:purge].blank?
+      return resource.update(deleted_at: DateTime.current) if params[:purge].blank?
       resource.destroy
     end
   

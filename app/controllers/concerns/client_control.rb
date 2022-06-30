@@ -23,6 +23,8 @@ module ClientControl
       request.variant = :phone
     end
 
+    set_client
+
   end
 
   # respond_to do |format|
@@ -31,5 +33,13 @@ module ClientControl
   #     html.phone { extra_setup_if_needs; render ... }
   #   end
   # end  
+
+  private
+    def set_client
+      Current.request_id = request.uuid
+      Current.user_agent = request.user_agent
+      Current.ip_address = request.ip
+      Current.variant = request.variant
+    end
 
 end

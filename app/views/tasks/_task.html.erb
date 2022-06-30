@@ -4,7 +4,7 @@
     <%= link_to resource.event.name, task_path(resource), data: { turbo_frame: "_top" } %>
   </td>
   <td class="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= display_time resource.event.started_at %>
+    <%= display_time resource.event.started_at, user %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
     <%= record_state resource.event %>

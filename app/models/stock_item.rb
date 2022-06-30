@@ -80,17 +80,29 @@ class StockItem < AbstractResource
   # methods supporting broadcasting 
   #
   def broadcast_create
-    broadcast_prepend_later_to model_name.plural, target: "#{self.class.to_s.underscore}_list", partial: self, locals: { resource: self }
-    broadcast_prepend_later_to "stocked_products", target: "stocked_product_list", partial: "stocked_products/stocked_product", locals: { resource: self.stocked_product }
+    broadcast_prepend_later_to model_name.plural, 
+      target: "#{self.class.to_s.underscore}_list", 
+      partial: self, 
+      locals: { resource: self, user: Current.user }
+    broadcast_prepend_later_to "stocked_products", 
+      target: "stocked_product_list", 
+      partial: "stocked_products/stocked_product", 
+      locals: { resource: self.stocked_product, user: Current.user }
   end
   
   def broadcast_update 
     if self.asset.deleted_at.nil? 
-      broadcast_replace_later_to model_name.plural, partial: self, locals: { resource: self }
-      broadcast_replace_later_to "stocked_products", partial: "stocked_products/stocked_product", locals: { resource: self.stocked_product }
+      broadcast_replace_later_to model_name.plural, 
+        partial: self, 
+        locals: { resource: self, user: Current.user }
+      broadcast_replace_later_to "stocked_products", 
+        partial: "stocked_products/stocked_product", 
+        locals: { resource: self.stocked_product, user: Current.user }
     else 
       broadcast_remove_to model_name.plural, target: self
-      broadcast_replace_later_to "stocked_products", partial: "stocked_products/stocked_product", locals: { resource: self.stocked_product }
+      broadcast_replace_later_to "stocked_products", 
+        partial: "stocked_products/stocked_product", 
+        locals: { resource: self.stocked_product, user: Current.user }
     end
   end
   #

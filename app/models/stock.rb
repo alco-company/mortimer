@@ -51,7 +51,10 @@ class Stock  < AbstractResource
   #
   def broadcast_update
     if self.asset.deleted_at.nil? 
-      broadcast_replace_later_to 'stocks', partial: self, target: self, locals: { resource: self }
+      broadcast_replace_later_to 'stocks', 
+        partial: self, 
+        target: self, 
+        locals: { resource: self, user: Current.user }
     else 
       broadcast_remove_to 'stocks', target: self
     end

@@ -27,7 +27,10 @@ class Task  < AbstractResource
   #
   def broadcast_update
     if self.event.deleted_at.nil? 
-      broadcast_replace_later_to 'task', partial: self, target: self, locals: {resource: self }
+      broadcast_replace_later_to 'task', 
+        partial: self, 
+        target: self, 
+        locals: {resource: self, user: Current.user }
     else 
       broadcast_remove_to 'task', target: self
     end

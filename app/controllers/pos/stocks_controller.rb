@@ -37,8 +37,7 @@ module Pos
       @resource= Asset.unscoped.where( assetable: Stock.unscoped.find( _id)).first
       Current.account = @resource.account
       redirect_to root_path and return unless token_approved
-      user_time_zone do
-        Stock.unscoped.find(_id).update last_heart_beat_at: DateTime.now
+      Stock.unscoped.find(_id).update last_heart_beat_at: DateTime.current
       end
     end
 
@@ -50,7 +49,7 @@ module Pos
       #   params[:items].each do |item|
       #     stocked_product = StockedProduct.find_by barcode: item["barcode"], stock_id: @stock.id
       #     if stocked_product
-      #       ts = (Time.zone.at(item["ts"].to_i / 1000 ).localtime) rescue DateTime.now
+      #       ts = (Time.zone.at(item["ts"].to_i / 1000 ).localtime) rescue DateTime.current
       #       stocked_product.quantity_in_stock = item["quantity_in_stock"]
       #       stocked_product.quantity_in_stock_at = ts
       #       stocked_product.save

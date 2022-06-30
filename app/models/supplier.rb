@@ -72,7 +72,10 @@ class Supplier < AbstractResource
   #
   def broadcast_update
     if self.participant.deleted_at.nil? 
-      broadcast_replace_later_to 'suppliers', partial: self, target: self, locals: { resource: self }
+      broadcast_replace_later_to 'suppliers', 
+        partial: self, 
+        target: self, 
+        locals: { resource: self, user: Current.user }
     else 
       broadcast_remove_to 'suppliers', target: self
     end

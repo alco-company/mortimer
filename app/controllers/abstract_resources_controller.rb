@@ -411,7 +411,7 @@ class AbstractResourcesController < ApplicationController
     end
 
     def delete_it
-      return resource.update(deleted_at: DateTime.now) if params[:purge].blank? && resource.respond_to?(:deleted_at)
+      return resource.update(deleted_at: DateTime.current) if params[:purge].blank? && resource.respond_to?(:deleted_at)
       resource.destroy
     end
 
@@ -495,7 +495,7 @@ end
   #   respond_with resources do |format|
   #     # format.xlsx {
   #     #   # response.headers['Content-Disposition'] = 'attachment; filename="current_tyre_stock.xlsx"'
-  #     #   render xlsx: 'stock_items/index', template: 'current_tyre_stock', filename: "current_tyre_stock.xlsx", disposition: 'inline', xlsx_created_at: Time.now, xlsx_author: "http://wheelstore.space"
+  #     #   render xlsx: 'stock_items/index', template: 'current_tyre_stock', filename: "current_tyre_stock.xlsx", disposition: 'inline', xlsx_created_at: Time.current, xlsx_author: "http://wheelstore.space"
   #     # }
   #   end
 

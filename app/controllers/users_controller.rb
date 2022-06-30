@@ -22,6 +22,7 @@ class UsersController < ParticipantsController
   
   def create
     @user = User.new(create_user_params)
+    profile = Profile.create user: @user, time_zone: 'UTC'
     @user.account = current_account
     resource= Participant.new account: current_account, name: @user.user_name, participantable: @user
     if resource.valid?
@@ -48,7 +49,7 @@ class UsersController < ParticipantsController
     end
     if params[:purge].blank?
       resource.participantable.update user_name: name
-      return resource.update(deleted_at: DateTime.now)
+      return resource.update(deleted_at: DateTime.current)
     else
       resource.destroy
     end
@@ -92,7 +93,7 @@ class UsersController < ParticipantsController
         say resource.to_json 
         say resource.participantable.to_json
         unless resource.participantable.confirmed? 
-          params[:participant][:participantable_attributes][:confirmed_at]=DateTime.now 
+          params[:participant][:participantable_attributes][:confirmed_at]=DateTime.current 
         end
       end
       params.require(:participant).permit(:participantable_type, :name, :account_id, roles: [], teams: [], participantable_attributes: [ :id, :user_name, :email, :password, :password_confirmation, :confirmed_at, :unconfirmed_email ] )
@@ -106,7 +107,7 @@ class UsersController < ParticipantsController
         email: pm[:email],
         password: pm[:password],
         password_confirmation: pm[:password_confirmation],
-        confirmed_at: pm[:confirmed_at] == "0" ? nil : DateTime.now 
+        confirmed_at: pm[:confirmed_at] == "0" ? nil : DateTime.current 
       })
     end
 

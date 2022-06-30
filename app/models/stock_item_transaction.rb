@@ -33,7 +33,7 @@ class StockItemTransaction  < AbstractResource
   
   def self.delete_pos_transaction params 
     st=StockItemTransaction.unscoped.find(params[:id])
-    return false unless st and st.event.update(deleted_at: DateTime.now)
+    return false unless st and st.event.update(deleted_at: DateTime.current)
     true
   end
   
@@ -106,7 +106,7 @@ class StockItemTransaction  < AbstractResource
         )
         say "----> StockItemTransaction (event) #{e.to_json}"
         say "----> StockItemTransaction #{e.eventable.to_json}"
-        sp.update_attribute :updated_at, DateTime.now
+        sp.update_attribute :updated_at, DateTime.current
         e.eventable
       rescue => err 
         Rails.logger.info "[stock_item_transaction] create_transaction: (#{err})"
@@ -120,8 +120,14 @@ class StockItemTransaction  < AbstractResource
     #
     def broadcast_create
       say "----> broadcast (self) #{self.to_json}"
-      broadcast_prepend_later_to model_name.plural, target: "#{self.class.to_s.underscore}_list", partial: self, locals: { resource: self }
-      broadcast_prepend_later_to "pos_stock_item_transactions", target: "pos_stock_item_transaction_list", partial: "pos/stock_item_transactions/stock_item_transaction", locals: { resource: self }
+      broadcast_prepend_later_to model_name.plural, 
+        target: "#{self.class.to_s.underscore}_list", 
+        partial: self, 
+        locals: { resource: self, user: Current.user }
+      broadcast_prepend_later_to "pos_stock_item_transactions", 
+        target: "pos_stock_item_transaction_list", 
+        partial: "pos/stock_item_transactions/stock_item_transaction", 
+        locals: { resource: self, user: Current.user }
     end
 
 end
