@@ -135,7 +135,7 @@ module ResourcesHelper
   # you can override this to have a custom form - eg when forms clash!
   #
   def resource_form
-    "%s_form" % resource_class.to_s.underscore
+    "%s_form" % (resource_class.to_s.underscore rescue "form")
   end
 
   #
