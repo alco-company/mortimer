@@ -7,6 +7,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## TODO 
 
 - job offering portal, application, interview, assessment, background check 
+- switch to good_job background job worker
 - consider using https://github.com/unabridged/motion and|or https://avohq.io
 - add manpower employees/interns/more
 - employees portal (to allowing employees a GDPR safe view on the information stored, links to refute, confirm, resign,more)
@@ -66,12 +67,33 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-07-03
+
+07:05 fresh is perhaps overstating the obvious but doing ok all things considered
+
+* depstaging service_objects, take 1
+
+
+### 2022-07-03
+
+resting day - traveling back from Valby
+
+### 2022-07-02
+
+made pretty good progress with service objects - assets, and participants
+
+### 2022-07-01
+
+Didn't move much code today - watch Tour de France Grand Depart first hand from H.C.Andersens Boulevard
+near Tivoli, Copenhagen
+
 ### 2022-06-30
 
 08:15 - with Ibumetin in the blood I can almost exist
 
 * cont' on time_zone - using https://nilssommer.de/articles/14-per-user-time-zone-configuration-in-rails
 * issue with all backgroundjobs not knowing of current_account / current_user
+* 16:41 switching to service_objects branch - testing the waters on that subject
 
 ### 2022-06-29
 

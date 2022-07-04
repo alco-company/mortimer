@@ -159,17 +159,19 @@ class AbstractResourcesController < ApplicationController
   # are updated instead
   #
   def create
-    unless authorize(:create)
-      not_authorized
-    else
-      if edit_all_posts
-        respond_to do |format|
-          format.js { head 201 }
-        end
-      else
-        respond_with :create
-      end
-    end
+    authorize(:create) ? respond_with(:create) : not_authorized
+
+    # unless authorize(:create)
+    #   not_authorized
+    # else
+    #   if edit_all_posts
+    #     respond_to do |format|
+    #       format.js { head 201 }
+    #     end
+    #   else
+    #     respond_with :create
+    #   end
+    # end
   end
 
   #
@@ -268,7 +270,7 @@ class AbstractResourcesController < ApplicationController
 
     def add_resource
       set_new
-      render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } )
+      render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } )
       # 29/5/2019 removed - using ancestry instead!
       # resource.parent_id = params[:parent_id] if resource.respond_to? :parent_id
     end
@@ -286,14 +288,13 @@ class AbstractResourcesController < ApplicationController
     #
     def edit_all_posts
       return false unless params[:edit_all]=="1"
-      attribs = resource_params[:dynamic_attributes].delete_if { |k,v| v.blank? or v.empty? or v.nil? or v == [""] }
-      resources.each{|r| r.update_attribute :dynamic_attributes, (r.dynamic_attributes.merge(attribs))}
+      AbstractResourceService.new.edit_all resources, resource_params
       true
     end
 
     def edit_resource
       # render head: 401 and return unless @authorized
-      render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } )
+      render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } )
     end
 
     #
@@ -327,60 +328,52 @@ class AbstractResourcesController < ApplicationController
       render action: "new", resource: @resource
     end
 
+    # The very essense of C in the CRUD - 
+    # any controller not required to do special stuff
+    # will inherit from this method
+    # create_resource will instantiate an AbstractResourceService object
+    # and call create on it, returning an instance of Result (defined on AbstractResourceService)
+    #
+    # if, however, the user is editing a selection of records
+    # see edit_all_posts 
     def create_resource
-      # head 401 and return unless @authorized
-      @resource = resource_class.new(resource_params) if @resource.nil?
-      # unless resource.valid?
-      #   render action: "new", resource: resource, status: 422 and return
-      # else
-      #   resource.save
-      #   # render :show, resource: resource, status: :created and return
-      # end
-      unless resource.valid? 
-        render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
-      else
-        begin        
-          resource.save
-          respond_to do |format|
-            format.turbo_stream { head :ok }
-            format.html { head :ok }
-            format.json { render json: resource }
-          end
-        rescue => exception
-          resource.errors.add(:base, exception)
-          render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
-        end
+      return create_update_response if edit_all_posts
+
+      # Each resource could have it's own - 
+      # result = "#{resource_class.to_s}Service".constantize.new.create resource
+      result = AbstractResourceService.new.create resource
+      resource= result.record
+      case result.status
+      when :created; create_update_response
+      when :not_valid; render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
       end
     end
-
-    def update_resource
-      # render head: 401 and return unless @authorized
-      return if params.include? "edit_all"
-      # unless resource.update resource_params
-      #   render action: "edit", resource: resource, status: 422 and return
-      # else
-      #   render action: "show", resource: resource, layout: false, status: :created and return
-      # end
-
-      begin        
-        say resource.to_json
-        say Current.account.to_json
-        say Current.user.to_json
-        say resource_params.to_json
-        unless resource.update resource_params
-          render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
-        else
-          respond_to do |format|
-            format.turbo_stream { head :ok }
-            format.html { head :ok }
-            format.json { render json: resource }
-          end
-        end
-      rescue => exception
-        resource.errors.add(:base, exception)
-        render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
-      end
     
+    # The very essense of U in the CRUD - 
+    # any controller not required to do special stuff
+    # will inherit from this method
+    # update_resource will instantiate an AbstractResourceService object
+    # and call update on it, returning an instance of Result (defined on AbstractResourceService)
+    def update_resource
+      # Each resource could have it's own - 
+      # result = "#{resource_class.to_s}Service".constantize.new.create resource
+      result = AbstractResourceService.new.update resource, resource_params
+      resource= result.record
+      case result.status
+      when :updated; create_update_response
+      when :not_valid; render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
+      end    
+    end
+
+    # if the create/update methods ends well - 
+    # tell the UI
+    def create_update_response
+      respond_to do |format|
+        format.turbo_stream { head :ok }
+        format.html { head :ok }
+        format.js { head 201 }
+        format.json { render json: resource }
+      end
     end
 
     def delete_resource
@@ -389,7 +382,7 @@ class AbstractResourcesController < ApplicationController
       # TODO: this is not the correct way to respond - with deletes being done by modals!
       #
       unless delete_it
-        render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
+        render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
       else
         render turbo_stream: turbo_stream.remove( resource ), status: 303
       end

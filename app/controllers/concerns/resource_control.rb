@@ -114,7 +114,7 @@ module ResourceControl
 
   def resource_class
     return @resource_class if resource?
-    @resource_class ||= params[:controller].split("/")[0].singularize.classify.constantize
+    @resource_class ||= params[:controller].gsub('/pos','').split("/")[0].singularize.classify.constantize
   end
 
   def resource_class= val

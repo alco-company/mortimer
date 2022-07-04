@@ -4,18 +4,6 @@ class SuppliersController < ParticipantsController
     @resource_class= Supplier
   end
 
-  # def new_resource
-  #   @resource = Participant.new participantable: Supplier.new
-  # end
-
-  # def resource
-  #   @resource = (_id.nil? ? new_resource : Supplier.find(_id).participant )
-  # end
-
-  # def resource_class
-  #   @resource_class ||= Supplier
-  # end
-
   def lookup 
     @target=params[:target]
     @value=params[:value]

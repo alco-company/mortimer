@@ -23,14 +23,14 @@ class EventsController < DelegatedController
     render head: 401 and return unless @authorized
     @resource= Event.new(resource_params)
     unless resource.valid? 
-      render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
+      render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
     else
       begin        
         resource.save
         head :no_content
       rescue => exception
         resource.errors.add(:base, exception)
-        render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
+        render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
       end
     end
   end
@@ -41,11 +41,11 @@ class EventsController < DelegatedController
     @resource = resource_class.find(_id).event
     begin        
       unless resource.update resource_params
-        render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
+        render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
       end
     rescue => exception
       resource.errors.add(:base, exception)
-      render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
+      render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
     end
   
   end

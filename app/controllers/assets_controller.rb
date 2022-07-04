@@ -4,36 +4,25 @@ class AssetsController < DelegatedController
   # The create_resource is an override to make sure Event is the 'base' entity
   # being created
   #
-  def create_resource
-    return not_authorized unless authorize(:create)
-    unless resource.valid? 
-      resource.assetable = resource_class.new if resource.assetable.nil?
-      render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
-    else
-      begin        
-        resource.save
-        head :no_content
-      rescue => exception
-        resource.errors.add(:base, exception)
-        render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
-      end
+  def create_resource    
+    # result = "#{resource_class.to_s}Service".constantize.new.create resource
+    result = AssetService.new.create resource
+    resource= result.record
+    case result.status
+    when :created; head :no_content
+    when :not_valid; render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
     end
   end
 
   def update_resource
-    return not_authorized unless authorize(:create)
     return if params.include? "edit_all"
-    # @resource = resource_class.find(_id).asset
-    begin        
-      unless resource.update resource_params
-        resource.assetable = resource_class.new if resource.assetable.nil?
-        render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
-      end
-    rescue => exception
-      resource.errors.add(:base, exception)
-      render turbo_stream: turbo_stream.replace( "resource_form", partial: 'form' ), status: :unprocessable_entity
+
+    result = AssetService.new.update resource, resource_params
+    resource= result.record
+    case result.status
+    when :updated; head :no_content
+    when :not_valid; render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
     end
-  
   end
 
   def delete_it
