@@ -3,17 +3,20 @@
 
 import { application } from "../javascript/controllers/application"
 
-import Navigation__TopbarComponentController from "./navigation/topbar_component_controller.js"
-application.register("navigation--topbar-component", Navigation__TopbarComponentController)
-
 import Navigation__MobileSidebarComponentController from "./navigation/mobile_sidebar_component_controller.js"
 application.register("navigation--mobile-sidebar-component", Navigation__MobileSidebarComponentController)
 
 import Navigation__SidebarComponentController from "./navigation/sidebar_component_controller.js"
 application.register("navigation--sidebar-component", Navigation__SidebarComponentController)
 
+import Navigation__TopbarComponentController from "./navigation/topbar_component_controller.js"
+application.register("navigation--topbar-component", Navigation__TopbarComponentController)
+
 import Resource__ComboComponentController from "./resource/combo_component_controller.js"
 application.register("resource--combo-component", Resource__ComboComponentController)
+
+import Resource__FileuploadComponentController from "./resource/fileupload_component_controller.js"
+application.register("resource--fileupload-component", Resource__FileuploadComponentController)
 
 import Resource__UserAccountComponentController from "./resource/user_account_component_controller.js"
 application.register("resource--user-account-component", Resource__UserAccountComponentController)

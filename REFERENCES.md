@@ -68,6 +68,8 @@ https://jose.omg.lol/posts/stimulus-trigger-pattern
 
 ### email construction 'framework'
 https://maizzle.com/docs/introduction/ 
+https://github.com/mailchimp/email-blueprints 
+https://www.joshwcomeau.com/react/wonderful-emails-with-mjml-and-mdx/
 
 ### Using Liquid for dynamic user content
 
@@ -108,10 +110,6 @@ https://stevepolito.design/blog/rails-authentication-from-scratch/
 ### Using esbuild with Stimulus
 
 https://github.com/excid3/esbuild-rails 
-
-### Designing Emails (with a little help)
-
-https://github.com/mailchimp/email-blueprints 
 
 
 ### Push notifications
@@ -203,8 +201,4 @@ https://blog.appsignal.com/2020/12/02/building-a-multi-tenant-ruby-on-rails-app-
 ### Anycable and Kubernetes
 
 https://vitobotta.com/2022/06/18/scaling-rails-web-sockets-in-kubernetes-with-anycable/ 
-
-### How to generate email
-
-https://www.joshwcomeau.com/react/wonderful-emails-with-mjml-and-mdx/
 

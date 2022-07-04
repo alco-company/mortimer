@@ -4,22 +4,8 @@
 
 import { application } from "./application"
 
-import { Alert } from "tailwindcss-stimulus-components"
-application.register('alert', Alert)
-
-import { Tabs } from "tailwindcss-stimulus-components"
-application.register('tabs', Tabs)
-
-import { Popover } from "tailwindcss-stimulus-components"
-application.register('popover', Popover)
-
-// ---
-
 import ContentLoaderController from "./content_loader_controller.js"
 application.register("content-loader", ContentLoaderController)
-
-import PaginationController from "./pagination_controller.js"
-application.register("pagination", PaginationController)
 
 import FlagController from "./flag_controller.js"
 application.register("flag", FlagController)
@@ -38,6 +24,9 @@ application.register("list-item-actions", ListItemActionsController)
 
 import ListItemController from "./list_item_controller.js"
 application.register("list-item", ListItemController)
+
+import PaginationController from "./pagination_controller.js"
+application.register("pagination", PaginationController)
 
 import SearchController from "./search_controller.js"
 application.register("search", SearchController)

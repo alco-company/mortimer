@@ -1,6 +1,8 @@
 class Profile < AbstractResource
   belongs_to :user
 
+  has_one_attached :avatar
+
   validates :time_zone, presence: true, time_zone: true
 
   def name 

@@ -1,4 +1,9 @@
-<%= form_with model: resource, url: url_for(resource), id: resource_form, data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
+<%= form_with model: resource, 
+  url: url_for(resource), 
+  id: resource_form, 
+  data: { form_sleeve_target: 'form' }, 
+  enctype: "multipart/form-data",
+  class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
   <%= form.hidden_field :user_id %>
   <div class="flex-1 relative "
     data-controller="form"
@@ -8,10 +13,19 @@
     <%= render_component "resource/form_header", resource: resource, title: form_header_title, description: form_header_description %>
 
     <!-- Divider container -->
-    <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+    <div class="h-full py-6 ">
+
+      <!-- Avatar -->
+      <div class="px-4 pt-8 ">
+        <div data-uppy="profile[avatar]">
+          <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t(".avatar") %></h3>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t(".avatar_description") %></p>
+          <%= render_component "resource/fileupload", resource: resource, form: form, field: :avatar %>           
+        </div>
+      </div>
 
       <!--  time_zone -->
-      <div class="px-4 divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+      <div class="px-4 pt-8">
         <div>
           <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t(".time_zone") %></h3>
           <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t(".time_zone_description") %></p>
@@ -24,6 +38,7 @@
            
         </div>
       </div>
+
 
     </div>
   </div>
