@@ -1,6 +1,11 @@
 # CHANGELOG
 
-I started this in another project - hermes - which evolved into 'astronaut' which was a bespoke customer project further developed by [Michal Szymanski](https://github.com/michalsz); the basic idea on how to persist data is, however, the same - with 4/5 core entities: Event, Asset, Participant, Message, (and Document). The distinction between Message and Document isn't quite clear because I haven't decided on whether Documents really are a particular form of Messages, or entities in their own right, yet.
+I started this as another project - hermes - which evolved into 'astronaut' which was a bespoke customer project further developed by [Michal Szymanski](https://github.com/michalsz); the basic idea on how to persist data is, however, the same - with 4-5 core entities: Event, Asset, Participant, Message, (and Document). 
+
+The distinction between Message and Document isn't quite clear because I haven't decided on whether Documents really are a particular form of Messages, or entities in their own right, yet.
+
+The Key Issue being that one/more Participants will exchange/persist a Message/Document and it will be an Event them doing it - and there is a good change that the exchange
+is pertaining to an Asset! 
 
 In the REFERENCES you will find a lot of people, resources, etc
 
@@ -33,7 +38,6 @@ In the REFERENCES you will find a lot of people, resources, etc
 * steps_field - like when you want the user to first finish typing in [fieldset] and then continue to the next [fieldset]
 * write some serious tests for people, partners, participants, events, 
 * we might need Redis' Sessions store down the road - [here's the low down](https://github.com/redis-store/redis-rails)
-* add user profile with some rudimentary settings and ability to fx switch to DarkMode !?
 * add Participant addressability - by means of basically one table :0 (URLs are not just webpages, but really any adressable resource!!)
 * add second **main feature** - documents (in all their glory and multiversatility, like notes, messages, contracts, SOP's, NDA's, invoices, orders, quotes, etc)
 * add Team - People are grouped into teams, either in a permanent position as fx a Sales rep in the Sales Team, or a temporary/matrix position as Data Analyst in the Finance Team/Department
@@ -60,18 +64,19 @@ In the REFERENCES you will find a lot of people, resources, etc
 * always type * in search and lookup fields to have SPEICHER start presenting all the available items
 * 
 
-* change user_time_zone in ApplicationController to use current_user's timezone - once we have added the User Model
 * use github actions (or gitlab equivalent) to do automagic deploys on git push to staging/production branches
 
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
 ## DONE
 
 
-### 2022-07-03
+### 2022-07-04
 
 07:05 fresh is perhaps overstating the obvious but doing ok all things considered
 
 * depstaging service_objects, take 1
+* 
+
 
 
 ### 2022-07-03
@@ -103,7 +108,10 @@ scratch this one - shitty as h...
 
 07:30 Nose been drippin' for a week - now it (finally turned into a full fleshed cold)
 
-* add time_zone and profile to user
+* change user_time_zone in ApplicationController to use current_user's timezone - once we have added the User Model
+* add user profile with some rudimentary settings and ability to fx switch to DarkMode !?
+
+
 
 ### 2022-06-27
 

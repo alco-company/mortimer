@@ -199,3 +199,12 @@ https://thoughtbot.com/blog/its-about-time-zones
 ### Multi tenancy
 
 https://blog.appsignal.com/2020/12/02/building-a-multi-tenant-ruby-on-rails-app-with-subdomains.html
+
+### Anycable and Kubernetes
+
+https://vitobotta.com/2022/06/18/scaling-rails-web-sockets-in-kubernetes-with-anycable/ 
+
+### How to generate email
+
+https://www.joshwcomeau.com/react/wonderful-emails-with-mjml-and-mdx/
+
