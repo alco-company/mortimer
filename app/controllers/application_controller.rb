@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
     #
     def user_time_zone(&block)
       current_user.time_zone.blank? ? 
-        Time.use_zone('Europe/Copenhagen',&block) :
+        Time.use_zone('UTC',&block) :
         Time.use_zone(current_user.time_zone, &block) 
     end
 

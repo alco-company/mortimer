@@ -21,7 +21,7 @@ class User < AbstractResource
   has_one :profile, dependent: :destroy
   belongs_to :account
 
-  delegate :time_zone, to: :profile
+  delegate :time_zone, to: :profile, allow_nil: true 
 
   #
   # default_scope returns all posts that have not been marked for deletion yet
