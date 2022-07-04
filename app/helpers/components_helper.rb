@@ -3,10 +3,18 @@ module ComponentsHelper
     t(msg).html_safe rescue msg
   end
  
-  def search_field name, value, placeholder=''
+  def search_field name:, value:, placeholder: '', component_method:
     raw %(
       <div class="mt-1 relative rounded-md shadow-sm">
-        <input type="search" name="#{name.to_s}" id="index_search" value="#{value}" oninput="this.form.requestSubmit()" class="focus:ring-slate-500 focus:border-slate-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder="#{placeholder}">
+        <input 
+          type="search" 
+          name="#{name.to_s}" 
+          id="index_search" 
+          data-search-target="input"
+          data-action="keydown->#{component_method}"
+          value="#{params[name]}" 
+          class="focus:ring-slate-500 focus:border-slate-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" 
+          placeholder="#{placeholder}">
         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
           <!-- Heroicon name: solid/search -->
           <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

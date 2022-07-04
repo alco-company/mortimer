@@ -39,6 +39,9 @@ application.register("list-item-actions", ListItemActionsController)
 import ListItemController from "./list_item_controller.js"
 application.register("list-item", ListItemController)
 
+import SearchController from "./search_controller.js"
+application.register("search", SearchController)
+
 import StockPosController from "./stock_pos_controller.js"
 application.register("stock-pos", StockPosController)
 

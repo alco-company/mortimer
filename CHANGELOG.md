@@ -61,7 +61,6 @@ In the REFERENCES you will find a lot of people, resources, etc
   * 
 
 * always type '?' in any inputfield (even if it cannot be presented - like checkboxes and radiobuttons) to get to the on screen documentation and help
-* always type * in search and lookup fields to have SPEICHER start presenting all the available items
 * 
 
 * use github actions (or gitlab equivalent) to do automagic deploys on git push to staging/production branches
@@ -75,7 +74,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 07:05 fresh is perhaps overstating the obvious but doing ok all things considered
 
 * depstaging service_objects, take 1
-* 
+* 12:18 always type * in search and lookup fields to have SPEICHER start presenting all the available items
 
 
 
