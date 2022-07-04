@@ -1,4 +1,4 @@
-<%= form_with model: resource, url: resource_url, id: "resource_form", data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
+<%= form_with model: resource, url: resource_url, id: resource_form, data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
   <div class="flex-1 relative"
     data-controller="form"
     data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"

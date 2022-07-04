@@ -2,7 +2,7 @@
 
 class Resource::IndexHeaderComponent < ViewComponent::Base
 
-  def initialize(form_id: 'resource_form', title: 'title', description: 'description', breadcrumbs:, current: )
+  def initialize(form_id:, title: 'title', description: 'description', breadcrumbs:, current: )
     @form_id = form_id
     @title = title 
     @description = description

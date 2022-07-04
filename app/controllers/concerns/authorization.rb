@@ -29,7 +29,7 @@ module Authorization
   def not_authorized redirect=false
     # render turbo_stream: [
     #   turbo_stream.replace( "unauthorized", partial: 'shared/unauthorized'), 
-    #   turbo_stream.remove( "resource_form") 
+    #   turbo_stream.remove( resource_form) 
     # ]
     flash[:warning] = flash.now[:warning]; redirect_to root_path and return if redirect
     render turbo_stream: turbo_stream.replace( "unauthorized", partial: 'shared/unauthorized' ), status: :unauthorized

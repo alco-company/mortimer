@@ -4,7 +4,7 @@
   data-action="speicherMessage@window->form#handleMessages"
   class="max-w-full lg:max-w-screen-2xl mx-auto sm:px-6 lg:px-8" >
 
-  <%= render_component "resource/index_header", form_id: "resource_form", title: raw_t("#{resource_class}.index"), description: raw_t("#{resource_class}.index_description"), breadcrumbs: @breadcrumbs, current: Current do %>
+  <%= render_component "resource/index_header", form_id: resource_form, title: raw_t("#{resource_class}.index"), description: raw_t("#{resource_class}.index_description"), breadcrumbs: @breadcrumbs, current: Current do %>
     <div class="md:mt-7 justify-end flex">
       <!-- <div class="w-full">
         <%#= form_with url: "", method: :get, data: { turbo_frame: resources_target, turbo_action: 'advance' } do |form| %>
