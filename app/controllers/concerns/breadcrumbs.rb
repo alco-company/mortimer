@@ -16,6 +16,7 @@ module Breadcrumbs
       Rails.logger.warn "Request query error: #{request.path}"
       return @breadcrumbs
     end
+    return @breadcrumbs if request.path =~ /profile/
     # ""
     # "/accounts"
     # "/accounts/1"

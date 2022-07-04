@@ -33,14 +33,14 @@ export default class ComboComponentController extends Controller {
         }
         this.updateSelect()
 
-        console.log(`isSingle ${this.isSingleValue}`)
-        console.log(`isMulti ${this.isMultiValue}`)
-        console.log(`isDrop ${this.isDropValue}`)
-        console.log(`isList ${this.isListValue}`)
-        console.log(`isTags ${this.isTagsValue}`)
-        console.log(`isSearch ${this.isSearchValue}`)
-        console.log(`isAdd ${this.isAddValue}`)
-        console.log(`shouldUpdateList ${this.shouldUpdateInputValue}`)
+        // console.log(`isSingle ${this.isSingleValue}`)
+        // console.log(`isMulti ${this.isMultiValue}`)
+        // console.log(`isDrop ${this.isDropValue}`)
+        // console.log(`isList ${this.isListValue}`)
+        // console.log(`isTags ${this.isTagsValue}`)
+        // console.log(`isSearch ${this.isSearchValue}`)
+        // console.log(`isAdd ${this.isAddValue}`)
+        // console.log(`shouldUpdateList ${this.shouldUpdateInputValue}`)
     }
 
     inOut(e) {
@@ -184,7 +184,9 @@ export default class ComboComponentController extends Controller {
         try {            
             if (this.selectedValue.length > 0){
                 // get the selected values
-                const response = await get(`${this.urlValue}?ids=${this.selectedValue.join(',')}`, { responseKind: "json" })
+                let uri = this.selectedValue.join(',')
+                let encoded = encodeURIComponent(uri)
+                const response = await get(`${this.urlValue}?ids=${encoded}`, { responseKind: "json" })
                 if (response.ok){
                     const elems = await response.json
                     console.log(`got this back from the server ${elems}`)

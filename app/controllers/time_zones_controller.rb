@@ -16,7 +16,9 @@ class TimeZonesController < ApplicationController
     if params[:ids].blank?
       @resources = ActiveSupport::TimeZone.all.map{ |tz| tz.name }.compact
     else
-      @resources = ActiveSupport::TimeZone.all.map{ |tz| tz.name if tz.name =~ /#{params[:ids]}/i }.compact
+      ids = params[:ids].gsub('(','\(')
+      ids = ids.gsub(')','\)')
+      @resources = ActiveSupport::TimeZone.all.map{ |tz| tz.name if tz.name =~ /#{ids}/i }.compact
     end
   end
 

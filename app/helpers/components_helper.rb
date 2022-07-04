@@ -45,5 +45,7 @@ module ComponentsHelper
     else
       [value].flatten.join(', ')
     end
+  rescue 
+    ''
   end
 end

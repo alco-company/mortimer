@@ -107,7 +107,7 @@ class AbstractResourcesController < ApplicationController
   # GET /controllers/:id/edit
   #
   def edit
-    authorize(:edit) ? respond_with(:new) : not_authorized
+    authorize(:edit) ? respond_with(:edit) : not_authorized
   end
 
   #

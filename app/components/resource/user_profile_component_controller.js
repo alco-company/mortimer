@@ -28,7 +28,9 @@ export default class UserProfileComponentController extends Controller {
   }
 
   toggleUserProfile(e) {
-    e.preventDefault()
+    // e.preventDefault()
+    //dirty hack !!!
+    document.getElementById('form_slideover').querySelectorAll('form')[0].id="profile_form"
     if ( this.userprofileTarget.classList.contains('hidden') ) {
       enter(this.userprofileTarget)
     } else {
