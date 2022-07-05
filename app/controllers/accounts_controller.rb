@@ -9,7 +9,7 @@ class AccountsController < SpeicherController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      params.require(:account).permit(:name, signed_services: {})
+      params.require(:account).permit(:name, :logo, signed_services: {})
     end
 
     #

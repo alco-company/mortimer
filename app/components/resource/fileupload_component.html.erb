@@ -1,6 +1,6 @@
 <div class="row-span-full">
   <div class="col">
-    <%= image_tag helpers.profile_avatar(@resource,40) %>
+    <%= image_tag helpers.profile_avatar(@resource,@size) %>
   </div>
   <div class="col">
     <%= @form.file_field @field %>

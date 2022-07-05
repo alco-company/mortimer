@@ -1,9 +1,10 @@
 module ProfilesHelper
-  def profile_avatar profile, size=40
-    if profile.avatar.attached?
-      profile.avatar.variant(resize: "#{size}x#{size}!")
+  def profile_avatar profile, size
+    if (profile.avatar.attached? rescue false)
+      profile.avatar.variant(resize: size)
     else
-      "https://picsum.photos/#{size}/#{size}?grayscale"
+      size.gsub!('x','/').gsub!('!','')
+      "https://picsum.photos/#{size}?grayscale"
     end
   end
 end

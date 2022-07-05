@@ -17,4 +17,15 @@ module AccountsHelper
 
     button_to resource.name, account_impersonate_path(resource)
   end
+
+  def account_logo account, size
+    if (account.logo.attached? rescue false)
+      account.logo.variant(resize: size)
+    else
+      size=size.gsub('x','/')
+      size=size.gsub('!','')
+      "https://picsum.photos/#{size}?grayscale"
+    end
+  end
+
 end

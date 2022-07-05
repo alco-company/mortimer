@@ -12,6 +12,8 @@ class Account < AbstractResource
 
   belongs_to :dashboard, optional: true
 
+  has_one_attached :logo
+
   before_create :create_dashboard_if_missing
   before_create :create_calendar_if_missing
 
