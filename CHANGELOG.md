@@ -69,6 +69,12 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-07-05
+
+6:55 fresh if not well
+
+* attached account/logo
+
 ### 2022-07-04
 
 07:05 fresh is perhaps overstating the obvious but doing ok all things considered
@@ -76,7 +82,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 * depstaging service_objects, take 1
 * 12:18 always type * in search and lookup fields to have SPEICHER start presenting all the available items
 
-
+22:50 done
 
 ### 2022-07-03
 
