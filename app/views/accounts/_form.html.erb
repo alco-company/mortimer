@@ -37,7 +37,7 @@
           <div data-uppy="account[logo]">
             <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t(".logo") %></h3>
             <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t(".logo_description") %></p>
-            <%= render_component "resource/fileupload", resource: resource, form: form, field: :logo, size: "100x40!" %>           
+            <%= render_component "resource/fileupload", url: account_logo(resource,"100x40!"), form: form, field: :logo %>           
           </div>
         </div>
 

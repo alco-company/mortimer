@@ -20,7 +20,7 @@
         <div data-uppy="profile[avatar]">
           <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t(".avatar") %></h3>
           <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t(".avatar_description") %></p>
-          <%= render_component "resource/fileupload", resource: resource, form: form, field: :avatar, size: "40x40!" %>           
+          <%= render_component "resource/fileupload", url: profile_avatar(resource,"40x40!"), form: form, field: :avatar %>           
         </div>
       </div>
 
