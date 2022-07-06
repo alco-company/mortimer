@@ -24,6 +24,13 @@ module ApplicationHelper
     raw "<span class='hidden'>dt is empty or not a date nor a (date)time</span>"
   end
 
+  def display_date dt, user 
+    return "" if dt.blank?    
+    l dt.in_time_zone(user.time_zone), format: :date
+  rescue 
+    raw "<span class='hidden'>dt is empty or not a date nor a (date)time</span>"
+  end
+
   def tailwind_classes_for(flash_type)
     {
       notice: "bg-green-400 border-l-4 border-green-700 text-white",
