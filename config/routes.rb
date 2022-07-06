@@ -102,6 +102,10 @@ Rails.application.routes.draw do
   end
 
   # resources :events
+  resources :employees, concerns: [:cloneable, :modalable, :exportable] do
+    resources :tasks, concerns: [:cloneable, :modalable]
+  end
+
   resources :tasks, concerns: [:cloneable, :modalable]
   resources :teams, concerns: [:cloneable, :modalable]
   resources :roles, concerns: [:cloneable, :modalable, :selectable]

@@ -6,6 +6,7 @@ module StocksHelper
     host= Rails.env.development? ? "http://localhost:3000" : "https://staging.greybox.speicher.ltd"
     case resource.class.to_s
     when "Stock"; "#{host}#{pos_stock_path(resource)}?api_key=#{resource.access_token}"
+    when "Employee"; "#{host}#{pos_employee_path(resource)}?api_key=#{resource.access_token}"
     else host
     end
   end

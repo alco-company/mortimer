@@ -69,11 +69,23 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-07-06
+
+7:25 worse than yesterday
+
+* uninstalled New Relic - guess we'll wait and see what monitor to use
+* add employee asset resource
+
 ### 2022-07-05
 
 6:55 fresh if not well
 
 * attached account/logo
+* make storage on staging.greybox.speicher.ltd persistent across deployments
+* make logs on staging.greybox.speicher.ltd (and other apps for that matter) sit away from Dokku/Docker - inside journalctl
+* install New Relic on Docker4
+
+22:10 finalemento
 
 ### 2022-07-04
 

@@ -639,8 +639,18 @@ root@srv005415:~# dokku postgres:expose greybox 10.85.130.8:5432
 The overall logfile is 'watchable' using `ssh docker4 logs -t staging.greybox.speicher.ltd` whereas the NgINX logfiles are best viewed with 
 `ssh docker4 nginx:access-logs staging.greybox.speicher.ltd` and `ssh docker4 nginx:error-logs staging.greybox.speicher.ltd`
 
+Besides that all logging is directed towards journald and accessible via `journalctl`
+
 ## Defining volumes (for cross-version file storage and more)
 
 Each app may require somewhere to persist files - say uploaded documents/images/more. To that end 
+
+```
+# dokku ps:stop staging.greybox.speicher.ltd
+# dokku docker-options:add staging.greybox.speicher.ltd deploy,run -v /var/lib/dokku/data/storage/staging.greybox.speicher.ltd:/app/storage
+# dokku ps:start staging.greybox.speicher.ltd
+# ls -la /var/lib/dokku/data/storage/staging.greybox.speicher.ltd
+
+```
 
 
