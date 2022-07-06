@@ -119,7 +119,6 @@ class StockItemTransaction  < AbstractResource
     # methods supporting broadcasting 
     #
     def broadcast_create
-      say "----> broadcast (self) #{self.to_json}"
       broadcast_prepend_later_to model_name.plural, 
         target: "#{self.class.to_s.underscore}_list", 
         partial: self, 

@@ -9,7 +9,7 @@ class ParticipantsController < DelegatedController
 
     # Each resource could have it's own - 
     # result = "#{resource_class.to_s}Service".constantize.new.create resource
-    result = ParticipantService.new.create resource
+    result = ParticipantService.new.create resource(), resource_class()
     resource= result.record
     case result.status
     when :created; create_update_response
@@ -20,7 +20,7 @@ class ParticipantsController < DelegatedController
   def update_resource
     # Each resource could have it's own - 
     # result = "#{resource_class.to_s}Service".constantize.new.create resource
-    result = ParticipantService.new.update resource, resource_params
+    result = ParticipantService.new.update resource(), resource_params, resource_class()
     resource= result.record
     case result.status
     when :updated; create_update_response

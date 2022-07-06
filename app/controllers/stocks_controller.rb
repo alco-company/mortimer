@@ -8,8 +8,8 @@ class StocksController < AssetsController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      # params[:asset][:assetable_attributes].delete(:access_token)
-      params[:asset][:assetable_attributes] = {access_token: "-"}
+      set_assetables params
+      # , :access_token not permitted - 'cause it's a secure_token
       params.require(:asset).permit(:assetable_type, :name, :account_id, assetable_attributes: [ :id, :last_heart_beat_at ] )
     end
 
@@ -19,5 +19,15 @@ class StocksController < AssetsController
     #
     def find_resources_queried options
       Stock.search Stock.all, params[:q]
+    end
+
+
+    def set_assetables params
+      # params[:asset][:assetable_attributes].delete(:access_token)
+      if params[:asset][:assetable_attributes].nil?
+        params[:asset][:assetable_attributes] = { access_token: "has to be set - otherwise assetable will not be created/updated" }
+      else
+        params[:asset][:assetable_attributes][:access_token] = "has to be set - otherwise assetable will not be created/updated"
+      end      
     end
 end

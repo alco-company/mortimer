@@ -7,18 +7,16 @@ class AbstractResourceService
         Result.new(status: :not_valid, record: resource)
       
     rescue => exception
-      resource.assetable = resource_class.new if resource.assetable.nil?
-      Result.new status: :error, record: resource
-    
+      Result.new status: :error, record: resource      
     end
   end
-
-  def update resource, resource_params
+  
+  def update( resource, resource_params )
     begin        
       resource.update resource_params 
       resource.valid? ? 
-        Result.new(status: :updated, record: resource) :
-        Result.new(status: :not_valid, record: resource)
+      Result.new(status: :updated, record: resource) :
+      Result.new(status: :not_valid, record: resource)
     rescue => exception
       resource.errors.add(:base, exception)
       Result.new status: :error, record: resource
