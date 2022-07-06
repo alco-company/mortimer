@@ -13,24 +13,6 @@ class Employee < AbstractResource
   #   where("assetable" deleted_at: nil)
     Employee.all.joins(:asset)
   end
-    
-  #
-  # Employees - if updated without the asset being 'called'
-  #
-  def broadcast_update
-    if self.asset.deleted_at.nil? 
-      broadcast_replace_later_to 'employees', partial: self, target: self, locals: {resource: self}
-    else 
-      broadcast_remove_to 'employees', target: self
-    end
-  end
-
-  def broadcast_destroy
-    raise "Employees should not be hard-deleteable!"
-    # after_destroy_commit { broadcast_remove_to self, partial: self, locals: {resource: self} }
-  end
-  #
-  #
 
   #
   # used by clone_from method on abstract_resource

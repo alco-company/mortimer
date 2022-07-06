@@ -77,6 +77,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 * add employee asset resource
 * add svg to menu items
 * fix for combos
+* fix to broadcast employee
 
 ### 2022-07-05
 
