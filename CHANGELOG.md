@@ -75,6 +75,8 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 * uninstalled New Relic - guess we'll wait and see what monitor to use
 * add employee asset resource
+* add svg to menu items
+* fix for combos
 
 ### 2022-07-05
 

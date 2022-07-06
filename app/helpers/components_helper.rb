@@ -32,16 +32,17 @@ module ComponentsHelper
         {},
         { multiple: true, class: "hidden", data: { resource__combo_component_target: "select"}}
     else
-      form.hidden_field attrib, value: values, data: { resource__combo_component_target: "select"}
+
+      form.hidden_field attrib, value: combo_input_value(values,:id), data: { resource__combo_component_target: "select"}
     end
   end
 
-  def combo_input_value value 
+  def combo_input_value value, key=:name 
     if [value].flatten.first.is_a? String 
       return [value].flatten.join(', ')
     end
-    if [value].flatten.first.keys.include? :name
-      [value].flatten.pluck(:name).join(', ') rescue ''
+    if [value].flatten.first.keys.include? key
+      [value].flatten.pluck(key).join(', ') rescue ''
     else
       [value].flatten.join(', ')
     end

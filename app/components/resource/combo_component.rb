@@ -45,7 +45,7 @@ class Resource::ComboComponent < ViewComponent::Base
       @values = values 
       @values ||= @form.object.send("combo_values_for_#{attr}") 
       @items = items || []
-
+ 
       type_s = type.to_s
       @is_single  = !(type_s =~ /single/).nil?
       @is_multi   = !@is_single
