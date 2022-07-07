@@ -69,6 +69,13 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-07-07
+
+08:30 nope - 4hrs from 10PM 'til 2:30AM and crumbles from 5 to 7:30
+
+* make impersonate render menu
+* work on creating a user
+
 ### 2022-07-06
 
 7:25 worse than yesterday
@@ -78,6 +85,8 @@ In the REFERENCES you will find a lot of people, resources, etc
 * add svg to menu items
 * fix for combos
 * fix to broadcast employee
+
+21:30 hope I'll sleep
 
 ### 2022-07-05
 

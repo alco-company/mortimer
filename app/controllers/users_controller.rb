@@ -1,6 +1,6 @@
 class UsersController < ParticipantsController
   # skip_before_action :authenticate_user!, only: [:create, :new]
-  skip_before_action :set_resource, only: :create
+  # skip_before_action :set_resource, only: :create
   skip_before_action :breadcrumbs, only: :create
   skip_before_action :set_ancestry, only: :create
   before_action :redirect_if_authenticated, only: [:create, :new]
@@ -19,26 +19,19 @@ class UsersController < ParticipantsController
     @account = Account.new
     @user = User.new
   end
-  
-  def create
-    @user = User.new(create_user_params)
-    profile = Profile.create user: @user, time_zone: 'UTC'
-    @user.account = current_account
-    resource= Participant.new account: current_account, name: @user.user_name, participantable: @user
-    if resource.valid?
-      resource.save
-      resource.participantable.send_confirmation_email! unless resource.participantable.confirmed? # params[:user][:confirmed_at]
-      if user_signed_in? # and user_is_admin?
-        head :ok
-      else
-        unless user_signed_in?
-          redirect_to root_path, notice: t('.check_email_for_confirmation')
-        end
-      end
-    else
-      Current.errors = resource.errors
-      render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
-      say "[users_controller] Errors: #{Current.errors.to_json}"
+
+
+  #
+  # The create_resource is an override to make sure Event is the 'base' entity
+  # being created
+  #
+  def create_resource
+    # @resource= User.new(resource_params)
+    result = UserService.new.create resource(), resource_params, resource_class()
+    resource= result.record
+    case result.status
+    when :created; user_signed_in? ? create_update_response : redirect_to( root_path, notice: t('.check_email_for_confirmation') )
+    when :not_valid; render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
     end
   end
 
@@ -59,7 +52,17 @@ class UsersController < ParticipantsController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      update_user_params
+      if params['action'] != 'create' && resource
+        params[:participant][:participantable_attributes][:confirmed_at] = resource.participantable.confirmed_at if resource.participantable.confirmed?
+      end
+      params[:participant][:participantable_attributes][:account_id] = params[:participant][:account_id]
+      params.require(:participant).permit(:participantable_type, :name, :account_id, roles: [], teams: [], participantable_attributes: [ :id, :user_name, :account_id, :email, :password, :password_confirmation, :confirmed_at, :unconfirmed_email ] )
+
+      # case params["action"]
+      # # when "create"; return create_user_params
+      # when "create"; return update_user_params
+      # when "update"; return update_user_params
+      # end
     end
 
     #
@@ -87,16 +90,17 @@ class UsersController < ParticipantsController
     # }
     #
     def update_user_params
-      if params[:participant][:participantable_attributes][:confirmed_at]=='0'
-        params[:participant][:participantable_attributes][:confirmed_at] = nil
-      else
-        say resource.to_json 
-        say resource.participantable.to_json
-        unless resource.participantable.confirmed? 
-          params[:participant][:participantable_attributes][:confirmed_at]=DateTime.current 
-        end
-      end
-      params.require(:participant).permit(:participantable_type, :name, :account_id, roles: [], teams: [], participantable_attributes: [ :id, :user_name, :email, :password, :password_confirmation, :confirmed_at, :unconfirmed_email ] )
+      # if params[:participant][:participantable_attributes][:confirmed_at]=='0' && resource.participantable.confirmed?
+      #   params[:participant][:participantable_attributes][:confirmed_at] = nil
+      # else
+      #   say resource.to_json 
+      #   say resource.participantable.to_json
+      #   unless resource.participantable.confirmed? 
+      #     params[:participant][:participantable_attributes][:confirmed_at]=DateTime.current 
+      #   end
+      # end
+      params[:participant][:participantable_attributes][:account_id] = params[:participant][:account_id]
+      params.require(:participant).permit(:participantable_type, :name, :account_id, roles: [], teams: [], participantable_attributes: [ :id, :user_name, :account_id, :email, :password, :password_confirmation, :confirmed_at, :unconfirmed_email ] )
       # set_confirmed_param.require(:user).permit(:user_name, :email, :password, :password_confirmation, :confirmed_at, :unconfirmed_email)
     end
 

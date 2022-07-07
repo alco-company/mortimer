@@ -23,7 +23,7 @@ class Participant < AbstractResource
 
   def roles= rs 
     roles.delete_all
-    rs.each{ |r| Roleable.create( role: Role.find(r), roleable: self) unless (r.blank? || r=='undefined') }
+    rs.each{ |r| Roleable.create( role: Role.find(r), roleable: self) unless (r.blank? || r=='undefined') } if self.id
   end
 
   def combo_values_for_roles
@@ -36,7 +36,7 @@ class Participant < AbstractResource
 
   def teams= ts 
     teams.delete_all
-    ts.each{ |t| ParticipantTeam.create( team: Team.find(t), participant: self) unless t.blank? }
+    ts.each{ |t| ParticipantTeam.create( team: Team.find(t), participant: self) unless t.blank? } if self.id
   end
 
   #
