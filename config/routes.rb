@@ -39,6 +39,7 @@ Rails.application.routes.draw do
         get :heartbeat
       end
       resources :stock_item_transactions
+      resources :stock_locations
     end
   end
   

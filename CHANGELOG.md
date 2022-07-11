@@ -69,12 +69,22 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-07-11
+
+08:30 no work today - headache and 'snot' :(
+
+* showing location names on the POS
+
+
+
 ### 2022-07-07
 
 08:30 nope - 4hrs from 10PM 'til 2:30AM and crumbles from 5 to 7:30
 
 * make impersonate render menu
 * work on creating a user
+
+17:17 off to Valby, this time for a baptism of my grandson Max
 
 ### 2022-07-06
 
