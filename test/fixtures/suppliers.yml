@@ -2,7 +2,7 @@
 
 one:
   product_resource: MyString
-  gtin_prefix: MyString
+  gtin_prefix: 4321
 
 two:
   product_resource: MyString

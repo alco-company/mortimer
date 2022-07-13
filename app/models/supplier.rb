@@ -13,25 +13,6 @@ class Supplier < AbstractResource
     Supplier.all.joins(:participant)
   end
 
-  def self.create_for_product account, parm 
-    # say account.to_json
-    s = Supplier.find_by_prefix parm["ean14"]
-    unless s 
-      #
-      # search the https://gepir.gs1.org/index.php/search-by-gtin somwhow to find the correct supplier
-      #
-      sup = Supplier.create!( gtin_prefix: parm["ean14"][4,4])
-      cal = Calendar.create!( name: parm["ean14"] )
-      participant = Participant.create! name: parm["ean14"], 
-        account: account,
-        calendar: cal,
-        participantable: sup
-
-      s= Supplier.find participant.participantable_id
-    end
-    s
-  end
-
   def self.find_by_prefix barcode 
     #
     # this really should go through all 
@@ -48,7 +29,7 @@ class Supplier < AbstractResource
     #
     barcode = "0" + barcode if barcode.length == 13
     id = Supplier.all.pluck(:id, :gtin_prefix).select{ |k,v| barcode[4,7].match(Regexp.new(v)) ? k : nil  }.compact.flatten[0] rescue nil
-    return id unless id 
+    return nil if id.nil? 
     Supplier.find(id)
     # Supplier.find_by gtin_prefix: prefix
   end

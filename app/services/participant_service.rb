@@ -1,5 +1,7 @@
 class ParticipantService < AbstractResourceService
   def create( resource, resource_class )
+    # resource.calendar = CalendarService.new.create(resource, resource_class) if resource.calendar.blank?
+    resource.calendar = Calendar.new(name: resource.name) if resource.calendar_id.blank?
     result = super(resource)
     if result.status != :created 
       resource.participantable = resource_class.new if resource.participantable.nil?
@@ -14,4 +16,5 @@ class ParticipantService < AbstractResourceService
     end
     result
   end
+
 end

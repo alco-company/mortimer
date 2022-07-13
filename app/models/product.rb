@@ -6,32 +6,12 @@ class Product < AbstractResource
   has_many :stock_locations, through: :stocked_products
   has_many :stock_item_transactions, through: :stocked_products
 
-  def self.default_scope
-    Product.all.joins(:asset)
-  end
-
   #
   # implement on every model where search makes sense
   # get's called from controller specific find_resources_queried
   #
   def self.search_by_model_fields lot, query
     default_scope.where "assets.name ilike '%#{query}%' "
-  end
-
-  def self.get_by field, s, parm 
-    self.find_by(field => parm["ean14"]) || self.create_for_stock_item_transaction( s, parm)
-  end
-
-  def self.create_for_stock_item_transaction s, parm 
-    acc = Asset.unscoped.where(assetable: s).first.account
-    sup = Supplier.create_for_product(acc, parm)
-    prod = Product.create!( supplier: sup, supplier_barcode: parm["ean14"] )
-    a= Asset.create!( 
-      account_id: acc.id, 
-      name: parm["ean14"], 
-      assetable: prod
-    )
-    Product.find a.assetable.id
   end
   #
   # default_scope returns all posts that have not been marked for deletion yet
@@ -44,14 +24,6 @@ class Product < AbstractResource
   def combo_values_for_supplier_id 
     return [{id: nil, name: ''}] if supplier.nil?
     [{id: supplier.id, name: supplier.name}]
-  end
-  
-  def get_stocked_product s, sl, prod, parm
-    sp = prod.stocked_products.where(stock: s).first 
-    if sp.nil?
-      sp = StockedProduct.create_for_stock_item_transaction( s, prod, sl, parm)
-    end
-    sp
   end
 
   def nbr_pallets

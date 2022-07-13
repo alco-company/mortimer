@@ -12,6 +12,8 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## TODO 
 
 - job offering portal, application, interview, assessment, background check 
+- signature like https://www.hellosign.com/products/api
+- a 'workshop' with free slots available for companies to come and get prototypes of projects - use railway.app as foundation
 - switch to good_job background job worker
 - consider using https://github.com/unabridged/motion and|or https://avohq.io
 - add manpower employees/interns/more
@@ -68,6 +70,20 @@ In the REFERENCES you will find a lot of people, resources, etc
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
 ## DONE
 
+
+### 2022-07-13
+
+09:15 not well - slept 5hrs from 3 to 8 w/o coughing
+
+* cont'd refactoring StockItemTransaction.create
+* 
+
+### 2022-07-12
+
+07:45 testing the form
+
+* refactoring StockItemTransaction.create
+* 
 
 ### 2022-07-11
 

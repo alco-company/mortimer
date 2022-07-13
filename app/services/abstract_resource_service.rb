@@ -1,12 +1,19 @@
 class AbstractResourceService
   def create( resource )
     begin
+      # puts "called-------------\n"
+      # puts resource.errors.to_json unless resource.valid?
+      # puts "er resource klar til at blive gemt? #{resource.valid?}"
       resource.save
+      # puts "saved"
       resource.valid? ? 
         Result.new(status: :created, record: resource) :
         Result.new(status: :not_valid, record: resource)
       
-    rescue => exception
+    rescue Exception => exception
+      # puts "SQL error in #{ resource.save.explain }"
+      # puts "SQL error #{ exception }"
+      ActiveRecord::Base.connection.execute 'ROLLBACK' 
       Result.new status: :error, record: resource      
     end
   end
@@ -34,6 +41,10 @@ class AbstractResourceService
     def initialize(status:, record:)
       @status = status
       @record = record
+    end
+
+    def created?
+      @status == :created
     end
   end
 end
