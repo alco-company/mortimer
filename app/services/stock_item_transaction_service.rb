@@ -1,8 +1,4 @@
 class StockItemTransactionService < EventService
-
-  def say msg 
-    puts msg
-  end
     
   def create_pos_transaction params
     parm=params["stock_item_transaction"]
