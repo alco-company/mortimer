@@ -17,22 +17,6 @@ class StockedProduct < AbstractResource
     StockedProduct.all.joins(:asset)
   end
 
-  def self.create_for_stock_item_transaction s, p, sl, parm
-    acc = s.account
-    # say "here with #{s}, #{p}, #{sl}, #{parm}"
-    # say "and what about #{p.asset}"
-    Asset.create( 
-      account_id: acc.id, 
-      name: "%s (%s)" % [p.name, parm["batchnbr"]], 
-      assetable: StockedProduct.create( 
-        stock_id: s.id, 
-        product_id: p.id, 
-        stock_location_id: sl.id,
-        stock_unit: parm[:unit]
-      )
-    ).assetable
-  end
-
   def nbr_pallets
     q = stock_item_transactions.pluck :state
     p = 0

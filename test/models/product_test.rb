@@ -9,7 +9,7 @@ class ProductTest < ActiveSupport::TestCase
     s = stocks(:one)
     prod = ProductService.new.create_product s, parm 
 
-    assert prod.supplier_barcode, "1234" 
+    assert prod.assetable.supplier_barcode, "1234" 
   end
 
 end

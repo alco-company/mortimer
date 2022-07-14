@@ -5,6 +5,9 @@ class StockLocation < AbstractResource
   has_many :stock_items
   has_many :stock_item_transactions, inverse_of: :stock_location
 
+  #
+  # default_scope returns all posts that have not been marked for deletion yet
+  #  
   def self.default_scope
     StockLocation.all.joins(:asset)
   end
@@ -17,28 +20,6 @@ class StockLocation < AbstractResource
   def self.all_locations_in_stock stock 
     StockLocation.where(stock: stock).pluck :id
   end
-  
-  def self.get_by field, s, parm 
-    self.find_by(field => parm["location"]) || self.create_for_stock_item_transaction( s, parm)
-  end
-  
-  def self.create_for_stock_item_transaction s, parm
-    begin      
-      acc = s.account
-      Asset.create( 
-        account_id: acc.id, 
-        name: parm["location"], 
-        assetable: StockLocation.create( 
-          stock_id: s.id, 
-          location_barcode: parm["location"] 
-        ) 
-      ).assetable
-    rescue => exception
-      raise ActiveRecord::Rollback
-      nil
-    end
-  end
-
 
   def nbr_pallets
     return 0 if stock_item_transactions.empty?
@@ -55,14 +36,6 @@ class StockLocation < AbstractResource
     qt = 0
     st.each{ |s,q| case s when 'RECEIVE'; qt+=q when 'SHIP'; qt-=(q||0) end } if st.any?
     qt
-  end
-
-  #
-  # default_scope returns all posts that have not been marked for deletion yet
-  #
-  def self.default_scope
-  #   where("assetable" deleted_at: nil)
-    StockLocation.all.joins(:asset)
   end
 
 

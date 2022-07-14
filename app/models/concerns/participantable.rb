@@ -9,7 +9,7 @@ module Participantable
   included do
     has_one :participant, as: :participantable, touch: true, dependent: :destroy
 
-    delegate :name, :state, :roles, :teams, :calendar, :deleted_at, to: :participant
+    delegate :name, :state, :account, :roles, :teams, :calendar, :deleted_at, to: :participant
 
     # ---
     #

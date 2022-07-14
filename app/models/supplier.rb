@@ -9,11 +9,14 @@ class Supplier < AbstractResource
   # default_scope returns all posts that have not been marked for deletion yet
   #
   def self.default_scope
-  #   where("assetable" deleted_at: nil)
+  #   where("participant" deleted_at: nil)
     Supplier.all.joins(:participant)
   end
 
-  def self.find_by_prefix barcode 
+  def self.find_by_prefix barcode, account=nil 
+    # suppliers = account.nil? ? Supplier.all : Supplier.unscoped.joins(:participant).where('participants.account_id = ?', account.id)
+    Current.account = account unless account.nil? 
+    suppliers = Supplier.all
     #
     # this really should go through all 
     # combinations starting with 3 digits all the way to 6 digits
@@ -27,8 +30,9 @@ class Supplier < AbstractResource
     #            d = EAN14 product identifier
     #            e = check digit
     #
-    barcode = "0" + barcode if barcode.length == 13
-    id = Supplier.all.pluck(:id, :gtin_prefix).select{ |k,v| barcode[4,7].match(Regexp.new(v)) ? k : nil  }.compact.flatten[0] rescue nil
+    return nil if barcode.length < 13
+    barcode = "0" + barcode if barcode.length < 14
+    id = suppliers.pluck(:id, :gtin_prefix).select{ |k,v| barcode[4,7].match(Regexp.new(v)) ? k : nil  }.compact.flatten[0] rescue nil
     return nil if id.nil? 
     Supplier.find(id)
     # Supplier.find_by gtin_prefix: prefix

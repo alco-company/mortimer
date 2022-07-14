@@ -1,18 +1,7 @@
 class StockItemTransactionService < EventService
-  def create( resource, resource_class )
-    result = super(resource)
-    if result.status != :created 
-      resource.assetable = resource_class.new if resource.assetable.nil?
-    end
-    result
-  end
 
-  def update( resource, resource_params, resource_class )
-    result = super(resource,resource_params)
-    if result.status != :updated 
-      resource.assetable = resource_class.new if resource.assetable.nil?
-    end
-    result
+  def say msg 
+    puts msg
   end
     
   def create_pos_transaction params
@@ -29,26 +18,28 @@ class StockItemTransactionService < EventService
     false
   end
   
+  # id is the stock_item_transaction
   def delete_pos_transaction params 
     st=StockItemTransaction.unscoped.find(params[:id])
-    return false unless st and st.event.update(deleted_at: DateTime.current)
-    true
+    return false unless st
+    delete(st.event).deleted?
   end
   
   def create_adding_transaction s, parm 
     StockItemTransaction.transaction do
       Current.account = Asset.unscoped.where(assetable: s).first.account
-      Rails.logger.info "----> Current.account #{Current.account.to_json}"
+      # Rails.logger.info "----> Current.account #{Current.account.to_json}"
       begin 
-        prod = ProductService.new.get_by :supplier_barcode, s, parm
-        say "----> Product #{prod.to_json}"
-        sl = StockLocation.unscoped.get_by :location_barcode, s, parm
-        say "----> StockLocation #{sl.to_json}"
-        sp = prod.get_stocked_product s, sl, prod, parm
-        say "----> StockedProduct #{sp.to_json}"
-        si = StockItem.add_quantity( s, sp, sl, parm)
-        say "----> StockItem #{si.to_json}"
-        self.create_transaction s, sl, sp, si, parm, parm["nbrcont"], parm["unit"]
+        # get the product asset
+        asset_prod = ProductService.new.get_by :supplier_barcode, s, parm
+        # say "----> Product #{asset_prod.assetable.to_json}"
+        sl = StockLocationService.new.get_by :location_barcode, s, parm
+        # say "----> StockLocation #{sl.to_json}"
+        sp = ProductService.new.get_stocked_product s, sl, asset_prod, parm
+        # say "----> StockedProduct #{sp.to_json}"
+        si = StockItemService.new.add_quantity( s, sp, sl, parm)
+        # say "----> StockItem #{si.to_json}"
+        create_transaction s, sl, sp, si, parm, parm["nbrcont"], parm["unit"]
       rescue ActiveRecord::StatementInvalid
         Rails.logger.info "[stock_item_transaction] create_adding_transaction: (StatementInvalid)"
         raise ActiveRecord::Rollback
@@ -100,8 +91,6 @@ class StockItemTransactionService < EventService
           unit: u
         ) 
       )
-      say "----> StockItemTransaction (event) #{e.to_json}"
-      say "----> StockItemTransaction #{e.eventable.to_json}"
       sp.update_attribute :updated_at, DateTime.current
       e.eventable
     rescue => err 

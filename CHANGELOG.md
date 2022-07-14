@@ -71,6 +71,18 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-07-14
+
+05:15 better - but 4hrs from 1:15 to 5:15 is NOT enough!
+
+7:30 Foldberg
+9:30 back in the trenches
+
+* prepared STEN containers
+* cont'd refactoring StockItemTransaction.create
+* 17:17 depstaging
+
+
 ### 2022-07-13
 
 09:15 not well - slept 5hrs from 3 to 8 w/o coughing
@@ -78,12 +90,16 @@ In the REFERENCES you will find a lot of people, resources, etc
 * cont'd refactoring StockItemTransaction.create
 * 
 
+17-ish Jonas Vingegaard won the 11th stage of Tour de France 2022 on Col de Granon and the yellow jersey!
+
 ### 2022-07-12
 
 07:45 testing the form
 
 * refactoring StockItemTransaction.create
 * 
+
+15:30 Foldberg
 
 ### 2022-07-11
 

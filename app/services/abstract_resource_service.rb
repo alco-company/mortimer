@@ -25,6 +25,18 @@ class AbstractResourceService
       Result.new(status: :updated, record: resource) :
       Result.new(status: :not_valid, record: resource)
     rescue => exception
+      ActiveRecord::Base.connection.execute 'ROLLBACK' 
+      resource.errors.add(:base, exception)
+      Result.new status: :error, record: resource
+    end
+  end
+  
+  def delete( resource )
+    begin        
+      resource.update_attribute :deleted_at, DateTime.current
+      Result.new(status: :deleted, record: resource)
+    rescue => exception
+      ActiveRecord::Base.connection.execute 'ROLLBACK' 
       resource.errors.add(:base, exception)
       Result.new status: :error, record: resource
     end
@@ -45,6 +57,14 @@ class AbstractResourceService
 
     def created?
       @status == :created
+    end
+
+    def updated?
+      @status == :updated
+    end
+
+    def deleted?
+      @status == :deleted
     end
   end
 end
