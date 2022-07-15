@@ -71,6 +71,12 @@ class Account < AbstractResource
     if deleted_at.nil?
       broadcast_replace_later_to model_name.plural, partial: self,
                                                     locals: { resource: self, user: Current.user }
+
+      broadcast_replace_later_to [Current.account, :account], target: "desktop_menu", partial: "shared/menu_desktop",
+                                                    locals: { resource: self, user: Current.user }
+      broadcast_replace_later_to [Current.account, :account], target: "mobile_menu", partial: "shared/menu_mobile",
+                                                    locals: { resource: self, user: Current.user }
+                                                    
     else
       broadcast_remove_to model_name.plural, target: self
     end

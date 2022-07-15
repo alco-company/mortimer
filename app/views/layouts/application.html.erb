@@ -46,7 +46,7 @@
     -->
     <div class="min-h-full">
       <%= turbo_stream_from Current.account, :account %>
-      <%= turbo_frame_tag 'menus' do %>        
+      <%= turbo_frame_tag 'menus', target: '_top' do %>        
         <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
         <%= render_component "navigation/mobile_sidebar", current: Current %>
 
