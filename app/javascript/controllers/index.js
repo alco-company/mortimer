@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import { Tabs } from "tailwindcss-stimulus-components"
+application.register('tabs', Tabs)
+
 import ContentLoaderController from "./content_loader_controller.js"
 application.register("content-loader", ContentLoaderController)
 

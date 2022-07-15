@@ -71,6 +71,13 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-07-15
+
+07:45 better - but still only 4-5 hrs sleep which is tough
+
+* adjust menus to account changes to services
+* added missing tabs method from tailwindcss-stimulus
+
 ### 2022-07-14
 
 05:15 better - but 4hrs from 1:15 to 5:15 is NOT enough!
