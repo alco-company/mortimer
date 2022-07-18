@@ -1,42 +1,56 @@
-<%= form_with(model: stocked_product) do |form| %>
-  <% if stocked_product.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(stocked_product.errors.count, "error") %> prohibited this stocked_product from being saved:</h2>
+<%= form_with model: resource, url: url_for(resource.assetable), id: resource_form, data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
+  <%= form.fields_for :assetable do |asset_form| %>
+    <%= form.hidden_field :account_id, value: current_account.id %>
+    <%= form.hidden_field :assetable_type, value: "StockedProduct" %>
+    <div class="flex-1 relative "
+      data-controller="form"
+      data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"    
+      >
+      <!-- Header -->
+      <%= render_component "resource/form_header", resource: resource, title: form_header_title, description: form_header_description %>
 
-      <ul>
-        <% stocked_product.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+      <!-- Divider container -->
+      <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+
+        <!-- Name -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".name" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2">
+            <%= form.text_field :name, 
+              required: true, 
+              data: { "form-target" => "focus" },
+              class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+            <div class="text-sm text-red-800" >
+              <%= resource.errors.where(:name).map( &:full_message).join( "og ") %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stock_unit -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="stock_unit" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".stock_unit" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2">
+            <%= asset_form.text_field :stock_unit, required: true, class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+            <div class="text-sm text-red-800" >
+              <%= resource.errors.where(:stock_unit).map( &:full_message).join( "og ") %>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :product_id, style: "display: block" %>
-    <%= form.text_field :product_id %>
-  </div>
 
-  <div>
-    <%= form.label :stock_id, style: "display: block" %>
-    <%= form.text_field :stock_id %>
-  </div>
+  <%= render_component "action_button", resource: resource, delete_url: resource_url(resource.assetable), deleteable: true %>
 
-  <div>
-    <%= form.label :stock_location_id, style: "display: block" %>
-    <%= form.text_field :stock_location_id %>
-  </div>
-
-  <div>
-    <%= form.label :quantity, style: "display: block" %>
-    <%= form.number_field :quantity %>
-  </div>
-
-  <div>
-    <%= form.label :stock_unit, style: "display: block" %>
-    <%= form.text_field :stock_unit %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>
+

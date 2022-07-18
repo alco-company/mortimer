@@ -8,7 +8,7 @@ class StockedProductsController < AssetsController
 
     # Only allow a list of trusted parameters through.
     def resource_params
-      params.require(:stocked_product).permit(:product_id, :stock_id, :stock_location_id, :stock_unit)
+      params.require(:asset).permit(:assetable_type, :name, :account_id, assetable_attributes: [ :id, :stock_unit ] )      
     end
 
     #

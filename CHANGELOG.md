@@ -71,6 +71,14 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-07-18
+
+08:35 much better - slept like a baby - this did me good!
+
+* fixing a few show actions (stocked_location, more)
+* 
+
+
 ### 2022-07-15
 
 07:45 better - but still only 4-5 hrs sleep which is tough

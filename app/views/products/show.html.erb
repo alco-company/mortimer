@@ -17,7 +17,7 @@
     <div class="md:mt-7 justify-end flex">
       <div class="w-full">
         <%= form_with url: "", method: :get, data: { turbo_frame: resources_target, turbo_action: 'advance' } do |form| %>
-          <%= search_field :q, params[:q] %>
+          <%= search_field name: :q, value: params[:q], component_method: "search#keydownHandler" %>
         <% end %>
       </div>
 
