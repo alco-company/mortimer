@@ -111,16 +111,47 @@ module Pos
         # 
         st_id=REDIS.incr('stock_item_transactions_id') 
         REDIS.set( ("stock_item_transactions:%d" % st_id), JSON.generate(resource_params.to_unsafe_h) ) 
+        # is the backgroundjob running?
         unless REDIS.get('stock_item_transaction_processing_job')
           REDIS.set "stock_item_transaction_processing_job", true
           StockItemTransactionProcessingJob.perform_later
         end
+        #
         # reset every 1 mio transactions - should be safe
         REDIS.set('stock_item_transactions_id',1) if REDIS.incr('stock_item_transactions_id') > 1_000_000
         true
       rescue
         false
       end
+
+
+      #
+      # this is the StockItemTransactionJob - 
+      # use it when debugging in development env
+      #
+      def perform
+        begin     
+          keys = REDIS.keys "stock_item_transactions:*"
+          looping = keys.size
+          while keys && (looping>0)
+            key = keys.shift
+            parms = JSON.parse( REDIS.get(key) ) rescue nil
+            if parms && (StockItemTransactionService.new.create_pos_transaction( parms ) rescue false)
+              REDIS.del key 
+            else
+              looping -= 1
+              keys.unshift(key) 
+            end
+          end
+        rescue => exception
+          say exception
+        ensure      
+          REDIS.del "stock_item_transaction_processing_job"
+        end
+      end
+    
+
+
       
   end
 end
