@@ -34,6 +34,7 @@ class StockItemService < AssetService
   def create_stock_item s, sp, sl, parm 
     begin      
       acc = Asset.unscoped.where( assetable: s).first.account
+      expire = StockItem.parse_yymmdd( parm["expr"] ) || StockItem.parse_yymmdd( parm["sell"] ) || nil
       Asset.create( 
         account_id: acc.id, 
         name: parm["batchnbr"], 
@@ -44,7 +45,7 @@ class StockItemService < AssetService
           batch_number: parm["batchnbr"], 
           quantity: parm["nbrcont"],
           batch_unit: parm["unit"],
-          expire_at: StockItem.parse_yymmdd( parm["expr"] || parm["sell"])
+          expire_at: expire
         )
       ).assetable
     rescue => exception      
