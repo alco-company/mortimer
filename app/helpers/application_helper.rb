@@ -21,6 +21,7 @@ module ApplicationHelper
     return "" if dt.blank?    
     l dt.in_time_zone(user.time_zone), format: :long
   rescue 
+    Rails.logger.warn "user #{user}, dt #{dt}"
     raw "<span class='hidden'>dt is empty or not a date nor a (date)time</span>"
   end
 

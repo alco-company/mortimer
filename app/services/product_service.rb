@@ -16,7 +16,13 @@ class ProductService < AssetService
   
   def get_stocked_product s, sl, prod, parm
     return nil if prod.nil? or prod.assetable.nil?
-    (prod.assetable.stocked_products.where(stock: s).first rescue nil) || StockedProductService.new.create_stocked_product( s, prod, sl, parm)
+    sp = prod.assetable.stocked_products.where(stock: s).first rescue nil
+    if sp 
+      sp.update_attribute :quantity, (sp.quantity+parm["nbrcont"].to_i)
+    else
+      sp = StockedProductService.new.create_stocked_product( s, prod, sl, parm)
+    end
+    sp
   end
 
 end

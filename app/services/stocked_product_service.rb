@@ -14,7 +14,8 @@ class StockedProductService < AssetService
         stock_id: s.id, 
         product_id: prod.assetable.id, 
         stock_location_id: sl.id,
-        stock_unit: parm["unit"]
+        stock_unit: parm["unit"],
+        quantity: parm["nbrcont"]
       )
     )
     a.assetable

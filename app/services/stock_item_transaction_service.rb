@@ -24,6 +24,7 @@ class StockItemTransactionService < EventService
   def create_adding_transaction s, parm 
     StockItemTransaction.transaction do
       Current.account = Asset.unscoped.where(assetable: s).first.account
+      Current.user ||= (Current.account.users.first || User.unscoped.first)
       # Rails.logger.info "----> Current.account #{Current.account.to_json}"
       begin 
         # get the product asset
@@ -47,6 +48,7 @@ class StockItemTransactionService < EventService
   def create_subtracting_transaction s, parm 
     StockItemTransaction.transaction do
       Current.account = Asset.where(assetable: s).first.account
+      Current.user ||= (Current.account.users.first || User.unscoped.first)
       begin
         st = Event.unscoped.where( name: parm["sscs"], state: "RECEIVE" ).last.eventable  
         si = StockItem.subtract_quantity( s, st, parm)
@@ -58,6 +60,7 @@ class StockItemTransactionService < EventService
   def create_inventory_transaction(s, parm)
     StockItemTransaction.transaction do
       Current.account = Asset.where(assetable: s).first.account
+      Current.user ||= (Current.account.users.first || User.unscoped.first)
       begin
         st = Event.unscoped.where( name: parm["sscs"] ).last.eventable
         self.create_transaction s, st.stock_location, st.stocked_product, si, parm

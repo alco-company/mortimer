@@ -35,6 +35,9 @@ class StockItemService < AssetService
     begin      
       acc = Asset.unscoped.where( assetable: s).first.account
       expire = StockItem.parse_yymmdd( parm["expr"] ) || StockItem.parse_yymmdd( parm["sell"] ) || nil
+      unit = parm["unit"] || 'pcs'
+      quantity = parm["nbrcont"].to_i || 1
+      batchnbr = parm["batchnbr"] || "%s_%s" % [ sp.name, DateTime.now ]
       Asset.create( 
         account_id: acc.id, 
         name: parm["batchnbr"], 
@@ -42,13 +45,14 @@ class StockItemService < AssetService
           stock_id: s.id,
           stocked_product_id: sp.id, 
           stock_location_id: sl.id, 
-          batch_number: parm["batchnbr"], 
-          quantity: parm["nbrcont"],
-          batch_unit: parm["unit"],
+          batch_number: batchnbr, 
+          quantity: quantity,
+          batch_unit: unit,
           expire_at: expire
         )
       ).assetable
     rescue => exception      
+      Rails.logger.warn "create_stock_item! s (#{s}), sp (#{sp}), sl (#{sl}), parm(#{parm})"
       puts exception 
       nil
     end 
