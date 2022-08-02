@@ -71,6 +71,20 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-08-02
+
+08:45 slept like a child
+
+* testing goods shipping
+
+### 2022-08-01
+
+06:05 almost 100% recovered - and back from a much needed vacation :) 
+
+* fix to stock_item
+
+16:50 done
+
 ### 2022-07-18
 
 08:35 much better - slept like a baby - this did me good!

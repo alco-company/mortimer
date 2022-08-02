@@ -20,12 +20,15 @@ class StockItemService < AssetService
 
   def subtract_quantity( s, st, parm)
     sp = st.stocked_product
+    sp.update_attribute :quantity, (sp.quantity - st.quantity)
     sl = st.stock_location
-    si = self.find_by( stocked_product_id: sp.id, stock_location: sl.id, batch_number: parm["batchnbr"])
+    si = StockItem.find_by( stocked_product_id: sp.id, stock_location: sl.id, batch_number: parm["batchnbr"])
     if si 
       si.update_attribute :quantity, (si.quantity - st.quantity)
     else
-      si = self.create_for_stock_item_transaction( s, sp, sl, parm)
+      # no StockItem - must be an error so we create one with the quantity
+      si = create_stock_item( s, sp, sl, parm)
+      # and then we update the quantity to zero to have our version log intact
       si.update_attribute :quantity, 0
     end
     si

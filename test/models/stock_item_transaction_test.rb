@@ -20,7 +20,7 @@ require "test_helper"
 # 0012345678901234567710123457
 # 0012345678901234567810123457
 # 0012345678901234567910123457
-
+ 
 # 1522061002057114261010293725  91101
 # 0012345678901234567010007
 # 0012345678901234567110007
@@ -89,17 +89,17 @@ class StockItemTransactionTest < ActiveSupport::TestCase
     assert_equal( 75, @st.stock_item.quantity)
   end
 
-  # test "RECEIVE 75 and SHIP 25" do
-  #   resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0012345678901234567810445566 1522040402412301234567893725 91100100", "left"=>"", "sscs"=>"123456789012345678", "batchnbr"=>"445566", "sell"=>"220404", "ean14"=>"41230123456789", "nbrcont"=>"25", "location"=>"100100", "direction"=>"RECEIVE", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
-  #   StockItemTransactionService.new.create_pos_transaction resource_params25
-  #   resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0012345678901234567710445566 1522040402412301234567893725 91100100", "left"=>"", "sscs"=>"123456789012345677", "batchnbr"=>"445566", "sell"=>"220404", "ean14"=>"41230123456789", "nbrcont"=>"25", "location"=>"100100", "direction"=>"RECEIVE", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
-  #   StockItemTransactionService.new.create_pos_transaction resource_params25
-  #   resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0012345678901234567610445566 1522040402412301234567893725 91100100", "left"=>"", "sscs"=>"123456789012345676", "batchnbr"=>"445566", "sell"=>"220404", "ean14"=>"41230123456789", "nbrcont"=>"25", "location"=>"100100", "direction"=>"RECEIVE", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
-  #   StockItemTransactionService.new.create_pos_transaction resource_params25
-  #   resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0012345678901234567710445566", "left"=>"", "sscs"=>"123456789012345677", "batchnbr"=>"445566", "direction"=>"SHIP", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
-  #   @st = StockItemTransactionService.new.create_pos_transaction resource_params25
-  #   assert_equal( 50,@st.stock_item.quantity)
-  # end
+  test "RECEIVE 75 and SHIP 25" do
+    resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0012345678901234567810445566 1522040402412301234567893725 91100100", "left"=>"", "sscs"=>"123456789012345678", "batchnbr"=>"445566", "sell"=>"220404", "ean14"=>"41230123456789", "nbrcont"=>"25", "location"=>"100100", "direction"=>"RECEIVE", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
+    StockItemTransactionService.new.create_pos_transaction resource_params25
+    resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0012345678901234567710445566 1522040402412301234567893725 91100100", "left"=>"", "sscs"=>"123456789012345677", "batchnbr"=>"445566", "sell"=>"220404", "ean14"=>"41230123456789", "nbrcont"=>"25", "location"=>"100100", "direction"=>"RECEIVE", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
+    StockItemTransactionService.new.create_pos_transaction resource_params25
+    resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0012345678901234567610445566 1522040402412301234567893725 91100100", "left"=>"", "sscs"=>"123456789012345676", "batchnbr"=>"445566", "sell"=>"220404", "ean14"=>"41230123456789", "nbrcont"=>"25", "location"=>"100100", "direction"=>"RECEIVE", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
+    StockItemTransactionService.new.create_pos_transaction resource_params25
+    resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0012345678901234567710445566", "left"=>"", "sscs"=>"123456789012345677", "batchnbr"=>"445566", "direction"=>"SHIP", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
+    @st = StockItemTransactionService.new.create_pos_transaction resource_params25
+    assert_equal( 50,@st.stock_item.quantity)
+  end
 
 
 

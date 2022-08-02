@@ -3,6 +3,7 @@ class StockItemTransactionService < EventService
   def create_pos_transaction params
     parm=params["stock_item_transaction"]
     s = Stock.unscoped.find(params["stock_id"])
+    set_current_data s
     case parm["direction"]
     when "RECEIVE"; create_adding_transaction(s, parm)
     when "SHIP","SCRAP"; create_subtracting_transaction( s, parm)
@@ -23,9 +24,6 @@ class StockItemTransactionService < EventService
   
   def create_adding_transaction s, parm 
     StockItemTransaction.transaction do
-      Current.account = Asset.unscoped.where(assetable: s).first.account
-      Current.user ||= (Current.account.users.first || User.unscoped.first)
-      # Rails.logger.info "----> Current.account #{Current.account.to_json}"
       begin 
         # get the product asset
         asset_prod = ProductService.new.get_by :supplier_barcode, s, parm
@@ -37,8 +35,8 @@ class StockItemTransactionService < EventService
         si = StockItemService.new.add_quantity( s, sp, sl, parm)
         # say "----> StockItem #{si.to_json}"
         create_transaction s, sl, sp, si, parm, parm["nbrcont"], parm["unit"]
-      rescue ActiveRecord::StatementInvalid
-        Rails.logger.info "[stock_item_transaction] create_adding_transaction: (StatementInvalid)"
+      rescue RuntimeError => err
+        Rails.logger.info "[stock_item_transaction] create_adding_transaction: (#{err})"
         raise ActiveRecord::Rollback
         false
       end    
@@ -47,20 +45,20 @@ class StockItemTransactionService < EventService
   
   def create_subtracting_transaction s, parm 
     StockItemTransaction.transaction do
-      Current.account = Asset.where(assetable: s).first.account
-      Current.user ||= (Current.account.users.first || User.unscoped.first)
       begin
         st = Event.unscoped.where( name: parm["sscs"], state: "RECEIVE" ).last.eventable  
-        si = StockItem.subtract_quantity( s, st, parm)
-        self.create_transaction s, st.stock_location, st.stocked_product, si, parm, st.quantity, st.unit
+        si = StockItemService.new.subtract_quantity( s, st, parm)
+        create_transaction s, st.stock_location, st.stocked_product, si, parm, st.quantity, st.unit
+      rescue RuntimeError => err
+        Rails.logger.info "[stock_item_transaction] create_subtracting_transaction: (#{err})"
+        raise ActiveRecord::Rollback
+        false
       end
     end
   end
   
   def create_inventory_transaction(s, parm)
     StockItemTransaction.transaction do
-      Current.account = Asset.where(assetable: s).first.account
-      Current.user ||= (Current.account.users.first || User.unscoped.first)
       begin
         st = Event.unscoped.where( name: parm["sscs"] ).last.eventable
         self.create_transaction s, st.stock_location, st.stocked_product, si, parm
@@ -97,6 +95,11 @@ class StockItemTransactionService < EventService
       raise ActiveRecord::Rollback
       nil
     end
+  end
+
+  def set_current_data stock 
+    Current.account ||= Asset.unscoped.where(assetable: stock).first.account
+    Current.user ||= (Current.account.users.first || User.unscoped.first)
   end
 
 end
