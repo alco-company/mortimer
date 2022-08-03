@@ -102,5 +102,18 @@ class StockItemTransactionTest < ActiveSupport::TestCase
   end
 
 
+  test "don't RECEIVE but SHIP 25" do
+    resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0022345678901234567810445566 1522040402412301234567893725 91100100", "left"=>"", "sscs"=>"223456789012345678", "batchnbr"=>"445566", "sell"=>"220404", "ean14"=>"41230123456789", "nbrcont"=>"25", "location"=>"100100", "direction"=>"RECEIVE", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
+    StockItemTransactionService.new.create_pos_transaction resource_params25
+    # resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0012345678901234567710445566 1522040402412301234567893725 91100100", "left"=>"", "sscs"=>"123456789012345677", "batchnbr"=>"445566", "sell"=>"220404", "ean14"=>"41230123456789", "nbrcont"=>"25", "location"=>"100100", "direction"=>"RECEIVE", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
+    # StockItemTransactionService.new.create_pos_transaction resource_params25
+    # resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0012345678901234567610445566 1522040402412301234567893725 91100100", "left"=>"", "sscs"=>"123456789012345676", "batchnbr"=>"445566", "sell"=>"220404", "ean14"=>"41230123456789", "nbrcont"=>"25", "location"=>"100100", "direction"=>"RECEIVE", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
+    # StockItemTransactionService.new.create_pos_transaction resource_params25
+    resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0032345678901234567710445566", "left"=>"", "sscs"=>"323456789012345677", "batchnbr"=>"445566", "direction"=>"SHIP", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
+    @st = StockItemTransactionService.new.create_pos_transaction resource_params25
+    assert StockItemTransaction.all.count, 1
+  end
+
+
 
 end

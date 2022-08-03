@@ -46,8 +46,14 @@ class StockItemTransactionService < EventService
   def create_subtracting_transaction s, parm 
     StockItemTransaction.transaction do
       begin
-        st = Event.unscoped.where( name: parm["sscs"], state: "RECEIVE" ).last.eventable  
-        si = StockItemService.new.subtract_quantity( s, st, parm)
+        st = Event.unscoped.where( name: parm["sscs"], state: "RECEIVE" ).last
+        unless st 
+          st = StockItemTransaction.new stocked_product: StockedProduct.new( id: nil ), quantity: 0, unit: 'missing'
+          si = StockItem.new
+        else 
+          st = st.eventable  
+          si = StockItemService.new.subtract_quantity( s, st, parm)
+        end
         create_transaction s, st.stock_location, st.stocked_product, si, parm, st.quantity, st.unit
       rescue RuntimeError => err
         Rails.logger.info "[stock_item_transaction] create_subtracting_transaction: (#{err})"
