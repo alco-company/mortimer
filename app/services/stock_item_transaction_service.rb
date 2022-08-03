@@ -46,15 +46,15 @@ class StockItemTransactionService < EventService
   def create_subtracting_transaction s, parm 
     StockItemTransaction.transaction do
       begin
-        st = Event.unscoped.where( name: parm["sscs"], state: "RECEIVE" ).last
-        unless st 
-          st = StockItemTransaction.new stocked_product: StockedProduct.new( id: nil ), quantity: 0, unit: 'missing'
+        sit = Event.unscoped.where( name: parm["sscs"], state: "RECEIVE" ).last
+        unless sit 
+          sit = StockItemTransaction.new stock_location: StockLocation.new, stocked_product: StockedProduct.new( id: nil ), quantity: 0, unit: 'missing'
           si = StockItem.new
         else 
-          st = st.eventable  
-          si = StockItemService.new.subtract_quantity( s, st, parm)
+          sit = sit.eventable  
+          si = StockItemService.new.subtract_quantity( s, sit, parm)
         end
-        create_transaction s, st.stock_location, st.stocked_product, si, parm, st.quantity, st.unit
+        create_transaction s, sit.stock_location, sit.stocked_product, si, parm, sit.quantity, sit.unit
       rescue RuntimeError => err
         Rails.logger.info "[stock_item_transaction] create_subtracting_transaction: (#{err})"
         raise ActiveRecord::Rollback
