@@ -12,7 +12,6 @@ class StockItemTransactionService < EventService
     end
   rescue RuntimeError => err
     Rails.logger.info "[stock_item_transaction] Error: (StockItemTransaction) #{err.message}"
-    false
   end
   
   # id is the stock_item_transaction
@@ -38,7 +37,6 @@ class StockItemTransactionService < EventService
       rescue RuntimeError => err
         Rails.logger.info "[stock_item_transaction] create_adding_transaction: (#{err})"
         raise ActiveRecord::Rollback
-        false
       end    
     end
   end
@@ -58,7 +56,6 @@ class StockItemTransactionService < EventService
       rescue RuntimeError => err
         Rails.logger.info "[stock_item_transaction] create_subtracting_transaction: (#{err})"
         raise ActiveRecord::Rollback
-        false
       end
     end
   end
@@ -99,7 +96,6 @@ class StockItemTransactionService < EventService
     rescue => err 
       Rails.logger.info "[stock_item_transaction] create_transaction: (#{err})"
       raise ActiveRecord::Rollback
-      nil
     end
   end
 

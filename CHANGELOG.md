@@ -11,6 +11,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## TODO 
 
+- make entire system 'loggable' using [Fluentd et al](https://docs.fluentd.org/how-to-guides/free-alternative-to-splunk-by-fluentd)
 - job offering portal, application, interview, assessment, background check 
 - signature like https://www.hellosign.com/products/api
 - a 'workshop' with free slots available for companies to come and get prototypes of projects - use railway.app as foundation
@@ -71,12 +72,20 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
-### 2022-08-02
+### 2022-08-03
 
-08:45 slept like a child
+08:05 slept like a child
 
 * testing goods shipping
 
+16:
+### 2022-08-02
+
+08:45 slept like a child - but not long enough (had to finish Goliath season 1)
+
+* testing goods shipping
+
+16:10 done
 ### 2022-08-01
 
 06:05 almost 100% recovered - and back from a much needed vacation :) 

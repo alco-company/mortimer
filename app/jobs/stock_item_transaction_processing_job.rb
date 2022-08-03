@@ -4,16 +4,13 @@ class StockItemTransactionProcessingJob < ApplicationJob
   def perform(*args)
     begin     
       keys = REDIS.keys "stock_item_transactions:*"
-      looping = keys.size
-      while keys && (looping>0)
+      while keys.any?
         key = keys.shift
         parms = JSON.parse( REDIS.get(key) ) rescue nil
-        if parms && (StockItemTransactionService.new.create_pos_transaction( parms ) rescue false)
-          REDIS.del key 
-        else
-          looping -= 1
-          keys.unshift(key) 
+        if parms 
+          StockItemTransactionService.new.create_pos_transaction( parms )
         end
+        REDIS.del key 
       end
     rescue => exception
       say exception
