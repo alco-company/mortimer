@@ -73,6 +73,13 @@ export default class StockPosController extends Controller {
 
     this.direction = "";
     this.shouldReload = false;
+
+    this.requiredIdentifiers = [ 'ean14', 'sscs', 'location' ]
+    this.commonIdentifiers = [ 'ean14', 'location' ]
+    this.sessionRequiredIdentifiers = []
+    this.commonScans = []
+    this.stopIdentifiers = [ 'location' ]
+
     super.connect()
 
     // turn on the (background)worker
@@ -83,6 +90,15 @@ export default class StockPosController extends Controller {
     .then(response => response.json)
     .then( data => {
       this.locations = data
+    })
+
+    this.pallets = [];
+    // load current known pallets/
+    get('/pos/stocks/'+this.stockIdValue+'/pallets.json?api_key='+this.apiKeyValue)
+    .then(response => response.json)
+    .then( data => {
+      this.pallets = data
+      console.log(this.pallets)
     })
 
     // focus the input field
@@ -180,6 +196,8 @@ export default class StockPosController extends Controller {
     this.sscsset = [];
     this.totalScans = 0;
     this.scanset = [];
+    this.sessionRequiredIdentifiers = this.requiredIdentifiers
+    this.commonScans = []
     this.resetReceivePath()
     this.direction = "RECEIVE"
     this.processScanset()
@@ -191,6 +209,8 @@ export default class StockPosController extends Controller {
     this.sscsset = [];
     this.totalScans = 0;
     this.scanset = [];
+    this.sessionRequiredIdentifiers = this.requiredIdentifiers
+    this.commonScans = []
     this.resetInventoryPath()
     this.direction = "INVENTORY"
     this.processScanset()
@@ -202,6 +222,8 @@ export default class StockPosController extends Controller {
     this.sscsset = [];
     this.totalScans = 0;
     this.scanset = [];
+    this.sessionRequiredIdentifiers = this.requiredIdentifiers
+    this.commonScans = []
     this.resetShipPath()
     this.direction = "SHIP"
     this.processScanset()
@@ -225,6 +247,17 @@ export default class StockPosController extends Controller {
     return false;
   }
 
+  // test whether the SSCS barcode identifies a stock_item - and we got that item in stock
+  sscsInStock(barcode){
+    var reg_sscs = /^00(\d{18})/;
+    var result = reg_sscs.exec(barcode)
+    if (result == null)
+      return false;
+    if (this.pallets.filter( s => s === result[1] ).length > 0)
+      return true;
+    return false;
+  }
+
   // test whether the current set of SSCS barcode scans contains this one
   sscsBarcodeExist(barcode){
     if (this.isSscs(barcode) && this.sscsSetContains(barcode)) {
@@ -237,6 +270,11 @@ export default class StockPosController extends Controller {
   handleBarcode(barcode){
     if (this.sscsBarcodeExist(barcode)) {
       this.focusTarget.value = ''
+      return false
+    }
+    if (this.direction === 'SHIP' && this.isSscs(barcode) && !this.sscsInStock(barcode)){
+      this.focusTarget.value = ''
+      this.warn_to_reload('SSCS ikke modtaget! (skal først modtages)')
       return false
     }
     this.processBarcode(barcode)
@@ -402,24 +440,6 @@ export default class StockPosController extends Controller {
     }
     return scan
   }
-
-  // based on the type of scan 
-  //
-  // product = <span class="material-symbols-outlined">bento</span>
-  // pallet = <span class="material-symbols-outlined">inventory_2</span>
-  // location = <span class="material-symbols-outlined">pin_drop</span>
-  setIcon(scan,type){
-    var reg_sscs = /sscs/,
-        reg_ean14 = /ean14/,
-        reg_location = /location/
-
-    switch(true){
-      case reg_sscs.test(type):     this.greenIcon(this.barcodeIconSSCSTarget);     scan.set('type','sscs');      break;
-      case reg_ean14.test(type):    this.greenIcon(this.barcodeIconEAN14Target);    scan.set('type','ean14');     break;
-      case reg_location.test(type): this.greenIcon(this.barcodeIconLOCTarget);      scan.set('type','location');  break;
-    }
-    return scan
-  }
   
   // used by decipherBarcode to either
   // - initialize any keys in key list
@@ -441,6 +461,24 @@ export default class StockPosController extends Controller {
     }
   }
 
+  // based on the type of scan 
+  //
+  // product = <span class="material-symbols-outlined">bento</span>
+  // pallet = <span class="material-symbols-outlined">inventory_2</span>
+  // location = <span class="material-symbols-outlined">pin_drop</span>
+  setIcon(scan,type){
+    var reg_sscs = /sscs/,
+        reg_ean14 = /ean14/,
+        reg_location = /location/
+
+    switch(true){
+      case reg_sscs.test(type):     this.greenIcon(this.barcodeIconSSCSTarget);     scan.set('type','sscs');      break;
+      case reg_ean14.test(type):    this.greenIcon(this.barcodeIconEAN14Target);    scan.set('type','ean14');     break;
+      case reg_location.test(type): this.greenIcon(this.barcodeIconLOCTarget);      scan.set('type','location');  break;
+    }
+    return scan
+  }
+
   //
   // queueScanset either adds a new scan tuple to the scanset
   // or finishes/updates last added scan tuple - new ones get 
@@ -450,59 +488,78 @@ export default class StockPosController extends Controller {
   //
   queueScanset(scan){
 
-    let queue = [],
-    map = null
+    let queue = []
 
     //
     // scenarios: a(dd), u(pdate), r(eset)
     //
     // scan     scanset.shift()
-    //          ean14,  sscs,   location
-    // ean14    r       u       u
-    // sscs     u       a       u
-    // location u       u       u
+    //          null, ean14,  sscs,   location, other
+    // ean14    a     r       u       u         u
+    // sscs     a     u       a/u     u         u
+    // location a     u       u       u         u
+    // other    a     u       u       u         u
     //
-    // adding the SSCS means that a SSCS has aldready been scanned and possibly
+    // adding the SSCS means that a SSCS has already been scanned and possibly
     // updated any EAN14 / location
 
-    try {      
-      // any scans to consider?
-      if (this.scanset.length<1){
-        queue.push(scan)
+    try {     
+
+      queue = this.scanset.slice()
+
+      // this is a common identifier which goes into every scan
+      if ( this.hasCommonIdentifiers(scan) ) {
+        this.commonScans.push(scan);
       } else {
-        // empty the scanset from the top
-        while( typeof (map = this.scanset.shift()) !== 'undefined'  ) {
-
-          switch(true) {
-            case this.ean14_ean14(scan,map): queue = []; queue.push(scan); break;
-            case this.sscs_sscs(scan,map): queue.push(scan) && queue.push(map); break; // input guards against same SSCS twice
-            default: this.updateQueue(scan,map,queue)
-          }
-
-        }
+        queue.push(scan)
       }
+      this.noteRequiredScan(scan)
+      
+      // now the 'session' is basically done
+      if (this.allRequiredIdentifiersScanned()) {
+        //  - and a stop identifier has been scanned
+        if (this.hasStopIdentifiers(scan) || this.commonScans.filter(c=>this.hasStopIdentifiers(c)).length>0) {
+          queue = queue.map( m => this.commonScans.reduce((acc,s) => this.updateMap(s,acc),m) )
+        } 
+      }
+      this.scanset = queue.slice()  
+      return true
+
     } catch (error) {
       console.log(`queueScanset error: ${error}`)
       return false
     }
-    this.scanset = queue.slice()
-    this.scanset.forEach( m => this.tellMap(m,'queueScanset'))
-    return true
   }
 
-  ean14_ean14(s,m){
-    return ( (s.get('ean14') != '') && (m.get('ean14') != '') && (s.get('ean14') !== m.get('ean14')) )
+  hasCommonIdentifiers(scan) {
+    return (this.commonIdentifiers.filter( ci => [...scan.entries()].filter( e => e[0] == ci && e[1] !== '' ).length > 0 ).length > 0)
   }
 
-  sscs_sscs(s,m){
-    return ( (s.get('sscs') != '') && (m.get('sscs') != '') )
+  hasStopIdentifiers(scan) {
+    return (this.stopIdentifiers.filter( si => [...scan.entries()].filter( e => e[0] == si && e[1] !== '' ).length > 0 ).length > 0)
   }
 
-  updateQueue(s,m,q){
+  noteRequiredScan(scan){
+    this.sessionRequiredIdentifiers = this.sessionRequiredIdentifiers
+    .filter( r => ![...scan.entries()]
+      .filter( e => e[1] != '')
+      .map( e => e[0] )
+      .includes(r)
+    )
+  }
+
+  allRequiredIdentifiersScanned() {
+    return (this.sessionRequiredIdentifiers.length < 1)
+  }
+
+
+  updateMap(s,m){
     let barcode = m.get('barcode') + ` ${ s.get('barcode')}` 
     s.forEach( (v,i) => { i === 'barcode' ? m.set(i, barcode) : (v !== '' ? m.set(i, v) : null ) }) 
-    q.push(m)
+    return m
   }
+
+
 
   //
   // 4 Output
@@ -538,6 +595,14 @@ export default class StockPosController extends Controller {
     while( typeof (map = processQueue.pop()) !== 'undefined' ) {
       this.scanset.unshift(map)
     }
+    if (this.scanset.length<1) {
+      this.sessionRequiredIdentifiers = this.requiredIdentifiers
+      this.commonScans = []  
+      switch(true){
+        case (this.direction=='RECEIVE'): this.resetReceivePath(); break;
+        case (this.direction=='SHIP'): this.resetShipPath(); break;
+      }
+    }
   }
 
   // - output dependant functions
@@ -559,15 +624,15 @@ export default class StockPosController extends Controller {
     map.set('unit', 'pallet')
     // this.tellMap(map,'shipping')
     try{App.webWorker.postMessage({ data: map })} catch(err){this.warn_to_reload('Kan ikke sende data - seneste indlæsninger kan være tabt!') }
-    this.resetShipPath()
+    
   }
   
   // send this receiving goods scan to the worker
   receiveScan(map){
     map.set('unit', 'pallet')
-    this.tellMap(map,'receiveScan -> off to worker')
+//    this.tellMap(map,'receiveScan -> off to worker')
     try{App.webWorker.postMessage({ data: map })} catch(err){this.warn_to_reload('Kan ikke sende data - seneste indlæsninger kan være tabt!')}
-    this.resetReceivePath()
+    
   }
 
   // ***** UI *****
@@ -589,6 +654,7 @@ export default class StockPosController extends Controller {
     this.barcodeTextLOCTarget.innerHTML=""
 
     this.scansetCountTarget.innerText = this.totalScans      
+    this.resetQueueStatus()
   }
 
   resetInventoryPath(){
@@ -657,19 +723,27 @@ export default class StockPosController extends Controller {
     this.focusTarget.classList.add('disabled')
   }
 
+  resetQueueStatus(msg='Antal paller i kø til server'){
+    this.queueStatusTarget.innerText=msg
+    this.queueIconTarget.classList.remove("bg-red-500","text-white")
+    this.focusTarget.classList.remove('disabled')
+  }
+
   updateUI(){
-    let uiset = this.scanset.slice(),
+    let uiset = [...this.scanset, ...this.commonScans],
       map = 'undefined'
 
     try {      
       while(  typeof (map = uiset.pop()) !== 'undefined' ) {
-        switch(true){
-          case map.get('sscs')!=='':         this.setSSCS(map);
-          case map.get('batchnbr')!=='':     this.setSSCS(map);
-          case map.get('ean14')!=='':        this.setProduct(map);
-          // case map.get('type')==='cust-1':   this.setProduct(map);
-          case map.get('location')!=='':     this.setLocation(map);
-        }
+        ['sscs','batchnbr','ean14','location'].map( lbl => {
+          switch(true){
+            case map.get('sscs')!=='':         this.setSSCS(map); break;
+            case map.get('batchnbr')!=='':     this.setSSCS(map); break;
+            case map.get('ean14')!=='':        this.setProduct(map); break;
+            // case map.get('type')==='cust-1':   this.setProduct(map);
+            case map.get('location')!=='':     this.setLocation(map); break;
+          }
+        })
       }  
     } catch (error) {
       console.log(`error updating the UI: ${error}`)
@@ -700,7 +774,7 @@ export default class StockPosController extends Controller {
   }
   
   setLocation(scan){
-    let location = this.locations.filter( l => l.location_barcode == `91${scan.get('location')}`)
+    let location = this.locations.filter( l => l.location_barcode == scan.get('location'))
     location = location.length > 0 ? location[0].name : scan.get('location')
     this.barcodeTextLOCTarget.innerHTML = location
     return true;
@@ -708,6 +782,7 @@ export default class StockPosController extends Controller {
 
   setQueueSize(size){
     this.queueCountTarget.innerText = size
+    this.resetQueueStatus()
   }
 
   setConnectionError(ctrl){

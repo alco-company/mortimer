@@ -20,16 +20,18 @@ class StockItemService < AssetService
 
   def subtract_quantity( s, st, parm)
     sp = st.stocked_product
-    sp.update_attribute :quantity, (sp.quantity - st.quantity)
+    sp.update_attribute :quantity, (sp.quantity - st.quantity) unless sp.id.nil?
     sl = st.stock_location
     si = StockItem.find_by( stocked_product_id: sp.id, stock_location: sl.id, batch_number: parm["batchnbr"])
     if si 
       si.update_attribute :quantity, (si.quantity - st.quantity)
     else
       # no StockItem - must be an error so we create one with the quantity
-      si = create_stock_item( s, sp, sl, parm)
-      # and then we update the quantity to zero to have our version log intact
-      si.update_attribute :quantity, 0
+      unless s.id.blank? || sp.id.blank? || sl.id.blank?
+        si = create_stock_item( s, sp, sl, parm)
+        # and then we update the quantity to zero to have our version log intact
+        si.update_attribute :quantity, 0
+      end
     end
     si
   end
@@ -37,7 +39,7 @@ class StockItemService < AssetService
   def create_stock_item s, sp, sl, parm 
     begin      
       acc = Asset.unscoped.where( assetable: s).first.account
-      expire = StockItem.parse_yymmdd( parm["expr"] ) || StockItem.parse_yymmdd( parm["sell"] ) || nil
+      expire = (StockItem.parse_yymmdd( parm["expr"] )) || (StockItem.parse_yymmdd( parm["sell"] )) || nil
       unit = parm["unit"] || 'pcs'
       quantity = parm["nbrcont"].to_i || 1
       batchnbr = parm["batchnbr"] || "%s_%s" % [ sp.name, DateTime.now ]

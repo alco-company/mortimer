@@ -72,6 +72,12 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-08-08
+
+06:45 started - with a bad tooth ache
+
+* depstaging POS
+
 ### 2022-08-03
 
 08:05 slept like a child

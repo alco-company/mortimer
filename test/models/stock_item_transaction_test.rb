@@ -21,6 +21,11 @@ require "test_helper"
 # 0012345678901234567810123457
 # 0012345678901234567910123457
  
+# 1522061002057224261010293725  91101
+# 0092345678901234567010007
+# 0092345678901234567110007
+# 0092345678901234567210007
+ 
 # 1522061002057114261010293725  91101
 # 0012345678901234567010007
 # 0012345678901234567110007
@@ -112,6 +117,15 @@ class StockItemTransactionTest < ActiveSupport::TestCase
     resource_params25 = { "stock_item_transaction"=>{"barcode"=>"0032345678901234567710445566", "left"=>"", "sscs"=>"323456789012345677", "batchnbr"=>"445566", "direction"=>"SHIP", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
     @st = StockItemTransactionService.new.create_pos_transaction resource_params25
     assert StockItemTransaction.all.count, 1
+  end
+
+  test "SHIP 1 pallet" do
+    resource_receive = { "stock_item_transaction"=>{"barcode"=>"0022345678901234567810445566 1522040402412301234567893725 91100100", "left"=>"", "sscs"=>"223456789012345678", "batchnbr"=>"445566", "sell"=>"220404", "ean14"=>"41230123456789", "nbrcont"=>"25", "location"=>"100100", "direction"=>"RECEIVE", "unit"=>"pallet"}, "api_key"=>"[FILTERED]", "stock_id"=>"#{@asset.assetable.id}" }
+    StockItemTransactionService.new.create_pos_transaction resource_receive
+    resource_ship = {"stock_item_transaction"=> {"barcode"=>"00123456789012345650","sscs"=>"123456789012345650","gwkg"=>"","cust-1"=>"","gtin14"=>"","ean14"=>"","batchnbr"=>"","prod"=>"","pkg"=>"", "sell"=>"","expr"=>"","var"=>"", "nbrcont"=>"","location"=>"","left"=>"","type"=>"sscs","direction"=>"SHIP","unit"=>"pallet"},"api_key"=>"F18BfsL1tJTu4AnUsjfx6QMX","controller"=>"pos/stock_item_transactions","action"=>"create", "stock_id"=>"#{@asset.assetable.id}" }
+    StockItemTransactionService.new.create_pos_transaction resource_ship
+    assert StockItemTransaction.all.count,2
+
   end
 
 
