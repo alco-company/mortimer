@@ -4,8 +4,17 @@
 
 import { application } from "./application"
 
+import { Alert } from "tailwindcss-stimulus-components"
+application.register('alert', Alert)
+
+import { Dropdown } from "tailwindcss-stimulus-components"
+application.register('dropdown', Dropdown)
+
 import { Tabs } from "tailwindcss-stimulus-components"
 application.register('tabs', Tabs)
+
+import { Popover } from "tailwindcss-stimulus-components"
+application.register('popover', Popover)
 
 import ContentLoaderController from "./content_loader_controller.js"
 application.register("content-loader", ContentLoaderController)
