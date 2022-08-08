@@ -5,6 +5,7 @@ class Stock  < AbstractResource
 
   has_many :stock_locations
   has_many :stocked_products
+  has_many :stock_items, through: :stocked_products
   has_many :stock_item_transactions, through: :stock_locations
 
   #

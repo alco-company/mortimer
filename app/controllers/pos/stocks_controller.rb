@@ -1,7 +1,7 @@
 module Pos
   class StocksController < AbstractResourcesController
 
-    skip_before_action :authenticate_user!, only: [:heartbeat, :show]
+    skip_before_action :authenticate_user!, only: [:heartbeat, :show, :pallets]
     skip_before_action :breadcrumbs
     skip_before_action :set_paper_trail_whodunnit
     
@@ -18,6 +18,18 @@ module Pos
       Rails.logger.info '--------------------------------------------------------'
       Rails.logger.info msg
       Rails.logger.info '--------------------------------------------------------'
+    end
+
+    def pallets
+      stock = Stock.unscoped.find( _id)
+      asset= Asset.unscoped.where( assetable: stock).first
+      if asset && stock 
+        redirect_to root_path and return unless stock.access_token == params[:api_key]
+        Current.account = asset.account
+        @resources = stock.stock_item_transactions.joins(:event).where( "events.state='RECEIVE'").pluck(:name).uniq
+      else
+        head 401
+      end
     end
 
     #

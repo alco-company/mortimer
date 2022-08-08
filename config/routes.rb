@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :employees
     resources :stocks do
       member do
+        get :pallets
         get :heartbeat
       end
       resources :stock_item_transactions
@@ -76,6 +77,7 @@ Rails.application.routes.draw do
       get :re_stock
       put :inventory
     end
+
     resources :stock_locations, concerns: [:cloneable, :modalable] 
     
     resources :stocked_products, concerns: :modalable
@@ -85,6 +87,8 @@ Rails.application.routes.draw do
         resources :stock_item_transactions
       end
     end
+
+    resources :stock_items
 
     resources :stock_item_transactions, concerns: [:cloneable, :modalable] 
     
