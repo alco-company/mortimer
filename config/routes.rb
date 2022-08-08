@@ -58,26 +58,23 @@ Rails.application.routes.draw do
   end
   
 
-  resources :stock_item_transactions
-
+  
   resources :stock_items, concerns:  [:cloneable, :modalable, :exportable] do
     resources :stock_item_transactions
   end
   
-  resources :stocked_products
-
   resources :stocked_products, concerns: [:cloneable, :modalable] do
     resources :stock_items, concerns: [:cloneable, :modalable] 
     resources :stock_item_transactions, concerns: [:cloneable, :modalable]
   end
-
-
+  
+  
   resources :stocks, concerns: [:cloneable, :modalable, :selectable] do
     member do
       get :re_stock
       put :inventory
     end
-
+    
     resources :stock_locations, concerns: [:cloneable, :modalable] 
     
     resources :stocked_products, concerns: :modalable
@@ -87,9 +84,9 @@ Rails.application.routes.draw do
         resources :stock_item_transactions
       end
     end
-
+    
     resources :stock_items
-
+    
     resources :stock_item_transactions, concerns: [:cloneable, :modalable] 
     
   end
@@ -100,17 +97,20 @@ Rails.application.routes.draw do
       resources :stock_item_transactions
     end
   end
-
-
+  
+  
   resources :suppliers, concerns: [:cloneable, :modalable, :selectable] do
     resources :products
   end
-
+  
   # resources :events
   resources :employees, concerns: [:cloneable, :modalable, :exportable] do
     resources :tasks, concerns: [:cloneable, :modalable]
   end
-
+  
+  
+  resources :stock_item_transactions, concerns: [:cloneable, :modalable]
+  resources :stocked_products
   resources :tasks, concerns: [:cloneable, :modalable]
   resources :teams, concerns: [:cloneable, :modalable]
   resources :roles, concerns: [:cloneable, :modalable, :selectable]
