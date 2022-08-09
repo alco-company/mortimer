@@ -4,7 +4,7 @@ class Asset < AbstractResource
   belongs_to :account, inverse_of: :assets
   belongs_to :calendar, optional: true
 
-  delegated_type :assetable, types: %w[ Employee Product Stock StockLocation PunchClock ], dependent: :destroy
+  delegated_type :assetable, types: %w[ Pupil Employee Product Stock StockLocation PunchClock ], dependent: :destroy
   accepts_nested_attributes_for :assetable
 
   before_create :create_calendar_if_missing

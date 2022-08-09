@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @pupil %>
+
+<div>
+  <%= link_to "Edit this pupil", edit_pupil_path(@pupil) %> |
+  <%= link_to "Back to pupils", pupils_path %>
+
+  <%= button_to "Destroy this pupil", @pupil, method: :delete %>
+</div>

@@ -68,15 +68,29 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 * use github actions (or gitlab equivalent) to do automagic deploys on git push to staging/production branches
 
-! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying
+! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying - or better - just run 'depstage'
 ## DONE
 
+
+### 2022-08-09
+
+06:40 started - still having this bad tooth ache
+
+* pos/employee
+* pupil
 
 ### 2022-08-08
 
 06:45 started - with a bad tooth ache
 
+* regression fix
+* allow POS to load all pallets in stock for validation
+* refactorings for POS
+* run jobs in debug mode
 * depstaging POS
+* deviate from events controller on new_resource
+* allow for create of teams
+* depstage
 
 ### 2022-08-03
 

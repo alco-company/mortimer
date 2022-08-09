@@ -46,7 +46,6 @@ Rails.application.routes.draw do
   
   
   # resources ----
-  
   resources :profiles
   resources :time_zones, concerns: [:selectable ]
   
@@ -56,9 +55,7 @@ Rails.application.routes.draw do
     resources :stock_item_transactions
     resources :stocked_products, concerns: :modalable
   end
-  
-
-  
+    
   resources :stock_items, concerns:  [:cloneable, :modalable, :exportable] do
     resources :stock_item_transactions
   end
@@ -67,7 +64,6 @@ Rails.application.routes.draw do
     resources :stock_items, concerns: [:cloneable, :modalable] 
     resources :stock_item_transactions, concerns: [:cloneable, :modalable]
   end
-  
   
   resources :stocks, concerns: [:cloneable, :modalable, :selectable] do
     member do
@@ -106,9 +102,11 @@ Rails.application.routes.draw do
   # resources :events
   resources :employees, concerns: [:cloneable, :modalable, :exportable] do
     resources :tasks, concerns: [:cloneable, :modalable]
+    resources :pupils, concerns: [:cloneable, :modalable]
   end
   
   
+  resources :pupils, concerns: [:cloneable, :modalable]
   resources :stock_item_transactions, concerns: [:cloneable, :modalable]
   resources :stocked_products
   resources :tasks, concerns: [:cloneable, :modalable]

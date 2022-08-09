@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_06_064508) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_09_130738) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -118,6 +118,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_06_064508) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "employees_pupils", id: false, force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.bigint "pupil_id", null: false
+    t.index ["employee_id", "pupil_id"], name: "index_employees_pupils_on_employee_id_and_pupil_id"
+    t.index ["pupil_id", "employee_id"], name: "index_employees_pupils_on_pupil_id_and_employee_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "eventable_type", null: false
@@ -179,6 +186,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_06_064508) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "pupils", force: :cascade do |t|
+    t.integer "time_spent_minutes"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "roleables", force: :cascade do |t|
@@ -297,6 +311,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_06_064508) do
     t.boolean "full_day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "started_at"
+    t.datetime "ended_at"
   end
 
   create_table "teams", force: :cascade do |t|
