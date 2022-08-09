@@ -11,6 +11,10 @@ class Assignment < AbstractResource
 
   accepts_nested_attributes_for :assignable
 
+  def self.default_scope
+    where(deleted_at: nil)
+  end
+
   #
   # used by clone_from method on abstract_resource
   # to exclude has_many associations which should not be cloned

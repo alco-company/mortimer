@@ -3,6 +3,7 @@ module Pos
 
     layout :find_layout
     skip_before_action :current_user, only: :show
+    skip_before_action :breadcrumbs
     skip_before_action :current_account, only: :show
     skip_before_action :authenticate_user!, only: :show
 
@@ -36,7 +37,7 @@ module Pos
     end
 
     def resource
-      @resource = (_id.nil? ? new_resource : Employee.find(_id).asset )
+      @resource ||= (_id.nil? ? new_resource : Asset.unscoped.where( assetable: Employee.unscoped.find(_id)).first )
     end
 
     def resource_class
@@ -71,6 +72,7 @@ module Pos
       end
 
       def token_approved
+        Current.account = resource.account
         resource.assetable.access_token == params[:api_key]
       end
   

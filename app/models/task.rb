@@ -12,7 +12,6 @@ class Task  < AbstractResource
   include Eventable
 
   validates :duration, comparison: { greater_than: 100 }
-  # has_many :assignments, through: :event
 
   #
   # default_scope returns all posts that have not been marked for deletion yet
