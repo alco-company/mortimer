@@ -3,7 +3,7 @@
       id: resource_form, 
       data: { form_sleeve_target: 'form' }, 
       class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
-
+ 
   <%= form.fields_for :participantable do |participant_form| %>
 
     <%= form.hidden_field :account_id, value: current_account.id %>
