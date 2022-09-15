@@ -46,6 +46,9 @@ application.register("search", SearchController)
 import StockPosController from "./stock_pos_controller.js"
 application.register("stock-pos", StockPosController)
 
+import EmployeePosController from "./employee_pos_controller.js"
+application.register("employee-pos", EmployeePosController)
+
 import SwitchboardController from "./switchboard_controller.js"
 application.register("switchboard", SwitchboardController)
 

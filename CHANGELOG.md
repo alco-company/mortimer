@@ -11,6 +11,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## TODO 
 
+- start [using BabySqueel](https://github.com/rzane/baby_squeel)
 - make entire system 'loggable' using [Fluentd et al](https://docs.fluentd.org/how-to-guides/free-alternative-to-splunk-by-fluentd)
 - job offering portal, application, interview, assessment, background check 
 - signature like https://www.hellosign.com/products/api
@@ -37,6 +38,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 
 * radio_field
+* use Trilogy gem instead of mysql2
 * TODO: use has_secure_token to allow 'user-less' users access without logging in!
 * steps_field - like when you want the user to first finish typing in [fieldset] and then continue to the next [fieldset]
 * write some serious tests for people, partners, participants, events, 
@@ -71,6 +73,16 @@ In the REFERENCES you will find a lot of people, resources, etc
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying - or better - just run 'depstage'
 ## DONE
 
+
+### 2022-09-05
+
+07:10 another beautiful morning! Now we've slept on the porch for almost 1 month!
+
+### 2022-08-30
+
+07:10 slept ok - but my entire body still aches! Been going on for almost 14 days now! On and off - some days with fever, others days just tired as an entire care center!
+
+* 
 
 ### 2022-08-09
 

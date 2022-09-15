@@ -31,6 +31,8 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * [Sidekiq and Redis example](https://www.digitalocean.com/community/tutorials/how-to-add-sidekiq-and-redis-to-a-ruby-on-rails-application)
 * [A Goldchest of Rails tips and tricks](https://til.hashrocket.com/rails)
 * use [this recipe](https://levelup.gitconnected.com/how-to-add-file-upload-to-your-graphql-api-34d51e341f38) to add fileupload using GraphQL
+* [Use the Trilogy adapter for MySQL databases instead of mysql2](https://github.blog/2022-08-25-introducing-trilogy-a-new-database-adapter-for-ruby-on-rails/)
+* [Stateless Forms with the Attributes API - how to set order to say a filter function](https://blog.testdouble.com/posts/2022-08-30-stateless-forms-with-the-rails-attributes-api/)
 
 
 https://blog.alco.dk/2021/03/18/tailwind-hotwire-more/
