@@ -30,12 +30,15 @@ class Assignment < AbstractResource
     # methods supporting broadcasting 
     #
     def broadcast_create
+      self.assignable.broadcast_create if self.assignable
     end
 
     def broadcast_update 
+      self.assignable.broadcast_update if self.assignable
     end
 
     def broadcast_destroy
+      self.assignable.broadcast_destroy if self.assignable
     end
     #
     #

@@ -55,6 +55,8 @@ class Participant < AbstractResource
       target: "#{self.participantable_class.to_s.underscore}_list", 
       partial: self.participantable, 
       locals: {resource: self.participantable, user: Current.user }
+    self.participantable.broadcast_create if self.participantable
+
   end
   
   
@@ -70,6 +72,7 @@ class Participant < AbstractResource
     else 
       broadcast_remove_to self.participantable_type.underscore.pluralize, target: self.participantable
     end
+    self.participantable.broadcast_update if self.participantable
   end
 
 

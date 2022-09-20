@@ -51,6 +51,8 @@ class Event < AbstractResource
       target: "#{self.eventable_class.to_s.underscore}_list", 
       partial: self.eventable, 
       locals: { resource: self.eventable, user: Current.user }
+    self.eventable.broadcast_create if self.eventable
+
   end
   
   
@@ -66,6 +68,7 @@ class Event < AbstractResource
     else 
       broadcast_remove_to self.eventable_type.underscore.pluralize, target: self.eventable
     end
+    self.eventable.broadcast_update if self.eventable
   end
 
 

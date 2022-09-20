@@ -27,7 +27,8 @@ class Asset < AbstractResource
       target: "#{self.assetable_class.to_s.underscore}_list", 
       partial: self.assetable, 
       locals: { resource: self.assetable, user: Current.user }
-  end
+    self.assetable.broadcast_create if self.assetable
+    end
   
   
   #
@@ -42,7 +43,7 @@ class Asset < AbstractResource
     else 
       broadcast_remove_to self.assetable_type.underscore.pluralize, target: self.assetable
     end
-    self.assetable.broadcast_update if self.assetable
+    self.assetable.broadcast_update if self.assetable 
   end
 
 
