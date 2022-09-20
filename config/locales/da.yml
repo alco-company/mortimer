@@ -607,5 +607,6 @@ da:
       long: "%A d. %e. %B %Y, %H.%M"
       short: "%e. %b %Y, %H.%M"
       date: "%d/%m/%Y"
+      time_day_date: "kl %H:%M, %A den %d. %B, %Y"
     pm: ''
 

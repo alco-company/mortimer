@@ -74,6 +74,26 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-09-20
+
+07:15 at my desk after a good nights sleep
+
+08:30 cont' on buttons and real time update of pupils
+
+
+### 2022-09-19
+
+07:30 ready in the Office
+
+11:15 started on buttons on the employee POS
+
+### 2022-09-16
+
+05:35 back from holidays in Spain - Madrid and Santa Pola
+
+09:30 meeting with Sindico
+15:30 starting to push changes to staging - issues with deployment: RUBYGEMS_ACTIVATION_MONITOR - and just above the ## DONE it says: always run dokku repo:purge-cache... which is what was wrong!
+
 ### 2022-09-05
 
 07:10 another beautiful morning! Now we've slept on the porch for almost 1 month!

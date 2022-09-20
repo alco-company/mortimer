@@ -441,6 +441,14 @@ Done in 89ms.
 ✨  Done in 0.52s.
 √ greybox % 
 
+- - - 
+
+Suddenly an issue with Ruby 3.1.2 arises on Docker4 - so trying to downgrade to 3.0.1 which works in other containers
+which then spoils the installed version of pg
+
+% gem install pg -v '1.2.3' -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/latest/bin/pg_config
+
+Basically this all came down to `ALWAYS PURGE CACHE ON THE DOKKU`
 
 
 ## Configuration
