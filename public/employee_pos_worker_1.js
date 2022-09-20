@@ -205,24 +205,24 @@ function say(obj){
 // then start sending data
 //
 onmessage = function(event) {
-  switch(true){
-    case event.data.hasOwnProperty('url'):                 urlUrl = event.data['url']
-    case event.data.hasOwnProperty('method'):              urlMethod = event.data['method'] 
-    case event.data.hasOwnProperty('frequency'):           timerTimeout = Number( event.data["frequency"] );
-    case event.data.hasOwnProperty('headers'):             urlHeaders = event.data['headers']; urlHeaders = JSON.parse(urlHeaders);
-    case event.data.hasOwnProperty('csrf'):                csrfToken = event.data['csrf']; urlHeaders["X-CSRF-Token"]=csrfToken;
-    case event.data.hasOwnProperty('api_key'):             apiKey = event.data["api_key"] 
-    case event.data.hasOwnProperty('heartbeat_frequency'): heartbeatTimerTimeout = Number( event.data["heartbeat_frequency"] ); 
-    case event.data.hasOwnProperty('heartbeat_url'):       heartbeatUrl = event.data["heartbeat_url"]; heartbeat();
-    case event.data.hasOwnProperty("employeeid"):          employeeId = event.data['employeeid']; console.log(employeeId);
-    case event.data.hasOwnProperty('cmd'):                 processCmd(event); break;
-    case event.data.hasOwnProperty('data'):                processData(event); break;
-    case event.data.hasOwnProperty("link_down"):           postMessage( {link_down: true} ); break;
-    case event.data.hasOwnProperty("link_up"):             postMessage( {link_up: true} ); break;
-    case event.data.hasOwnProperty("reload"):              postMessage( {reload: true} ); break;
-    case event.data.hasOwnProperty("loadondone"):          loadOnDone = true; break;
-    case event.data.hasOwnProperty("version"):             version = event.data['version']; break;
-  }
+  // switch(true){
+  //   case event.data.hasOwnProperty('url'):                 urlUrl = event.data['url'];
+  //   case event.data.hasOwnProperty('method'):              urlMethod = event.data['method']; 
+  //   case event.data.hasOwnProperty('frequency'):           timerTimeout = Number( event.data["frequency"] );
+  //   case event.data.hasOwnProperty('headers'):             console.log(`headers: ${event.data['headers']}`); //urlHeaders = event.data['headers']; urlHeaders = JSON.parse(urlHeaders);
+  //   case event.data.hasOwnProperty('csrf'):                csrfToken = event.data['csrf']; urlHeaders["X-CSRF-Token"]=csrfToken;
+  //   case event.data.hasOwnProperty('api_key'):             apiKey = event.data["api_key"]; 
+  //   case event.data.hasOwnProperty('heartbeat_frequency'): heartbeatTimerTimeout = Number( event.data["heartbeat_frequency"] ); 
+  //   case event.data.hasOwnProperty('heartbeat_url'):       heartbeatUrl = event.data["heartbeat_url"]; heartbeat();
+  //   case event.data.hasOwnProperty("employeeid"):          employeeId = event.data['employeeid']; console.log(employeeId);
+  //   case event.data.hasOwnProperty('cmd'):                 processCmd(event); break;
+  //   case event.data.hasOwnProperty('data'):                processData(event); break;
+  //   case event.data.hasOwnProperty("link_down"):           postMessage( {link_down: true} ); break;
+  //   case event.data.hasOwnProperty("link_up"):             postMessage( {link_up: true} ); break;
+  //   case event.data.hasOwnProperty("reload"):              postMessage( {reload: true} ); break;
+  //   case event.data.hasOwnProperty("loadondone"):          loadOnDone = true; break;
+  //   case event.data.hasOwnProperty("version"):             version = event.data['version']; break;
+  // }
   // console.log(`this is the headers: ${say(urlHeaders)}`)
   
 }
