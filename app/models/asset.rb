@@ -42,6 +42,7 @@ class Asset < AbstractResource
     else 
       broadcast_remove_to self.assetable_type.underscore.pluralize, target: self.assetable
     end
+    self.assetable.broadcast_update if self.assetable
   end
 
 

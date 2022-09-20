@@ -7,6 +7,7 @@ class Employee < AbstractResource
   accepts_nested_attributes_for :pupils, allow_destroy: true
 
   validates :pin_code, uniqueness: true
+
   
   #
   # default_scope returns all posts that have not been marked for deletion yet
@@ -28,6 +29,13 @@ class Employee < AbstractResource
   #
   def excluded_associations_from_cloning
     []
+  end
+
+  def broadcast_update
+    broadcast_replace_later_to "employee_#{self.asset.id}_pupils", 
+        partial: "employees/employee_pupils", 
+        target: "pupils", 
+        locals: { resource: self.asset, user: Current.user }
   end
 
 end
