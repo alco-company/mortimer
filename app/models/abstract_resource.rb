@@ -79,7 +79,6 @@ class AbstractResource < ApplicationRecord
     raise "implement name method on the #{self.class} model"
   end
 
-  private
 
   #
   # methods supporting broadcasting
@@ -106,4 +105,7 @@ class AbstractResource < ApplicationRecord
       partial: self, 
       locals: { resource: self, user: Current.user } }
   end
+
+  private
+
 end

@@ -17,20 +17,21 @@ class StockItemTransaction  < AbstractResource
     StockItemTransaction.all.joins(:event)
   end
   
+  
+  # 
+  # methods supporting broadcasting 
+  #
+  def broadcast_create
+    broadcast_prepend_later_to model_name.plural, 
+    target: "#{self.class.to_s.underscore}_list", 
+    partial: self, 
+    locals: { resource: self, user: Current.user }
+    broadcast_prepend_later_to "pos_stock_item_transactions", 
+    target: "pos_stock_item_transaction_list", 
+    partial: "pos/stock_item_transactions/stock_item_transaction", 
+    locals: { resource: self, user: Current.user }
+  end
+  
   private 
-
-    # 
-    # methods supporting broadcasting 
-    #
-    def broadcast_create
-      broadcast_prepend_later_to model_name.plural, 
-        target: "#{self.class.to_s.underscore}_list", 
-        partial: self, 
-        locals: { resource: self, user: Current.user }
-      broadcast_prepend_later_to "pos_stock_item_transactions", 
-        target: "pos_stock_item_transaction_list", 
-        partial: "pos/stock_item_transactions/stock_item_transaction", 
-        locals: { resource: self, user: Current.user }
-    end
 
 end
