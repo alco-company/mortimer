@@ -23,7 +23,8 @@ export default class SwitchboardController extends Controller {
   }
 
   newForm(e){
-    this.element.formSleeve.toggle()
+    this.toggleFormSleeve()
+    // this.element.formSleeve.toggle()
     // window.dispatchEvent( new CustomEvent("speicherMessage", { detail: { message: 'new form', value: e.params.url }}) )
   }
 
