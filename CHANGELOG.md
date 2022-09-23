@@ -74,6 +74,25 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-09-23
+
+07:45 at my desk with a hurting neck
+08:15 cont' with prepairing for meet monday
+10:30 use toggleFormSleeve
+11:20 move 'private'
+13:40 set new button right for stock_locations on stock
+14:10 catch bad resource_form return
+
+
+
+### 2022-09-22
+
+08:00 meet at Vindø Telgværk, Randers Tegl Hobro
+10:25 at my desk after a somewhat terrible meet with Klaus at 
+14:30 moving on with testing for meet monday with Nordthy
+
+21-22:45 watched Denmark lose 1-2 to Croatia in Zagreb
+
 ### 2022-09-20
 
 07:15 at my desk after a good nights sleep

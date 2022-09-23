@@ -1,5 +1,8 @@
 class StockItemTransactionService < EventService
     
+  #
+  # TODO: create a logfile where all transactions are listed - and possibly can be edited and rerun
+  #
   def create_pos_transaction params
     parm=params["stock_item_transaction"]
     s = Stock.unscoped.find(params["stock_id"])
@@ -52,7 +55,7 @@ class StockItemTransactionService < EventService
           sit = sit.eventable  
           si = StockItemService.new.subtract_quantity( s, sit, parm)
         end
-        create_transaction s, sit.stock_location, sit.stocked_product, si, parm, sit.quantity, sit.unit
+        create_transaction s, sit.stock_location, sit.stocked_product, si, parm, sit.quantity, sit.unit if s && sit && si
       rescue RuntimeError => err
         Rails.logger.info "[stock_item_transaction] create_subtracting_transaction: (#{err})"
         raise ActiveRecord::Rollback
@@ -64,7 +67,7 @@ class StockItemTransactionService < EventService
     StockItemTransaction.transaction do
       begin
         st = Event.unscoped.where( name: parm["sscs"] ).last.eventable
-        self.create_transaction s, st.stock_location, st.stocked_product, si, parm
+        self.create_transaction s, sit.stock_location, sit.stocked_product, si, parm, parm["nbrcont"], parm["unit"] if s && sit && si
       rescue => error
         Rails.logger.info "[stock_item_transaction] create_inventory_transaction: (#{error})"
       end

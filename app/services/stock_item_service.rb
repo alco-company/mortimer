@@ -18,13 +18,16 @@ class StockItemService < AssetService
     end
   end
 
-  def subtract_quantity( s, st, parm)
-    sp = st.stocked_product
-    sp.update_attribute :quantity, (sp.quantity - st.quantity) unless sp.id.nil?
-    sl = st.stock_location
+  #
+  # params stock, stock_item_transaction, params
+  def subtract_quantity( s, sit, parm)
+    return nil unless sit
+    sp = sit.stocked_product
+    sp.update_attribute :quantity, (sp.quantity - sit.quantity) unless sp.id.nil?
+    sl = sit.stock_location
     si = StockItem.find_by( stocked_product_id: sp.id, stock_location: sl.id, batch_number: parm["batchnbr"])
     if si 
-      si.update_attribute :quantity, (si.quantity - st.quantity)
+      si.update_attribute :quantity, (si.quantity - sit.quantity)
     else
       # no StockItem - must be an error so we create one with the quantity
       unless s.id.blank? || sp.id.blank? || sl.id.blank?
