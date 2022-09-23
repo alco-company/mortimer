@@ -1,4 +1,8 @@
-<%= form_with model: resource, url: form_stock_location_url(resource), id: resource_form, data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
+<%= form_with model: resource, 
+  url: form_stock_location_url(resource), 
+  id: resource_form, 
+  data: { form_sleeve_target: 'form' }, 
+  class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
   <%= form.fields_for :assetable do |asset_form| %>
     <%= form.hidden_field :account_id, value: current_account.id %>
     <%= asset_form.hidden_field :stock_id, value: resource.assetable.stock_id %>

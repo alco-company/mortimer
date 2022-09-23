@@ -126,6 +126,15 @@ module ResourceControl
   # you can override this to have a custom form - eg when forms clash!
   #
   def resource_form
+    #
+    # this is a terrible hack :( 
+    # due to the fact that the <form id="#{resource_form}"> does not change on
+    # show pages like /stocks/1 with tabs angling for new resources like /stocks/1/stock_locations/new
+    #
+    # TODO: make show pages with tabs change the 'resource_form' id to the correct one
+    #
+    return "stock_form" if request.url =~ /stocks.*stock_locations/
+
     "%s_form" % resource_class.to_s.underscore
   end
 
