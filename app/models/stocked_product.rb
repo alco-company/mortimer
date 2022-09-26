@@ -27,7 +27,7 @@ class StockedProduct < AbstractResource
   def quantity
     st = stock_item_transactions.pluck( :state, :quantity).compact
     qt = 0
-    st.each{ |s,q| case s when 'RECEIVE'; qt+=q when 'SHIP'; qt-=(q||0) end } if st.any?
+    st.each{ |s,q| case s when 'RECEIVE'; qt+=(q||0) when 'SHIP'; qt-=(q||0) end } if st.any?
     qt
   end
   
