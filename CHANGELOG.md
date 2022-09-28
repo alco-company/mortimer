@@ -74,6 +74,12 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-09-28
+
+08:05 at my desk in fairly ok condition
+12:15 adding system_parameter
+
+
 ### 2022-09-23
 
 07:45 at my desk with a hurting neck

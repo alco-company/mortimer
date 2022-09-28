@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_09_130738) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_28_103502) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -300,6 +300,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_09_130738) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "system_parameters", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "name"
+    t.string "system_key"
+    t.integer "position"
+    t.string "value"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_system_parameters_on_account_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.integer "duration"
     t.datetime "planned_start_at"
@@ -374,6 +386,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_09_130738) do
   add_foreign_key "stocked_products", "products"
   add_foreign_key "stocked_products", "stock_locations"
   add_foreign_key "stocked_products", "stocks"
+  add_foreign_key "system_parameters", "accounts"
   add_foreign_key "teams", "tasks"
   add_foreign_key "users", "accounts"
 end

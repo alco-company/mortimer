@@ -48,7 +48,8 @@ Rails.application.routes.draw do
   # resources ----
   resources :profiles
   resources :time_zones, concerns: [:selectable ]
-  
+  resources :system_parameters, concerns: [:cloneable, :modalable, :selectable]
+
   resources :products, concerns: [:cloneable, :modalable, :selectable] do
     resources :stock_locations
     resources :stock_items
