@@ -74,11 +74,18 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## DONE
 
 
+### 2022-09-29
+
+09:30 in DGB with too little sleep
+11:00 start testing asset_work_transaction
+13:00 added asset_workday_sum
+14:20 added punch_clock
+
 ### 2022-09-28
 
 08:05 at my desk in fairly ok condition
 12:15 adding system_parameter
-
+17:30 adding asset_work_transaction
 
 ### 2022-09-23
 

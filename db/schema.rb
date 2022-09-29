@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_28_103502) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_28_153856) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,35 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_103502) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "asset_work_transactions", force: :cascade do |t|
+    t.bigint "asset_id", null: false
+    t.bigint "asset_workday_sum_id"
+    t.bigint "punch_asset_id"
+    t.string "punch_asset_ip_addr"
+    t.datetime "punched_at"
+    t.integer "extra_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_asset_work_transactions_on_asset_id"
+  end
+
+  create_table "asset_workday_sums", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "asset_id", null: false
+    t.date "work_date"
+    t.integer "work_minutes"
+    t.integer "break_minutes"
+    t.integer "ot1_minutes"
+    t.integer "ot2_minutes"
+    t.integer "sick_minutes"
+    t.integer "free_minutes"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_asset_workday_sums_on_account_id"
+    t.index ["asset_id"], name: "index_asset_workday_sums_on_asset_id"
   end
 
   create_table "assets", force: :cascade do |t|
@@ -364,6 +393,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_103502) do
   add_foreign_key "accounts", "dashboards"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "asset_work_transactions", "assets"
+  add_foreign_key "asset_workday_sums", "accounts"
+  add_foreign_key "asset_workday_sums", "assets"
   add_foreign_key "assets", "accounts"
   add_foreign_key "assets", "calendars"
   add_foreign_key "assignments", "events"

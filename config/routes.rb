@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :punch_clocks
   resources :asset_workday_sums
   
   require 'sidekiq/web'
