@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :asset_workday_sums
   
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'

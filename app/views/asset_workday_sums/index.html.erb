@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Asset workday sums</h1>
+
+<div id="asset_workday_sums">
+  <% @asset_workday_sums.each do |asset_workday_sum| %>
+    <%= render asset_workday_sum %>
+    <p>
+      <%= link_to "Show this asset workday sum", asset_workday_sum %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New asset workday sum", new_asset_workday_sum_path %>

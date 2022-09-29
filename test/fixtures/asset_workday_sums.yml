@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account: one
+  asset: one
+  work_date: 2022-09-28
+  work_minutes: 1
+  break_minutes: 1
+  ot1_minutes: 1
+  ot2_minutes: 1
+  sick_minutes: 1
+  free_minutes: 1
+  deleted_at: 2022-09-28 16:48:43
+
+two:
+  account: two
+  asset: two
+  work_date: 2022-09-28
+  work_minutes: 1
+  break_minutes: 1
+  ot1_minutes: 1
+  ot2_minutes: 1
+  sick_minutes: 1
+  free_minutes: 1
+  deleted_at: 2022-09-28 16:48:43
