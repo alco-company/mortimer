@@ -78,6 +78,22 @@ In the REFERENCES you will find a lot of people, resources, etc
 - notification when adding new products, suppliers, etc via POS
 ## DONE
 
+### 2022-10-05
+
+07:05 starting well rested
+08:00 answering/sending emails
+08:30 cont' testing asset_workday_sums
+13:15 fixing open form edge case
+15:45 depstaging
+### 2022-10-04
+
+06:40 woke rather early
+08:15 delivered PC 
+10:10 got my 3rd jab - COVID19
+11:05 arrived at DGB
+11:15 testing asset_workday_sums 
+19:05 done
+
 ### 2022-10-03
 
 08:15 in DGB after a tough weekend in Valby
