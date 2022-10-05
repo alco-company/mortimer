@@ -16,6 +16,7 @@ export default class FormSleeveController extends Controller {
         .join('')
         .replace(/^\w/, c => c.toLowerCase())
       })(this.identifier)] = this;
+    
   }
 
   handleSuccess({ detail: { success } }) {  
@@ -29,22 +30,18 @@ export default class FormSleeveController extends Controller {
         },
         bubbles: true
       }))
+      
+      document.getElementById('form_slideover').querySelectorAll('form')[0].id = document.getElementById('form_slideover').dataset.current_form_slideover || "dashboard_form"
     }
   }
 
-  // openForm(){
-  //   this._show()
-  //   window.dispatchEvent( new CustomEvent("speicherMessage", {
-  //     detail: {
-  //       message: 'focus form'
-  //     }
-  //   })); 
-  // }
-
   cancel(){
     this.clearErrors()
-    if (this.hasformTarget)
+    document.getElementById('form_slideover').querySelectorAll('form')[0].id = document.getElementById('form_slideover').dataset.current_form_slideover
+    if (this.hasFormTarget){
+      document.getElementById("form-sleeve").classList.add("hidden")
       this.formTarget.reset()
+    }
     window.dispatchEvent( new CustomEvent("speicherMessage", {
       detail: {
         message: 'focus list'
@@ -81,6 +78,14 @@ export default class FormSleeveController extends Controller {
       this._hide()
     }
     if(e.detail.message==='open form'){
+      this._show()
+      window.dispatchEvent( new CustomEvent("speicherMessage", {
+        detail: {
+          message: 'focus form field'
+        }
+      }));  
+    }
+    if(e.detail.message==='open list form'){
       this._show()
       window.dispatchEvent( new CustomEvent("speicherMessage", {
         detail: {

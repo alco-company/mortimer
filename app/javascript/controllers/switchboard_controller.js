@@ -44,7 +44,7 @@ export default class SwitchboardController extends Controller {
   //     .replace(/^\w/, c => c.toLowerCase())
   //   })(this.identifier)] = this;
 
-  // not used
+  // 
   toggleFormSleeve() {
     // this.element.formSleeve.toggle()
     window.dispatchEvent( new CustomEvent("speicherMessage", {
@@ -52,7 +52,16 @@ export default class SwitchboardController extends Controller {
         message: 'open form'
       }
     }));  
-}
+  }
+
+  toggleListFormSleeve() {
+    // this.element.formSleeve.toggle()
+    window.dispatchEvent( new CustomEvent("speicherMessage", {
+      detail: {
+        message: 'open list form'
+      }
+    }));  
+  }
 
   //
   // the most important job of the switchBoard controller is to

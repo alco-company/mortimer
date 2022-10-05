@@ -12,6 +12,8 @@ export default class ListController extends Controller {
     this.cursorPositionValue = 1
     this.listAwaitingFocus = false
     this.formAwaitingFocus = false
+    document.getElementById('form_slideover').dataset.current_form_slideover=document.getElementById('form_slideover').querySelectorAll('form')[0].id
+    console.log( 'focusing ', document.getElementById('form_slideover').dataset.current_form_slideover )
   }
 
   connect() {
@@ -40,9 +42,16 @@ export default class ListController extends Controller {
     } catch( err ){
       this.element.querySelectorAll("#toggle-all-rows")[0].focus()
     }
-    console.log('focusing')
+    document.getElementById('form_slideover').querySelectorAll('form')[0].id = document.getElementById('form_slideover').dataset.current_form_slideover
+
+    console.log('focusing -')
     this.listAwaitingFocus = false
   }
+
+
+  // document.getElementById('form_slideover').dataset.current_form_slideover=document.getElementById('form_slideover').querySelectorAll('form')[0].id
+  // console.log('list form: ', document.getElementById('form_slideover').dataset.current_form_slideover)
+
 
   // we got the ok from authorization - now open the form
   focusForm(){

@@ -30,10 +30,10 @@ export default class UserProfileComponentController extends Controller {
   toggleUserProfile(e) {
     // e.preventDefault()
     //dirty hack !!!
-    document.getElementById('form_slideover').querySelectorAll('form')[0].id="profile_form"
     if ( this.userprofileTarget.classList.contains('hidden') ) {
       enter(this.userprofileTarget)
     } else {
+      document.getElementById('form_slideover').querySelectorAll('form')[0].id="profile_form"
       leave(this.userprofileTarget)
     }
   }
@@ -42,6 +42,10 @@ export default class UserProfileComponentController extends Controller {
     console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
 
     if(e.detail.message==='toggle user profile'){
+      this.toggleUserProfile()
+    }
+
+    if(e.detail.message==='focus list'){
       this.toggleUserProfile()
     }
   }
