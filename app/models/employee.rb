@@ -1,13 +1,20 @@
+#
+#
+# f_days_acc - accumulated number of holi-days (2,08 days pr month)
+# ff_days - number of 'feriefridage' / 'omsorgsdage' - same same
+# 
 class Employee < AbstractResource
   include Assetable, Assignable
 
   has_secure_token :access_token
   has_one_attached :mug_shot
   has_and_belongs_to_many :pupils
+
   accepts_nested_attributes_for :pupils, allow_destroy: true
 
   validates :pin_code, uniqueness: true
 
+  delegate :asset_workday_sums, to: :asset
   
   #
   # default_scope returns all posts that have not been marked for deletion yet
@@ -15,6 +22,14 @@ class Employee < AbstractResource
   def self.default_scope
   #   where("assetable" deleted_at: nil)
     Employee.all.joins(:asset)
+  end
+
+  #
+  # implement on every model where search makes sense
+  # get's called from controller specific find_resources_queried
+  #
+  def self.search_by_model_fields lot, query
+    default_scope.where "assets.name ilike '%#{query}%' "
   end
 
   def signed_pupils=(ppls)

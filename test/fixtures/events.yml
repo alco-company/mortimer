@@ -26,3 +26,17 @@ two:
   ended_at: 2022-05-31 13:23:41
   minutes_spent: 1
   deleted_at: 
+
+asset_work_in:
+  account: one
+  eventable: in
+  eventable_type: AssetWorkTransaction
+  calendar: one
+  name: AWT
+  state: IN
+  position: 1
+  ancestry: 
+  started_at: 2022-05-31 13:23:41
+  ended_at: 2022-05-31 13:23:41
+  minutes_spent: 1
+  deleted_at: 

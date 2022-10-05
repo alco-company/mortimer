@@ -10,8 +10,10 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * Rails [David Heinemeier Hansson](https://basecamp.com/)
 * Tailwind [Adam Wathan](https://tailwindcss.com/)
 * Tailwind & Rails [David Teren](https://davidteren.medium.com/)
+* Running multiple Rails apps - with 'real' URLs [Lewis Buckley](https://world.hey.com/lewis/run-multiple-rails-apps-with-puma-dev-67b1c10f)
 * Progressier by [Kevin Basset](https://progressier.com/)
 * Rails Training [Chris Oliver](https://gorails.com/)
+* Better View Components by [Joel Drapper](https://github.com/joeldrapper/phlex)
 * Display Table Anti Hero [Colin Toh](https://colintoh.com/blog/display-table-anti-hero)
 * Simple authentication [Ira Herman](https://gist.github.com/iscott/4618dc0c85acb3daa5c26641d8be8d0d)
 * ice_cube [John Crepezzi](https://github.com/seejohnrun/ice_cube)
@@ -27,6 +29,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 
 ## Resources
 
+* [How to define work hours - wages, attendance, and more](https://www.danskindustri.dk/vi-radgiver-dig/personale/arbejdstid/)
 * [How To GraphQL](https://www.howtographql.com/)
 * [Sidekiq and Redis example](https://www.digitalocean.com/community/tutorials/how-to-add-sidekiq-and-redis-to-a-ruby-on-rails-application)
 * [A Goldchest of Rails tips and tricks](https://til.hashrocket.com/rails)

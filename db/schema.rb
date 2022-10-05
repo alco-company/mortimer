@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_28_153856) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_29_121243) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -215,6 +215,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_153856) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "punch_clocks", force: :cascade do |t|
+    t.string "location"
+    t.string "ip_addr"
+    t.datetime "last_punch_at"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pupils", force: :cascade do |t|

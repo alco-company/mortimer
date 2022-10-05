@@ -110,6 +110,18 @@ module ApplicationHelper
 
   end
 
+  def enumerate_hours(start, stop)
+    enumerate_datetime(start, stop, 1.hour)
+  end
+
+  def enumerate_days(start, stop)
+    enumerate_datetime(start, stop, 1.day)
+  end
+
+  def enumerate_datetime(start, stop, gap)
+    Enumerator.new { |y| loop { y.yield start; start += gap } }.take_while { |d| d < stop }
+  end
+
 
 
 end
