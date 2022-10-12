@@ -14,7 +14,10 @@ export default class EmployeePosController extends Controller {
     "sickButton"
   ]
   static values = {
-  }
+    url: String,            // where to do the lookup for data values
+    apikey: String,
+    employeeAssetId: String,
+}
 
   //
   // 1 Initialize/Connect
@@ -69,26 +72,95 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching in
   punch_in(e){
+    this.startButtonTarget.classList.add("bg-green-400")
+    this.pauseButtonTarget.classList.remove("bg-green-400")
+    this.stopButtonTarget.classList.remove("bg-red-400")
+    this.sickButtonTarget.classList.remove("bg-yellow-400")
+
+    this.startButtonTarget.disabled = true
+    this.stopButtonTarget.disabled = false
+    this.pauseButtonTarget.disabled = false
+    this.sickButtonTarget.disabled = false
+
     const elems = document.querySelectorAll('#pupils td.bg-blue-100')
-    alert(`punch_in ${elems.length}`)
+    let pupils = {}
+    document.querySelectorAll('#pupils td.bg-blue-100').forEach( e => pupils[e.id]='on')
+    let data = { "asset_work_transaction": { 
+      "punched_at": new Date().toISOString(), 
+      "state": "IN", 
+      "punched_pupils": pupils,
+      }
+    }
+
+    this.postPunch( data )
+
   }
 
   // button to register employee punching out
   punch_out(e){
+    this.stopButtonTarget.classList.add("bg-red-400")
+    this.startButtonTarget.classList.remove("bg-green-400")
+    this.pauseButtonTarget.classList.remove("bg-green-400")
+    this.sickButtonTarget.classList.remove("bg-yellow-400")
+        
+    this.startButtonTarget.disabled = false
+    this.stopButtonTarget.disabled = true
+    this.pauseButtonTarget.disabled = true
+    this.sickButtonTarget.disabled = true
+
     const elems = document.querySelectorAll('#pupils td.bg-blue-100')
-    alert(`punch_out ${elems.length}`)
+    elems.forEach( e => e.classList.remove("bg-blue-100"))
+    let data = { "asset_work_transaction": { 
+      "punched_at": new Date().toISOString(), 
+      "state": "OUT", 
+      }
+    }
+
+    this.postPunch( data )
   }
 
   // button to register employee punching pause/resume
   punch_pause_resume(e){
-    const elems = document.querySelectorAll('#pupils td.bg-blue-100')
-    alert(`punch_pause/resume ${elems.length}`)
+    this.pauseButtonTarget.classList.add("bg-green-400")
+    this.stopButtonTarget.classList.remove("bg-red-400")
+    this.startButtonTarget.classList.remove("bg-green-400")
+    this.sickButtonTarget.classList.remove("bg-yellow-400")
+        
+    this.startButtonTarget.disabled = false
+    this.stopButtonTarget.disabled = true
+    this.pauseButtonTarget.disabled = true
+    this.sickButtonTarget.disabled = true
+
+    let data = { "asset_work_transaction": { 
+      "punched_at": new Date().toISOString(), 
+      "state": 'BREAK', 
+      }
+    }
+
+    this.postPunch( data )
   }
   
   // button to register employee punching sick
   punch_sick(e){
+    this.sickButtonTarget.classList.add("bg-yellow-400")
+    this.pauseButtonTarget.classList.remove("bg-green-400")
+    this.stopButtonTarget.classList.remove("bg-red-400")
+    this.startButtonTarget.classList.remove("bg-green-400")
+        
+    this.sickButtonTarget.disabled = true
+    this.startButtonTarget.disabled = false
+    this.stopButtonTarget.disabled = true
+    this.pauseButtonTarget.disabled = true
+
     const elems = document.querySelectorAll('#pupils td.bg-blue-100')
-    alert(`punch_sick ${elems.length}`)
+    elems.forEach( e => e.classList.remove("bg-blue-100"))
+    let data = { "asset_work_transaction": { 
+      "punched_at": new Date().toISOString(), 
+      "state": "SICK", 
+      }
+    }
+
+    this.postPunch( data )
   }
 
   // -- input dependant functions
@@ -99,7 +171,6 @@ export default class EmployeePosController extends Controller {
   // process input - send good scans to the background worker
 
   // - process dependant function
-
 
 
   //
@@ -134,5 +205,71 @@ export default class EmployeePosController extends Controller {
     // console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
   }
 
+  // postPunch
+  // transmits the punch
+  // and possibly (if told so in the result) asks 
+  // the terminal to reload 
+  //
+  // on error it unshifts the data back on the queue
+  // 
+
+  // let urlMethod = "POST";
+  // let urlUrl = "";
+  // let csrfToken = null;
+  // let urlHeaders = "";
+  // let apiKey = "";
+
+  // { "asset_work_transaction"=> { 
+  //   "punched_at"=>"2022-09-29 12:05:12", 
+  //   "state"=>"OUT", 
+  //   "employee_id"=>"#{ @emp_one.id }", 
+  //   "punch_asset_id"=>"#{ @punch_asset.id }", 
+  //   "ip_addr"=>"10.4.3.170" 
+  //   }, 
+  //   "api_key"=>"[FILTERED]" 
+  // }
+
+  // url = `${urlUrl}?api_key=${apiKey}`
+  // post_data = {}
+  // data.forEach( (v,k) => post_data[k]=v ) 
+  // postPunch(url, urlMethod, urlHeaders, { asset_work_transaction: post_data }, data)
+
+  postPunch(data){
+    try{
+      const csrfToken = document.querySelector("[name='csrf-token']").content
+      let headers = { "X-CSRF-Token": csrfToken, "Content-Type": "application/json" }
+      let url = `${this.urlValue}?api_key=${this.apikeyValue}`
+
+      let options = {
+        method: 'POST',
+        // mode: 'no-cors',
+        // cache: 'no-cache',
+        // redirect: 'follow', 
+        // referrerPolicy: 'no-referrer',
+        // credentials: 'same-origin',
+        // responseKind: "json",
+        headers: headers,
+        body: JSON.stringify( data )
+      }
+    
+      fetch(url, options)
+      .then( response => {
+        switch(response.status){
+          case 200: console.log('done'); return true;
+          case '200': console.log('done - string'); return true;
+          case 201: window.location.reload(); return true; 
+          case '201': window.location.reload(); return true; 
+          case 301: console.log('bad api_key!'); return false;
+          default: return false; 
+        }
+        return true
+      } )
+      .catch( err => {
+        console.log(`postPunch error: ${err}`)
+      })
+    } catch (err) {
+      console.log( `postPunch response: ${err} ` ); return false;
+    }
+  }
 
 }

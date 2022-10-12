@@ -29,6 +29,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 
 ## Resources
 
+* [How to protect against hackers using CORS and CSRF](https://www.stackhawk.com/blog/rails-csrf-protection-guide/)
 * [How to define work hours - wages, attendance, and more](https://www.danskindustri.dk/vi-radgiver-dig/personale/arbejdstid/)
 * [How To GraphQL](https://www.howtographql.com/)
 * [Sidekiq and Redis example](https://www.digitalocean.com/community/tutorials/how-to-add-sidekiq-and-redis-to-a-ruby-on-rails-application)

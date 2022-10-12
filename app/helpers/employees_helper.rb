@@ -20,10 +20,10 @@ module EmployeesHelper
 
   def show_employee_attendance_state resource
     case resource.state 
-    when "in"; "Du er mødt (startet) #{ asset_state_time_updated resource }"
-    when "out"; "Du er mødt ud (stoppet) #{ asset_state_time_updated resource }"
-    when "pause"; "Du har været til pause siden #{ asset_state_time_updated resource }"
-    when "sick"; "Du meldte dig syg #{ asset_state_time_updated resource }"
+    when "IN"; "Du er mødt (startet) #{ asset_state_time_updated resource }"
+    when "OUT"; "Du er mødt ud (stoppet) #{ asset_state_time_updated resource }"
+    when "BREAK"; "Du har været til pause siden #{ asset_state_time_updated resource }"
+    when "SICK"; "Du meldte dig syg #{ asset_state_time_updated resource }"
     end
   end
 
@@ -33,6 +33,15 @@ module EmployeesHelper
 
   def random_bg_pos_emp
     image_tag "ka_#{rand(1..4)}.jpg", class: "h-32 w-full object-cover lg:h-48"
+  end
+
+  def display_public name
+    emp_parts = name.split " "
+    "%s %s" % [emp_parts.shift, emp_parts.map{|n| n.first}.join('.')]
+  end
+
+  def set_emp_bg_color_on_state state 
+    (state === 'IN' || state === 'BREAK') ? 'bg-green-200' : ''
   end
 
 end

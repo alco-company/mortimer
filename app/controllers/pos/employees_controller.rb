@@ -2,10 +2,10 @@ module Pos
   class EmployeesController < AssetsController
 
     layout :find_layout
-    skip_before_action :current_user, only: :show
+    skip_before_action :current_user, only: [:index, :show, :punch]
     skip_before_action :breadcrumbs
-    skip_before_action :current_account, only: :show
-    skip_before_action :authenticate_user!, only: :show
+    skip_before_action :current_account, only: [:index, :show, :punch]
+    skip_before_action :authenticate_user!, only: [:index, :show, :punch]
 
     def export
       if params[:filename]
@@ -44,8 +44,26 @@ module Pos
       @resource_class ||= Employee
     end
 
+    def index 
+      _id= params[:id]
+      resource 
+      redirect_to root_path and return unless token_approved
+      @resources = find_resources_queried {}
+      render layout: 'naked'
+    end
+    
     def show 
       redirect_to root_path and return unless token_approved
+    end
+    
+    def punch 
+      Rails.logger.info resource_params
+      head 301 and return unless token_approved
+      res1 = AssetWorkTransactionService.new.create_employee_punch_transaction( resource, resource_params )
+      if res1
+         res2 = PupilTransactionService.new.create_pupil_transaction( resource, resource_params )
+      end
+      head 200
     end
 
     private 
@@ -59,15 +77,17 @@ module Pos
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def resource_params
-        params[:asset][:assetable_attributes][:hired_at] = DateTime.parse params[:asset][:assetable_attributes][:hired_at]
-        params.require(:asset).permit(:assetable_type, :name, :account_id, assetable_attributes: [ :id, :hired_at ] )
+        params["asset_work_transaction"]["ip_addr"] = request.remote_ip
+        params["asset_work_transaction"]["employee_asset_id"] = resource.id
+        params["asset_work_transaction"]["punch_asset_id"] = resource.id # the user's own device
+        params.require(:asset_work_transaction).permit(:punched_at, :state, :ip_addr, :punch_asset_id, :employee_asset_id, punched_pupils: {} )
       end
 
       #
       # implement on every controller where search makes sense
       # geet's called from resource_control.rb 
       #
-      def find_resources_queried options
+      def find_resources_queried options={}
         Employee.search Employee.all, params[:q]
       end
 

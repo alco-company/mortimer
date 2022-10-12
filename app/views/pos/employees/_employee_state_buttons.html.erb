@@ -1,0 +1,48 @@
+<div id="employee_state_buttons" class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+  <button 
+    data-employee-pos-target="startButton" 
+    data-action="employee-pos#punch_in" 
+    type="button" 
+    <%= 'disabled' if resource.state.match /(IN)/ %>
+    class="inline-flex justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+    <span class="material-symbols-outlined">
+    login
+    </span>                  
+    <span>Start</span>
+  </button>
+  
+  <button 
+    data-employee-pos-target="pauseButton" 
+    data-action="employee-pos#punch_pause_resume" 
+    type="button" 
+    <%= 'disabled' if resource.state.match /(BREAK)|(OUT)|(SICK)/ %>
+    class="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+    <span class="material-symbols-outlined">
+    pause
+    </span>
+    <span>Pause</span>
+  </button>
+  <button 
+    data-employee-pos-target="stopButton" 
+    data-action="employee-pos#punch_out" 
+    type="button" 
+    <%= 'disabled' if resource.state.match /(BREAK)|(OUT)|(SICK)/ %>
+    class="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+    <span class="material-symbols-outlined">
+    logout
+    </span>
+    <span>Stop</span>
+  </button>
+  
+  <button 
+    data-employee-pos-target="sickButton" 
+    data-action="employee-pos#punch_sick" 
+    type="button" 
+    <%= 'disabled' if resource.state.match /(BREAK)|(SICK)/ %>
+    class="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+    <span class="material-symbols-outlined">
+    sick
+    </span>
+    <span>Syg!</span>
+  </button>
+</div>

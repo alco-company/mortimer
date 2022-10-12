@@ -48,7 +48,7 @@ class Employee < AbstractResource
 
   def broadcast_update
     broadcast_replace_later_to "employee_#{self.asset.id}_pupils", 
-        partial: "employees/employee_pupils", 
+        partial: "pos/employees/employee_pupils", 
         target: "pupils", 
         locals: { resource: self.asset, user: Current.user }
   end

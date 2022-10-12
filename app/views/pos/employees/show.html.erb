@@ -35,20 +35,24 @@
         <div id="work_status" class="bg-white overflow-hidden shadow sm:rounded-lg">
           <div class="px-4 py-5 sm:p-6 flex h-30 w-full ">
             <!-- Content goes here -->
-            <div class="relative grow">
-              <%= show_employee_attendance_state resource %>
-            </div>
+            <%= turbo_stream_from "employee_#{resource.id}_state"  %>
+            <%= turbo_frame_tag "employee_state" do %>
+              <%= render partial: "pos/employees/employee_state", locals: { resource: resource } %>
+            <% end %>
           </div>
         </div>
 
         <!-- This example requires Tailwind CSS v2.0+ -->
         <!-- Be sure to use this with a layout container that is full-width on mobile -->
         <div
-          data-controller="employee-pupil"   
           id="task_list" 
-          class="bg-white overflow-hidden shadow sm:rounded-lg">
+          class="bg-white overflow-hidden shadow sm:rounded-lg"
+          >
           <!-- This example requires Tailwind CSS v2.0+ -->
-          <div class="px-4 sm:px-6 lg:px-8">
+          <div 
+            data-controller="employee-pupil"
+            class="px-4 sm:px-6 lg:px-8"
+            >
             <div class="sm:flex sm:items-center">
               <div class="mt-5 sm:flex-auto">
                 <h1 class="text-xl font-semibold text-gray-900">Dine elever</h1>
@@ -63,7 +67,6 @@
               <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                   <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg mb-10">
-                    <%= turbo_stream_from "tasks"  %>
                     <table class="min-w-full divide-y divide-gray-300">
                       <thead class="bg-gray-50">
                         <tr>
@@ -78,7 +81,7 @@
                       </thead>
                       <%= turbo_stream_from "employee_#{resource.id}_pupils"  %>
                       <%= turbo_frame_tag "employee_#{resource.id}_pupils" do %>
-                        <%= render partial: "employees/employee_pupils", locals: { resource: resource } %>
+                        <%= render partial: "pos/employees/employee_pupils", locals: { resource: resource } %>
                       <% end %>
                     </table>
                   </div>
@@ -86,10 +89,7 @@
               </div>
             </div>
           </div>
-
-
         </div>
-
       </div>
 
 

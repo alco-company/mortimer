@@ -78,6 +78,10 @@ In the REFERENCES you will find a lot of people, resources, etc
 - notification when adding new products, suppliers, etc via POS
 ## DONE
 
+### 2022-10-12
+
+08:30 depstaging /pos/employees/:id
+
 ### 2022-10-05
 
 07:05 starting well rested
@@ -85,6 +89,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 08:30 cont' testing asset_workday_sums
 13:15 fixing open form edge case
 15:45 depstaging
+
 ### 2022-10-04
 
 06:40 woke rather early
