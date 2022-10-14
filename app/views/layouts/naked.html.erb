@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html class="h-full bg-white">
+  <head>
+    <title>S P E I C H E R</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= yield :head %>
+    <% if Rails.env.development? %>
+      <%= javascript_include_tag "hotwire-livereload", defer: true %>
+    <% end %>
+  </head>
+
+  <body 
+    id="switchboard" 
+    data-controller="switchboard"
+    class="h-full">
+    <div class="min-h-full bg-gradient-to-br from-amber-600 to-amber-800">
+      <%= turbo_stream_from Current.account, :account %>
+
+      <!-- Main part -->
+      <div class="flex flex-col flex-1">
+        <main class="flex-1">
+              <%= yield %>
+        </main>
+      </div>
+    </div>
+
+    <%= render partial: "shared/takiro", locals: {size: 'phone'} %>
+    <%= render partial: "shared/notifications" %>
+    <div id="unauthorized"></div>
+
+
+  </body>
+</html>
+
+
+

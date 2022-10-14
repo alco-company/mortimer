@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :punch_clocks
-  resources :asset_workday_sums
   
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
@@ -35,7 +33,11 @@ Rails.application.routes.draw do
   # POS ----
   
   scope module: :pos, path: 'pos', as: 'pos' do 
-    resources :employees
+    resources :employees do 
+      member do
+        post :punch
+      end
+    end
     resources :stocks do
       member do
         get :pallets
@@ -51,6 +53,9 @@ Rails.application.routes.draw do
   resources :profiles
   resources :time_zones, concerns: [:selectable ]
   resources :system_parameters, concerns: [:cloneable, :modalable, :selectable]
+
+  resources :punch_clocks
+  resources :asset_workday_sums
 
   resources :products, concerns: [:cloneable, :modalable, :selectable] do
     resources :stock_locations
@@ -105,7 +110,9 @@ Rails.application.routes.draw do
   # resources :events
   resources :employees, concerns: [:cloneable, :modalable, :exportable] do
     resources :tasks, concerns: [:cloneable, :modalable]
-    resources :pupils, concerns: [:cloneable, :modalable]
+    resources :pupils, concerns: [:cloneable, :modalable] do
+      resources :pupil_transactions
+    end
   end
   
   

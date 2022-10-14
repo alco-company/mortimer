@@ -36,9 +36,31 @@ class EmployeesController < AssetsController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
+      #
+      # WIP - 2022-10-12 whd
+      # use case not entirely clear; what should be updated, created, and more
+      #
+      # if we need to set the state - to allow the employee to continue punching after a fail
+      # if params[:asset][:state] != resource.state 
+      #   AssetWorkTransactionService.new.create_employee_punch_transaction( resource, punch_params )
+      # end
+      #
       params[:asset][:assetable_attributes][:hired_at] = DateTime.parse params[:asset][:assetable_attributes][:hired_at]
-      params.require(:asset).permit(:assetable_type, :name, :account_id, assetable_attributes: [ :id, :pin_code, :hired_at, :job_title, :birthday, :base_salary, :description, :mug_shot, signed_pupils: {} ] )
+      params.require(:asset).permit(:assetable_type, :name, :state, :account_id, assetable_attributes: [ :id, :pin_code, :hired_at, :job_title, :birthday, :base_salary, :description, :mug_shot, signed_pupils: {} ] )
     end
+
+    # def punch_params
+    #   parms = {
+    #     asset_work_transaction: {
+    #       ip_addr: request.remote_ip,
+    #       employee_asset_id: resource.id,
+    #       punched_at: DateTime.now,
+    #       state: params[:asset][:state],
+    #       force: true
+    #     }
+    #   }
+    #   ActionController::Parameters.new(parms).require(:asset_work_transaction).permit(:punched_at, :state, :ip_addr, :punch_asset_id, :employee_asset_id, punched_pupils: {} )
+    # end
 
     #
     # implement on every controller where search makes sense

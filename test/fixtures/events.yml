@@ -40,3 +40,45 @@ asset_work_in:
   ended_at: 2022-05-31 13:23:41
   minutes_spent: 1
   deleted_at: 
+
+asset_work_out:
+  account: one
+  eventable: out
+  eventable_type: AssetWorkTransaction
+  calendar: one
+  name: AWT
+  state: OUT
+  position: 1
+  ancestry: 
+  started_at: 2022-09-28 17:38:56
+  ended_at: 2022-09-28 18:18:00
+  minutes_spent: 39
+  deleted_at: 
+
+pupil_work_in:
+  account: one
+  eventable: one
+  eventable_type: PupilTransaction
+  calendar: one
+  name: AWT
+  state: IN
+  position: 1
+  ancestry: 
+  started_at: 2022-05-31 13:23:41
+  ended_at: 2022-05-31 13:23:41
+  minutes_spent: 1
+  deleted_at: 
+
+pupil_work_out:
+  account: one
+  eventable: two
+  eventable_type: PupilTransaction
+  calendar: one
+  name: AWT
+  state: OUT
+  position: 1
+  ancestry: 
+  started_at: 2022-05-31 13:23:41
+  ended_at: 2022-05-31 13:23:41
+  minutes_spent: 1
+  deleted_at: 

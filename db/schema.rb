@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_29_121243) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_07_103851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -226,6 +226,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_121243) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pupil_transactions", force: :cascade do |t|
+    t.bigint "asset_id", null: false
+    t.bigint "pupil_id", null: false
+    t.string "state"
+    t.datetime "punched_at"
+    t.integer "work_minutes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_pupil_transactions_on_asset_id"
+    t.index ["pupil_id"], name: "index_pupil_transactions_on_pupil_id"
+  end
+
   create_table "pupils", force: :cascade do |t|
     t.integer "time_spent_minutes"
     t.string "location"
@@ -415,6 +427,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_29_121243) do
   add_foreign_key "participants", "accounts"
   add_foreign_key "products", "suppliers"
   add_foreign_key "profiles", "users"
+  add_foreign_key "pupil_transactions", "assets"
+  add_foreign_key "pupil_transactions", "pupils"
   add_foreign_key "roleables", "roles"
   add_foreign_key "roles", "accounts"
   add_foreign_key "stock_item_transactions", "stock_items"

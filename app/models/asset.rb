@@ -5,8 +5,9 @@ class Asset < AbstractResource
   belongs_to :calendar, optional: true
 
   has_many :asset_workday_sums
+  has_many :asset_work_transactions
 
-  delegated_type :assetable, types: %w[ Pupil Employee Product Stock StockLocation PunchClock ], dependent: :destroy
+  delegated_type :assetable, types: %w[ Employee Product PunchClock Pupil Stock StockLocation ], dependent: :destroy
   accepts_nested_attributes_for :assetable
 
   before_create :create_calendar_if_missing

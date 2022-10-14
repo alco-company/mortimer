@@ -24,6 +24,7 @@ module EmployeesHelper
     when "OUT"; "Du er mødt ud (stoppet) #{ asset_state_time_updated resource }"
     when "BREAK"; "Du har været til pause siden #{ asset_state_time_updated resource }"
     when "SICK"; "Du meldte dig syg #{ asset_state_time_updated resource }"
+    when "FREE"; "Du har oprettet en kalenderaftale, hvor du har fri fra x til y"
     end
   end
 
@@ -40,8 +41,19 @@ module EmployeesHelper
     "%s %s" % [emp_parts.shift, emp_parts.map{|n| n.first}.join('.')]
   end
 
+  def display_work_today asset 
+    "%s (%s)" % [display_hours_minutes(asset.asset_workday_sums.last.work_minutes),display_hours_minutes(asset.asset_workday_sums.last.break_minutes)    ]
+  end
+
   def set_emp_bg_color_on_state state 
-    (state === 'IN' || state === 'BREAK') ? 'bg-green-200' : ''
+    case state
+    when 'IN'; 'bg-green-100'
+    when 'BREAK'; 'bg-yellow-100'
+    when 'SICK'; 'bg-red-100'
+    when 'OUT'; 'bg-slate-100'
+    when 'FREE'; 'bg-blue-100'
+    else ''
+    end
   end
 
 end

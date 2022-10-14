@@ -178,6 +178,10 @@ da:
     index: "Oversigt over instrumentbrædder/skabeloner"
     index_description: "Oversigten viser alle de instrumentbrædder, der er oprettet - uanset om de benyttes af konti eller brugere. "
 
+  Employee:
+    index: Oversigt over medarbejdere
+    index_description: Oversigten viser alle de medarbejdere, der er oprettet. Du kan se medarbejdernes &nbsp; <a class="text-indigo-500" target="_blank" href="/pos/employees"> fremmøde status her</a>.
+    
   Invitation:
     new: 'Ny bruger (invitation)'
     new_description: 'Du opretter en ny bruger ved at sende hen en invitation'

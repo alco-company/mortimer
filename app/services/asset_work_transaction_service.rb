@@ -1,30 +1,35 @@
 class AssetWorkTransactionService < EventService
     
-  def create_employee_punch_transaction params
-    awparm=params["asset_work_transaction"]
-    employee_asset = Employee.unscoped.find(awparm["employee_id"]).asset
-    set_current_data employee_asset
-    create_asset_work_transaction( employee_asset, awparm )
+  def create_employee_punch_transaction resource, awparams
+    set_current_data resource
+    create_asset_work_transaction( resource, awparams )
   end
-
   
   #
   # TODO: create a logfile where all transactions are listed - and possibly can be edited and rerun
   #
   def create_asset_work_transaction employee_asset, params
+    awd = employee_asset.asset_workday_sums.where(work_date: Date.parse(params["punched_at"])).first
+    if awd.nil?
+      result = AssetWorkdaySumService.new.create( 
+      AssetWorkdaySumService.new.new_from_employee_asset( employee_asset, Date.parse(params["punched_at"]) ), Employee ) 
+      raise "AssetWorkdaySum could not be created!" unless result.created?
+      awd = result.record
+    end
+
     w = case params["state"]
-    when "IN"; create_in_transaction(employee_asset, params)
-    when "OUT"; create_out_transaction(employee_asset, params)
-    when "BREAK"; create_break_transaction(employee_asset, params)
-    when "SICK"; create_sick_transaction(employee_asset, params)
-    when "FREE"; create_free_transaction(employee_asset, params)
+    when "IN"; create_in_transaction(employee_asset, params, awd)
+    when "OUT"; create_out_transaction(employee_asset, params, awd)
+    when "BREAK"; create_break_transaction(employee_asset, params, awd)
+    when "SICK"; create_sick_transaction(employee_asset, params, awd)
+    when "FREE"; create_free_transaction(employee_asset, params, awd)
     else raise "state parameter (#{params["state"]}) is not implemented!"
     end
-  rescue RuntimeError => err
-    Rails.logger.info "[asset_work_transaction] Error: (AssetWorkTransaction) #{err.message}"
+  # rescue RuntimeError => err
+  #   Rails.logger.info "[asset_work_transaction] Error: (AssetWorkTransaction) #{err.message}"
   end
   
-  def create_in_transaction employee_asset, parms 
+  def create_in_transaction employee_asset, parms, awd 
     punch_clock_asset = Asset.find(parms["punch_asset_id"])
     awt = nil
     AssetWorkTransaction.transaction do
@@ -35,19 +40,20 @@ class AssetWorkTransactionService < EventService
         extra_time = 0
 
         # create transaction
-        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms
+        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms, awd
         # run calc if employee.state in ['BREAK','SICK','FREE','OUT']
-        calc_awd(employee_asset, awt.eventable)
+        calc_awd(employee_asset, awt.eventable, awd)
+
         # set employee state
         employee_asset.update state: 'IN'
-      rescue RuntimeError => err 
-        Rails.logger.info "[asset_work_transaction] Error: (create_in_transaction) #{err.message}"
+      # rescue RuntimeError => err 
+      #   Rails.logger.info "[asset_work_transaction] Error: (create_in_transaction) #{err.message}"
       end
     end
     awt
   end
-  
-  def create_break_transaction employee_asset, parms 
+
+  def create_break_transaction employee_asset, parms, awd 
     punch_clock_asset = Asset.find(parms["punch_asset_id"])
     awt = nil
     AssetWorkTransaction.transaction do
@@ -58,9 +64,9 @@ class AssetWorkTransactionService < EventService
         extra_time = 0
 
         # create transaction
-        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms
+        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms, awd
         # run calc if employee.state in ['BREAK','SICK','FREE','OUT']
-        calc_awd(employee_asset, awt.eventable)
+        calc_awd(employee_asset, awt.eventable, awd)
         # set employee state
         employee_asset.update state: 'BREAK'
 
@@ -71,7 +77,7 @@ class AssetWorkTransactionService < EventService
     awt
   end
   
-  def create_sick_transaction employee_asset, parms 
+  def create_sick_transaction employee_asset, parms, awd 
     punch_clock_asset = Asset.find(parms["punch_asset_id"])
     awt = nil
     AssetWorkTransaction.transaction do
@@ -82,9 +88,9 @@ class AssetWorkTransactionService < EventService
         extra_time = 0
 
         # create transaction - returns event
-        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms
+        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms, awd
         # run calc if employee.state in ['BREAK','SICK','FREE','OUT']
-        calc_awd(employee_asset, awt.eventable)
+        calc_awd(employee_asset, awt.eventable, awd)
         # set employee state
         employee_asset.update state: 'SICK'
 
@@ -95,7 +101,7 @@ class AssetWorkTransactionService < EventService
     awt
   end
   
-  def create_free_transaction employee_asset, parms 
+  def create_free_transaction employee_asset, parms, awd 
     punch_clock_asset = Asset.find(parms["punch_asset_id"])
     awt = nil
     AssetWorkTransaction.transaction do
@@ -106,9 +112,9 @@ class AssetWorkTransactionService < EventService
         extra_time = 0
 
         # create transaction - returns event
-        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms
+        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms, awd
         # run calc if employee.state in ['BREAK','SICK','FREE','OUT']
-        calc_awd(employee_asset, awt.eventable)
+        calc_awd(employee_asset, awt.eventable, awd)
         # set employee state
         employee_asset.update state: 'FREE'
 
@@ -119,7 +125,7 @@ class AssetWorkTransactionService < EventService
     awt
   end
   
-  def create_out_transaction employee_asset, parms 
+  def create_out_transaction employee_asset, parms, awd 
     punch_clock_asset = Asset.find(parms["punch_asset_id"])
     awt = nil
     AssetWorkTransaction.transaction do
@@ -130,9 +136,9 @@ class AssetWorkTransactionService < EventService
         extra_time = 0
 
         # create transaction - returns event
-        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms
+        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms, awd
         # run calc if employee.state in ['BREAK','SICK','FREE','OUT']
-        calc_awd(employee_asset, awt.eventable)
+        calc_awd(employee_asset, awt.eventable, awd)
         # set employee state
         employee_asset.update state: 'OUT'
 
@@ -143,12 +149,13 @@ class AssetWorkTransactionService < EventService
     awt
   end
     
-  def create_transaction asset, punch_clock_asset, extra_time, parms 
+  def create_transaction asset, punch_clock_asset, extra_time, parms, awd 
     begin      
       awt = AssetWorkTransaction.new
       
       awt.asset = asset
       awt.punch_asset = punch_clock_asset
+      awt.asset_workday_sum = awd
       awt.punch_asset_ip_addr = parms["ip_addr"]
       awt.punched_at = parms["punched_at"]
       e = Event.create( 
@@ -158,24 +165,16 @@ class AssetWorkTransactionService < EventService
         calendar: (asset.calendar || Current.account.calendar),
         eventable: (awt.save ? awt : nil)
       )
-    rescue => err
-      Rails.logger.info "[asset_work_transaction] Error: (create_transaction) #{err.message}"
-      raise ActiveRecord::Rollback
+    # rescue => err
+    #   Rails.logger.info "[asset_work_transaction] Error: (create_transaction) #{err.message}"
+    #   raise ActiveRecord::Rollback
     end
   end
 
   # calc_awd calculates the time spent on various activities
   # for the current date of registration
   #
-  def calc_awd employee_asset, current_awt
-    awd = employee_asset.asset_workday_sums.where(work_date: Date.today) 
-    if awd.empty?
-      result = AssetWorkdaySumService.new.create( 
-      AssetWorkdaySumService.new.new_from_employee_asset( employee_asset, current_awt.punched_at.to_date ), Employee 
-      ) 
-      raise "AssetWorkdaySum could not be created!" unless result.created?
-      awd = result.record
-    end
+  def calc_awd employee_asset, current_awt, awd
 
     # _yesterday does not necessarily literally mean yesterday only any other day previously
     last_punch_yesterday = employee_asset.asset_work_transactions.where( 'punched_at < ?', current_awt.punched_at.at_beginning_of_day ).last rescue nil
@@ -190,14 +189,15 @@ class AssetWorkTransactionService < EventService
     
     AssetWorkTransaction.where( 'punched_at > ?', current_awt.punched_at.at_beginning_of_day ).order(punched_at: :asc).each do |awt|
       case awt.state
-      when 'IN';    start_time = start_in_minutes( awt, last_state, employee_asset, awd, start_time )
-      when 'BREAK'; start_time = start_break_minutes( awt, last_state, employee_asset, awd, start_time )
-      when 'FREE';  start_time = start_free_minutes( awt, last_state, employee_asset, awd, start_time )
-      when 'SICK';  start_time = start_sick_minutes( awt, last_state, employee_asset, awd, start_time )
-      when 'OUT';   start_time = start_out_minutes( awt, last_state, employee_asset, awd, start_time )
+      when 'IN';    start_time, time_spent = start_in_minutes( awt, last_state, employee_asset, awd, start_time )
+      when 'BREAK'; start_time, time_spent = start_break_minutes( awt, last_state, employee_asset, awd, start_time )
+      when 'FREE';  start_time, time_spent = start_free_minutes( awt, last_state, employee_asset, awd, start_time )
+      when 'SICK';  start_time, time_spent = start_sick_minutes( awt, last_state, employee_asset, awd, start_time )
+      when 'OUT';   start_time, time_spent = start_out_minutes( awt, last_state, employee_asset, awd, start_time )
       else raise "AssetWorkTransaction cannot process #{awt.state}!"
       end
       last_state = awt.state
+      awt.event.update minutes_spent: time_spent
     end
 
   end
@@ -206,8 +206,10 @@ class AssetWorkTransactionService < EventService
   # employee punched IN
   #
   def start_in_minutes( awt, last_state, employee_asset, awd, start_time )
+    time_spent = 0
     case last_state
     when nil 
+      awd.update work_minutes: 0, break_minutes: 0, free_minutes: 0, sick_minutes: 0
       start_time = awt.punched_at
     when 'OUT'
       start_time = awt.punched_at
@@ -226,13 +228,14 @@ class AssetWorkTransactionService < EventService
       start_time = awt.punched_at
       awd.update break_minutes: (awd.break_minutes + time_spent)
     end    
-    start_time
+    [start_time, time_spent]
   end
 
   #
   # employee punched OUT
   #
   def start_out_minutes( awt, last_state, employee_asset, awd, start_time )
+    time_spent = 0
     case last_state
     when nil 
       start_time = nil
@@ -255,13 +258,14 @@ class AssetWorkTransactionService < EventService
       start_time = awt.punched_at
       awd.update break_minutes: (awd.break_minutes + time_spent)
     end
-    start_time
+    [start_time, time_spent]
   end
 
   #
   # employee punched SICK
   #
   def start_sick_minutes( awt, last_state, employee_asset, awd, start_time )
+    time_spent = 0
     case last_state
     when nil 
       start_time = awt.punched_at
@@ -280,13 +284,14 @@ class AssetWorkTransactionService < EventService
       start_time = awt.punched_at
       awd.update break_minutes: (awd.break_minutes + time_spent)
     end
-    start_time
+    [start_time, time_spent]
   end
 
   #
   # employee punched BREAK
   #
   def start_break_minutes( awt, last_state, employee_asset, awd, start_time )
+    time_spent = 0
     case last_state
     when nil 
       start_time = awt.punched_at
@@ -301,13 +306,14 @@ class AssetWorkTransactionService < EventService
     when 'BREAK'
       raise "last_state was BREAK so #{employee_asset.name} cannot punch break again!"
     end
-    start_time
+    [start_time, time_spent]
   end
 
   #
   # employee punched FREE
   #
   def start_free_minutes( awt, last_state, employee_asset, awd, start_time )
+    time_spent = 0
     case last_state
     when nil 
       start_time = awt.punched_at
@@ -328,7 +334,7 @@ class AssetWorkTransactionService < EventService
       start_time = awt.punched_at
       awd.update break_minutes: (awd.break_minutes + time_spent)
     end    
-    start_time
+    [start_time, time_spent]
   end
 
   def calc_distance_in_minutes to, from

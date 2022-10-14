@@ -37,7 +37,7 @@ employee_one:
   assetable: one
   assetable_type: Employee
   name: John Doe
-  state: Ok
+  state: 
   position: 1
   ancestry: 
   deleted_at: 
@@ -49,6 +49,28 @@ punch_one:
   assetable_type: PunchClock
   name: PunchClock at home
   state: Ok
+  position: 1
+  ancestry: 
+  deleted_at: 
+  calendar: one
+
+pupil_one:
+  account: one
+  assetable: one
+  assetable_type: Pupil
+  name: Ivan
+  state: 
+  position: 1
+  ancestry: 
+  deleted_at: 
+  calendar: one
+
+pupil_two:
+  account: one
+  assetable: two
+  assetable_type: Pupil
+  name: Mie
+  state: 
   position: 1
   ancestry: 
   deleted_at: 

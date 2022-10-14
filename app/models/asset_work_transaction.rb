@@ -12,9 +12,25 @@ class AssetWorkTransaction < AbstractResource
   belongs_to :asset
   belongs_to :asset_workday_sum, optional: true
   belongs_to :punch_asset, optional: true, class_name: "Asset"
-  
+
   def self.default_scope
     AssetWorkTransaction.all.joins(:event)
+  end
+
+  def punched_pupils=(ppls)
+
+  end
+
+  def broadcast_create
+    broadcast_replace_later_to "employee_#{self.asset.id}_state", 
+        partial: "pos/employees/employee_state", 
+        target: "employee_state", 
+        locals: { resource: self.asset, user: Current.user }
+        
+    broadcast_replace_later_to "employee_#{self.asset.id}_state_buttons", 
+        partial: "pos/employees/employee_state_buttons", 
+        target: "employee_state_buttons", 
+        locals: { resource: self.asset, user: Current.user }
   end
 
 end
