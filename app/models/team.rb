@@ -6,12 +6,19 @@ class Team  < AbstractResource
   has_many :participant_teams
   has_many :participants, through: :participant_teams
 
+  has_many :asset_teams
+  has_many :assets, through: :asset_teams
+
   #
   # default_scope returns all posts that have not been marked for deletion yet
   #
   def self.default_scope
     #   where("participant" deleted_at: nil)
     Team.all.joins(:participant)
+  end
+
+  def employees 
+    assets.where(assetable_type: 'Employee')
   end
 
   #

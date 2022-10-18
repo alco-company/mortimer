@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_07_103851) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_17_053458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_07_103851) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "asset_teams", force: :cascade do |t|
+    t.bigint "asset_id", null: false
+    t.bigint "team_id", null: false
+    t.string "team_role", default: "member"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_asset_teams_on_asset_id"
+    t.index ["team_id"], name: "index_asset_teams_on_team_id"
   end
 
   create_table "asset_work_transactions", force: :cascade do |t|

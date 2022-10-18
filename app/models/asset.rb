@@ -7,12 +7,24 @@ class Asset < AbstractResource
   has_many :asset_workday_sums
   has_many :asset_work_transactions
 
+  has_many :asset_teams
+  has_many :teams, through: :asset_teams
+  
   delegated_type :assetable, types: %w[ Employee Product PunchClock Pupil Stock StockLocation ], dependent: :destroy
   accepts_nested_attributes_for :assetable
 
   before_create :create_calendar_if_missing
   def create_calendar_if_missing 
     self.calendar = account.calendar || Calendar.create( name: account.name) if calendar.nil?
+  end
+
+  def combo_values_for_teams
+    teams
+  end
+
+  def teams= ts 
+    teams.delete_all
+    ts.each{ |t| AssetTeam.create( team: Team.find(t), asset: self) unless t.blank? } if self.id
   end
 
   #
