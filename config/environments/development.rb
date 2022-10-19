@@ -73,3 +73,21 @@ Rails.application.configure do
 
   config.action_controller.default_url_options = { host: 'localhost', port: 3000 }
 end
+
+
+# MiddlewareTracer 
+# helps debug the racks middleware
+#
+#require "middleware_tracer"
+
+
+# Instrument the middleware stack after initialization so that we
+# know the stack won't be changed afterwards.
+# Rails.configuration.after_initialize do
+#   Rails.application.middleware.each do |middleware|
+#     klass = middleware.klass
+
+#     # There are a few odd middlewares that aren't classes.
+#     klass.prepend(MiddlewareTracer) if klass.respond_to?(:prepend)
+#   end
+# end

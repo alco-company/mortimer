@@ -91,3 +91,14 @@ gem "ancestry", "~> 4.1"
 gem "rqrcode", "~> 2.1"
 
 gem "rubocop", "~> 1.30"
+
+# OAuth
+gem 'omniauth-oauth2', '~> 1.8.0'
+
+# OmniAuth CSRF protection
+gem 'omniauth-rails_csrf_protection', '~> 1.0.1'
+
+# REST calls to Microsoft Graph
+gem 'httparty', '~> 0.20.0'
+
+gem "activerecord-session_store", "~> 2.0"

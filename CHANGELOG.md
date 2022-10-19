@@ -42,7 +42,6 @@ In the REFERENCES you will find a lot of people, resources, etc
 * TODO: use has_secure_token to allow 'user-less' users access without logging in!
 * steps_field - like when you want the user to first finish typing in [fieldset] and then continue to the next [fieldset]
 * write some serious tests for people, partners, participants, events, 
-* we might need Redis' Sessions store down the road - [here's the low down](https://github.com/redis-store/redis-rails)
 * add Participant addressability - by means of basically one table :0 (URLs are not just webpages, but really any adressable resource!!)
 * add second **main feature** - documents (in all their glory and multiversatility, like notes, messages, contracts, SOP's, NDA's, invoices, orders, quotes, etc)
 * add Team - People are grouped into teams, either in a permanent position as fx a Sales rep in the Sales Team, or a temporary/matrix position as Data Analyst in the Finance Team/Department
@@ -77,6 +76,22 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 - notification when adding new products, suppliers, etc via POS
 ## DONE
+
+### 2022-10-19
+
+06:45 up and about - with some bowel problems
+07:45 added activerecord-session_store
+
+### 2022-10-18
+
+07:10 started working on employees calendar - sync'ing with Microsoft
+16:34 added a MiddlewareTracer to debug the racks middleware stacks
+
+### 2022-10-17
+
+06:30 started working on employees calendar - sync'ing with Microsoft
+11:15 pulled all data from printserver in Gandrup (Randers Tegl)
+18:15 done for now
 
 ### 2022-10-12
 

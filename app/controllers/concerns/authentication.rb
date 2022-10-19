@@ -20,7 +20,9 @@ module Authentication
 
   def login(user)
     reset_session
-    Current.account = session[:current_account] = user.account.id
+    current_user user
+    set_current_account
+    # Current.account = session[:current_account] = user.account.id
     user.regenerate_session_token
     user.update_attribute :logged_in_at, Time.current
     session[:current_user_session_token] = user.reload.session_token
@@ -61,13 +63,14 @@ module Authentication
       redirect_to login_path, status: :see_other, alert: t('your_credentials_dont_match')
     end
 
-    def current_user
+    def current_user usr=nil
       # say "Current.user (session_token) #{session[:current_user_session_token]}"
-      Current.user ||= set_current_user
+      Current.user ||= set_current_user(usr)
       Current.user
     end
 
-    def set_current_user
+    def set_current_user usr=nil
+      return usr unless usr.nil?
       if session[:current_user_session_token].present?
         User.unscoped.find_by(session_token: session[:current_user_session_token])
       elsif cookies.permanent.encrypted[:remember_token].present?
@@ -82,8 +85,8 @@ module Authentication
 
     def set_current_account    
       say "Current.account #{session[:current_account]}"
-      return Account.find( session[:current_account]) if session[:current_account].present? and !session[:current_account].nil?
-      return Account.find( (session[:current_account] = Current.user.account.id) ) if Current.user and !Current.user.nil?
+      return Account.find( session[:current_account]) if session[:current_account].present? and !session[:current_account].nil? 
+      return Current.account = Account.find( (session[:current_account] = Current.user.account.id) ) if Current.user and !Current.user.nil?
       (session[:current_account] = nil)
     end
 

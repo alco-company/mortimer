@@ -130,10 +130,10 @@ Rails.application.routes.draw do
     post "impersonate", to: "accounts#impersonate"
   end
 
-
+  
   resources :dashboards, concerns: [:cloneable, :modalable] 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  
   # user sign-in, -out, and -up
   post "sign_up", to: "users#create"
   get "sign_up", to: "users#sign_up"
@@ -142,13 +142,17 @@ Rails.application.routes.draw do
   post "logout", to: "sessions#destroy"
   get "login", to: "sessions#new"
   
+  # Add route for OmniAuth callback
+  get 'auth/:provider/callback', to: 'auth#callback'
+  
   resources :confirmations, only: [:create, :edit, :new], param: :confirmation_token
   resources :passwords, only: [:create, :edit, :new, :update], param: :password_reset_token
-
+  
   # this next endpoint is meant for dokku to use upon start
   # to verify that the service did infact start up as expected
   get '/check.txt', to: proc {[200, {}, ['check_ok']]}
-
+  
+  
   root to: "dashboards#landing"
   
 end

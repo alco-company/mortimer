@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%# once we're ready for importmap - edit config/importmaps.rb %>
+    <%# 1. edit config/importmaps.rb %>
+    <%# 2. uncomment this line = javascript_importmap_tags %>
+
     <%= yield :head %>
     <% if Rails.env.development? %>
       <%= javascript_include_tag "hotwire-livereload", defer: true %>

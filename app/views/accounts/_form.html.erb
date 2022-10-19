@@ -32,6 +32,68 @@
           </div>
         </div>
 
+        <!-- azure -->
+        <div class="px-4 divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+          <div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t(".azure_title") %></h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t(".azure_description") %></p>
+          </div>
+
+          <!-- tenant id -->
+          <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+            <div>
+              <label for="account-tenant-id" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+                <%= t ".tenant_id" %>
+              </label>
+            </div>
+            <div class="sm:col-span-2">
+              <%= form.text_field :tenant_id, 
+                required: true, 
+                data: { 'form-target' => 'focus' },
+                class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+              <div class="text-sm text-red-800" >
+                <%= resource.errors.where(:tenant_id).map( &:full_message).join( "og ") %>
+              </div>
+            </div>
+          </div>
+
+          <!-- app id -->
+          <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+            <div>
+              <label for="account-app-id" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+                <%= t ".app_id" %>
+              </label>
+            </div>
+            <div class="sm:col-span-2">
+              <%= form.text_field :app_id, 
+                required: true, 
+                data: { 'form-target' => 'focus' },
+                class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+              <div class="text-sm text-red-800" >
+                <%= resource.errors.where(:app_id).map( &:full_message).join( "og ") %>
+              </div>
+            </div>
+          </div>
+
+          <!-- app_secret secret -->
+          <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+            <div>
+              <label for="account-app-secret" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+                <%= t ".app_secret" %>
+              </label>
+            </div>
+            <div class="sm:col-span-2">
+              <%= form.text_field :app_secret, 
+                required: true, 
+                data: { 'form-target' => 'focus' },
+                class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+              <div class="text-sm text-red-800" >
+                <%= resource.errors.where(:app_secret).map( &:full_message).join( "og ") %>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Logo -->
         <div class="px-4 pt-8 ">
           <div data-uppy="account[logo]">
