@@ -6,6 +6,7 @@ class Navigation::MenuComponent < ViewComponent::Base
 
   def initialize( destination:, current:, nav_classes:, link_classes: )
     @id = current.account.id rescue 0
+    @user_id = current.user.id rescue 0
     @destination = destination
     @current = current
     @nav_classes = nav_classes

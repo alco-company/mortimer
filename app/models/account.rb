@@ -37,6 +37,7 @@ class Account < AbstractResource
   end
 
   def signed_services=(srv)
+    return if srv.keys.map{|k|k.to_i}.sort == services.pluck( :id).sort
     services.delete_all
     srv.keys.each { |k| services << Service.find(k) }
   end
@@ -82,4 +83,5 @@ class Account < AbstractResource
     end
   rescue
   end
+
 end
