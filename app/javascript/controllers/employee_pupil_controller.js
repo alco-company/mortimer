@@ -58,6 +58,8 @@ export default class EmployeePupilController extends Controller {
 
   // button to register employee punching in
   toggle_pupil(e){
+    if(e.srcElement.dataset['disabled']=='disabled')
+      return
     if (e.srcElement.classList.contains('bg-blue-100')){
       e.srcElement.classList.remove('bg-blue-100')
     } else {

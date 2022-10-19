@@ -4,7 +4,7 @@
       <td
         id="<%= dom_id pupil %>" 
         data-action="click->employee-pupil#toggle_pupil"  
-        <%= 'disabled' if ['BREAK','OUT','SICK'].include? resource.state %>
+        data-disabled="<%= 'disabled' if ['IN','BREAK','SICK'].include? resource.state %>"
         class="<%= color_pupil pupil %>whitespace-nowrap cursor-pointer py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"> <%= pupil.name %></td>
     </tr>
   <% end %>

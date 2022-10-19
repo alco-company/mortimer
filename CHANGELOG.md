@@ -81,6 +81,10 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 06:45 up and about - with some bowel problems
 07:45 added activerecord-session_store
+11:20 made omniauth login work
+16:08 started on handling user_menu/services work individually
+20:15 make sure pupils are not clickable unless employee is OUT
+
 
 ### 2022-10-18
 
