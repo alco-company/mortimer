@@ -2,7 +2,7 @@
 # Licensed under the MIT License.
 # frozen_string_literal: true
 
-# require 'omniauth/strategies/microsoft_graph_auth'
+# require 'omni_auth/strategies/microsoft_graph_auth'
 
 # TODO circumvent the need for 
 # ENV's, 'cause this does not work unless we set the ENV's atm!!
