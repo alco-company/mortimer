@@ -2,9 +2,8 @@
 
   <% unless @current.user.nil? %>
 
-
     <% if @current.account != @current.user.account %>
-      <%= button_to account_impersonate_path(@current.user.account), class: "text-indigo-700 hover:bg-gray-500 group flex items-center px-2 py-2 #{@text} font-medium rounded-md" do %>
+      <%= helpers.render_component "button_to", url: account_impersonate_path(@current.user.account), css: "text-indigo-700 hover:bg-gray-500 group flex items-center px-2 py-2 #{@text} font-medium rounded-md" do %>
         <svg class="mr-4 flex-shrink-0 h-6 w-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
         </svg>
@@ -20,26 +19,7 @@
     </a>
 
     <div id="user_<%= @user_id %>_services" class="space-y-1">
-      <% @current.account.services.each do |service| %>
-        <% active = request.fullpath == service.index_url %>
-        <% if (@current.user.can_list_service?(service) rescue false) %>
-          <!-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-600 hover:text-gray-900 hover:bg-gray-50" -->
-          <a href="<%= service.index_url %>" class="<%= @link_classes %><%= active ? " bg-gray-200 text-gray-900" : "" %>" aria-current="page">
-            <!--
-              Heroicon name: outline/home
-
-              Current: "text-gray-500", Default: "text-gray-400 group-hover:text-gray-500"
-              <svg class="text-gray-500 mr-3 flex-shrink-0 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
-
-            -->
-            <%= raw service.menu_icon %>
-            <span class="truncate pl-2"><%= t ".#{service.menu_label}" %></span>
-          </a>
-        <% end %>
-
-      <% end if @current && @current.account %>
+      <%= render( Navigation::ServiceComponent.with_collection @current.account.services, current: @current, css: @link_classes) if @current && @current.account %>
     </div>
 
 

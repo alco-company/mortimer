@@ -96,3 +96,49 @@ export default class FormSleeveController extends Controller {
   }
 }
   
+// from CoffeeScript
+// implementation on db.arkivthy.dk
+// 2022, oct - whd
+
+// App.setFormData = () ->
+//   form = App.currentForm
+
+//   setField = (e) ->
+//     s = "[name='#{e[0]}']"
+//     i = form.querySelector s
+//     i && i.value = e[1]
+
+//   if localStorage.getItem(this.localStorageKey) != null
+//     data = JSON.parse(localStorage.getItem(this.localStorageKey))
+//     setField e for e in data
+
+// App.getFormData = () ->
+//   f = new FormData(App.currentForm)
+//   data = []
+//   data.push [e[0], e[1]] for e from f.entries() when e[0] isnt "authenticity_token"
+//   data
+
+// App.saveInterval = () ->
+//   App.saveToLocalStorage()
+//   setTimeout ->
+//     App.saveInterval()
+//   , 1500
+
+// App.autosave = (form) ->
+//   App.currentForm = form
+//   App.setFormData()
+//   form.addEventListener 'change', () ->
+//     App.saveToLocalStorage()
+//   App.saveInterval()
+
+// App.saveToLocalStorage = () ->
+//   if this.localStorageKey != null
+//     localStorage.setItem App.localStorageKey, JSON.stringify(App.getFormData())
+
+// App.clearLocalStorage = () ->
+//   console.log 'should clear'
+//   if localStorage.getItem(this.localStorageKey) != null
+//     console.log "clearing #{this.localStorageKey}..."
+//     localStorage.removeItem(this.localStorageKey)
+//     this.localStorageKey = null
+
