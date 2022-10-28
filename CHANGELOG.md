@@ -77,6 +77,45 @@ In the REFERENCES you will find a lot of people, resources, etc
 - notification when adding new products, suppliers, etc via POS
 ## DONE
 
+### 2022-10-28
+
+08:00 another day at the office
+08:15 Elmelund - cont' work_schedule
+
+### 2022-10-27
+
+06:05 early rise - Anne went to Foldberg (with limited success)
+07:05 Elmelund - cont' work_schedule
+
+### 2022-10-26
+
+06:55 decent sleep - 
+07:05 Elmelund - cont' work_schedule
+
+### 2022-10-25
+
+06:50 decent sleep - 
+07:05 Elmelund - cont' work_schedule
+
+### 2022-10-24
+
+07:30 slow morning - Ajs, Edith, and Albert stayed the weekend
+09:10 cont' work_schedule
+17:30 training
+
+### 2022-10-21
+
+07:55 late night - but finished arkivthy
+08:20 working on backup on docker4
+15:05 adding 3 view_components - menu, button_to, and service
+17:10 adding work_schedule
+
+### 2022-10-20
+
+06:30 up and about - my tommy seems to have recovered :)
+07:05 working on pos/employees
+11:00 started working on arkivthy - strike rest of the day
+
 ### 2022-10-19
 
 06:45 up and about - with some bowel problems
