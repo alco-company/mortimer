@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_19_053900) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_25_082958) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -183,6 +183,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_19_053900) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "rrule"
+    t.datetime "first_occurence"
+    t.datetime "last_occurence"
     t.index ["account_id"], name: "index_events_on_account_id"
     t.index ["calendar_id"], name: "index_events_on_calendar_id"
     t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable"
@@ -432,6 +435,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_19_053900) do
     t.text "object"
     t.datetime "created_at"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  end
+
+  create_table "work_schedules", force: :cascade do |t|
+    t.boolean "roll"
+    t.integer "start_minute"
+    t.integer "end_minute"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "accounts", "dashboards"

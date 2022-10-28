@@ -10,6 +10,8 @@
 # :ended_at - once finished, we should know too
 # :minutes_spent - how many minutes did this event 'take to finish'
 #
+# TODO - RRULE - https://icalendar.org/rrule-tool.html
+#
 #
 # Event is one in 4 core entities - together with Participants, Assets, and Messages
 # and together they make any data relation possible; with the supporting tables close by
@@ -26,7 +28,7 @@ class Event < AbstractResource
   # has_many :employees, through: :assignments, source: "assignable", source_type: "Employee"
   # has_many :messages, through: :assignments, source: "assignable", source_type: "Message"
   # has_many :event_transactions
-  delegated_type :eventable, types: %w[ Call Task StockItemTransaction AssetWorkTransaction ], dependent: :destroy
+  delegated_type :eventable, types: %w[ Task StockItemTransaction AssetWorkTransaction WorkSchedule ], dependent: :destroy
 
   accepts_nested_attributes_for :eventable, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :assignments, reject_if: :all_blank, allow_destroy: true

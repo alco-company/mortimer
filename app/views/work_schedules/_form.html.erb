@@ -1,0 +1,43 @@
+<%= form_with model: resource, url: url_for(resource.eventable), id: resource_form, data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
+  <%= form.fields_for :eventable do |work_schedule_form| %>
+    <%= form.hidden_field :account_id, value: current_account.id %>
+    <%= form.hidden_field :eventable_type, value: "WorkSchedule" %>
+    <div class="flex-1 relative "
+      data-controller="form"
+      data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"    
+      >
+      <!-- Header -->
+      <%= render_component "resource/form_header", resource: resource, title: form_header_title, description: form_header_description %>
+
+      <!-- Divider container -->
+      <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+
+        <!-- Name -->
+        <%= render_component "resource/input_string", form: form, field: :name, resource: resource, title: t('.name'), focus: true, required: true %>
+
+        <!-- roll -->
+        <%= render_component "resource/input_boolean", form: work_schedule_form, field: :roll, resource: resource, title: t('.roll') %>
+
+        <!-- start_minute -->
+        <%= render_component "resource/input_time", form: work_schedule_form, field: :start_minute_string, resource: resource, title: t('.start_at'), required: true %>
+
+        <!-- end_minute -->
+        <%= render_component "resource/input_time", form: work_schedule_form, field: :end_minute_string, resource: resource, title: t('.stop_at') %>
+
+        <!-- FirstOccurence -->
+        <%= render_component "resource/input_date", form: form, field: :first_occurence, resource: resource, title: t('.first_occurence'), required: true %>
+
+        <!-- LastOccurence -->
+        <%= render_component "resource/input_date", form: form, field: :last_occurence, resource: resource, title: t('.last_occurence') %>
+
+        <!-- Calendar rrule -->
+        <%= render_component "resource/input_calendar", form: form, field: :rrule, resource: resource, title: t('.rrule'), start_date: resource.first_occurence %>
+
+      </div>
+    </div>
+  <% end %>
+
+
+  <%= render_component "action_button", resource: resource, delete_url: resource_url(resource.eventable), deleteable: true %>
+
+<% end %>
