@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Resource::ComboComponent < ViewComponent::Base
+
+  renders_one :header
+  renders_one :footer
+
     #
     # form*           - the form element 
     # attr*           - the attribute or association holding the data element

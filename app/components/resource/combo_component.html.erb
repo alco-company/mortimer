@@ -9,7 +9,7 @@
   data-resource--combo-component-is-add-value="<%= @is_add %>"
   data-resource--combo-component-account-id-value="<%= Current.account.id %>"
   data-controller="resource--combo-component"
-  class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+  class="space-y-1 z-10 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
   <label for="combo" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
     <%= @label %>
   </label>
@@ -93,6 +93,9 @@
     </div>    
 
   </div>
-  <div class="relative sm:col-start-3">
+  <div class="relative col-span-3 text-xs">
+    <% if footer? %>
+      <%= footer %>
+    <% end %>
   </div>
 </div>
