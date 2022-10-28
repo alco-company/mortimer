@@ -23,3 +23,12 @@ application.register("resource--user-account-component", Resource__UserAccountCo
 
 import Resource__UserProfileComponentController from "./resource/user_profile_component_controller.js"
 application.register("resource--user-profile-component", Resource__UserProfileComponentController)
+
+import Resource__InputBooleanComponentController from "./resource/input_boolean_component_controller.js"
+application.register("resource--input-boolean-component", Resource__InputBooleanComponentController)
+
+import Resource__InputCalendarComponentController from "./resource/input_calendar_component_controller.js"
+application.register("resource--input-calendar-component", Resource__InputCalendarComponentController)
+
+import Resource__InputStringComponentController from "./resource/input_string_component_controller.js"
+application.register("resource--input-string-component", Resource__InputStringComponentController)

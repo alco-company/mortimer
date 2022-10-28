@@ -1,0 +1,20 @@
+<!-- string -->
+<div
+  data-controller="resource--input-time-component"
+  class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+  <div>
+    <label for="<%= @field.to_s %>" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+      <%= @title %>
+    </label>
+  </div>
+  <div class="sm:col-span-2">
+    <%= @form.text_field @field, 
+      type: :time,
+      data: { "form-target" => "#{'focus' if @focus}" },
+      required: @required,
+      class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+    <div class="text-sm text-red-800" >
+      <%= @resource.errors.where(@field).map( &:full_message).join( "og ") %>
+    </div>
+  </div>
+</div>
