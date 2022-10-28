@@ -21,6 +21,13 @@ class Team  < AbstractResource
     assets.where(assetable_type: 'Employee')
   end
 
+  def work_schedules= ws 
+
+    Assignment.where( assignable_type: 'Participant', event_id: Event.where(eventable_type: 'WorkSchedule', eventable_id: self.work_schedules.map( &:id) )).delete_all
+    ws.each{ |w| Assignment.create( event: w.event, assignable: participant) unless w.blank? } if self.id
+
+  end
+
   #
   # implement on every model where search makes sense
   # get's called from controller specific find_resources_queried

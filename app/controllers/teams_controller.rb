@@ -8,9 +8,9 @@ class TeamsController < ParticipantsController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      params[:participant][:participantable_attributes] = {}
+      params[:participant][:participantable_attributes] ||= {}
       # params[:participant][:participantable_attributes][:task_id] = 0
-      params.require(:participant).permit(:participantable_type, :name, :account_id, roles: [], participantable_attributes: [ :id, :task_id ] )
+      params.require(:participant).permit(:participantable_type, :name, :account_id, roles: [], work_schedules: [], participantable_attributes: [ :id, :task_id ] )
     end
 
     #

@@ -67,7 +67,9 @@ da:
     stock_locations: "Lagerlokationer"
     stock_item_transactions: "Lagerbevægelser"
     suppliers: "Leverandører"
+    teams: 'Grupper'
     users: 'Brugere'
+    work_schedules: 'Normtider'
 
   navigation:
     menu_component:
@@ -180,8 +182,18 @@ da:
 
   Employee:
     index: Oversigt over medarbejdere
-    index_description: Oversigten viser alle de medarbejdere, der er oprettet. Du kan se medarbejdernes &nbsp; <a class="text-indigo-500" target="_blank" href="/pos/employees"> fremmøde status her</a>.
+    index_description: <span>Oversigten viser alle de medarbejdere, der er oprettet. Du kan se medarbejdernes &nbsp; <a class="text-indigo-500" target="_blank" href="/pos/employees"> fremmøde status her</a> &nbsp;og normtider definerer du &nbsp; <a class="text-indigo-500"  href="/work_schedules">her</a></span>.
     
+  employees:
+    form:
+      new: 'Ny medarbejder'
+      edit: 'Ret medarbejder'
+      team_work_schedules: 'Medarbejderen har derudover, igennem sine tildelte arbejdsgrupper, følgende normtider: %{ws}'
+    show:
+      info: Generel
+      tasks: Opgaver
+      pupils: Elever
+
   Invitation:
     new: 'Ny bruger (invitation)'
     new_description: 'Du opretter en ny bruger ved at sende hen en invitation'
@@ -348,7 +360,11 @@ da:
       name: "Navn"
       product_resource: "Sti til leverandørens produktoversigt"
       gtin_prefix: GTIN firma præfix
-      
+
+  Team:
+    index: Oversigt over grupper
+    index_description: <span>Oversigten viser alle de grupper, der er oprettet, til at styre roller og arbejdsgrupper. </span>.
+
   User:
     index: "Oversigt over brugere"
     index_description: I denne oversigt finder du alle der har adgang til Speicher. Hver adgang er knyttet til en email adresse (der kan være flere adgange knyttet til samme email adresse). Brugernavnet er unikt.
@@ -363,6 +379,11 @@ da:
       new_description: "Du kan oprette en ny bruger her. Der bliver sendt en bekræftelse af oprettelsen til den email adresse du angiver. <p class='text-sm text-gray-500'>Har vedkommende ikke en email adresse - eller har du ikke mulighed for at bruge den - kan email'en sendes til en anden adresse, og link'et bruges fra denne adresse!</p>"
     create:
       user_created: "Brugeren blev oprettet korrekt!"
+
+  WorkSchedule:
+    index: Oversigt over normtider
+    index_description: <span>Oversigten viser alle de normtider, der er oprettet. Du kan tildele normtider til <a class="text-indigo-500"  href="/teams"> grupper</a> &nbsp; eller <a class="text-indigo-500"  href="/employees">enkelte medarbejdere</a>.</span>
+
 
   activerecord:
     models:
@@ -434,6 +455,8 @@ da:
       default: "%d.%m.%Y"
       long: "%e. %B %Y"
       short: "%e. %b %Y"
+      short_iso: "%Y-%m-%d"
+      week_number: "%W"
     month_names:
     - 
     - januar
@@ -610,6 +633,7 @@ da:
       default: "%e. %B %Y, %H.%M"
       long: "%A d. %e. %B %Y, %H.%M"
       short: "%e. %b %Y, %H.%M"
+      short_iso: "%Y-%m-%d"
       date: "%d/%m/%Y"
       time_day_date: "kl %H:%M, %A den %d. %B, %Y"
     pm: ''

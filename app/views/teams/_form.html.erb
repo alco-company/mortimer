@@ -33,6 +33,10 @@
         <% unless resource.new_record? %>
           <!-- roles -->
           <%= render_component "resource/combo", form: form, attr: :roles, label: t('.roles'), type: :multi_list, url: "/roles", items: Role.all %>
+
+        <!-- WorkSchedules -->
+        <%= render_component "resource/combo", form: form, attr: :work_schedules, label: t('.work_schedules'), type: :multi_list, url: "/work_schedules", items: WorkSchedule.all %>
+
         <% end %>
       </div>
 

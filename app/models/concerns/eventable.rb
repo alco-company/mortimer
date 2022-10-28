@@ -4,7 +4,7 @@ module Eventable
 
   included do
     has_one :event, as: :eventable, touch: true, dependent: :destroy
-    has_many :assignments
+    has_many :assignments, through: :event
     accepts_nested_attributes_for :assignments, reject_if: :all_blank, allow_destroy: true
 
     delegate :name, :calendar, :account, :state, :deleted_at, to: :event

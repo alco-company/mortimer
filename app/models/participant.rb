@@ -1,4 +1,5 @@
 class Participant < AbstractResource
+  include Assignable
   has_ancestry
 
   belongs_to :account
@@ -34,9 +35,20 @@ class Participant < AbstractResource
     teams
   end
 
+  def combo_values_for_work_schedules
+    work_schedules
+  end
+
   def teams= ts 
     teams.delete_all
     ts.each{ |t| ParticipantTeam.create( team: Team.find(t), participant: self) unless t.blank? } if self.id
+  end
+
+  def work_schedules= ws 
+    Assignment.where( assignable_type: 'Participant', event_id: Event.where(eventable_type: 'WorkSchedule', eventable_id: self.work_schedules.map( &:id) )).delete_all
+    ws.each{ |w| Assignment.create( event: WorkSchedule.find(w).event, assignable: self) unless w.blank? } if self.id
+    # ws.each{ |w| Assignment.create( event: w.event, assignable: asset) unless w.blank? } if self.id
+
   end
 
   #

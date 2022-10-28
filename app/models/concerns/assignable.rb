@@ -11,6 +11,7 @@ module Assignable
     has_many :assignments, as: :assignable
     has_many :events, through: :assignments
     has_many :tasks, through: :events, source: :eventable, source_type: "Task"
+    has_many :work_schedules, through: :events, source: :eventable, source_type: "WorkSchedule"
     
   end
 

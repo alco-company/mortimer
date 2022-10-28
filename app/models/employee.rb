@@ -4,7 +4,7 @@
 # ff_days - number of 'feriefridage' / 'omsorgsdage' - same same
 # 
 class Employee < AbstractResource
-  include Assetable, Assignable
+  include Assetable
 
   has_secure_token :access_token
   has_one_attached :mug_shot
@@ -14,7 +14,7 @@ class Employee < AbstractResource
 
   validates :pin_code, uniqueness: true
 
-  delegate :asset_workday_sums, to: :asset
+  delegate :asset_workday_sums, :teams, to: :asset
   
   def self.working
     where('assets.state': ['IN','BREAK'])

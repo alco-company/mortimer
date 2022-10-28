@@ -151,6 +151,13 @@
         <!-- Teams -->
         <%= render_component "resource/combo", form: form, attr: :teams, label: t('.teams'), type: :multi_list, url: "/teams", items: Team.all %>
 
+        <!-- WorkSchedules -->
+        <%= render_component "resource/combo", form: form, attr: :work_schedules, label: t('.work_schedules'), type: :multi_list, url: "/work_schedules", items: WorkSchedule.all do |c| %>
+          <% c.with_footer do %>
+            <%= raw t '.team_work_schedules', ws: show_team_work_schedules( resource ) %>
+          <% end %>
+
+        <% end %>
 
         <!--  Pupils -->
         <div class="px-4 divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
