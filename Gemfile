@@ -102,3 +102,5 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0.1'
 gem 'httparty', '~> 0.20.0'
 
 gem "activerecord-session_store", "~> 2.0"
+
+gem "rrule", "~> 0.5.0"

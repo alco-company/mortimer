@@ -11,7 +11,10 @@
 # :minutes_spent - how many minutes did this event 'take to finish'
 #
 # TODO - RRULE - https://icalendar.org/rrule-tool.html
-#
+# https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+# 
+# on client - https://github.com/jakubroztocil/rrule
+# on server - gem 'rrule' - https://github.com/square/ruby-rrule
 #
 # Event is one in 4 core entities - together with Participants, Assets, and Messages
 # and together they make any data relation possible; with the supporting tables close by
@@ -23,9 +26,10 @@ class Event < AbstractResource
   belongs_to :account, inverse_of: :events
   belongs_to :calendar, optional: true
   has_many :assignments, inverse_of: :event
-  has_many :event_transactions, inverse_of: :event
-  # has_many :participants, through: :assignments, source: "assignable", source_type: "Participant"
-  # has_many :employees, through: :assignments, source: "assignable", source_type: "Employee"
+  has_many :participants, through: :assignments, source: "assignable", source_type: "Participant"
+  has_many :assets, through: :assignments, source: "assignable", source_type: "Asset"
+  has_many :employees, through: :assets, source: "assetable", source_type: "Employee"
+  has_many :teams, through: :participants, source: "participantable", source_type: "Team"
   # has_many :messages, through: :assignments, source: "assignable", source_type: "Message"
   # has_many :event_transactions
   delegated_type :eventable, types: %w[ Task StockItemTransaction AssetWorkTransaction WorkSchedule ], dependent: :destroy

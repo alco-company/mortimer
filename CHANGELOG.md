@@ -12,6 +12,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## TODO 
 
 - start [using BabySqueel](https://github.com/rzane/baby_squeel)
+- use [encrypted fields and queries](https://enquo.org/components/pg_enquo/)
 - make entire system 'loggable' using [Fluentd et al](https://docs.fluentd.org/how-to-guides/free-alternative-to-splunk-by-fluentd)
 - job offering portal, application, interview, assessment, background check 
 - signature like https://www.hellosign.com/products/api
@@ -75,7 +76,18 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## TODO 
 
 - notification when adding new products, suppliers, etc via POS
+- use https://www.maglev.dev/
+- use https://blog.testdouble.com/posts/2022-10-25-building-passwordless-email-auth-in-rails/ 
+- use https://blog.appsignal.com/2022/10/26/build-a-table-editor-with-trix-and-turbo-frames-in-rails.html
+- use https://github.com/truemail-rb/truemail 
+- use https://github.com/jakubroztocil/rrule
+- 
 ## DONE
+
+### 2022-10-31
+
+05:45 been sleeping like a baby - after a busy weekend, redecorating the hall and stairways to the basement
+08:15 Elmelund - have to redefine schedules!
 
 ### 2022-10-28
 

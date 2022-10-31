@@ -37,8 +37,14 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * use [this recipe](https://levelup.gitconnected.com/how-to-add-file-upload-to-your-graphql-api-34d51e341f38) to add fileupload using GraphQL
 * [Use the Trilogy adapter for MySQL databases instead of mysql2](https://github.blog/2022-08-25-introducing-trilogy-a-new-database-adapter-for-ruby-on-rails/)
 * [Stateless Forms with the Attributes API - how to set order to say a filter function](https://blog.testdouble.com/posts/2022-08-30-stateless-forms-with-the-rails-attributes-api/)
+* [How to build Rails generators](https://www.honeybadger.io/blog/build-a-rails-generator/)
+* [A platform for notifications](https://www.courier.com)
+* [Using ActiveInteraction to service ActiveModel](https://github.com/AaronLasseigne/active_interaction)
+* [Build a Tableeditor with TRIX](https://blog.appsignal.com/2022/10/26/build-a-table-editor-with-trix-and-turbo-frames-in-rails.html)
+* [Passwordless Authentication](https://blog.testdouble.com/posts/2022-10-25-building-passwordless-email-auth-in-rails/)
 
 
+[Concepts of doing Advanced Datebase Computing using PostgreSQL ](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)
 https://blog.alco.dk/2021/03/18/tailwind-hotwire-more/
 
 [How to build a beautiful modal - using the <dialog> element](https://web.dev/building-a-dialog-component/)
@@ -76,6 +82,7 @@ https://jose.omg.lol/posts/stimulus-trigger-pattern
 https://maizzle.com/docs/introduction/ 
 https://github.com/mailchimp/email-blueprints 
 https://www.joshwcomeau.com/react/wonderful-emails-with-mjml-and-mdx/
+https://github.com/truemail-rb/truemail
 
 ### Using Liquid for dynamic user content
 
