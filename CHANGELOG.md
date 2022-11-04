@@ -84,10 +84,19 @@ In the REFERENCES you will find a lot of people, resources, etc
 - 
 ## DONE
 
+### 2022-11-01
+
+05:45 another super night's sleep - woke up to election day - took a piss at 4:30
+08:15 voted - then drove to visit/work with my brother
+15:30 added locations
+
 ### 2022-10-31
 
 05:45 been sleeping like a baby - after a busy weekend, redecorating the hall and stairways to the basement
 08:15 Elmelund - have to redefine schedules!
+13:36 `gem install jekyll bundler` && `jekyll new docs` && `cd docs && bundle add just-the-docs`
+13:41 `bundle exec jekyll serve`
+13:57 `yardoc --output-dir docs/dev app/**/*.rb`
 
 ### 2022-10-28
 

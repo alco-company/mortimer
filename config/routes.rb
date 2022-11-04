@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   resources :punch_clocks
   resources :asset_workday_sums
   resources :work_schedules, concerns: [:cloneable, :modalable, :selectable]
+  resources :locations, concerns: [:cloneable, :modalable, :selectable]
+
 
   resources :products, concerns: [:cloneable, :modalable, :selectable] do
     resources :stock_locations

@@ -203,6 +203,10 @@ da:
       new: "Ny bruger (invitation)"
       new_description: "Du kan oprette en ny bruger ved at sende hen en invitation. <p class='text-sm text-gray-500'>Har vedkommende ikke en email adresse - eller har du ikke mulighed for at bruge den - kan email'en sendes til en anden adresse, og link'et bruges fra denne adresse!</p>"
 
+  Location:
+    index: "Oversigt over lokationer"
+    index_description: "Denne oversigt viser dig alle de 'sites' dvs de 'steder' hvor virksomhedens 'produkter' produceres/forældles. "
+    
   pos:
     employees:
       show:
