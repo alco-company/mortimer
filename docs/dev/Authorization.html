@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Authorization
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Authorization";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (A)</a> &raquo;
+    
+    
+    <span class="title">Authorization</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Authorization
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  <dl>
+      <dt>Extended by:</dt>
+      <dd>ActiveSupport::Concern</dd>
+  </dl>
+  
+  
+  
+  
+
+  
+  <dl>
+    <dt>Included in:</dt>
+    <dd><span class='object_link'><a href="AbstractResourcesController.html" title="AbstractResourcesController (class)">AbstractResourcesController</a></span></dd>
+  </dl>
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/controllers/concerns/authorization.rb</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#authorize-instance_method" title="#authorize (instance method)">#<strong>authorize</strong>(action, endpoint = nil)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>TODO: implement alternative to Pundit - or implement Pundit! no pundit!.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#not_authorized-instance_method" title="#not_authorized (instance method)">#<strong>not_authorized</strong>(redirect = false)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="authorize-instance_method">
+  
+    #<strong>authorize</strong>(action, endpoint = nil)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>TODO: implement alternative to Pundit - or implement Pundit! no pundit!</p>
+
+<p>authorize</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/authorization.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_authorize'>authorize</span> <span class='id identifier rubyid_action'>action</span><span class='comma'>,</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id identifier rubyid_endpoint'>endpoint</span> <span class='op'>||=</span> <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span>
+
+  <span class='ivar'>@authorized</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>return</span> <span class='ivar'>@authorized</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Current.html" title="Current (class)">Current</a></span></span><span class='period'>.</span><span class='id identifier rubyid_account'>account</span> <span class='op'>!=</span> <span class='const'><span class='object_link'><a href="Current.html" title="Current (class)">Current</a></span></span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_account'>account</span><span class='rparen'>)</span>
+
+  <span class='kw'>return</span> <span class='ivar'>@authorized</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_env'>env</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>test</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='ivar'>@authorized</span> <span class='kw'>if</span> <span class='id identifier rubyid_endpoint'>endpoint</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>profile</span><span class='tstring_end'>&#39;</span></span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span> <span class='op'>==</span> <span class='id identifier rubyid_current_user'>current_user</span>
+  <span class='kw'>return</span> <span class='ivar'>@authorized</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_is_a_god?'>is_a_god?</span><span class='rparen'>)</span> <span class='comment'># a real superuser - apparently they do exist!!
+</span>  <span class='kw'>return</span> <span class='ivar'>@authorized</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='op'>==</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>account</span><span class='tstring_end'>&#39;</span></span>
+
+  <span class='ivar'>@authorized</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_can'>can</span> <span class='id identifier rubyid_action'>action</span><span class='comma'>,</span> <span class='id identifier rubyid_endpoint'>endpoint</span>
+  <span class='id identifier rubyid_flash'>flash</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='lbracket'>[</span><span class='symbol'>:warning</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_raw_t'>raw_t</span><span class='lparen'>(</span><span class='symbol'>:not_authorized</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@authorized</span>
+  <span class='ivar'>@authorized</span>
+<span class='kw'>rescue</span>
+  <span class='id identifier rubyid_say'>say</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>(authorize) User </span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="Current.html" title="Current (class)">Current</a></span></span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='embexpr_end'>}</span><span class='tstring_content'> failed checking if </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_action'>action</span><span class='embexpr_end'>}</span><span class='tstring_content'> against </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_endpoint'>endpoint</span><span class='embexpr_end'>}</span><span class='tstring_content'> is authorized</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@authorized</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="not_authorized-instance_method">
+  
+    #<strong>not_authorized</strong>(redirect = false)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31
+32
+33
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/authorization.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span> <span class='id identifier rubyid_redirect'>redirect</span><span class='op'>=</span><span class='kw'>false</span>
+  <span class='comment'># render turbo_stream: [
+</span>  <span class='comment'>#   turbo_stream.replace( &quot;unauthorized&quot;, partial: &#39;shared/unauthorized&#39;), 
+</span>  <span class='comment'>#   turbo_stream.remove( resource_form) 
+</span>  <span class='comment'># ]
+</span>  <span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:warning</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_flash'>flash</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='lbracket'>[</span><span class='symbol'>:warning</span><span class='rbracket'>]</span><span class='semicolon'>;</span> <span class='id identifier rubyid_redirect_to'>redirect_to</span> <span class='id identifier rubyid_root_path'>root_path</span> <span class='kw'>and</span> <span class='kw'>return</span> <span class='kw'>if</span> <span class='id identifier rubyid_redirect'>redirect</span>
+  <span class='id identifier rubyid_render'>render</span> <span class='label'>turbo_stream:</span> <span class='id identifier rubyid_turbo_stream'>turbo_stream</span><span class='period'>.</span><span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>unauthorized</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>partial:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>shared/unauthorized</span><span class='tstring_end'>&#39;</span></span> <span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>status:</span> <span class='symbol'>:unauthorized</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Mon Oct 31 14:07:32 2022 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-3.1.2).
+</div>
+
+    </div>
+  </body>
+</html>

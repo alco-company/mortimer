@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Asset
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Asset";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (A)</a> &raquo;
+    
+    
+    <span class="title">Asset</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Asset
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName"><span class='object_link'><a href="AbstractResource.html" title="AbstractResource (class)">AbstractResource</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next"><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="AbstractResource.html" title="AbstractResource (class)">AbstractResource</a></span></li>
+          
+            <li class="next">Asset</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="Assignable.html" title="Assignable (module)">Assignable</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/models/asset.rb</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_rec-class_method" title="new_rec (class method)">.<strong>new_rec</strong>(r)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>called by resource_control when creating new resources for the #new action.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#broadcast_create-instance_method" title="#broadcast_create (instance method)">#<strong>broadcast_create</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>will be called by “children” too - like Employees, Stocks, StockLocations, etc.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#broadcast_update-instance_method" title="#broadcast_update (instance method)">#<strong>broadcast_update</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>will be called by “children” too - like Employees, Stocks, StockLocations, etc.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#combo_values_for_teams-instance_method" title="#combo_values_for_teams (instance method)">#<strong>combo_values_for_teams</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#combo_values_for_work_schedules-instance_method" title="#combo_values_for_work_schedules (instance method)">#<strong>combo_values_for_work_schedules</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_calendar_if_missing-instance_method" title="#create_calendar_if_missing (instance method)">#<strong>create_calendar_if_missing</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#excluded_associations_from_cloning-instance_method" title="#excluded_associations_from_cloning (instance method)">#<strong>excluded_associations_from_cloning</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>used by clone_from method on abstract_resource to exclude has_many associations which should not be cloned when making a copy of some instance of a model.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#teams=-instance_method" title="#teams= (instance method)">#<strong>teams=</strong>(ts)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#work_schedules=-instance_method" title="#work_schedules= (instance method)">#<strong>work_schedules=</strong>(ws)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="AbstractResource.html" title="AbstractResource (class)">AbstractResource</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="AbstractResource.html#broadcast_destroy-instance_method" title="AbstractResource#broadcast_destroy (method)">#broadcast_destroy</a></span>, <span class='object_link'><a href="AbstractResource.html#clone_from-instance_method" title="AbstractResource#clone_from (method)">#clone_from</a></span>, <span class='object_link'><a href="AbstractResource.html#default_scope-class_method" title="AbstractResource.default_scope (method)">default_scope</a></span>, <span class='object_link'><a href="AbstractResource.html#name-instance_method" title="AbstractResource#name (method)">#name</a></span>, <span class='object_link'><a href="AbstractResource.html#say-class_method" title="AbstractResource.say (method)">say</a></span>, <span class='object_link'><a href="AbstractResource.html#say-instance_method" title="AbstractResource#say (method)">#say</a></span>, <span class='object_link'><a href="AbstractResource.html#search_by_model_fields-instance_method" title="AbstractResource#search_by_model_fields (method)">#search_by_model_fields</a></span>, <span class='object_link'><a href="AbstractResource.html#valid_attributes%3F-instance_method" title="AbstractResource#valid_attributes? (method)">#valid_attributes?</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="new_rec-class_method">
+  
+    .<strong>new_rec</strong>(r)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>called by resource_control when creating new resources for the #new action</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/asset.rb', line 46</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new_rec'>new_rec</span> <span class='id identifier rubyid_r'>r</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>assetable:</span> <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="broadcast_create-instance_method">
+  
+    #<strong>broadcast_create</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>will be called by “children” too - like Employees, Stocks, StockLocations, etc</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55
+56
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/asset.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_broadcast_create'>broadcast_create</span>
+<span class='id identifier rubyid_broadcast_prepend_later_to'>broadcast_prepend_later_to</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable_type'>assetable_type</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span><span class='period'>.</span><span class='id identifier rubyid_pluralize'>pluralize</span><span class='comma'>,</span> 
+  <span class='label'>target:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable_class'>assetable_class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span><span class='embexpr_end'>}</span><span class='tstring_content'>_list</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> 
+  <span class='label'>partial:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='comma'>,</span> 
+  <span class='label'>locals:</span> <span class='lbrace'>{</span> <span class='label'>resource:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='comma'>,</span> <span class='label'>user:</span> <span class='const'><span class='object_link'><a href="Current.html" title="Current (class)">Current</a></span></span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span> <span class='rbrace'>}</span>
+<span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='period'>.</span><span class='id identifier rubyid_broadcast_create'>broadcast_create</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="broadcast_update-instance_method">
+  
+    #<strong>broadcast_update</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>will be called by “children” too - like Employees, Stocks, StockLocations, etc</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/asset.rb', line 65</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_broadcast_update'>broadcast_update</span>
+  <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_deleted_at'>deleted_at</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
+    <span class='id identifier rubyid_broadcast_replace_later_to'>broadcast_replace_later_to</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable_type'>assetable_type</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span><span class='period'>.</span><span class='id identifier rubyid_pluralize'>pluralize</span><span class='comma'>,</span> 
+      <span class='label'>partial:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='comma'>,</span> 
+      <span class='label'>target:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='comma'>,</span> 
+      <span class='label'>locals:</span> <span class='lbrace'>{</span> <span class='label'>resource:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='comma'>,</span> <span class='label'>user:</span> <span class='const'><span class='object_link'><a href="Current.html" title="Current (class)">Current</a></span></span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span> <span class='rbrace'>}</span>
+  <span class='kw'>else</span> 
+    <span class='id identifier rubyid_broadcast_remove_to'>broadcast_remove_to</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable_type'>assetable_type</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span><span class='period'>.</span><span class='id identifier rubyid_pluralize'>pluralize</span><span class='comma'>,</span> <span class='label'>target:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span>
+  <span class='kw'>end</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='period'>.</span><span class='id identifier rubyid_broadcast_update'>broadcast_update</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span> 
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="combo_values_for_teams-instance_method">
+  
+    #<strong>combo_values_for_teams</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/asset.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_combo_values_for_teams'>combo_values_for_teams</span>
+  <span class='id identifier rubyid_teams'>teams</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="combo_values_for_work_schedules-instance_method">
+  
+    #<strong>combo_values_for_work_schedules</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/asset.rb', line 27</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_combo_values_for_work_schedules'>combo_values_for_work_schedules</span>
+  <span class='id identifier rubyid_work_schedules'>work_schedules</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_calendar_if_missing-instance_method">
+  
+    #<strong>create_calendar_if_missing</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/asset.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_calendar_if_missing'>create_calendar_if_missing</span> 
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_calendar'>calendar</span> <span class='op'>=</span> <span class='id identifier rubyid_account'>account</span><span class='period'>.</span><span class='id identifier rubyid_calendar'>calendar</span> <span class='op'>||</span> <span class='const'><span class='object_link'><a href="Calendar.html" title="Calendar (class)">Calendar</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span> <span class='label'>name:</span> <span class='id identifier rubyid_account'>account</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_calendar'>calendar</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="excluded_associations_from_cloning-instance_method">
+  
+    #<strong>excluded_associations_from_cloning</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>used by clone_from method on abstract_resource to exclude has_many associations which should not be cloned when making a copy of some instance of a model</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+83
+84
+85</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/asset.rb', line 83</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_excluded_associations_from_cloning'>excluded_associations_from_cloning</span>
+  <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="teams=-instance_method">
+  
+    #<strong>teams=</strong>(ts)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/asset.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_teams='>teams=</span> <span class='id identifier rubyid_ts'>ts</span> 
+  <span class='id identifier rubyid_teams'>teams</span><span class='period'>.</span><span class='id identifier rubyid_delete_all'>delete_all</span>
+  <span class='id identifier rubyid_ts'>ts</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span> <span class='const'><span class='object_link'><a href="AssetTeam.html" title="AssetTeam (class)">AssetTeam</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span> <span class='label'>team:</span> <span class='const'><span class='object_link'><a href="Team.html" title="Team (class)">Team</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_t'>t</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>asset:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="work_schedules=-instance_method">
+  
+    #<strong>work_schedules=</strong>(ws)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/asset.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_work_schedules='>work_schedules=</span> <span class='id identifier rubyid_ws'>ws</span> 
+  <span class='const'><span class='object_link'><a href="Assignment.html" title="Assignment (class)">Assignment</a></span></span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span> <span class='label'>assignable_type:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Asset</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>event_id:</span> <span class='const'><span class='object_link'><a href="Event.html" title="Event (class)">Event</a></span></span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>eventable_type:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>WorkSchedule</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>eventable_id:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_work_schedules'>work_schedules</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span> <span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span> <span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_delete_all'>delete_all</span>
+  <span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_w'>w</span><span class='op'>|</span> <span class='const'><span class='object_link'><a href="Assignment.html" title="Assignment (class)">Assignment</a></span></span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span> <span class='label'>event:</span> <span class='const'><span class='object_link'><a href="WorkSchedule.html" title="WorkSchedule (class)">WorkSchedule</a></span></span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_event'>event</span><span class='comma'>,</span> <span class='label'>assignable:</span> <span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_w'>w</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span> <span class='rbrace'>}</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+  <span class='comment'># ws.each{ |w| Assignment.create( event: w.event, assignable: asset) unless w.blank? } if self.id
+</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Mon Oct 31 14:07:35 2022 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-3.1.2).
+</div>
+
+    </div>
+  </body>
+</html>
