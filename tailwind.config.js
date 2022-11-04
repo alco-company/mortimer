@@ -16,7 +16,8 @@ module.exports = {
   content: [
     './app/views/**/*.html.erb',
     './app/helpers/**/*.rb',
-    './app/components/**/*.*',
+    './app/components/**/*.html.erb',
+    './app/components/**/*.rb',
     './config/locales/*.yml',
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js'
