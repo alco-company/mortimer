@@ -4,6 +4,11 @@ class ProductService < AssetService
     (Product.unscoped.find_by(field => parm["ean14"]).asset rescue nil) || create_product( s, parm)
   end
 
+  def new_product account 
+    prod = Product.new
+    Asset.new account: account, assetable: prod
+  end
+
   def create_product s, parm 
     acc = Asset.unscoped.where(assetable: s).first.account
     sup = SupplierService.new.get_by :supplier_barcode, acc, parm

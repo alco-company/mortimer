@@ -13,6 +13,7 @@ class Product < AbstractResource
   def self.search_by_model_fields lot, query
     default_scope.where "assets.name ilike '%#{query}%' "
   end
+
   #
   # default_scope returns all posts that have not been marked for deletion yet
   #
