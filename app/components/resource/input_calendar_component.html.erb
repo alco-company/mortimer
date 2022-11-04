@@ -1,6 +1,5 @@
 <div
   data-controller="resource--input-calendar-component"
-  data-resource--input-calendar-component-marked-days-value="[<%= @resource.rrule %>]"
   class="space-y-1 px-4 sm:space-y-0  sm:px-6 sm:py-5">
   <%= @form.hidden_field @field, data: { "resource--input-calendar-component-target": "input"} %>
   <div class="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
@@ -78,11 +77,8 @@
       </div>
     </div>
 
-    <%# <button 
-      type="button" 
-      class="mt-8 w-full rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-      Add event
-    </button> %>
+    <%= turbo_frame_tag 'calendar_event_modal' do %>
+    <% end %>    
   </div>
 </div>
 

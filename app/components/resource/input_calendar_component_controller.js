@@ -3,14 +3,9 @@ import { Controller } from "@hotwired/stimulus"
 export default class InputCalendarComponentController extends Controller {
   static targets = [ "input", "day", "weekday", "week" ]
 
-  static values = {
-    markedDays: Array  
-  }
-
   connect() {
-    this.markedDays = this.markedDaysValue
+    this.markedDays = JSON.parse(this.inputTarget.value)
     this.markAllMarked()
-    console.log( this.markedDays )
   }
   
   flip(t){

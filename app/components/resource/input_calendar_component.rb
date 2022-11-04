@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Resource::InputCalendarComponent < ViewComponent::Base
+class Resource::InputCalendarComponent < ApplicationComponent
   def initialize(form:, field:, resource:, title:, start_date:)
     @form = form
     @field = field
