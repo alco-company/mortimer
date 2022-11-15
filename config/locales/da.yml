@@ -57,6 +57,7 @@ da:
     home: 'Instrumentbrædt'
     accounts: 'Konti'
     dashboards: "Instrumentbrædder/skabeloner"
+    locations: "Arbejdssteder"
     employees: "Medarbejdere"
     products: "Produkter"
     punch_clocks: "Stempelure"
@@ -194,6 +195,22 @@ da:
       tasks: Opgaver
       pupils: Elever
 
+  Location:
+    index: "Oversigt over arbejdssteder"
+    index_description: "Denne oversigt viser dig alle de 'arbejdssteder' dvs de 'steder' hvor virksomhedens 'produkter/tjenester' produceres/leveres/forædles. "
+    new_button: "Nyt arbejdssted!"
+
+  locations:
+    index_columns:
+      name: Navn
+      long_lat: Geo pos
+      state: Status
+    form: 
+      new: "Nyt arbejdssted"
+      new_description: "Du kan oprette et nyt arbejdssted her."
+      edit: "Ret arbejdssted"
+      edit_description: "Du kan rette et arbejdssted her."
+
   Invitation:
     new: 'Ny bruger (invitation)'
     new_description: 'Du opretter en ny bruger ved at sende hen en invitation'
@@ -202,10 +219,6 @@ da:
     form:
       new: "Ny bruger (invitation)"
       new_description: "Du kan oprette en ny bruger ved at sende hen en invitation. <p class='text-sm text-gray-500'>Har vedkommende ikke en email adresse - eller har du ikke mulighed for at bruge den - kan email'en sendes til en anden adresse, og link'et bruges fra denne adresse!</p>"
-
-  Location:
-    index: "Oversigt over lokationer"
-    index_description: "Denne oversigt viser dig alle de 'sites' dvs de 'steder' hvor virksomhedens 'produkter' produceres/forældles. "
     
   pos:
     employees:
@@ -461,6 +474,7 @@ da:
       short: "%e. %b %Y"
       short_iso: "%Y-%m-%d"
       week_number: "%W"
+      month_name: "%B"
     month_names:
     - 
     - januar
@@ -640,5 +654,6 @@ da:
       short_iso: "%Y-%m-%d"
       date: "%d/%m/%Y"
       time_day_date: "kl %H:%M, %A den %d. %B, %Y"
+      week_number: "%W"
     pm: ''
 

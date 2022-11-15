@@ -29,7 +29,7 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
+de:
   you_must_login_to_access_this: "Du er nødt til at logge ind for at tilgå denne side!"
   your_credentials_dont_match: "Dine brugeroplysninger blev ikke fundet - CSRF fejl!"
   record_not_found: "(404) Den post, du bad om, blev desværre ikke fundet"
@@ -38,8 +38,8 @@ en:
   register_time: "tid"
   calendar: "kalender"
   statistics: "historik"
-  my_profile: "Min profil"
-  settings: "Indstillinger"
+  my_profile: "Mein Profil"
+  settings: "Einstellungen"
   sign_off: "Log af!"
   form_errors: "Der er %{nbr} fejl, som forhindrer at posten kan gemmes korrekt!"
   new: "Ny"
@@ -58,8 +58,8 @@ en:
     accounts: 'Tenants'
     dashboards: "Instrumentbrædder/skabeloner"
     locations: "Arbejdssteder"
-    employees: "Employees"
-    products: "Produkter"
+    employees: "Mitarbeitern"
+    products: "Produkte"
     punch_clocks: "Stempelure"
     services: "Tjenester"
     stocks: "Lagre"
@@ -233,7 +233,7 @@ en:
 
   products:
     index_columns: 
-      name: Product name
+      name: Produkt name
       supplier_name: Leverandør
       supplier_barcode: GTIN EAN14 
       state: status

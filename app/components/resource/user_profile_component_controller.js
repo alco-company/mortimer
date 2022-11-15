@@ -33,7 +33,7 @@ export default class UserProfileComponentController extends Controller {
     if ( this.userprofileTarget.classList.contains('hidden') ) {
       enter(this.userprofileTarget)
     } else {
-      document.getElementById('form_slideover').querySelectorAll('form')[0].id="profile_form"
+      // document.getElementById('form_slideover').querySelectorAll('form')[0].id="profile_form"
       leave(this.userprofileTarget)
     }
   }

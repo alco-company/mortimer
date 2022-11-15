@@ -22,6 +22,10 @@ class Profile < AbstractResource
     [time_zone]
   end
 
+  def combo_values_for_locale
+    [['dansk','da'],['deutsch','de'],['english','en']]
+  end
+
   def broadcast_create
   end
 
