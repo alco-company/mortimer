@@ -61,9 +61,9 @@ module Pos
     #               "punched_pupils"=>{"pupil_2"=>"on", "pupil_6"=>"on"}}, "api_key"=>"[FILTERED]", "id"=>"2", "employee"=>{}}
     def punch 
       head 301 and return unless token_approved
-      res1 = AssetWorkTransactionService.new.create_employee_punch_transaction( resource, resource_params )
-      if res1 && (['IN','OUT','SICK'].include? resource_params['state'])
-        res2 = PupilTransactionService.new.create_pupil_transaction( resource, res1, resource_params )
+      event = AssetWorkTransactionService.new.create_employee_punch_transaction( resource, resource_params )
+      if event && (['OUT','SICK','BREAK'].include? resource_params['state']) 
+        ev = PupilTransactionService.new.close_active_pupils( resource, event, resource_params ) if resource_params[:punched_pupils]
       end
       head 200
     end
@@ -82,7 +82,7 @@ module Pos
         params["asset_work_transaction"]["ip_addr"] = request.remote_ip
         params["asset_work_transaction"]["employee_asset_id"] = resource.id
         params["asset_work_transaction"]["punch_asset_id"] = resource.id # the user's own device
-        params.require(:asset_work_transaction).permit(:punched_at, :state, :ip_addr, :punch_asset_id, :employee_asset_id, punched_pupils: {} )
+        params.require(:asset_work_transaction).permit(:punched_at, :state, :ip_addr, :punch_asset_id, :p_time, :substitute, :employee_asset_id, punched_pupils: {} )
       end
 
       #

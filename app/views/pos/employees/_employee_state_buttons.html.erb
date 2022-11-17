@@ -1,26 +1,47 @@
 <div id="employee_state_buttons" class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
   <button 
-    data-employee-pos-target="startButton" 
-    data-action="employee-pos#punch_in" 
+    data-employee-pos-target="pButton" 
+    data-action="employee-pos#punch_in_p" 
     type="button" 
     <%= 'disabled' if ['IN'].include? resource.state %>
     class="inline-flex justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
     <span class="material-symbols-outlined">
     login
     </span>                  
-    <span>Start</span>
+    <span class="pl-1">P-tid</span>
+  </button>
+  <button 
+    data-employee-pos-target="substituteButton" 
+    data-action="employee-pos#punch_in_sub" 
+    type="button" 
+    <%= 'disabled' if ['IN'].include? resource.state %>
+    class="inline-flex justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+    <span class="material-symbols-outlined">
+    login
+    </span>                  
+    <span class="pl-1">Vikar</span>
+  </button>
+
+  <button 
+    data-employee-pos-target="startButton" 
+    data-action="employee-pos#punch_in" 
+    type="button" 
+    <%= 'disabled' if ['IN'].include? resource.state %>
+    class="inline-flex justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+    <span class="material-symbols-outlined">login</span>                  
+    <span class="pl-1">Start</span>
   </button>
   
   <button 
     data-employee-pos-target="pauseButton" 
-    data-action="employee-pos#punch_pause_resume" 
+    data-action="employee-pos#punch_pause" 
     type="button" 
     <%= 'disabled' if !['IN'].include? resource.state %> 
     class="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
     <span class="material-symbols-outlined">
     pause
     </span>
-    <span>Pause</span>
+    <span class="pl-1">Pause</span>
   </button>
   <button 
     data-employee-pos-target="stopButton" 
@@ -31,7 +52,7 @@
     <span class="material-symbols-outlined">
     logout
     </span>
-    <span>Stop</span>
+    <span class="pl-1">Stop</span>
   </button>
   
   <button 
@@ -43,6 +64,6 @@
     <span class="material-symbols-outlined">
     sick
     </span>
-    <span>Syg!</span>
+    <span class="pl-1">Syg!</span>
   </button>
 </div>

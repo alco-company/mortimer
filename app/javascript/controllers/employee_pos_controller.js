@@ -8,10 +8,13 @@ import { get } from "@rails/request.js"
 // 5 Misc
 export default class EmployeePosController extends Controller {
   static targets = [ 
+    "pButton",
+    "substituteButton",
     "startButton",
     "pauseButton",
     "stopButton",
-    "sickButton"
+    "sickButton",
+    "pupilsList"
   ]
   static values = {
     url: String,            // where to do the lookup for data values
@@ -76,24 +79,98 @@ export default class EmployeePosController extends Controller {
     this.pauseButtonTarget.classList.remove("bg-green-400")
     this.stopButtonTarget.classList.remove("bg-red-400")
     this.sickButtonTarget.classList.remove("bg-yellow-400")
+    this.pupilsListTarget.classList.remove("hidden")
 
     this.startButtonTarget.disabled = true
+    this.substituteButtonTarget.disabled = true
+    this.pButtonTarget.disabled = true
     this.stopButtonTarget.disabled = false
     this.pauseButtonTarget.disabled = false
     this.sickButtonTarget.disabled = false
 
-    const elems = document.querySelectorAll('#pupils td.bg-blue-100')
-    let pupils = {}
-    document.querySelectorAll('#pupils td.bg-blue-100').forEach( e => pupils[e.id]='on')
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "IN", 
-      "punched_pupils": pupils,
       }
     }
 
     this.postPunch( data )
 
+  }
+
+  punch_pupil(e) {
+    if(e.srcElement.dataset['disabled']=='disabled')
+    return
+
+    let state=null
+    if (e.srcElement.classList.contains('bg-blue-100')){
+      e.srcElement.classList.remove('bg-blue-100')
+      state="OUT"
+    } else {
+      e.srcElement.classList.add('bg-blue-100')
+      state="IN"
+    }
+
+    let data = { "pupil_transaction": { 
+      "punched_at": new Date().toISOString(), 
+      "state": state, 
+      "pupil_id": e.target.dataset.id,
+      }
+    }
+
+    this.postPunch(data,`${this.urlValue}/pupil_transactions`)
+
+  }
+
+  // button to register employee punching p-time
+  punch_in_p(e){
+    this.pButtonTarget.classList.add("bg-green-400")
+    this.pauseButtonTarget.classList.remove("bg-green-400")
+    this.stopButtonTarget.classList.remove("bg-red-400")
+    this.sickButtonTarget.classList.remove("bg-yellow-400")
+    this.pupilsListTarget.classList.add("hidden")
+
+    this.pButtonTarget.disabled = true
+    this.substituteButtonTarget.disabled = true
+    this.startButtonTarget.disabled = true
+    this.stopButtonTarget.disabled = false
+    this.pauseButtonTarget.disabled = false
+    this.sickButtonTarget.disabled = false
+
+    let data = { "asset_work_transaction": { 
+      "punched_at": new Date().toISOString(), 
+      "state": "IN", 
+      "p_time": "true"
+      }
+    }
+
+    this.postPunch( data )
+  }
+
+  // button to register employee punching substitute
+  punch_in_sub(e){
+    this.substituteButtonTarget.classList.add("bg-green-400")
+    this.pButtonTarget.classList.remove("bg-green-400")
+    this.pauseButtonTarget.classList.remove("bg-green-400")
+    this.stopButtonTarget.classList.remove("bg-red-400")
+    this.sickButtonTarget.classList.remove("bg-yellow-400")
+    this.pupilsListTarget.classList.remove("hidden")
+
+    this.pButtonTarget.disabled = true
+    this.substituteButtonTarget.disabled = true
+    this.startButtonTarget.disabled = true
+    this.stopButtonTarget.disabled = false
+    this.pauseButtonTarget.disabled = false
+    this.sickButtonTarget.disabled = false
+
+    let data = { "asset_work_transaction": { 
+      "punched_at": new Date().toISOString(), 
+      "state": "IN", 
+      "substitute": "true"
+      }
+    }
+
+    this.postPunch( data )
   }
 
   // button to register employee punching out
@@ -102,17 +179,21 @@ export default class EmployeePosController extends Controller {
     this.startButtonTarget.classList.remove("bg-green-400")
     this.pauseButtonTarget.classList.remove("bg-green-400")
     this.sickButtonTarget.classList.remove("bg-yellow-400")
+    this.pupilsListTarget.classList.add("hidden")
         
     this.startButtonTarget.disabled = false
+    this.substituteButtonTarget.disabled = false
     this.stopButtonTarget.disabled = true
     this.pauseButtonTarget.disabled = true
     this.sickButtonTarget.disabled = true
 
     const elems = document.querySelectorAll('#pupils td.bg-blue-100')
-    elems.forEach( e => e.classList.remove("bg-blue-100"))
+    let pupils = {}
+    document.querySelectorAll('#pupils td.bg-blue-100').forEach( e => pupils[e.id]='off')
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "OUT", 
+      "punched_pupils": pupils,
       }
     }
 
@@ -120,20 +201,25 @@ export default class EmployeePosController extends Controller {
   }
 
   // button to register employee punching pause/resume
-  punch_pause_resume(e){
+  punch_pause(e){
     this.pauseButtonTarget.classList.add("bg-green-400")
     this.stopButtonTarget.classList.remove("bg-red-400")
     this.startButtonTarget.classList.remove("bg-green-400")
     this.sickButtonTarget.classList.remove("bg-yellow-400")
+    this.pupilsListTarget.classList.add("hidden")
         
     this.startButtonTarget.disabled = false
     this.stopButtonTarget.disabled = true
     this.pauseButtonTarget.disabled = true
     this.sickButtonTarget.disabled = true
 
+    const elems = document.querySelectorAll('#pupils td.bg-blue-100')
+    let pupils = {}
+    document.querySelectorAll('#pupils td.bg-blue-100').forEach( e => pupils[e.id]='off')
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": 'BREAK', 
+      "punched_pupils": pupils,
       }
     }
 
@@ -146,6 +232,7 @@ export default class EmployeePosController extends Controller {
     this.pauseButtonTarget.classList.remove("bg-green-400")
     this.stopButtonTarget.classList.remove("bg-red-400")
     this.startButtonTarget.classList.remove("bg-green-400")
+    this.pupilsListTarget.classList.add("hidden")
         
     this.sickButtonTarget.disabled = true
     this.startButtonTarget.disabled = false
@@ -153,10 +240,13 @@ export default class EmployeePosController extends Controller {
     this.pauseButtonTarget.disabled = true
 
     const elems = document.querySelectorAll('#pupils td.bg-blue-100')
+    let pupils = {}
+    document.querySelectorAll('#pupils td.bg-blue-100').forEach( e => pupils[e.id]='off')
     elems.forEach( e => e.classList.remove("bg-blue-100"))
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "SICK", 
+      "punched_pupils": pupils,
       }
     }
 
@@ -234,11 +324,14 @@ export default class EmployeePosController extends Controller {
   // data.forEach( (v,k) => post_data[k]=v ) 
   // postPunch(url, urlMethod, urlHeaders, { asset_work_transaction: post_data }, data)
 
-  postPunch(data){
+  postPunch(data,url=null){
     try{
       const csrfToken = document.querySelector("[name='csrf-token']").content
       let headers = { "X-CSRF-Token": csrfToken, "Content-Type": "application/json" }
-      let url = `${this.urlValue}?api_key=${this.apikeyValue}`
+      if (!url )
+        url = `${this.urlValue}/punch?api_key=${this.apikeyValue}`
+      else
+        url = `${url}?api_key=${this.apikeyValue}`
 
       let options = {
         method: 'POST',
