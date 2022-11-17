@@ -17,7 +17,6 @@ class AssetsController < DelegatedController
   #   @resource_class ||= Employee
   # end
 
-
   #
   # The create_resource is an override to make sure Event is the 'base' entity
   # being created

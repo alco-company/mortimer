@@ -22,7 +22,7 @@ module Authorization
     flash.now[:warning] = raw_t(:not_authorized) unless @authorized
     @authorized
   rescue
-    say "(authorize) User #{Current.user.id} failed checking if #{action} against #{endpoint} is authorized"
+    say "(authorize) User #{(Current.user.id rescue 'unknown')} failed checking whether '#{action}' against '#{endpoint}' is authorized"
     @authorized = false
   end
 

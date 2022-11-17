@@ -48,6 +48,8 @@ class AbstractResourcesController < ApplicationController
   #
   # this include will prepare the resource and/or resources
   # be it a new resource, an existing, or a paginated set of resources
+  # and further set_user_info and more, through UserInfo
+  # allowing _non_users_ like punch_clocks access setting Current.punch_clock
   #
   # now in concerns/resource_control.rb: before_action :set_resource
   # now in concerns/resource_control.rb: before_action :set_paper_trail_whodunnit

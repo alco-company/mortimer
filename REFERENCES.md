@@ -29,6 +29,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 
 ## Resources
 
+* [How to use Custom Fonts](https://medium.com/@alexis.teh/how-to-add-custom-fonts-to-your-rails-application-992b197c7baa)
 * [How to protect against hackers using CORS and CSRF](https://www.stackhawk.com/blog/rails-csrf-protection-guide/)
 * [How to define work hours - wages, attendance, and more](https://www.danskindustri.dk/vi-radgiver-dig/personale/arbejdstid/)
 * [How To GraphQL](https://www.howtographql.com/)

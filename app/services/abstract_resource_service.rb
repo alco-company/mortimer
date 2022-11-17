@@ -1,3 +1,9 @@
+#
+# Most resources are easily inserted
+# and will return a Result hash with 
+# a status and a record persisting the
+# ActiveRecord
+#
 class AbstractResourceService
   def create( resource )
     begin
@@ -31,6 +37,11 @@ class AbstractResourceService
     end
   end
   
+  #
+  # deleting a resource will usually mean softdeleting it
+  # by ways of updating the deleted_at attribute with the
+  # current timestamp
+  #
   def delete( resource )
     begin        
       resource.update_attribute :deleted_at, DateTime.current
@@ -43,11 +54,21 @@ class AbstractResourceService
   end
 
   # this should probably be distilled quite a bit!
+  #
+  # records having dynamic_attributes may be
+  # batch updated with a set of attributes - which is
+  # an easy way of changing fx profit margin on all
+  # products of a particular category, expire a selected
+  # set of stock_items, etc
+  #
   def edit_all resources, resource_params
     attribs = resource_params[:dynamic_attributes].delete_if { |k,v| v.blank? or v.empty? or v.nil? or v == [""] }
     resources.each{|r| r.update_attribute :dynamic_attributes, (r.dynamic_attributes.merge(attribs))}
   end
 
+  #
+  # Result is the hash returned by a service
+  # after creating, updating, or deleting it
   class Result 
     attr_reader :record, :status
     def initialize(status:, record:)

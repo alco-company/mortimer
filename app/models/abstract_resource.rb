@@ -34,6 +34,8 @@ class AbstractResource < ApplicationRecord
   #
   # called by resource_control when creating new resources
   # for the #new action
+  # resources like Event, Participant, Message, and Asset
+  # will overload this method 
   def self.new_rec(_r)
     new
   end
