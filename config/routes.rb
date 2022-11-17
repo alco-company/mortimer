@@ -35,8 +35,10 @@ Rails.application.routes.draw do
   scope module: :pos, path: 'pos', as: 'pos' do 
     resources :employees do 
       member do
+        get :calendar
         post :punch
       end
+      resources :pupil_transactions
     end
     resources :stocks do
       member do
@@ -57,7 +59,9 @@ Rails.application.routes.draw do
   resources :punch_clocks
   resources :asset_workday_sums
   resources :work_schedules, concerns: [:cloneable, :modalable, :selectable]
-  resources :locations, concerns: [:cloneable, :modalable, :selectable]
+  resources :locations, concerns: [:cloneable, :modalable, :selectable] do
+    resources :calendars
+  end
 
 
   resources :products, concerns: [:cloneable, :modalable, :selectable] do
@@ -112,6 +116,7 @@ Rails.application.routes.draw do
   
   # resources :events
   resources :employees, concerns: [:cloneable, :modalable, :exportable] do
+    resources :calendars
     resources :tasks, concerns: [:cloneable, :modalable]
     resources :pupils, concerns: [:cloneable, :modalable] do
       resources :pupil_transactions

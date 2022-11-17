@@ -75,17 +75,8 @@
           </div>
         </div>
 
-        <!-- hired_at -->
-        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
-          <div>
-            <label for="hired_at" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
-              <%= t ".hired_at" %>
-            </label>
-          </div>
-          <div class="sm:col-span-2 flex">
-            <%= employee.text_field :hired_at, value: display_date( employee.object.hired_at, Current.user) %>
-          </div>
-        </div>
+        <!-- hired_at --> 
+        <%= render_component "resource/input_date", form: employee, field: :hired_at, resource: resource, title: t('.hired_at'), required: true %>
 
         <!-- state -->
         <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
@@ -100,16 +91,7 @@
         </div>
 
         <!-- birthday -->
-        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
-          <div>
-            <label for="birthday" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
-              <%= t ".birthday" %>
-            </label>
-          </div>
-          <div class="sm:col-span-2 flex">
-            <%= employee.text_field :birthday, value: display_date( employee.object.birthday, Current.user) %>
-          </div>
-        </div>
+        <%= render_component "resource/input_date", form: employee, field: :birthday, resource: resource, title: t('.birthday'), required: true %>
 
         <!-- pin_code -->
         <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
