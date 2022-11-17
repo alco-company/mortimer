@@ -134,8 +134,10 @@ module ResourcesHelper
   # this method is used when building forms using Turbo(frames)
   # you can override this to have a custom form - eg when forms clash!
   #
-  def resource_form
-    "%s_form" % (resource_class.to_s.underscore rescue "form")
+  def resource_form rs=nil
+    # rs ||= resource
+    return ("form_%s" % (Current.user.id rescue '0')) # if rs.nil?
+    # "%s_%s_form" % [rs.class.to_s.underscore, (rs.id rescue 'new')]
   end
 
   #

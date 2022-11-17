@@ -1,7 +1,7 @@
 require 'active_support/concern'
 
-# load the concerns/parent_control.rb
 # require "parent_control"
+# load the concerns/parent_control.rb
 
 module ResourceControl
   extend ActiveSupport::Concern
@@ -125,7 +125,7 @@ module ResourceControl
   # this method is used when building forms using Turbo(frames)
   # you can override this to have a custom form - eg when forms clash!
   #
-  def resource_form
+  def resource_form rs=nil
     #
     # this is a terrible hack :( 
     # due to the fact that the <form id="#{resource_form}"> does not change on
@@ -134,8 +134,9 @@ module ResourceControl
     # TODO: make show pages with tabs change the 'resource_form' id to the correct one
     #
     return "stock_form" if request.url =~ /stocks.*stock_locations/
-
-    "%s_form" % resource_class.to_s.underscore
+    # rs ||= resource
+    return ("form_%s" % (Current.user.id rescue '0')) # if rs.nil?
+    # "%s_%s_form" % [rs.class.to_s.underscore, (rs.id rescue 'new')]
   end
 
   #
@@ -158,8 +159,9 @@ module ResourceControl
   #
   # return the resource in an edit action
   #
-  def edit_resource_url
-    url_for(resource)+"/edit"
+  def edit_resource_url options={}
+    debugger
+    url_for(resource, options)+"/edit"
   end
 
   #
