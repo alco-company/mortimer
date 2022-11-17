@@ -5,11 +5,11 @@ I started this as another project - hermes - which evolved into 'astronaut' whic
 The distinction between Message and Document isn't quite clear because I haven't decided on whether Documents really are a particular form of Messages, or entities in their own right, yet.
 
 The Key Issue being that one/more Participants will exchange/persist a Message/Document and it will be an Event them doing it - and there is a good change that the exchange
-is pertaining to an Asset! 
+is pertaining to an Asset!
 
 In the REFERENCES you will find a lot of people, resources, etc
 
-## TODO 
+## TODO
 
 - start [using BabySqueel](https://github.com/rzane/baby_squeel)
 - use [encrypted fields and queries](https://enquo.org/components/pg_enquo/)
@@ -25,70 +25,120 @@ In the REFERENCES you will find a lot of people, resources, etc
 - product (variant) design/calculation/planning - PIM work in a number of domains (graphics, patents/documents,more ) - collaboration
 - leads/supplier
 - purchase inquiries
-- 
 - call (to making notes/comments on phone calls, and uptake leads, and sales inquiries/orders)
 - lead/customer portal (to allow the lead/customer a GDPR safe view on their engagement with the company, recent offers, orders, invoices, more)
 - order confirmation
 - ..
-- picklist 
+- picklist
 - b/l aka receipt
 - freight/carrier documents
 - invoice
 - all the documents should be pixel perfect 'on screen' as well as in print
-
-
-
-* radio_field
-* use Trilogy gem instead of mysql2
-* TODO: use has_secure_token to allow 'user-less' users access without logging in!
-* steps_field - like when you want the user to first finish typing in [fieldset] and then continue to the next [fieldset]
-* write some serious tests for people, partners, participants, events, 
-* add Participant addressability - by means of basically one table :0 (URLs are not just webpages, but really any adressable resource!!)
-* add second **main feature** - documents (in all their glory and multiversatility, like notes, messages, contracts, SOP's, NDA's, invoices, orders, quotes, etc)
-* add Team - People are grouped into teams, either in a permanent position as fx a Sales rep in the Sales Team, or a temporary/matrix position as Data Analyst in the Finance Team/Department
-
-* make  H E R M E S  a PWA - use [Kevin Basset's Progressier](https://progressier.com/) &  https://dev.to/zippytyro/how-to-convert-any-website-webpage-into-an-installable-progressive-web-app-pwa-59ai
-* 
-* Connecting customer specific data through DT (Delegated Types)
-* use Chartkick.js for [Presentational Graphics](https://github.com/ankane/chartkick.js)
-* fixing [issues with current_user](https://blog.cloud66.com/making-hotwire-and-devise-play-nicely-with-viewcomponents/) when using Hotwire
-* using imagekit.io to building the image library - remember new UI from TailwindUI
-
-* ideas for wms - https://www.youtube.com/watch?v=Nphpy0PH2BE
-* ideas for handset/pos  - https://www.youtube.com/watch?v=6yu883oEq7A
-* checkbox on stock to scan 92___ own barcode w/fixed quantity
-* checkbox on stock to scan 93___ own barcode manual entry of quantity
-* checkbox on stock to manual entry of quantity on GTIN EAN14
-* checkbox on stock to manual entry of best-before on GTIN EAN14
-* stock_item_transaction_processing_job has to start every 2 minute to check if any items to process - ajob for whenever
-  * https://medium.com/swlh/automate-tasks-in-rails-using-the-whenever-gem-46f9708ab002
-  * https://dokku.com/docs/processes/scheduled-cron-tasks/
-  * 
-
-* always type '?' in any inputfield (even if it cannot be presented - like checkboxes and radiobuttons) to get to the on screen documentation and help
-* 
-
-* use github actions (or gitlab equivalent) to do automagic deploys on git push to staging/production branches
+- radio_field
+- use Trilogy gem instead of mysql2
+- TODO: use has_secure_token to allow 'user-less' users access without logging in!
+- steps_field - like when you want the user to first finish typing in [fieldset] and then continue to the next [fieldset]
+- write some serious tests for people, partners, participants, events, 
+- add Participant addressability - by means of basically one table :0 (URLs are not just webpages, but really any adressable resource!!)
+- add second **main feature** - documents (in all their glory and multiversatility, like notes, messages, contracts, SOP's, NDA's, invoices, orders, quotes, etc)
+- add Team - People are grouped into teams, either in a permanent position as fx a Sales rep in the Sales Team, or a temporary/matrix position as Data Analyst in the Finance Team/Department
+- make  H E R M E S  a PWA - use [Kevin Basset's Progressier](https://progressier.com/) &  https://dev.to/zippytyro/how-to-convert-any-website-webpage-into-an-installable-progressive-web-app-pwa-59ai
+- Connecting customer specific data through DT (Delegated Types)
+- use Chartkick.js for [Presentational Graphics](https://github.com/ankane/chartkick.js)
+- fixing [issues with current_user](https://blog.cloud66.com/making-hotwire-and-devise-play-nicely-with-viewcomponents/) when using Hotwire
+- using imagekit.io to building the image library - remember new UI from TailwindUI
+- ideas for wms - https://www.youtube.com/watch?v=Nphpy0PH2BE
+- ideas for handset/pos  - https://www.youtube.com/watch?v=6yu883oEq7A
+- checkbox on stock to scan 92___ own barcode w/fixed quantity
+- checkbox on stock to scan 93___ own barcode manual entry of quantity
+- checkbox on stock to manual entry of quantity on GTIN EAN14
+- checkbox on stock to manual entry of best-before on GTIN EAN14
+- stock_item_transaction_processing_job has to start every 2 minute to check if any items to process - ajob for whenever
+- [whenever gem](https://medium.com/swlh/automate-tasks-in-rails-using-the-whenever-gem-46f9708ab002)
+- [cron](https://dokku.com/docs/processes/scheduled-cron-tasks/)
+- always type '?' in any inputfield (even if it cannot be presented - like checkboxes and radiobuttons) to get to the on screen documentation and help
+- use github actions (or gitlab equivalent) to do automagic deploys on git push to staging/production branches
+- notification when adding new products, suppliers, etc via POS
+- use [to improve image handling](https://austingil.com/better-html-images)
+- use [maglev](https://www.maglev.dev/)
+- use [passwordless](https://blog.testdouble.com/posts/2022-10-25-building-passwordless-email-auth-in-rails/ )
+- use [table editoer](https://blog.appsignal.com/2022/10/26/build-a-table-editor-with-trix-and-turbo-frames-in-rails.html)
+- use [truemail](https://github.com/truemail-rb/truemail )
+- use [rrule](https://github.com/jakubroztocil/rrule)
 
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying - or better - just run 'depstage'
 
-
-## TODO 
-
-- notification when adding new products, suppliers, etc via POS
-- use https://www.maglev.dev/
-- use https://blog.testdouble.com/posts/2022-10-25-building-passwordless-email-auth-in-rails/ 
-- use https://blog.appsignal.com/2022/10/26/build-a-table-editor-with-trix-and-turbo-frames-in-rails.html
-- use https://github.com/truemail-rb/truemail 
-- use https://github.com/jakubroztocil/rrule
-- 
 ## DONE
+
+### 2022-11-17
+
+08:00 working on pupil_transactions
+
+### 2022-11-16
+
+08:00 working on work_schedules
+
+### 2022-11-15
+
+08:00 working on work_schedules
+21:00 problems with Google Material Symbols
+
+yarn add material-symbols
+cp material-symbols-outlined.woff2 assets/fonts
+add path to application.rb
+
+### 2022-11-14
+
+08:00 working on work_schedules
+
+### 2022-11-13
+
+08:00 working on work_schedules
+
+### 2022-11-12
+
+08:00 working on work_schedules
+
+### 2022-11-11
+
+08:00 working on work_schedules
+
+### 2022-11-10
+
+08:00 working on work_schedules
+
+### 2022-11-09
+
+08:00 working on work_schedules
+
+### 2022-11-08
+
+08:00 working on work_schedules
+
+### 2022-11-07
+
+08:00 working on work_schedules
+
+### 2022-11-04
+
+08:00 working on work_schedules
+
+### 2022-11-03
+
+08:00 working on work_schedules
+
+### 2022-11-02
+
+stayed with Bo while Anne was in Münster on business
+14:00 worked in the shop on planing some oak
 
 ### 2022-11-01
 
 05:45 another super night's sleep - woke up to election day - took a piss at 4:30
 08:15 voted - then drove to visit/work with my brother
 15:30 added locations
+
+stayed with Bo while Anne was in Münster on business
 
 ### 2022-10-31
 
@@ -144,7 +194,6 @@ In the REFERENCES you will find a lot of people, resources, etc
 11:20 made omniauth login work
 16:08 started on handling user_menu/services work individually
 20:15 make sure pupils are not clickable unless employee is OUT
-
 
 ### 2022-10-18
 

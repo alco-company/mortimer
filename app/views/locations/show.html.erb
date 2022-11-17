@@ -1,10 +1,76 @@
-<p style="color: green"><%= notice %></p>
+<div 
+  class="max-w-full lg:max-w-screen-2xl mx-auto sm:px-6 lg:px-8" 
+  data-controller="tabs"  
+  data-tabs-active-tab="border-indigo-500 text-indigo-600" 
+  >
+  <%= render_component "resource/show_header", 
+      title: resource.name, 
+      breadcrumbs: @breadcrumbs, 
+      current: Current, 
+      tabs: [ 
+        {id: "info_tab", url: "#info", label: t('.info'), action: "click->tabs#change" },
+        {id: "calendar_tab", url: edit_location_calendar_url(resource,resource.calendar), label: t('.calendar'), action: "click->tabs#change" },
+      ] do %>
+    <div class="md:mt-7 justify-end flex">
+      <div class="w-full">
+        <%= form_with url: "", method: :get, data: { turbo_frame: resources_target, turbo_action: 'advance' } do |form| %>
+          <%= search_field name: :q, value: params[:q], component_method: "search#keydownHandler" %>
+        <% end %>
+      </div>
 
-<%= render @location %>
+      <div class="ml-4 mt-1 shrink-0">
+        <%= link_to t("#{resource_class}.new_button"), new_stock_stock_location_url(resource), class: "button new-button inline-block select-none", data: { form_sleeve_target: "button", action: "click->extended-slideover#toggle", 'turbo-frame': 'form_slideover' } %>
+      </div>
+      <%# <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Share</button> %>
+      
+    </div>
 
-<div>
-  <%= link_to "Edit this location", edit_location_path(@location) %> |
-  <%= link_to "Back to locations", locations_path %>
 
-  <%= button_to "Destroy this location", @location, method: :delete %>
+  <% end %>
+  <div id="info_tab" class="hidden py-4 px-4 " data-tabs-target="panel">
+
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t '.location' %></h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t '.location.description' %></p>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+        <dl class="sm:divide-y sm:divide-gray-200">
+          <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500"><%= t '.name' %></dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= resource.name %></dd>
+          </div>
+          <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500"><%= t '.tasks_count' %></dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= resource.long_lat %></dd>
+          </div>
+          <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500"><%= t '.created_at' %></dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= display_time resource.created_at, Current.user %> </dd>
+          </div>
+          <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500"><%= t '.updated_at' %></dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= display_time resource.updated_at, Current.user %> </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div id="calendar_tab" class="hidden shadow overflow-hidden border-b border-gray-200 sm:rounded-lg" data-tabs-target="panel">
+    <%= turbo_stream_from resource_form(resource.calendar)  %>
+    <%= turbo_frame_tag resource_form(resource.calendar), loading: "lazy", src: edit_location_calendar_url(resource,resource.calendar) do %>
+      <span class="py-2 px2">
+        <%= t('loading') %>
+      </span>
+
+    <% end %>
+
+  </div>
+
 </div>
+
+
+
+
