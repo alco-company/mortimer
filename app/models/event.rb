@@ -1,14 +1,14 @@
 #
-# :account - which account does this event belong to
-# :eventable - what kind of event is this (call/todo/appointment/...)
-# :calendar_id - what calendar does this event belong to
-# :name - event description
-# :state - what is the current state of this event (dependable upon the eventable)
-# :position - if ordered somewhat - what position does this event hold
-# :ancestry - if hierachically ordered - where in the 'tree' does this event sit
-# :started_at - once started, we should know
-# :ended_at - once finished, we should know too
-# :minutes_spent - how many minutes did this event 'take to finish'
+# * :account - which account does this event belong to
+# * :eventable - what kind of event is this (call/todo/appointment/...)
+# * :calendar_id - what calendar does this event belong to
+# * :name - event description
+# * :state - what is the current state of this event (dependable upon the eventable)
+# * :position - if ordered somewhat - what position does this event hold
+# * :ancestry - if hierachically ordered - where in the 'tree' does this event sit
+# * :started_at - once started, we should know
+# * :ended_at - once finished, we should know too
+# * :minutes_spent - how many minutes did this event 'take to finish'
 #
 # TODO - RRULE - https://icalendar.org/rrule-tool.html
 # https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
@@ -29,10 +29,11 @@ class Event < AbstractResource
   has_many :participants, through: :assignments, source: "assignable", source_type: "Participant"
   has_many :assets, through: :assignments, source: "assignable", source_type: "Asset"
   has_many :employees, through: :assets, source: "assetable", source_type: "Employee"
+  has_many :work_schedules, through: :assets, source: "eventable", source_type: "WorkSchedule"
   has_many :teams, through: :participants, source: "participantable", source_type: "Team"
   # has_many :messages, through: :assignments, source: "assignable", source_type: "Message"
   # has_many :event_transactions
-  delegated_type :eventable, types: %w[ Task StockItemTransaction AssetWorkTransaction WorkSchedule ], dependent: :destroy
+  delegated_type :eventable, types: %w[ Task StockItemTransaction AssetWorkTransaction PupilTransaction WorkSchedule ], dependent: :destroy
 
   accepts_nested_attributes_for :eventable, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :assignments, reject_if: :all_blank, allow_destroy: true
@@ -85,6 +86,14 @@ class Event < AbstractResource
   #
   def excluded_associations_from_cloning
     []
+  end
+
+  def rrule_set
+    self.rrule.split("|")
+  end
+
+  def rrule_set= ruleset 
+    self.rrule= ruleset.join("|")
   end
   
 end

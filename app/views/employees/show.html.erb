@@ -9,6 +9,7 @@
       current: Current, 
       tabs: [ 
         {id: "info_tab", url: "#info", label: t('.info'), action: "click->tabs#change" },
+        {id: "calendar_tab", url: edit_employee_calendar_url(resource,resource.calendar), label: t('.calendar'), action: "click->tabs#change" },
         {id: "tasks_tab", url: employee_tasks_url(resource), label: t('.tasks'), action: "click->tabs#change" },
         {id: "pupils_tab", url: employee_pupils_url(resource), label: t('.pupils'), action: "click->tabs#change" }
       ] do %>
@@ -57,6 +58,17 @@
         </dl>
       </div>
     </div>
+  </div>
+
+  <div id="calendar_tab" class="hidden shadow overflow-hidden border-b border-gray-200 sm:rounded-lg" data-tabs-target="panel">
+    <%= turbo_stream_from resource_form(resource.calendar)  %>
+    <%= turbo_frame_tag resource_form(resource.calendar), loading: "lazy", src: edit_employee_calendar_url(resource,resource.calendar) do %>
+      <span class="py-2 px2">
+        <%= t('loading') %>
+      </span>
+
+    <% end %>
+
   </div>
 
   <div id="tasks_tab" class="hidden shadow overflow-hidden border-b border-gray-200 sm:rounded-lg" data-tabs-target="panel">

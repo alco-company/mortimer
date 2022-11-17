@@ -56,6 +56,28 @@
           </button>
         <% end %>
 
+        <!-- 
+
+            button content when used to add appointments and free/busy
+            each day has an intensity thermometer, going from gray through green, yellow, to red
+
+            <div class="grid grid-cols-3 gap-0 p-0 m-0">
+              <div class="grid grid-rows-4 h-7 mx-1">
+                <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+              </div>
+              <div class="bg-white m-0">
+                <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                  31
+                </time>
+              </div>
+              <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+            </div>
+        
+        -->
+
         <button 
           data-action="resource--input-calendar-component#toggleDay" 
           data-range="day" 
@@ -77,8 +99,150 @@
       </div>
     </div>
 
-    <%= turbo_frame_tag 'calendar_event_modal' do %>
-    <% end %>    
+
+    <div id="calendar_event_modal" class="hidden relative z-20" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      
+      <!--
+        Background backdrop, show/hide based on modal state.
+
+        Entering: "ease-out duration-300"
+          From: "opacity-0"
+          To: "opacity-100"
+        Leaving: "ease-in duration-200"
+          From: "opacity-100"
+          To: "opacity-0"
+      -->
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <!--
+            Modal panel, show/hide based on modal state.
+
+            Entering: "ease-out duration-300"
+              From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              To: "opacity-100 translate-y-0 sm:scale-100"
+            Leaving: "ease-in duration-200"
+              From: "opacity-100 translate-y-0 sm:scale-100"
+              To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          -->
+          <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div class="sm:flex sm:items-start">
+                <div class="mt-3 sm:mt-0 sm:ml-4 grid gap-2 sm:grid-cols-1 md:grid-cols-2">
+
+                  <div class="col-span-1">
+                    <label for="email" class="block text-sm font-medium text-gray-700">from</label>
+                    <div class="relative mt-1 rounded-md shadow-sm">
+                      <input type="email" name="email" id="email" class="block w-full rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm" placeholder="you@example.com" value="adamwathan" aria-invalid="true" aria-describedby="email-error">
+                      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <!-- Heroicon name: mini/exclamation-circle -->
+                        <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="mt-2 text-sm text-red-600" id="email-error">Your password must be less than 4 characters.</p>
+                  </div>
+                  <div class="col-span-1">
+                    <label for="email" class="block text-sm font-medium text-gray-700">to</label>
+                    <div class="relative mt-1 rounded-md shadow-sm">
+                      <input type="email" name="email" id="email" class="block w-full rounded-md border-red-300 pr-10 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm" placeholder="you@example.com" value="adamwathan" aria-invalid="true" aria-describedby="email-error">
+                      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <!-- Heroicon name: mini/exclamation-circle -->
+                        <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="mt-2 text-sm text-red-600" id="email-error">Your password must be less than 4 characters.</p>
+                  </div>
+
+                  <!--
+                    This example requires some changes to your config:
+                    
+                    ```
+                    // tailwind.config.js
+                    module.exports = {
+                      // ...
+                      plugins: [
+                        // ...
+                        require('@tailwindcss/forms'),
+                      ],
+                    }
+                    ```
+                  -->
+                  <fieldset class="col-span-2">
+                    <legend class="text-lg font-medium text-gray-900">Status</legend>
+                    <div class="mt-4 divide-y divide-gray-200 border-t border-b border-gray-200">
+                      <div class="relative flex items-start py-4">
+                        <div class="min-w-0 flex-1 text-sm">
+                          <label for="side-null" class="select-none font-medium text-gray-700">Ikke valgt</label>
+                        </div>
+                        <div class="ml-3 flex h-5 items-center">
+                          <input id="side-null" name="plan" type="radio" checked class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        </div>
+                      </div>
+
+                      <div class="relative flex items-start py-4">
+                        <div class="min-w-0 flex-1 text-sm">
+                          <label for="side-1" class="select-none font-medium text-gray-700">Arbejde</label>
+                        </div>
+                        <div class="ml-3 flex h-5 items-center">
+                          <input id="side-1" name="plan" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        </div>
+                      </div>
+
+                      <div class="relative flex items-start py-4">
+                        <div class="min-w-0 flex-1 text-sm">
+                          <label for="side-2" class="select-none font-medium text-gray-700">Fri</label>
+                        </div>
+                        <div class="ml-3 flex h-5 items-center">
+                          <input id="side-2" name="plan" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        </div>
+                      </div>
+
+                      <div class="relative flex items-start py-4">
+                        <div class="min-w-0 flex-1 text-sm">
+                          <label for="side-3" class="select-none font-medium text-gray-700">Ferie</label>
+                        </div>
+                        <div class="ml-3 flex h-5 items-center">
+                          <input id="side-3" name="plan" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        </div>
+                      </div>
+
+                      <div class="relative flex items-start py-4">
+                        <div class="min-w-0 flex-1 text-sm">
+                          <label for="side-4" class="select-none font-medium text-gray-700">Syg</label>
+                        </div>
+                        <div class="ml-3 flex h-5 items-center">
+                          <input id="side-4" name="plan" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        </div>
+                      </div>
+
+                      <div class="relative flex items-start py-4">
+                        <div class="min-w-0 flex-1 text-sm">
+                          <label for="side-5" class="select-none font-medium text-gray-700">Omsorg</label>
+                        </div>
+                        <div class="ml-3 flex h-5 items-center">
+                          <input id="side-5" name="plan" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+              <button type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Deactivate</button>
+              <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </div>
 

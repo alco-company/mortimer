@@ -17,7 +17,7 @@ class Asset < AbstractResource
 
   before_create :create_calendar_if_missing
   def create_calendar_if_missing 
-    self.calendar = account.calendar || Calendar.create( name: account.name) if calendar.nil?
+    self.calendar = account.calendar || Calendar.create( name: account.name) if calendar.blank?
   end
 
   def combo_values_for_teams

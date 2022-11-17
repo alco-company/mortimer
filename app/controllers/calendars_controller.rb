@@ -1,70 +1,33 @@
-class CalendarsController < ApplicationController
-  before_action :set_calendar, only: %i[ show edit update destroy ]
+class CalendarsController < SpeicherController
 
-  # GET /calendars or /calendars.json
-  def index
-    @calendars = Calendar.all
+  def edit_resource 
+    @first_date = (Date.parse(params[:start_date]) rescue Date.today)
+    @start_date = @first_date.at_beginning_of_month.at_beginning_of_week
+    @end_date = @first_date.at_end_of_month.at_end_of_week
+    @schedules = resource.work_schedules.where('events.first_occurence <= ?', @end_date).where('(events.last_occurence is null or events.last_occurence >= ?)', @start_date)
+    @schedules= @schedules.select( :id, 'events.rrule').to_json
+
+    super
   end
 
-  # GET /calendars/1 or /calendars/1.json
-  def show
-  end
+  private 
 
-  # GET /calendars/new
-  def new
-    @calendar = Calendar.new
-  end
-
-  # GET /calendars/1/edit
-  def edit
-  end
-
-  # POST /calendars or /calendars.json
-  def create
-    @calendar = Calendar.new(calendar_params)
-
-    respond_to do |format|
-      if @calendar.save
-        format.html { redirect_to calendar_url(@calendar), notice: "Calendar was successfully created." }
-        format.json { render :show, status: :created, location: @calendar }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @calendar.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /calendars/1 or /calendars/1.json
-  def update
-    respond_to do |format|
-      if @calendar.update(calendar_params)
-        format.html { redirect_to calendar_url(@calendar), notice: "Calendar was successfully updated." }
-        format.json { render :show, status: :ok, location: @calendar }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @calendar.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /calendars/1 or /calendars/1.json
-  def destroy
-    @calendar.destroy
-
-    respond_to do |format|
-      format.html { redirect_to calendars_url, notice: "Calendar was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_calendar
-      @calendar = Calendar.find(params[:id])
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def resource_params
+      params.require(:calendar).permit(:name, event_attributes: [ :id, :rrule, :first_occurence, :last_occurence ])
     end
 
-    # Only allow a list of trusted parameters through.
-    def calendar_params
-      params.require(:calendar).permit(:name, :deleted_at)
+    #
+    # implement on every controller where search makes sense
+    # geet's called from resource_control.rb 
+    #
+    def find_resources_queried options
+      Service.search Service.all, params[:q]
+      # get <selectize> lookups
+      # if request.format.symbol==:json
+      #   Dashboard.search Dashboard.all, params[:q]
+      # else
+      #   Dashboard.search Dashboard.all, params[:q]
+      # end
     end
 end
