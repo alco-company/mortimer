@@ -47,6 +47,7 @@ module ParentControl
   #
   # /employees/1/teams
   # /employees/1/teams/5
+  # /pos/employees/2/pupil_transactions#create
   # /employees/1/teams/5/attach
   # /theatres/2/contacts/5/uris.js
   def find_parent path=nil, parms=nil
@@ -58,17 +59,28 @@ module ParentControl
     return nil if paths.size < 3
     paths.pop if %w{new edit show create update delete index attach detach prefer defer activate deactivate print clonez modal}.include? paths[-1].split(".")[0]
     return nil if (paths.size < 3)
-    p0 = paths[0].singularize.classify.constantize.find(paths[1])
-    return p0 if paths.size < 5
-    p1 = paths[2].singularize.classify.constantize.find(paths[3])
-    return p1 if paths.size == 5 and parent_reflections(p1, paths[4])
-    p0
+    prnt = (paths[0].singularize.classify.constantize rescue nil)
+    return set_account(prnt.nil? ? nil : prnt.unscoped.find(paths[1])) if paths.size == 3
+    
+    prnt = (paths[1].singularize.classify.constantize rescue nil)
+    return set_account(prnt.nil? ? nil : prnt.unscoped.find(paths[2])) if paths.size == 4
+
+    prnt = (paths[2].singularize.classify.constantize rescue nil)
+    return set_account(prnt.nil? ? nil : prnt.unscoped.find(paths[3])) if paths.size == 5 and parent_reflections(prnt, paths[4])
+
+    nil
     # return paths[0].singularize.classify.constantize.find(paths[1])
   rescue
     nil
     # elems = Rails.application.routes.recognize_path path
     # return nil if
     # recognise_path paths.join("/")
+  end
+
+  def set_account prnt 
+    return prnt if prnt.nil?
+    Current.account= Asset.unscoped.where( assetable: prnt).first.account
+    prnt
   end
 
   def parent_reflections p, e 
