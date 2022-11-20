@@ -14,7 +14,7 @@ class AssetWorkTransaction < AbstractResource
   belongs_to :punch_asset, optional: true, class_name: "Asset"
 
   def self.default_scope
-    AssetWorkTransaction.all.joins(:event)
+    AssetWorkTransaction.all.joins(:event,:asset)
   end
 
   def punched_pupils=(ppls)

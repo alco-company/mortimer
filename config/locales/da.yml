@@ -71,6 +71,7 @@ da:
     teams: 'Grupper'
     users: 'Brugere'
     work_schedules: 'Normtider'
+    asset_work_transactions: 'Tidsstemplinger'
 
   navigation:
     menu_component:

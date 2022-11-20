@@ -14,7 +14,7 @@ class Employee < AbstractResource
 
   validates :pin_code, uniqueness: true
 
-  delegate :asset_workday_sums, :teams, to: :asset
+  delegate :asset_work_transactions, :asset_workday_sums, :teams, to: :asset
   
   def self.working
     where('assets.state': ['IN','BREAK'])
