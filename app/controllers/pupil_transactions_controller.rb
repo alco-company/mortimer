@@ -1,70 +1,46 @@
-class PupilTransactionsController < ApplicationController
-  before_action :set_pupil_transaction, only: %i[ show edit update destroy ]
+class PupilTransactionsController < EventsController
 
-  # GET /pupil_transactions or /pupil_transactions.json
-  def index
-    @pupil_transactions = PupilTransaction.all
+  def set_resource_class
+    @resource_class= PupilTransaction
   end
 
-  # GET /pupil_transactions/1 or /pupil_transactions/1.json
-  def show
+
+  def new_resource 
+    Event.new eventable: resource_class.new
   end
 
-  # GET /pupil_transactions/new
-  def new
-    @pupil_transaction = PupilTransaction.new
-  end
 
-  # GET /pupil_transactions/1/edit
-  def edit
-  end
+  private 
 
-  # POST /pupil_transactions or /pupil_transactions.json
-  def create
-    @pupil_transaction = PupilTransaction.new(pupil_transaction_params)
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def resource_params
+      params.permit(:stock_id, :id)
+    end
 
-    respond_to do |format|
-      if @pupil_transaction.save
-        format.html { redirect_to pupil_transaction_url(@pupil_transaction), notice: "Pupil transaction was successfully created." }
-        format.json { render :show, status: :created, location: @pupil_transaction }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @pupil_transaction.errors, status: :unprocessable_entity }
+    #
+    # implement on every controller where search makes sense
+    # geet's called from resource_control.rb 
+    #
+    def find_resources_queried options
+      PupilTransaction.search PupilTransaction.all, params[:q]
+    end
+
+    #
+    # delete_it gets called from the abstract_resources_controller
+    # and overwrites the events_controller -
+    # in order to either add or subtract quantity from
+    # the stock_item
+    def delete_it
+
+      case resource.state
+      when "RECEIVE"; resource.eventable.stock_item.update_attribute :quantity, resource.eventable.stock_item.quantity - resource.eventable.quantity
+      when "SHIP","SCRAP"; resource.eventable.stock_item.update_attribute :quantity, resource.eventable.stock_item.quantity + resource.eventable.quantity
+      # when "INVENTORY"; 
       end
-    end
-  end
 
-  # PATCH/PUT /pupil_transactions/1 or /pupil_transactions/1.json
-  def update
-    respond_to do |format|
-      if @pupil_transaction.update(pupil_transaction_params)
-        format.html { redirect_to pupil_transaction_url(@pupil_transaction), notice: "Pupil transaction was successfully updated." }
-        format.json { render :show, status: :ok, location: @pupil_transaction }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @pupil_transaction.errors, status: :unprocessable_entity }
-      end
+      return resource.update(deleted_at: DateTime.current) if params[:purge].blank?
+      resource.destroy
     end
-  end
+  
 
-  # DELETE /pupil_transactions/1 or /pupil_transactions/1.json
-  def destroy
-    @pupil_transaction.destroy
-
-    respond_to do |format|
-      format.html { redirect_to pupil_transactions_url, notice: "Pupil transaction was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_pupil_transaction
-      @pupil_transaction = PupilTransaction.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def pupil_transaction_params
-      params.require(:pupil_transaction).permit(:asset_id, :pupil_id, :work_minutes)
-    end
 end
