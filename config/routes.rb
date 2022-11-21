@@ -40,6 +40,13 @@ Rails.application.routes.draw do
       end
       resources :pupil_transactions
     end
+    resources :punch_clocks do
+      member do
+        get "register"
+        get "status"
+        get "list_employees"
+      end
+    end
     resources :stocks do
       member do
         get :pallets

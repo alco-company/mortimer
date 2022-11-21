@@ -1,0 +1,38 @@
+<% content_for :head do %>
+  <meta name='viewport' content= 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta viewport= 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' mobileAppIOS= true>
+  <meta name="mobile-web-app-capable"  content= "yes">
+  <meta name="full-screen"  content="yes">
+  <meta name="browsermode"  content="application">
+  <meta name="screen-orientation"  content="portrait">
+  <script>
+    // window.App = {};
+    // App.webWorker = new Worker("/employee_pos_worker_1.js");
+  </script>
+<% end %>
+
+<div 
+  class="max-w-full lg:max-w-screen-2xl mx-auto sm:px-6 lg:px-8" 
+  data-controller=""  
+  data-tabs-active-tab="border-indigo-500 text-indigo-600" 
+  >
+
+    <div id="punch_clock_tab" class=" py-4 px-4  space-y-6" data-tabs-target="panel">
+
+      <!-- This example requires Tailwind CSS v2.0+ -->
+      <!-- Be sure to use this with a layout container that is full-width on mobile -->
+      <div id="work_status" class="bg-white overflow-hidden shadow sm:rounded-lg">
+        <div class="px-4 py-5 sm:p-6 flex h-30 w-full ">
+          <!-- Content goes here -->
+          <%= turbo_stream_from "punch_clock_#{resource.id}_state"  %>
+          <%= turbo_frame_tag "punch_clock_#{resource.id}_state" do %>
+            <%= render partial: "pos/punch_clocks/punch_clock_state", locals: { resource: resource } %>
+          <% end %>
+        </div>
+      </div>
+
+      <%= render partial: "punch_clock_state_buttons_turbo", locals: { resource: resource } %>
+    </div>
+
+</div>
+

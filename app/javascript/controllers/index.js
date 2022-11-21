@@ -49,6 +49,9 @@ application.register("stock-pos", StockPosController)
 import EmployeePosController from "./employee_pos_controller.js"
 application.register("employee-pos", EmployeePosController)
 
+import PunchClockController from "./punch_clock_controller.js"
+application.register("punch-clock", PunchClockController)
+
 import SwitchboardController from "./switchboard_controller.js"
 application.register("switchboard", SwitchboardController)
 

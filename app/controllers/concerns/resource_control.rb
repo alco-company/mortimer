@@ -339,9 +339,9 @@ module ResourceControl
   #
   def policy_scope arg
     return arg if resource_class == Account
+    return arg.where("events.account_id = ?", current_account) if resource_class.new.respond_to? "event"
     return arg.where("assets.account_id = ?", current_account) if resource_class.new.respond_to? "asset"
     return arg.where("participants.account_id = ?", current_account) if resource_class.new.respond_to? "participant"
-    return arg.where("events.account_id = ?", current_account) if resource_class.new.respond_to? "event"
     return arg.where("account_id = ?", current_account) if resource_class.new.respond_to? "account"
     return arg if current_user #and current_user.is_a_superuser?
     # arg.where account: Account.current.id

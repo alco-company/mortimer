@@ -6,16 +6,14 @@ import { get } from "@rails/request.js"
 // 3 Process Input
 // 4 Output
 // 5 Misc
-export default class EmployeePosController extends Controller {
+export default class PunchClockController extends Controller {
   static targets = [ 
-    "pButton",
-    "substituteButton",
-    "substituteModal",
-    "startButton",
-    "pauseButton",
-    "stopButton",
-    "sickButton",
-    "pupilsList"
+    "digitTap",
+    "digitbox",
+    "key",
+    "digit",
+    "delete",
+    "backspace"
   ]
   static values = {
     url: String,            // where to do the lookup for data values
@@ -28,10 +26,55 @@ export default class EmployeePosController extends Controller {
   //
   // first we initialize the handset - on every connect
   connect() {
+    this.digitCount=0
   }
 
   disconnect() {
     super.disconnect()
+  }
+
+  digitboxTap(e){
+    for (const t of this.digitboxTargets){
+      if (t.classList.contains('hidden'))
+        t.classList.remove('hidden')
+      else
+        t.classList.add('hidden')
+    }
+  }
+
+  digitTap(e){
+    if (this.digitCount < 4){
+      this.keyTargets[ this.digitCount ].classList.add('bg-blue-200')
+      this.digitboxTargets[ this.digitCount++ ].innerText = e.srcElement.innerText
+    } else {
+      alert('Du skal kun indtaste 4 cifre')
+    }
+  }
+
+  deleteTap(e){
+    for (const t of this.digitboxTargets){
+      t.innerText=''
+    }
+    for (const t of this.keyTargets){
+      t.classList.remove('bg-blue-200')
+    }
+    this.digitCount=0
+  }
+
+  backspaceTap(e){
+    if (this.digitCount > 0){
+      this.digitboxTargets[ --this.digitCount ].innerText = ''
+      this.keyTargets[ this.digitCount ].classList.remove('bg-blue-200')
+    }
+  }
+
+  playTap(e){
+  }
+
+  pauseTap(e){
+  }
+
+  stopTap(e){
   }
 
   // -- initialize dependant functions

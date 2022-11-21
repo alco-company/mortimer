@@ -1,0 +1,4 @@
+<%= turbo_stream_from "punch_clock_#{resource.id}_state_buttons"  %>
+<%= turbo_frame_tag "punch_clock_#{resource.id}_state_buttons" do %>
+  <%= render partial: "pos/punch_clocks/punch_clock_state_buttons", locals: { resource: resource } %>
+<% end %>

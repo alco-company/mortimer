@@ -70,6 +70,18 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## DONE
 
+### 2022-11-21
+
+08:00 working on punch_clocks
+
+### 2022-11-20
+
+08:00 working on asset_work_transactions and pupil_transactions
+
+### 2022-11-18
+
+08:00 working on pos/employees/:id
+
 ### 2022-11-17
 
 08:00 working on pupil_transactions

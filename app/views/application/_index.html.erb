@@ -20,11 +20,11 @@
         <% resources.each do |rec| %>
           <%= render partial: resource_class.to_s.underscore, locals: { resource: rec, user: Current.user } %>
         <% end if resources %>
-        <% if (((params[:page].to_i + 1) rescue 1) > @pagy.pages) %>
+        <% if @pagy.nil? or (((params[:page].to_i + 1) rescue 1) > @pagy.pages) %>
           <tr class="hidden" data-pagination-target="noRecords"><td>no more records</td></tr>
         <% end %>
       </tbody>
-      <tfoot id="pagination_foot" class="bg-gray-50 pl-4 pr-4 z-10">
+      <tfoot id="pagination_foot" class="bg-gray-50 pl-4 pr-4 z-10 <%= @pagy.nil? ? "h-10" : ""%>">
         <tr>
           <td data-pagination-target="pagy" class="pl-4 pr-4" colspan=10><%== pagy_nav(@pagy) %></td>
         </tr>

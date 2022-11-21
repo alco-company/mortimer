@@ -1,10 +1,10 @@
-<div id="employee_state_buttons" class="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+<div id="employee_state_buttons" class="mt-12 columns-2 md:columns-3 justify-stretch">
   <button 
     data-employee-pos-target="pButton" 
     data-action="employee-pos#punch_in_p" 
     type="button" 
     <%= 'disabled' if ['IN'].include? resource.state %>
-    class="inline-flex justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+    class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
     <span class="material-symbols-outlined">
     login
     </span>                  
@@ -15,7 +15,7 @@
     data-action="employee-pos#punch_in_sub" 
     type="button" 
     <%= 'disabled' if ['IN'].include? resource.state %>
-    class="inline-flex justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+    class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
     <span class="material-symbols-outlined">
     login
     </span>                  
@@ -27,7 +27,7 @@
     data-action="employee-pos#punch_in" 
     type="button" 
     <%= 'disabled' if ['IN'].include? resource.state %>
-    class="inline-flex justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+    class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
     <span class="material-symbols-outlined">login</span>                  
     <span class="pl-1">Start</span>
   </button>
@@ -37,7 +37,7 @@
     data-action="employee-pos#punch_pause" 
     type="button" 
     <%= 'disabled' if !['IN'].include? resource.state %> 
-    class="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+    class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
     <span class="material-symbols-outlined">
     pause
     </span>
@@ -48,7 +48,7 @@
     data-action="employee-pos#punch_out" 
     type="button" 
     <%= 'disabled' if !['IN'].include? resource.state %> 
-    class="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+    class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
     <span class="material-symbols-outlined">
     logout
     </span>
@@ -60,7 +60,7 @@
     data-action="employee-pos#punch_sick" 
     type="button" 
     <%= 'disabled' if ['BREAK','SICK'].include? resource.state %> 
-    class="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+    class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
     <span class="material-symbols-outlined">
     sick
     </span>
