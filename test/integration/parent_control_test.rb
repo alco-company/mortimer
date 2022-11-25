@@ -8,7 +8,6 @@ class FakeController <  ActionController::Base
   end
 
   def index
-    debugger
     @parent = find_parent "/employees/#{@emp.id}/pupils/2"
     # The concern modify some of the parameters, so I'm saving them in a
     # variable for future test inspection, so YMMV here.

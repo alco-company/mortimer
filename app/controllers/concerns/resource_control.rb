@@ -160,7 +160,6 @@ module ResourceControl
   # return the resource in an edit action
   #
   def edit_resource_url options={}
-    debugger
     url_for(resource, options)+"/edit"
   end
 
@@ -267,6 +266,14 @@ module ResourceControl
 
   #
   # sort - it at all
+  #
+  # allow listings to be sorted by some of the columns - by tapping the column lead text
+  # the current selection of records will be sorted by that field in ASC order and tapping
+  # the same column once more will reverse the order to DESC
+  #
+  # use this helper in your listing column headers:
+  #
+  # <%= sort_link_to t('.long_lat'), :long_lat, data: { turbo_action: "advance"} %>
   #
   # %th{ role:"sort", data{ field: "*barcode", direction: "DESC"} }
   # $('th[role="sort"]')

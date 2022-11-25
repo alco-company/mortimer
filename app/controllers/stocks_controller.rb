@@ -10,7 +10,7 @@ class StocksController < AssetsController
     def resource_params
       set_assetables params
       # , :access_token not permitted - 'cause it's a secure_token
-      params.require(:asset).permit(:assetable_type, :name, :account_id, assetable_attributes: [ :id, :last_heart_beat_at ] )
+      params.require(:asset).permit(:assetable_type, :name, :account_id, assetable_attributes: [ :id, :last_heart_beat_at, :access_token ] )
     end
 
     #

@@ -12,7 +12,9 @@ class Asset < AbstractResource
   has_many :asset_teams
   has_many :teams, through: :asset_teams
   
-  delegated_type :assetable, types: %w[ Employee Product PunchClock Pupil Stock StockLocation ], dependent: :destroy
+  delegated_type :assetable, types: %w[ Employee Location Product PunchClock Pupil Stock StockLocation ], dependent: :destroy
+  delegate :access_token, to: :assetable
+
   accepts_nested_attributes_for :assetable
 
   before_create :create_calendar_if_missing

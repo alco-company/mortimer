@@ -49,7 +49,6 @@ class AuthController < ApplicationController
     auth_hash.dig(:extra, :raw_info, :userPrincipalName)
     # Save the user's time zone
     session[:user_timezone] = auth_hash.dig(:extra, :raw_info, :mailboxSettings, :timeZone)
-    debugger
   end
 
   def user_name
