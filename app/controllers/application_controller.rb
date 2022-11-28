@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
       locale = extract_locale_from_tld || I18n.default_locale
       locale = params[:locale] || locale
       # locale = current_user.preferred_locale if current_user rescue locale
-      parsed_locale = current_user.locale.to_sym rescue locale
+      parsed_locale = (current_user.locale.blank? ? locale : current_user.locale.to_sym) rescue locale
       I18n.with_locale(parsed_locale, &action)
     end
 

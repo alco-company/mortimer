@@ -1,1 +1,1 @@
-json.array! @pupils, partial: "pupils/pupil", as: :pupil
+json.array! resources, partial: "pupils/pupil", as: :pupil
