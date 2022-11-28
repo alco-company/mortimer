@@ -129,6 +129,18 @@
           </div>
         </div>
 
+        <!-- norm_time -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="norm_time" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".norm_time" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2 flex">
+            <%= employee.number_field :norm_time %>
+          </div>
+        </div>
+
 
         <!-- Teams -->
         <%= render_component "resource/combo", form: form, attr: :teams, label: t('.teams'), type: :multi_list, url: "/teams", items: Team.all %>
