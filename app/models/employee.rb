@@ -19,6 +19,10 @@ class Employee < AbstractResource
   def self.working
     where('assets.state': ['IN','BREAK'])
   end
+
+  def working?
+    ['IN','BREAK'].include? state
+  end
   #
   # default_scope returns all posts that have not been marked for deletion yet
   #
@@ -49,13 +53,25 @@ class Employee < AbstractResource
     []
   end
 
-  def broadcast_update
-    broadcast_replace_later_to "employee_#{self.id}_calendar", 
-      partial: "employees/calendar", 
-      target: "employee_#{self.id}_calendar", 
-      locals: { resource: self, user: Current.user }
+  def broadcast_create
+    broadcast_prepend_later_to "pos_employees", 
+      partial: "pos/employees/list_employee", 
+      target:  "pos_employees_#{self.id}",  
+      locals: { employee: self, user: Current.user }
 
-      broadcast_replace_later_to "employee_#{self.asset.id}_pupils", 
+  end
+
+  def broadcast_update
+    # broadcast_replace_later_to "employee_#{self.id}_calendar", 
+    #   partial: "employees/calendar", 
+    #   target: "employee_#{self.id}_calendar", 
+    #   locals: { resource: self, user: Current.user }
+    broadcast_replace_later_to "pos_employees", 
+      partial: "pos/employees/list_employee", 
+      target: "pos_employees_#{self.id}", 
+      locals: { employee: self, user: Current.user }
+
+    broadcast_replace_later_to "employee_#{self.asset.id}_pupils", 
       partial: "pos/employees/employee_pupils", 
       target: "pupils", 
       locals: { resource: self.asset, user: Current.user }

@@ -6,8 +6,8 @@
   <meta name="browsermode"  content="application">
   <meta name="screen-orientation"  content="portrait">
   <script>
-    window.App = {};
-    App.webWorker = new Worker("/employee_pos_worker_1.js");
+    // window.App = {};
+    // App.webWorker = new Worker("/employee_pos_worker_1.js");
   </script>
 <% end %>
 
@@ -25,7 +25,7 @@
         {id: "enter_leave_tab", url: "#enter_leave_tab", label: t('.enter_leave'), action: "click->tabs#change" },
         #{id: "calendar_tab", url: "#calendar_tab", label: t('.calendar'), action: "click->tabs#change" },
         {id: "stats_tab", url: "#stats_tab", label: t('.stats'), action: "click->tabs#change" },
-        {id: "info_tab", url: "#info_tab", label: t('.info'), action: "click->tabs#change" },
+        #{id: "info_tab", url: "#info_tab", label: t('.info'), action: "click->tabs#change" },
       ] do %>
 
     <div id="enter_leave_tab" class=" py-4 px-4  space-y-6" data-tabs-target="panel">
@@ -41,6 +41,74 @@
           <% end %>
         </div>
 
+
+
+        <!-- extraModal -->
+        <div 
+          data-employee-pos-target="extraModal" 
+          class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+          <!--
+            Background backdrop, show/hide based on modal state.
+
+            Entering: "ease-out duration-300"
+              From: "opacity-0"
+              To: "opacity-100"
+            Leaving: "ease-in duration-200"
+              From: "opacity-100"
+              To: "opacity-0"
+          -->
+          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+          <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <!--
+                Modal panel, show/hide based on modal state.
+
+                Entering: "ease-out duration-300"
+                  From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  To: "opacity-100 translate-y-0 sm:scale-100"
+                Leaving: "ease-in duration-200"
+                  From: "opacity-100 translate-y-0 sm:scale-100"
+                  To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              -->
+              <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div class="sm:flex sm:items-start">
+                    <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                      <!-- Heroicon name: outline/exclamation-triangle -->
+                      <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z" />
+                      </svg>
+                    </div>
+                    <div class="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                      <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Jeg er startet på en ekstra opgave</h3>
+                      <div class="mt-2">
+                        <div>
+                          <label for="comment" class="pl-3 block text-sm font-medium text-gray-700">opgave</label>
+                          <div class="mt-1">
+                            <input type="text" name="comment" id="comment" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="beskriv ekstra-opgaven">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                  <button type="button" 
+                    data-action="employee-pos#punch_in_xtra_ok" 
+                    class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Ok</button>
+                  <button type="button" 
+                    data-action="employee-pos#punch_in_xtra_cancel" 
+                    class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Fortryd</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- substituteModal -->
         <div 
           data-employee-pos-target="substituteModal" 
           class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -80,12 +148,7 @@
                     <div class="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Jeg vikarerer for</h3>
                       <div class="mt-2">
-                        <div>
-                          <label for="vikarerer" class="pl-3 block text-sm font-medium text-gray-700">Email</label>
-                          <div class="mt-1">
-                            <input type="text" name="vikarerer" id="vikarerer" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="navn på den jeg vikarerer for">
-                          </div>
-                        </div>
+                        <%= render_component "resource/combo", form: nil, attr: :location, label: t('.location'), type: :single_drop, url: "/locations", values: [], items: Location.all, api_key: resource.access_token, api_class: 'Employee' %>
                       </div>
                     </div>
                   </div>
@@ -104,6 +167,131 @@
         </div>
 
 
+        <!-- sickModal -->
+        <div 
+          data-employee-pos-target="sickModal" 
+          class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+          <!--
+            Background backdrop, show/hide based on modal state.
+
+            Entering: "ease-out duration-300"
+              From: "opacity-0"
+              To: "opacity-100"
+            Leaving: "ease-in duration-200"
+              From: "opacity-100"
+              To: "opacity-0"
+          -->
+          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+          <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <!--
+                Modal panel, show/hide based on modal state.
+
+                Entering: "ease-out duration-300"
+                  From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  To: "opacity-100 translate-y-0 sm:scale-100"
+                Leaving: "ease-in duration-200"
+                  From: "opacity-100 translate-y-0 sm:scale-100"
+                  To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              -->
+              <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div class="sm:flex sm:items-start">
+                    <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                      <!-- Heroicon name: outline/exclamation-triangle -->
+                      <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z" />
+                      </svg>
+                    </div>
+                    <div class="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                      <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Jeg skulle have arbejdet</h3>
+                      <div class="mt-2">
+                        <div>
+                          <label for="sick_hrs" class="pl-3 block text-sm font-medium text-gray-700">timer i dag</label>
+                          <div class="mt-1">
+                            <input type="number" name="sick_hrs" id="sick_hrs" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                  <button type="button" 
+                    data-action="employee-pos#punch_in_sick_ok" 
+                    class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Ok</button>
+                  <button type="button" 
+                    data-action="employee-pos#punch_in_sick_cancel" 
+                    class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Fortryd</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- stopModal -->
+        <div 
+          data-employee-pos-target="stopModal" 
+          class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+          <!--
+            Background backdrop, show/hide based on modal state.
+
+            Entering: "ease-out duration-300"
+              From: "opacity-0"
+              To: "opacity-100"
+            Leaving: "ease-in duration-200"
+              From: "opacity-100"
+              To: "opacity-0"
+          -->
+          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+          <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <!--
+                Modal panel, show/hide based on modal state.
+
+                Entering: "ease-out duration-300"
+                  From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                  To: "opacity-100 translate-y-0 sm:scale-100"
+                Leaving: "ease-in duration-200"
+                  From: "opacity-100 translate-y-0 sm:scale-100"
+                  To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              -->
+              <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div class="sm:flex sm:items-start">
+                    <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                      <!-- Heroicon name: outline/exclamation-triangle -->
+                      <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z" />
+                      </svg>
+                    </div>
+                    <div class="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                      <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Jeg er færdig for nu!</h3>
+                      <div class="mt-2">
+                        <div>
+                          <label for="sick_hrs" class="pl-3 block text-sm font-medium text-gray-700">kommentarer (fx grund til overarbejde)</label>
+                          <div class="mt-1">
+                            <input type="text" name="comment" id="comment" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="kommentar - fx hvis overarbejde">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                  <button type="button" 
+                    data-action="employee-pos#punch_out_ok" 
+                    class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Ok</button>
+                  <button type="button" 
+                    data-action="employee-pos#punch_out_cancel" 
+                    class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Fortryd</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
 
@@ -240,21 +428,21 @@
       </div>
     </div>
 
-    <div id="info_tab" class="hidden py-4 px-4 " data-tabs-target="panel">
+    <!-- <div id="info_tab" class="hidden py-4 px-4 " data-tabs-target="panel">
 
-      <!-- Description list -->
+      
       <div class="mt-6 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <% [resource.assetable].each do |employee| %>
           <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
 
-            <!-- <div class="sm:col-span-2">
+            -- <div class="sm:col-span-2">
               <dt class="text-sm font-medium text-gray-500">GDPR</dt>
               <dd class="mt-1 max-w-prose text-sm text-gray-900 space-y-5">
                 <p>Vi må forvente en del af de her viste oplysninger er genstand for 'design for privacy'.</p>
                 <p>Det vil være op til kunden, i hvilket omfang det skal implementeres -</p>
               </dd>
-            </div> -->
+            </div> --
 
             <div class="sm:col-span-1">
               <dt class="text-sm font-medium text-gray-500">Email</dt>
@@ -275,7 +463,7 @@
               <dt class="text-sm font-medium text-gray-500">Fødselsdag</dt>
               <dd class="mt-1 text-sm text-gray-900"> <%= l employee.birthday, format: :date %></dd>
             </div>
-<!--
+
             <div class="sm:col-span-2">
               <dt class="text-sm font-medium text-gray-500">About</dt>
               <dd class="mt-1 max-w-prose text-sm text-gray-900 space-y-5">
@@ -283,12 +471,12 @@
                 <p>Et vivamus lorem pulvinar nascetur non. Pulvinar a sed platea rhoncus ac mauris amet. Urna, sem pretium sit pretium urna, senectus vitae. Scelerisque fermentum, cursus felis dui suspendisse velit pharetra. Augue et duis cursus maecenas eget quam lectus. Accumsan vitae nascetur pharetra rhoncus praesent dictum risus suspendisse.</p>
               </dd>
             </div>
-            -->
+            --
           </dl>
         <% end %>
       </div>
 
-      <!-- Team member list -->
+      -- Team member list --
       <div class="mt-8 max-w-5xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">
         <h2 class="text-sm font-medium text-gray-500">Team kollegaer</h2>
         <div class="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -310,7 +498,7 @@
       </div>
 
 
-    </div>
+    </div> -->
       
   <% end %>
 
