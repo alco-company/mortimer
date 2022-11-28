@@ -9,7 +9,7 @@ class PupilsController < AssetsController
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
       # params[:asset][:assetable_attributes][:hired_at] = DateTime.parse params[:asset][:assetable_attributes][:hired_at]
-      params.require(:asset).permit(:assetable_type, :name, :account_id, :state, assetable_attributes: [ :id, :time_spent_minutes, :location ] )
+      params.require(:asset).permit(:assetable_type, :name, :account_id, :state, assetable_attributes: [ :id, :pin_code, :location ] )
     end
 
     #

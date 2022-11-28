@@ -4,12 +4,22 @@ class Pupil < AbstractResource
   has_and_belongs_to_many :employees
   has_many :pupil_transactions
 
+  validates :pin_code, uniqueness: true
+
   #
   # default_scope returns all posts that have not been marked for deletion yet
   #
   def self.default_scope
   #   where("assetable" deleted_at: nil)
     Pupil.all.joins(:asset)
+  end
+
+  #
+  # implement on every model where search makes sense
+  # get's called from controller specific find_resources_queried
+  #
+  def self.search_by_model_fields lot, query
+    default_scope.where "assets.name ilike '%#{query}%' or pin_code='#{query}'"
   end
 
   #
