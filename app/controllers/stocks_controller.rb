@@ -10,7 +10,7 @@ class StocksController < AssetsController
     def resource_params
       set_assetables params
       # , :access_token not permitted - 'cause it's a secure_token
-      params.require(:asset).permit(:assetable_type, :name, :account_id, assetable_attributes: [ :id, :last_heart_beat_at, :access_token ] )
+      params.require(:asset).permit(:assetable_type, :name, :account_id, assetable_attributes: [ :id, :last_heart_beat_at, :created_at, :access_token ] )
     end
 
     #
@@ -25,9 +25,9 @@ class StocksController < AssetsController
     def set_assetables params
       # params[:asset][:assetable_attributes].delete(:access_token)
       if params[:asset][:assetable_attributes].nil?
-        params[:asset][:assetable_attributes] = { access_token: "has to be set - otherwise assetable will not be created/updated" }
-      else
-        params[:asset][:assetable_attributes][:access_token] = "has to be set - otherwise assetable will not be created/updated"
+        params[:asset][:assetable_attributes] = { created_at: DateTime.current }
+      # else
+      #   params[:asset][:assetable_attributes][:access_token] = "has to be set - otherwise assetable will not be created/updated"
       end      
     end
 end
