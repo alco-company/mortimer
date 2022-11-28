@@ -6,7 +6,7 @@ class UserService < ParticipantService
     else
       update_roles_teams result, resource_params
       resource.participantable.confirm! if resource_params[:participantable_attributes][:confirmed_at] == '1'
-      Profile.create user: result.record.participantable, time_zone: 'UTC'
+      Profile.create user: result.record.participantable, time_zone: 'UTC', locale: I18n.default_locale
       result.record.participantable.send_confirmation_email! unless result.record.participantable.confirmed?
     end
     result
