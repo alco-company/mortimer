@@ -1,15 +1,11 @@
-<div class="m-auto p-5">
-  <% if current_user %>
-    <div class="text-2xl mb-10 grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-1">
-      <% (resources-resources.working).each do |asset| %>
-        <div class="p-1 leading-1 <%= set_emp_bg_color_on_state asset.state %>"><%= display_public asset.name %> <span class="float-right"><%= display_work_today asset if current_user %></span></div>
-      <% end %>
-    </div>
-  <% end %>
-  <span class="text-stone-100"> Antal mødte: <%= resources.working.size %></span>
-  <div class="text-2xl grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-1">
-    <% resources.working.each do |asset| %>
-      <div class="p-1 leading-1 <%= set_emp_bg_color_on_state asset.state %>"><%= display_public asset.name %> <span class="float-right"><%= display_work_today asset if current_user %></span></div>
+<%= turbo_stream_from "pos_employees" %>
+<%= turbo_frame_tag "pos_employees" do %>
+<div class="m-2">
+  <p class="mt-4 text-stone-100"> Antal mødte: <%= resources.working.size %></p>
+  <div class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+    <% resources.each do |employee| %>
+      <%= render partial: "list_employee", locals: { employee: employee } %>
     <% end %>
   </div>
 </div>
+<% end  %>
