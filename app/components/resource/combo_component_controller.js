@@ -6,15 +6,17 @@ export default class ComboComponentController extends Controller {
     static values = {
         url: String,            // where to do the lookup for data values
         current: String,        // what is the current input value
-        accountId: String,        // what is the current input value
+        accountId: String,      // what is the current input value
 
-        isSingle: Boolean,     // just one selectable item
-        isMulti: Boolean,      // any number of selectable items
-        isDrop: Boolean,      // ol'school drop down select
-        isList: Boolean,      // even older school select list
-        isTags: Boolean,      // show tags below an input
-        isSearch: Boolean,    // can items be searched (provided a url is given)
-        isAdd: Boolean,       // can new items be created
+        isSingle: Boolean,      // just one selectable item
+        isMulti: Boolean,       // any number of selectable items
+        isDrop: Boolean,        // ol'school drop down select
+        isList: Boolean,        // even older school select list
+        isTags: Boolean,        // show tags below an input
+        isSearch: Boolean,      // can items be searched (provided a url is given)
+        isAdd: Boolean,         // can new items be created
+        apiKey: String,         // apiKey if component is used by 'non-user'
+        apiClass: String,       // apiClass if component is used by 'non-user' - entity validating the apiKey
 
         selected: Array
     }
@@ -186,7 +188,8 @@ export default class ComboComponentController extends Controller {
                 // get the selected values
                 let uri = this.selectedValue.join(',')
                 let encoded = encodeURIComponent(uri)
-                const response = await get(`${this.urlValue}?ids=${encoded}`, { responseKind: "json" })
+                let apikey = this.apiKeyValue == '' ? '' : `&api_key=${this.apiKeyValue}&api_class=${this.apiClassValue}` 
+                const response = await get(`${this.urlValue}?ids=${encoded}${apikey}`, { responseKind: "json" })
                 if (response.ok){
                     const elems = await response.json
                     console.log(`got this back from the server ${elems}`)
@@ -257,7 +260,7 @@ export default class ComboComponentController extends Controller {
     updateSelect(name) {
         if (!this.isMultiValue)
             return
-        try {            
+        try {
             this.selectTarget.innerHTML = "";
             if (this.selectedValue.length == 0) {
                 //   const option = document.createElement("option");
