@@ -22,7 +22,7 @@ module EmployeesHelper
     case resource.state 
     when "IN"; "Du er mødt (startet) #{ asset_state_time_updated resource }"
     when "OUT"; "Du er mødt ud (stoppet) #{ asset_state_time_updated resource }"
-    when "BREAK"; "Du har været til pause siden #{ asset_state_time_updated resource }"
+    when "BREAK"; "Du har pauseret siden #{ asset_state_time_updated resource }"
     when "SICK"; "Du meldte dig syg #{ asset_state_time_updated resource }"
     when "FREE"; "Du har oprettet en kalenderaftale, hvor du har fri fra x til y"
     end
@@ -42,7 +42,9 @@ module EmployeesHelper
   end
 
   def display_work_today asset 
-    "%s (%s)" % [display_hours_minutes(asset.asset_workday_sums.last.work_minutes),display_hours_minutes(asset.asset_workday_sums.last.break_minutes)    ]
+    "%s (%s)" % [display_hours_minutes(asset.asset_workday_sums.last.work_minutes),display_hours_minutes(asset.asset_workday_sums.last.break_minutes) ]
+  rescue 
+    "0 (0)"
   end
 
   def set_emp_bg_color_on_state state 
@@ -52,7 +54,7 @@ module EmployeesHelper
     when 'SICK'; 'bg-red-100'
     when 'OUT'; 'bg-slate-100'
     when 'FREE'; 'bg-blue-100'
-    else ''
+    else 'bg-white'
     end
   end
 
