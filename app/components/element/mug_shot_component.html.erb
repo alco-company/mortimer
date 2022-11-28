@@ -1,0 +1,7 @@
+<% if @url %>
+  <%= image_tag @url, class: @class %>
+<% else %>
+  <div class="<%= @class %>">
+    <span class="material-symbols-outlined">photo_camera</span>
+  </div>
+<% end %>

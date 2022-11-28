@@ -10,6 +10,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * Rails [David Heinemeier Hansson](https://basecamp.com/)
 * Tailwind [Adam Wathan](https://tailwindcss.com/)
 * Tailwind & Rails [David Teren](https://davidteren.medium.com/)
+* CSS for JavaScript Developers [Josh W Comeau](https://courses.joshwcomeau.com/css-for-js)
 * Running multiple Rails apps - with 'real' URLs [Lewis Buckley](https://world.hey.com/lewis/run-multiple-rails-apps-with-puma-dev-67b1c10f)
 * Progressier by [Kevin Basset](https://progressier.com/)
 * Rails Training [Chris Oliver](https://gorails.com/)
@@ -20,15 +21,20 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * iCalendar [Sean Dague, Ryan Ahearn, Rick Denatale, et al](https://github.com/icalendar/icalendar/graphs/contributors)
 * favicon [Ravi Katta](https://dev.to/kattak2k/adding-a-favicon-to-your-site-using-webpacker-in-rails-6-2m2h)
 * Rails in Docker [Will Schenk](https://willschenk.com/articles/2020/rails_in_docker/)
+* What to do when installing Rails [Joe Masilotti](https://github.com/joemasilotti/railsdevs.com)
 * Rails & Vue [Ivan Shamatov](https://mkdev.me/en/posts/rails-5-vue-js-how-to-stop-worrying-and-love-the-frontend)
 * Vue Tailwind [Alfonso Bribiesca](https://www.vue-tailwind.com/)
 * GraphQL Loader for Webpack [Steven Wan](https://github.com/samsarahq/graphql-loader) 
 * A To-do List API with GraphQL & Rails [Eddy Karanja](https://www.codementor.io/@karanjaeddy/build-a-to-do-list-api-with-graphql-api-rails-5-part-1-irjt1e7jm)
 * Evil Martians: [GraphQL on Rails](https://evilmartians.com/chronicles/graphql-on-rails-2-updating-the-data)
 * Digital Ocean: [Setting Up a Ruby On Rails GraphQL API](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-graphql-api)
+* Flipper - managing app features [JNunemaker](https://github.com/jnunemaker/flipper)
+* Custom Turbo Stream Actions [Marco Roth](https://marcoroth.dev/posts/guide-to-custom-turbo-stream-actions)
 
 ## Resources
 
+* [Several posts - ActionText and Theme selector](https://afomera.dev/posts)
+* [Strapi for building backends - 'socalled' headless CMS](https://strapi.io)
 * [How to use Custom Fonts](https://medium.com/@alexis.teh/how-to-add-custom-fonts-to-your-rails-application-992b197c7baa)
 * [How to protect against hackers using CORS and CSRF](https://www.stackhawk.com/blog/rails-csrf-protection-guide/)
 * [How to define work hours - wages, attendance, and more](https://www.danskindustri.dk/vi-radgiver-dig/personale/arbejdstid/)

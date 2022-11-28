@@ -11,6 +11,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## TODO
 
+- use [Squasher to compress old ActiveRecord migrations](https://github.com/jalkoby/squasher)
 - start [using BabySqueel](https://github.com/rzane/baby_squeel)
 - use [encrypted fields and queries](https://enquo.org/components/pg_enquo/)
 - make entire system 'loggable' using [Fluentd et al](https://docs.fluentd.org/how-to-guides/free-alternative-to-splunk-by-fluentd)
@@ -69,6 +70,21 @@ In the REFERENCES you will find a lot of people, resources, etc
 ! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying - or better - just run 'depstage'
 
 ## DONE
+
+### 2022-11-24
+
+07:55 awt calculations
+09:00 refactore token_approved, wip
+
+### 2022-11-23
+
+07:45 list_employees
+11:50 awt calculations
+
+### 2022-11-22
+
+07:00 presentation to Elmelund
+16:00
 
 ### 2022-11-21
 
