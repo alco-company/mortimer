@@ -19,10 +19,10 @@
         <%= render_component "resource/input_string", form: location_form, field: :long_lat, resource: resource, title: t('.long_lat') %>
 
         <!-- asset_requirements -->
-        <%= render_component "resource/input_text", form: location_form, field: :asset_requirements, resource: resource, title: t('.asset_requirements') %>
+        <%#= render_component "resource/input_text", form: location_form, field: :asset_requirements, resource: resource, title: t('.asset_requirements') %>
 
         <!-- asset_requirements -->
-        <%= render_component "resource/combo", form: location_form, attr: :asset_requirements, label: t('.asset_requirements'), type: :multi_tags_search_list, url: "/locations", items: Location.all %>
+        <%#= render_component "resource/combo", form: location_form, attr: :asset_requirements, label: t('.asset_requirements'), type: :multi_tags_search_list, url: "/locations", items: Location.all %>
 
 
       </div>
