@@ -117,13 +117,15 @@ class AbstractResourcesController < ApplicationController
   # GET /controllers
   #
   # index calls [resources](resource_control#ressources) which will return a [Pagy]() paginated
-  # set of records and set a @pagy variable used on the index.html.* template
+  # set of records and set a @pagy variable used on the index.html.* template (unless provided with
+  # an ids params in which case the identified records are returned)
   #
   # a few params are chipping in:
   #
   # params[:q] - search
   # params[:f] - filter
   # params[:s] - sort
+  # params[:d] - sorting direction
   # params[:ids] - narrow the elements to return
   #
   # and along the way it also sets a @sorting_direction variable for the current (field) sorting
@@ -135,6 +137,8 @@ class AbstractResourcesController < ApplicationController
   #
   # lookup does the same job as index - except it only returns TURBO_STREAM - and does not care about authorization
   # expecting the caller to otherwise be allowed to!
+  #
+  # used by components like combo_component, and more
   #
   # TODO! this obviously is a ways into the system and should be guarding
   #
