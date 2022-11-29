@@ -72,6 +72,8 @@ da:
     users: 'Brugere'
     work_schedules: 'Normtider'
     asset_work_transactions: 'Tidsstemplinger'
+    asset_workday_sums: 'Stempelkort'
+    background_jobs: 'Baggrundsjobs'
 
   navigation:
     menu_component:
@@ -82,6 +84,20 @@ da:
       StockLocations: Lagerlokationer
       Roles: Roller
       Teams: Brugergrupper
+    service_component:
+      employees: Medarbejdere
+      locations: Lokationer
+      printservers: Printservere
+      products: Produkter
+      punch_clocks: Stempelure
+      pupils: Elever
+      roles: Roller 
+      stocked_products: Lagervarer
+      stock_locations: Lagerlokationer
+      stocks: Lagre
+      suppliers: Leverandører
+      teams: Arbejdsgrupper/Teams
+
       
   topbar:
     search: "Søg overalt..."
@@ -178,6 +194,26 @@ da:
       edit: "Ret konto"
       edit_description: "Du kan rette en konto her. Angiv et navn og vælg hvilke tjenester, kontoens brugere skal have adgang til."
 
+  BackgroundJob:
+    index: 'Oversigt over baggrundsjobs'
+    index_description: I denne oversigt finder du alle de opgaver, som skal afvikles uden din indgriben - fra 1 gang i minuttet til hvert 4. år
+    new_button: 'Nyt baggrundsjob'
+
+  background_jobs:
+    index_columns:
+      work: Navn (på job objektklassen)
+      execute_at: Afvikles (hvornår)
+      params: Argumenter
+      job_id: Proces ID
+    form: 
+      new: "Nyt baggrundsjob"
+      new_description: "Du kan oprette et nyt baggrundsjob her. Baggrundsjob afvikles typisk på tidspunkter, hvor der er mindre pres på."
+      edit: "Ret baggrundsjob"
+      edit_description: "Du kan rette et baggrundsjob her. Baggrundsjob afvikles typisk på tidspunkter, hvor der er mindre pres på."
+      work: Navn (på job objektklassen)
+      execute_at: Afvikles (hvornår)
+      params: Argumenter
+
   Dashboard:
     index: "Oversigt over instrumentbrædder/skabeloner"
     index_description: "Oversigten viser alle de instrumentbrædder, der er oprettet - uanset om de benyttes af konti eller brugere. "
@@ -191,6 +227,13 @@ da:
       new: 'Ny medarbejder'
       edit: 'Ret medarbejder'
       team_work_schedules: 'Medarbejderen har derudover, igennem sine tildelte arbejdsgrupper, følgende normtider: %{ws}'
+      norm_time: Timer (ansat på)
+      base_salary: Grundløn
+      job_title: Job titel 
+      pin_code: Pinkode
+      birthday: Fødselsdag
+      state: Status 
+      
     show:
       info: Generel
       tasks: Opgaver

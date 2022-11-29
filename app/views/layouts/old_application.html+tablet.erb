@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>S P E I C H E R</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= yield :head %>
+    <% if Rails.env.development? %>
+      <%= javascript_include_tag "hotwire-livereload", defer: true %>
+    <% end %>
+  </head>
+
+  <body 
+    id="switchboard" 
+    data-controller="switchboard"
+    class="h-full">
+    <div class="min-h-full">
+      <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
+      <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
+        <!--
+          Off-canvas menu backdrop, show/hide based on off-canvas menu state.
+
+          Entering: "transition-opacity ease-linear duration-300"
+            From: "opacity-0"
+            To: "opacity-100"
+          Leaving: "transition-opacity ease-linear duration-300"
+            From: "opacity-100"
+            To: "opacity-0"
+        -->
+        <div class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
+
+        <div class="fixed inset-0 flex z-40">
+          <!--
+            Off-canvas menu, show/hide based on off-canvas menu state.
+
+            Entering: "transition ease-in-out duration-300 transform"
+              From: "-translate-x-full"
+              To: "translate-x-0"
+            Leaving: "transition ease-in-out duration-300 transform"
+              From: "translate-x-0"
+              To: "-translate-x-full"
+          -->
+          <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
+            <!--
+              Close button, show/hide based on off-canvas menu state.
+
+              Entering: "ease-in-out duration-300"
+                From: "opacity-0"
+                To: "opacity-100"
+              Leaving: "ease-in-out duration-300"
+                From: "opacity-100"
+                To: "opacity-0"
+            -->
+            <div class="absolute top-0 right-0 -mr-12 pt-2">
+              <button type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <span class="sr-only">Close sidebar</span>
+                <!-- Heroicon name: outline/x -->
+                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="flex-shrink-0 flex items-center px-4">
+              <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-purple-500-mark-gray-700-text.svg" alt="Workflow">
+            </div>
+            <div class="mt-5 flex-1 h-0 overflow-y-auto">
+              <%= render Navigation::MenuComponent.new current: nil, nav_classes: "px2", link_classes: "bg-gray-100 text-gray-900 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md" %>
+            </div>
+          </div>
+
+          <div class="flex-shrink-0 w-14" aria-hidden="true">
+            <!-- Dummy element to force sidebar to shrink to fit close icon -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Main column -->
+      <div class="lg:pl-64 flex flex-col">
+        <!-- Search header -->
+        <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:hidden">
+          <!-- Sidebar toggle, controls the 'sidebarOpen' sidebar state. -->
+          <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden">
+            <span class="sr-only">Open sidebar</span>
+            <!-- Heroicon name: outline/menu-alt-1 -->
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+          </button>
+          <div class="flex-1 flex justify-between px-4 sm:px-6 lg:px-8">
+            <div class="flex-1 flex">
+              <%= render Navigation::SearchComponent.new container_classes: "relative w-full text-gray-400 focus-within:text-gray-600",  search_placeholder: nil %>
+            </div>
+            <div class="flex items-center">
+              <!-- Profile dropdown -->
+              <div class="ml-3 relative">
+                <div>
+                  <button type="button" class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                  </button>
+                </div>
+                <%= render Resource::UserProfileComponent.new container_classes: "origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none", labelledby: "user-menu-button", current: nil %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <main class="flex-1">
+          <%= yield %>
+        </main>
+      </div>
+    </div>
+
+    <%= turbo_frame_tag 'form_slideover' do %>
+      <%= render Resource::FormComponent.new %>
+    <% end %>
+
+    <div id="modal_content"></div>
+
+    <%= render partial: "shared/takiro", locals: {size: 'tablet'} %>
+    <%= render partial: "shared/notifications" %>
+    <div id="unauthorized"></div>
+  </body>
+</html>
