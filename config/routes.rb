@@ -44,7 +44,7 @@ Rails.application.routes.draw do
       member do
         get "register"
         get "status"
-        get "list_employees"
+        get "search"
       end
     end
     resources :stocks do
@@ -150,6 +150,7 @@ Rails.application.routes.draw do
     post "impersonate", to: "accounts#impersonate"
   end
 
+  resources :background_jobs
   
   resources :dashboards, concerns: [:cloneable, :modalable] 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

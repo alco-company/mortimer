@@ -21,7 +21,7 @@ module Greybox
 
     # background job executioner
     config.active_job.queue_adapter = :sidekiq
-
+    
     # Since we're using Redis for Sidekiq, we might as well use Redis to back
     # our cache store. This keeps our application stateless as well.
     config.cache_store = :redis_cache_store, { url: ENV['CACHE_URL'],

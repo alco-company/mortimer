@@ -30,6 +30,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * Digital Ocean: [Setting Up a Ruby On Rails GraphQL API](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-graphql-api)
 * Flipper - managing app features [JNunemaker](https://github.com/jnunemaker/flipper)
 * Custom Turbo Stream Actions [Marco Roth](https://marcoroth.dev/posts/guide-to-custom-turbo-stream-actions)
+* Handling Dokku [Vito Botta](https://vitobotta.com/2022/02/16/deploying-an-app-with-dokku/)
 
 ## Resources
 

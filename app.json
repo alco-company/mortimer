@@ -6,5 +6,11 @@
     "dokku": {
       "postdeploy": "bundle exec rake db:migrate"
     }
-  }
+  },
+  "cron": [
+    {
+      "command": "rake prepare_background_jobs",
+      "schedule": "@daily"
+    }
+  ]  
 }

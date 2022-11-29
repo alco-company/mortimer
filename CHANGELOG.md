@@ -67,9 +67,40 @@ In the REFERENCES you will find a lot of people, resources, etc
 - use [truemail](https://github.com/truemail-rb/truemail )
 - use [rrule](https://github.com/jakubroztocil/rrule)
 
-! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying - or better - just run 'depstage'
+
+## Particular sets of commands
+
+### deploying to staging
+
+! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying - or better - just run 'bin/depstage'
+
+### upgrading just dokku
+
+```bash
+apt-get update
+apt-get install --no-install-recommends dokku
+```
+
+### how to work with rake
+
+[This post defines most of what is to say about rake tasks](https://www.rubyguides.com/2019/02/ruby-rake/)
+[How to access Rails ActiveRecord models from inside rake tasks](https://dev.to/software_writer/how-to-access-rails-activerecord-models-inside-a-rake-task-5c76)
 
 ## DONE
+
+### 2022-11-29
+
+08:30 translations, refactoring regressions
+
+### 2022-11-28
+
+08:30 awt calculations, cont'ed
+14:30 setting up background_jobs - wip
+      [setting up cron job in Dokku](https://github.com/dokku/dokku/issues/4695)
+
+### 2022-11-25
+
+08:30 awt calculations, cont'ed
 
 ### 2022-11-24
 

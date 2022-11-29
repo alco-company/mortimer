@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_25_082309) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_28_171908) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -99,6 +99,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_082309) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "holiday_free_minutes"
+    t.integer "child_sick_minutes"
+    t.integer "nursing_minutes"
+    t.integer "senior_minutes"
+    t.integer "unpaid_free_minutes"
+    t.integer "lost_work_revenue_minutes"
+    t.integer "child_leave_minutes"
+    t.integer "leave_minutes"
     t.index ["account_id"], name: "index_asset_workday_sums_on_account_id"
     t.index ["asset_id"], name: "index_asset_workday_sums_on_asset_id"
   end
@@ -131,6 +139,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_082309) do
     t.datetime "updated_at", null: false
     t.index ["assignable_type", "assignable_id"], name: "index_assignments_on_assignable"
     t.index ["event_id"], name: "index_assignments_on_event_id"
+  end
+
+  create_table "background_jobs", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.text "execute_at"
+    t.text "work"
+    t.text "params"
+    t.text "job_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_background_jobs_on_account_id"
   end
 
   create_table "calendars", force: :cascade do |t|
@@ -465,6 +485,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_082309) do
   add_foreign_key "assets", "accounts"
   add_foreign_key "assets", "calendars"
   add_foreign_key "assignments", "events"
+  add_foreign_key "background_jobs", "accounts"
   add_foreign_key "events", "accounts"
   add_foreign_key "events", "calendars"
   add_foreign_key "participant_teams", "participants"
