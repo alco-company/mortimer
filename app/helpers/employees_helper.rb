@@ -25,6 +25,7 @@ module EmployeesHelper
     when "BREAK"; "Du har pauseret siden #{ asset_state_time_updated resource }"
     when "SICK"; "Du meldte dig syg #{ asset_state_time_updated resource }"
     when "FREE"; "Du har oprettet en kalenderaftale, hvor du har fri fra x til y"
+    when "LEAVE"; "Du har oprettet en kalenderaftale, hvor du har orlov fra x til y"
     end
   end
 
@@ -39,6 +40,18 @@ module EmployeesHelper
   def display_public name
     emp_parts = name.split " "
     "%s %s" % [emp_parts.shift, emp_parts.map{|n| n.first}.join('.')]
+  end
+
+  def display_employee_state resource
+    case resource.state 
+    when "IN"; "er mødt (startet)"
+    when "OUT"; "er mødt ud (stoppet)"
+    when "BREAK"; "pauserer"
+    when "SICK"; "sygemeldt"
+    when "FREE"; "fri"
+    when "LEAVE"; "orlov"
+    else ""
+    end
   end
 
   def display_work_today asset 
