@@ -97,6 +97,7 @@ da:
       stocks: Lagre
       suppliers: Leverandører
       teams: Arbejdsgrupper/Teams
+      work_schedules: Vagtskemaer
 
       
   topbar:
@@ -226,14 +227,18 @@ da:
     form:
       new: 'Ny medarbejder'
       edit: 'Ret medarbejder'
+      name: Navn
       team_work_schedules: 'Medarbejderen har derudover, igennem sine tildelte arbejdsgrupper, følgende normtider: %{ws}'
       norm_time: Timer (ansat på)
+      hired_at: Ansat den
       base_salary: Grundløn
       job_title: Job titel 
       pin_code: Pinkode
       birthday: Fødselsdag
       state: Status 
-      
+      teams: Arbejdsgrupper/Teams
+      work_schedules: Vagtskemaer
+
     show:
       info: Generel
       tasks: Opgaver

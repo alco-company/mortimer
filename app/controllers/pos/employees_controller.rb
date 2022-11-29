@@ -63,7 +63,7 @@ module Pos
       head 301 and return unless token_approved
       event = AssetWorkTransactionService.new.create_employee_punch_transaction( resource, resource_params )
       if event && (['OUT','SICK','BREAK'].include? resource_params['state']) 
-        ev = PupilTransactionService.new.close_active_pupils( resource, event, resource_params ) if resource_params[:punched_pupils]
+        ev = PupilTransactionService.new.close_active_pupils( resource, event, resource_params ) 
       end
       head 200
     end
@@ -82,7 +82,8 @@ module Pos
         params["asset_work_transaction"]["ip_addr"] = request.remote_ip
         params["asset_work_transaction"]["employee_asset_id"] = resource.id
         params["asset_work_transaction"]["punch_asset_id"] = resource.id # the user's own device
-        params.require(:asset_work_transaction).permit(:punched_at, :state, :ip_addr, :punch_asset_id, :p_time, :substitute, :employee_asset_id, punched_pupils: {} )
+        params.require(:asset_work_transaction).permit(:punched_at, :state, :ip_addr, 
+          :punch_asset_id, :p_time, :substitute, :location, :extra_time, :comment, :sick_hrs, :employee_asset_id, punched_pupils: {} )
       end
 
       #
