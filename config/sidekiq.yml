@@ -2,3 +2,4 @@
   - transactions
   - calendars
   - default
+:max_retries: 3

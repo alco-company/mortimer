@@ -31,6 +31,9 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * Flipper - managing app features [JNunemaker](https://github.com/jnunemaker/flipper)
 * Custom Turbo Stream Actions [Marco Roth](https://marcoroth.dev/posts/guide-to-custom-turbo-stream-actions)
 * Handling Dokku [Vito Botta](https://vitobotta.com/2022/02/16/deploying-an-app-with-dokku/)
+* Working with SQL, includes and joins especially [Julianna Seiki](https://medium.com/gusto-engineering/a-visual-guide-to-using-includes-in-rails-700a91cd3095)
+* Building of background_jobs, taking cues from Sidekiq [Mike Perham](https://github.com/mperham/sidekiq/wiki/Ent-Periodic-Jobs)
+* Custom Validations [Sylvia Vargas](https://dev.to/sylwiavargas/rails-custom-validations-58mo)
 
 ## Resources
 

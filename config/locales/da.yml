@@ -52,7 +52,9 @@ da:
   RECEIVE: Modtaget
   SHIP: Udleveret
   INVENTORY: Optalt
-
+  #
+  klass_not_background_job: Det angivne er ikke et baggrundsjob!
+  
   breadcrumbs:
     home: 'Instrumentbrædt'
     accounts: 'Konti'
@@ -76,7 +78,14 @@ da:
     background_jobs: 'Baggrundsjobs'
 
   navigation:
+    super_user_component:
+      accounts: Konti 
+      users: Brugere
+      dashboards: Instrumentpaneler
+      background_jobs: Baggrundsjobs
+      services: Tjenester 
     menu_component:
+      dashboard: Instrumentpanel
       stocked_products: Lagervarer
       Products: Varer
       Stocks: Lagre
@@ -195,17 +204,30 @@ da:
       edit: "Ret konto"
       edit_description: "Du kan rette en konto her. Angiv et navn og vælg hvilke tjenester, kontoens brugere skal have adgang til."
 
+  AssetWorkTransaction:
+    index: "Oversigt over komme/gå registreringer"
+    index_description: "Denne oversigt viser dig alle de 'stemplinger' som medarbejdere kan registreret, enten på deres app, på deres eget device, eller på de stempelure, der sidder rundt om."
+    new_button: "Ny stempling"
+
+  asset_work_transactions:
+    index_columns:
+      name: Navn
+
   BackgroundJob:
     index: 'Oversigt over baggrundsjobs'
     index_description: I denne oversigt finder du alle de opgaver, som skal afvikles uden din indgriben - fra 1 gang i minuttet til hvert 4. år
     new_button: 'Nyt baggrundsjob'
 
   background_jobs:
+    background_job:
+      delete_run_job: Drop kørsel
+
     index_columns:
-      work: Navn (på job objektklassen)
-      execute_at: Afvikles (hvornår)
+      klass: Navn (på job objektklassen)
+      schedule: Afvikles (hvornår)
       params: Argumenter
       job_id: Proces ID
+      next_run_at: Afvikles næste gang
     form: 
       new: "Nyt baggrundsjob"
       new_description: "Du kan oprette et nyt baggrundsjob her. Baggrundsjob afvikles typisk på tidspunkter, hvor der er mindre pres på."
@@ -222,6 +244,9 @@ da:
   Employee:
     index: Oversigt over medarbejdere
     index_description: <span>Oversigten viser alle de medarbejdere, der er oprettet. Du kan se medarbejdernes &nbsp; <a class="text-indigo-500" target="_blank" href="/pos/employees"> fremmøde status her</a> &nbsp;og normtider definerer du &nbsp; <a class="text-indigo-500"  href="/work_schedules">her</a></span>.
+    new_button: 'Ny medarbejder'
+
+
     
   employees:
     form:
@@ -243,6 +268,8 @@ da:
       info: Generel
       tasks: Opgaver
       pupils: Elever
+      employee: Medarbejder
+      asset_work_transactions: Komme/Gå stemplinger
 
   Location:
     index: "Oversigt over arbejdssteder"
@@ -316,6 +343,16 @@ da:
       new_description: "Du kan oprette et stempelur her. Angiv et navn og hvor uret bliver sat op. Angiv også en statisk IP adresse for uret - det er vigtigt for at uret fungerer korrekt."
       edit: "Ret stempeluret"
       edit_description: "Du kan rette et stempelur her. Angiv et navn og hvor uret bliver sat op. Angiv også en statisk IP adresse for uret - det er vigtigt for at uret fungerer korrekt."
+
+  Pupil: 
+    index: "Oversigt over elever"
+    index_description: "Oversigten viser dig de elever, der er oprettet i Speicher."
+
+  pupils:
+    index_columns: 
+      name: Navn 
+      time_spent_minutes: Forbrugt tid
+      status: 
 
   Service:
     index: "Oversigt over tjenester"

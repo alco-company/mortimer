@@ -88,9 +88,23 @@ apt-get install --no-install-recommends dokku
 
 ## DONE
 
+### 2022-12-01
+
+06:45 background_jobs
+12:00 maglev
+13:00 translations
+
+### 2022-11-30
+
+07:05 asset_workday_sum
+14:20 cron_task
+
 ### 2022-11-29
 
 08:30 translations, refactoring regressions
+13:00 meet Elmelund virtual
+14:00 particulars ref counters
+18:30 done
 
 ### 2022-11-28
 
