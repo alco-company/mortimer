@@ -1,6 +1,13 @@
 class StockItemTransactionProcessingJob < ApplicationJob
   queue_as :transactions
 
+  retry_on RuntimeError, queue: :transactions, attempts: 2
+  
+  #
+  # stock_item_transactions are quickly stuffed onto Redis
+  # then this job is expected to clean up and create bonafide
+  # stock_item_transaction record
+  #
   def perform(*args)
     begin     
       keys = REDIS.keys "stock_item_transactions:*"
