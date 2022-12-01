@@ -1,19 +1,34 @@
-# t.bigint "account_id", null: false
-# t.bigint "asset_id", null: false
 # t.date "work_date"
-# t.integer "work_minutes"
-# t.integer "break_minutes"
-# t.integer "ot1_minutes"
-# t.integer "ot2_minutes"
-# t.integer "sick_minutes"
-# t.integer "free_minutes"
-# t.datetime "deleted_at"
-# t.datetime "created_at", null: false
-# t.datetime "updated_at", null: false
-# t.index ["account_id"], name: "index_asset_workday_sums_on_account_id"
-# t.index ["asset_id"], name: "index_asset_workday_sums_on_asset_id"
+# t.integer "work_minutes" - arbejde
+# t.integer "break_minutes" - pauser
+# t.integer "ot1_minutes" - overtid 50%
+# t.integer "ot2_minutes" - overtid 100%
+# t.integer "sick_minutes" - syg
+# t.integer "pgf56_minutes" - pgf 56 sygdom
+# t.integer "free_minutes" - ferie
+# t.integer "free_prev_minutes" - ferie sidste år
+# t.integer "holiday_free_minutes" - Feriefridage
+# t.integer "child_sick_minutes" - Barns 1. sygedag
+# t.integer "nursing_minutes" - Omsorgsdage
+# t.integer "senior_minutes" - Seniordage
+# t.integer "unpaid_free_minutes" - Fri uden løn
+# t.integer "lost_work_revenue_minutes" - Tabt arbejdsfortjeneste
+# t.integer "child_leave_minutes" - Barselsorlov
+# t.integer "leave_minutes" - Orlov (sygdom forældre eller ægtefælle)
 
 class AssetWorkdaySumService < AbstractResourceService
+
+  def get_todays_worksum employee_asset, dato 
+    awd = employee_asset.asset_workday_sums.where(work_date: dato).first
+    if awd.nil?
+      result = create( new_from_employee_asset( employee_asset, dato), employee_asset.class ) 
+      raise "AssetWorkdaySum could not be created!" unless result.created?
+      awd = result.record
+    end
+    awd
+  rescue
+    nil
+  end
   
   def new_from_employee_asset employee_asset, dato 
     AssetWorkdaySum.new( account: employee_asset.account, 
@@ -21,10 +36,20 @@ class AssetWorkdaySumService < AbstractResourceService
       work_date: dato.at_beginning_of_day,
       work_minutes: 0,
       break_minutes: 0,
+      free_minutes: 0,
+      free_prev_minutes: 0,
+      holiday_free_minutes: 0,
+      unpaid_free_minutes: 0,
       ot1_minutes: 0,
       ot2_minutes: 0,
       sick_minutes: 0,
-      free_minutes: 0
+      child_sick_minutes: 0,
+      nursing_minutes: 0,
+      senior_minutes: 0,
+      lost_work_revenue_minutes: 0,
+      child_leave_minutes: 0,
+      leave_minutes: 0,
+      pgf56_minutes: 0,
     )
   end
 

@@ -9,4 +9,9 @@ class AssetWorkdaySum < AbstractResource
   def broadcast_update
     
   end
+
+  def self.build_for_yesterday 
+    say "FISK"
+  end
+
 end
