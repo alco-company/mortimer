@@ -1,175 +1,128 @@
 class AssetWorkTransactionService < EventService
     
-  def create_employee_punch_transaction resource, awparams
+  #
+  # first we need to set the Current.account and Current.user
+  # it may result in the first user in this account = account.administrator
+  #
+  def create_employee_punch_transaction resource, params
     set_current_data resource
-    create_asset_work_transaction( resource, awparams )
+    create_asset_work_transaction( resource, params )
   end
-  
+
+  #
+  # when doing automated punches - ie employees did mark their calendar
+  # in advance saying what this day will be chalked up for - 
+  # we will use the employee to set the Current.account and Current.user
+  #
+  def create_automated_employee_punch_transaction resource, params
+    set_current_data resource 
+
+    params["state"] = "OUT"
+    create_asset_work_transaction( resource, params )
+  end
+
   #
   # TODO: create a logfile where all transactions are listed - and possibly can be edited and rerun
   #
+  #
+  # then we create a punch_action - because that's what really happened - no matter what we
+  # have on records - we need to trust the client UI!
+  #
+  # to do that, we need todays punch_card (asset_workday_sum) 
+  #
   def create_asset_work_transaction employee_asset, params
-    awd = employee_asset.asset_workday_sums.where(work_date: Date.parse(params["punched_at"])).first
-    if awd.nil?
-      result = AssetWorkdaySumService.new.create( 
-      AssetWorkdaySumService.new.new_from_employee_asset( employee_asset, Date.parse(params["punched_at"]) ), Employee ) 
-      raise "AssetWorkdaySum could not be created!" unless result.created?
-      awd = result.record
-    end
 
-    w = case params["state"]
-    when "IN"; create_in_transaction(employee_asset, params, awd)
-    when "OUT"; create_out_transaction(employee_asset, params, awd)
-    when "BREAK"; create_break_transaction(employee_asset, params, awd)
-    when "SICK"; create_sick_transaction(employee_asset, params, awd)
-    when "FREE"; create_free_transaction(employee_asset, params, awd)
-    else raise "state parameter (#{params["state"]}) is not implemented!"
-    end
+    # create transaction
+    awt = create_transaction employee_asset, params
+
+    # set employee state
+    employee_asset.update state: params["state"]
+
+
+    # now perform any calculations required based on the current state 
+    # TODO make this part a job to perform_later
+    calculate_punch_consequence awt, params
   # rescue RuntimeError => err
   #   Rails.logger.info "[asset_work_transaction] Error: (AssetWorkTransaction) #{err.message}"
   end
-  
-  def create_in_transaction employee_asset, parms, awd 
-    punch_clock_asset = Asset.find(parms["punch_asset_id"])
-    awt = nil
+
+  #
+  # create the asset_work_transaction and event records
+  def create_transaction asset, params
+    e = nil
+    return e unless [ "IN", "OUT", "BREAK", "SICK", "FREE" ].include? params["state"]
+
+    awd = AssetWorkdaySumService.new.get_todays_worksum asset, Date.parse(params["punched_at"])
+    punch_clock_asset = Asset.find(params["punch_asset_id"]) rescue nil
     AssetWorkTransaction.transaction do
-      begin
-        #
-        # find employee workshift
-        # and decide what to do with the IN state
-        extra_time = 0
+      begin      
+        awt = AssetWorkTransaction.new
+        comment = params["comment"] rescue ""
 
-        # create transaction
-        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms, awd
-        # run calc if employee.state in ['BREAK','SICK','FREE','OUT']
-        calc_awd(employee_asset, awt.eventable, awd)
-
-        # set employee state
-        employee_asset.update state: 'IN'
-      # rescue RuntimeError => err 
-      #   Rails.logger.info "[asset_work_transaction] Error: (create_in_transaction) #{err.message}"
+        awt.asset = asset
+        awt.punch_asset = punch_clock_asset
+        awt.asset_workday_sum = awd
+        awt.punch_asset_ip_addr = params["ip_addr"]
+        awt.punched_at = params["punched_at"]
+        awt.extra_time = params["extra_time"] ? 0 : nil 
+        e = Event.create( 
+          account: Current.account, 
+          name: comment,
+          state: params["state"], 
+          calendar: (asset.calendar || Current.account.calendar),
+          eventable: (awt.save ? awt : nil)
+        )
+      rescue => err
+        Rails.logger.info "[asset_work_transaction] Error: (create_transaction) #{err.message}"
+        raise ActiveRecord::Rollback
       end
     end
-    awt
+    e
   end
 
-  def create_break_transaction employee_asset, parms, awd 
-    punch_clock_asset = Asset.find(parms["punch_asset_id"])
-    awt = nil
-    AssetWorkTransaction.transaction do
-      begin
-        #
-        # find employee workshift
-        # and decide what to do with the IN state
-        extra_time = 0
-
-        # create transaction
-        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms, awd
-        # run calc if employee.state in ['BREAK','SICK','FREE','OUT']
-        calc_awd(employee_asset, awt.eventable, awd)
-        # set employee state
-        employee_asset.update state: 'BREAK'
-
-      rescue RuntimeError => err 
-        Rails.logger.info "[asset_work_transaction] Error: (create_break_transaction) #{err.message}"
-      end
-    end
-    awt
-  end
-  
-  def create_sick_transaction employee_asset, parms, awd 
-    punch_clock_asset = Asset.find(parms["punch_asset_id"])
-    awt = nil
-    AssetWorkTransaction.transaction do
-      begin
-        #
-        # find employee workshift
-        # and decide what to do with the IN state
-        extra_time = 0
-
-        # create transaction - returns event
-        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms, awd
-        # run calc if employee.state in ['BREAK','SICK','FREE','OUT']
-        calc_awd(employee_asset, awt.eventable, awd)
-        # set employee state
-        employee_asset.update state: 'SICK'
-
-      rescue RuntimeError => err 
-        Rails.logger.info "[asset_work_transaction] Error: (create_sick_transaction) #{err.message}"
-      end
-    end
-    awt
-  end
-  
-  def create_free_transaction employee_asset, parms, awd 
-    punch_clock_asset = Asset.find(parms["punch_asset_id"])
-    awt = nil
-    AssetWorkTransaction.transaction do
-      begin
-        #
-        # find employee workshift
-        # and decide what to do with the IN state
-        extra_time = 0
-
-        # create transaction - returns event
-        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms, awd
-        # run calc if employee.state in ['BREAK','SICK','FREE','OUT']
-        calc_awd(employee_asset, awt.eventable, awd)
-        # set employee state
-        employee_asset.update state: 'FREE'
-
-      rescue RuntimeError => err 
-        Rails.logger.info "[asset_work_transaction] Error: (create_free_transaction) #{err.message}"
-      end
-    end
-    awt
-  end
-  
-  def create_out_transaction employee_asset, parms, awd 
-    punch_clock_asset = Asset.find(parms["punch_asset_id"])
-    awt = nil
-    AssetWorkTransaction.transaction do
-      begin
-        #
-        # find employee workshift
-        # and decide what to do with the IN state
-        extra_time = 0
-
-        # create transaction - returns event
-        awt = create_transaction employee_asset, punch_clock_asset, extra_time, parms, awd
-        # run calc if employee.state in ['BREAK','SICK','FREE','OUT']
-        calc_awd(employee_asset, awt.eventable, awd)
-        # set employee state
-        employee_asset.update state: 'OUT'
-
-      rescue RuntimeError => err 
-        Rails.logger.info "[asset_work_transaction] Error: (create_out_transaction) #{err.message}"
-      end
-    end
-    awt
-  end
+  #
+  # now do any calculations as consequences of the punch
+  def calculate_punch_consequence awt, params
+    return calculate_automated_consequences(awt, params) unless params["event_type"].nil?
     
-  def create_transaction asset, punch_clock_asset, extra_time, parms, awd 
-    begin      
-      awt = AssetWorkTransaction.new
-      
-      awt.asset = asset
-      awt.punch_asset = punch_clock_asset
-      awt.asset_workday_sum = awd
-      awt.punch_asset_ip_addr = parms["ip_addr"]
-      awt.punched_at = parms["punched_at"]
-      e = Event.create( 
-        account: Current.account, 
-        name: "AWT",
-        state: parms["state"], 
-        calendar: (asset.calendar || Current.account.calendar),
-        eventable: (awt.save ? awt : nil)
-      )
-    # rescue => err
-    #   Rails.logger.info "[asset_work_transaction] Error: (create_transaction) #{err.message}"
-    #   raise ActiveRecord::Rollback
+    case e.state 
+    when "IN"
+      # find the previous BREAK and calc the diff
+      # t.integer "break_minutes"
+    when "OUT"
+      # find the previous IN and calc the diff
+      # t.integer "work_minutes"
+      # t.integer "ot1_minutes"
+      # t.integer "ot2_minutes"
+    when "SICK"
+      # t.integer "sick_minutes"
+      # t.integer "child_sick_minutes" - Barns 1. sygedag
+      # t.integer "pgf56_minutes" - pgf 56 sygdom
     end
+
   end
+
+  #
+  # every night at 00:01 all employees' asset_workday_sum for the
+  # previous day are (re)calculated - called from AssetWorkdaySumJob
+  #
+  def calculate_automated_consequences awt, params 
+    
+    case params[:event_type]
+    when "free_minutes"                     #  - ferie
+    when "free_prev_minutes"                #  - ferie sidste år
+    when "holiday_free_minutes"             #  - Feriefridage
+    when "nursing_minutes"                  #  - Omsorgsdage
+    when "senior_minutes"                   #  - Seniordage
+    when "unpaid_free_minutes"              #  - Fri uden løn
+    when "lost_work_revenue_minutes"        #  - Tabt arbejdsfortjeneste
+    when "child_leave_minutes"              #  - Barselsorlov
+    when "leave_minutes"                    #  - Orlov (sygdom forældre eller ægtefælle)
+    end
+
+  end
+
+
 
   # calc_awd calculates the time spent on various activities
   # for the current date of registration
