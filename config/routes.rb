@@ -150,7 +150,11 @@ Rails.application.routes.draw do
     post "impersonate", to: "accounts#impersonate"
   end
 
-  resources :background_jobs
+  resources :background_jobs, concerns: [:cloneable, :modalable] do
+    member do
+      post :delete_run_job
+    end
+  end
   
   resources :dashboards, concerns: [:cloneable, :modalable] 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

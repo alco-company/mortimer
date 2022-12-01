@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_28_171908) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_30_175317) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -107,6 +107,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_171908) do
     t.integer "lost_work_revenue_minutes"
     t.integer "child_leave_minutes"
     t.integer "leave_minutes"
+    t.integer "free_prev_minutes"
+    t.integer "pgf56_minutes"
     t.index ["account_id"], name: "index_asset_workday_sums_on_account_id"
     t.index ["asset_id"], name: "index_asset_workday_sums_on_asset_id"
   end
@@ -143,14 +145,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_171908) do
 
   create_table "background_jobs", force: :cascade do |t|
     t.bigint "account_id", null: false
-    t.text "execute_at"
-    t.text "work"
+    t.bigint "user_id", null: false
+    t.string "klass"
     t.text "params"
-    t.text "job_id"
+    t.text "schedule"
+    t.datetime "next_run_at"
+    t.string "job_id"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_background_jobs_on_account_id"
+    t.index ["user_id"], name: "index_background_jobs_on_user_id"
   end
 
   create_table "calendars", force: :cascade do |t|
@@ -486,6 +491,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_171908) do
   add_foreign_key "assets", "calendars"
   add_foreign_key "assignments", "events"
   add_foreign_key "background_jobs", "accounts"
+  add_foreign_key "background_jobs", "users"
   add_foreign_key "events", "accounts"
   add_foreign_key "events", "calendars"
   add_foreign_key "participant_teams", "participants"

@@ -10,40 +10,28 @@
     <!-- Divider container -->
     <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
        <%= form.hidden_field :account_id, value: current_account.id %>
+       <%= form.hidden_field :user_id, value: current_user.id %>
 
-
-      <!-- Execute_at -->
+      <!-- klass -->
       <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
         <div>
-          <label for="execute_at" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
-            <%= t ".execute_at" %>
+          <label for="klass" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+            <%= t ".klass" %>
           </label>
         </div>
         <div class="sm:col-span-2">
-          <%= form.text_field :execute_at, 
-            required: true, 
-            data: { "form-target" => "focus" },
-            class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
+          <%= form.text_field :klass, 
+          required: true, 
+          data: { "form-target" => "focus" },
+          class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
           <div class="text-sm text-red-800" >
-            <%= form.object.errors.where(:execute_at).map( &:full_message).join( "og ") %>
+            <%= form.object.errors.where(:klass).map( &:full_message).join( "og ") %>
           </div>
         </div>
       </div>
 
-      <!-- work -->
-      <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
-        <div>
-          <label for="work" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
-            <%= t ".work" %>
-          </label>
-        </div>
-        <div class="sm:col-span-2">
-          <%= form.text_field :work, required: true, class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
-          <div class="text-sm text-red-800" >
-            <%= form.object.errors.where(:work).map( &:full_message).join( "og ") %>
-          </div>
-        </div>
-      </div>
+      <!-- schedule -->
+      <%= render_component "resource/input_text", form: form, field: :schedule, resource: resource, title: t('.schedule') %>
 
       <!-- Params -->
       <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">

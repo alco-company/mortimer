@@ -1,16 +1,19 @@
 <tr id="<%= dom_id resource %>"  data-controller="list-item">
   <%= render_component "resource/list_checkbox", resource: resource %>
   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= resource.work %>
+    <%= resource.klass %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= resource.execute_at %>
+    <%= resource.schedule %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
     <%= resource.params %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= resource.job_id %>
+    <%= display_time resource.next_run_at, user %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= delete_job resource %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
     <%= render_component "edit", resource: resource, url: edit_resource_url(resource) %>
