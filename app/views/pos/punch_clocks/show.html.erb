@@ -13,10 +13,12 @@
 
 <div 
   class="max-w-full lg:max-w-screen-2xl mx-auto sm:px-6 lg:px-8" 
-  data-controller=""  
+  data-controller="punch-clock"
+  data-punch-clock-punch-clock-asset-id-value="<%= resource.id %>"
+  data-punch-clock-apikey-value="<%= resource.assetable.access_token %>"
+  data-punch-clock-url-value="<%= pos_punch_clock_url(resource.assetable) %>"
   data-tabs-active-tab="border-indigo-500 text-indigo-600" 
   >
-
     <div id="punch_clock_tab" class=" py-4 px-4  space-y-6" data-tabs-target="panel">
 
       <!-- This example requires Tailwind CSS v2.0+ -->
@@ -33,6 +35,13 @@
 
       <%= render partial: "punch_clock_state_buttons_turbo", locals: { resource: resource } %>
     </div>
+    <form method="get" action="search" data-turbo-frame="search-results" data-punch-clock-target="form">
+      <input type="hidden" name="apikey" value="<%= resource.assetable.access_token %>" />
+      <input data-punch-clock-target="search" name="q" />
+    </form>
+    <turbo-frame id="search-results">
+      <div class="result">...</div>
+    </turbo-frame>
 
 </div>
 

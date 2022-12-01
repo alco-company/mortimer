@@ -180,7 +180,6 @@ export default class ListController extends Controller {
           ids.push( elem.id.split("_")[ elem.id.split("_").length - 2] )
         }
       });
-      console.log( ids )
       this.getData(`${this.urlValue}/modal?ids=${ids.join(',')}&action_content=delete`)
       this.openModalForm()
     } else {

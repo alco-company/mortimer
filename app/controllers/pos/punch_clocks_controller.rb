@@ -2,29 +2,10 @@ module Pos
   class PunchClocksController < AssetsController
 
     layout :find_layout
-    skip_before_action :current_user, only: [:index, :show, :punch]
+    skip_before_action :current_user, only: [:index, :show, :punch, :search]
     skip_before_action :breadcrumbs
-    skip_before_action :current_account, only: [:index, :show, :punch]
-    skip_before_action :authenticate_user!, only: [:index, :show, :punch]
-
-    def export
-      if params[:filename]
-        t= File.open Rails.root.join("tmp",params[:filename])
-        (send_data( t.read, type: 'application/pdf', :disposition => 'attachment', filename: params[:filename]) && t.close) and return
-      else
-        ip = Rails.env.development? ? "10.4.3.170" : request.remote_ip
-        @resource = PunchClock.all.where(ip_addr: ip).first rescue nil
-        redirect_to root_url and return if @resource.nil?
-
-        @from_date = Date.parse(params[:from]) rescue nil
-        @to_date = Date.parse(params[:to]) rescue nil 
-        @settled_at = Date.parse(params[:settled]) rescue nil 
-
-        params[:context] = self
-        params[:speicher_account] = Account.current
-        render "export", locals: {filename: Employee.print_record(params)} and return
-      end
-    end
+    skip_before_action :current_account, only: [:index, :show, :punch, :search]
+    skip_before_action :authenticate_user!, only: [:index, :show, :punch, :search]
 
     #
     # we have to 'redefine' the resource calls to provide the proper 
@@ -43,17 +24,13 @@ module Pos
     def resource_class
       @resource_class ||= PunchClock
     end
-
-    def index 
-      _id= params[:id]
-      resource 
-      redirect_to root_path and return unless token_approved
-      @resources = find_resources_queried {}
-      render layout: 'naked'
-    end
     
     def show 
       redirect_to root_path and return unless token_approved
+    end
+
+    def search
+      @resources=Pupil.search_by_model_fields Pupil.all, params[:q]
     end
     
     #
