@@ -19,15 +19,19 @@ module ApplicationHelper
 
   def display_time dt, user 
     return "" if dt.blank?    
-    l dt.in_time_zone(user.time_zone), format: :long
+    I18n.localize dt.in_time_zone(user.time_zone), format: :long
   rescue 
     Rails.logger.warn "user #{user}, dt #{dt}"
-    raw "<span class='hidden'>dt is empty or not a date nor a (date)time</span>"
+    if user 
+      raw "<span class='hidden'>dt is empty or not a date nor a (date)time</span>" 
+    else
+      raw "#{dt}<span class='hidden'>user empty or not a User</span>"
+    end
   end
 
   def display_date dt, user 
     return "" if dt.blank?    
-    l dt.in_time_zone(user.time_zone), format: :date
+    I18n.localize dt.in_time_zone(user.time_zone), format: :date
   rescue 
     raw "<span class='hidden'>dt is empty or not a date nor a (date)time</span>"
   end

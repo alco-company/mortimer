@@ -2,14 +2,18 @@
 
 one:
   account: one
-  execute_at: MyText
-  work: MyString
+  user: one
+  schedule: MyText
+  klass: MyString
   params: MyText
+  next_run_at: DateTime.current
   job_id: MyString
 
 two:
-  account: one
-  execute_at: MyText
-  work: MyString
+  account: two
+  user: two
+  schedule: MyText
+  klass: MyString
   params: MyText
+  next_run_at: DateTime.current
   job_id: MyString

@@ -50,7 +50,7 @@ module CronTask
 
     def single_unit_field
       field.split(',').
-        select { |unit| unit.to_i < every_unit_field.last }.
+        select { |unit| unit unless unit.to_i > every_unit_field.sort.last }.
         tap { |units| units << 0 if units.empty? }
     end
 

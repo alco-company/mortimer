@@ -34,9 +34,11 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * Working with SQL, includes and joins especially [Julianna Seiki](https://medium.com/gusto-engineering/a-visual-guide-to-using-includes-in-rails-700a91cd3095)
 * Building of background_jobs, taking cues from Sidekiq [Mike Perham](https://github.com/mperham/sidekiq/wiki/Ent-Periodic-Jobs)
 * Custom Validations [Sylvia Vargas](https://dev.to/sylwiavargas/rails-custom-validations-58mo)
+* Authentication Zero [lazaronixon](https://github.com/lazaronixon/authentication-zero)
 
 ## Resources
 
+* [How to use Authentication Zero - Simon Chiu](https://codewithrails.com/rails-authentication)
 * [Several posts - ActionText and Theme selector](https://afomera.dev/posts)
 * [Strapi for building backends - 'socalled' headless CMS](https://strapi.io)
 * [How to use Custom Fonts](https://medium.com/@alexis.teh/how-to-add-custom-fonts-to-your-rails-application-992b197c7baa)
@@ -54,8 +56,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * [Build a Tableeditor with TRIX](https://blog.appsignal.com/2022/10/26/build-a-table-editor-with-trix-and-turbo-frames-in-rails.html)
 * [Passwordless Authentication](https://blog.testdouble.com/posts/2022-10-25-building-passwordless-email-auth-in-rails/)
 
-
-[Concepts of doing Advanced Datebase Computing using PostgreSQL ](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)
+[ Concepts of doing Advanced Datebase Computing using PostgreSQL ](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)
 https://blog.alco.dk/2021/03/18/tailwind-hotwire-more/
 
 [How to build a beautiful modal - using the <dialog> element](https://web.dev/building-a-dialog-component/)

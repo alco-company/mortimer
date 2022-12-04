@@ -8,11 +8,18 @@
 # t.string :job_id
 #
 class BackgroundJob < AbstractResource
+  #
+  # prepareable makes it possible to
+  # run cron_task and rrule on background_jobs
+  # in order to prepare them for processing
+  # as ActiveJobs (backed by Sidekiq)
+  #
   include Prepareable
   
   validates :klass, presence: true
   validates :klass, background_job: true 
   belongs_to :account
+  belongs_to :user, optional: true
 
   #
   # default_scope returns all posts that have not been marked for deletion yet
@@ -32,10 +39,11 @@ class BackgroundJob < AbstractResource
   end
 
   def broadcast_update 
+    user = Current.user || set_user
     if self.deleted_at.nil? 
       broadcast_replace_later_to model_name.plural, 
         partial: self, 
-        locals: { resource: self, user: Current.user }
+        locals: { resource: self, user: user }
     else 
       broadcast_remove_to model_name.plural, target: self
     end
@@ -50,4 +58,8 @@ class BackgroundJob < AbstractResource
     []
   end
 
+  private 
+    def set_user 
+      User.unscoped.find self.user_id 
+    end
 end

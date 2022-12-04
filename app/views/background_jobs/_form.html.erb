@@ -30,6 +30,9 @@
         </div>
       </div>
 
+      <!-- active -->
+      <%= render_component "resource/input_boolean", form: form, field: :active, resource: resource, title: t('.active') %>
+
       <!-- schedule -->
       <%= render_component "resource/input_text", form: form, field: :schedule, resource: resource, title: t('.schedule') %>
 

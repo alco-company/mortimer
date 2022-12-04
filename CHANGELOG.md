@@ -66,6 +66,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 - use [table editoer](https://blog.appsignal.com/2022/10/26/build-a-table-editor-with-trix-and-turbo-frames-in-rails.html)
 - use [truemail](https://github.com/truemail-rb/truemail )
 - use [rrule](https://github.com/jakubroztocil/rrule)
+- user [Authentication Zero](https://codewithrails.com/rails-authentication)
 
 
 ## Particular sets of commands
@@ -87,6 +88,21 @@ apt-get install --no-install-recommends dokku
 [How to access Rails ActiveRecord models from inside rake tasks](https://dev.to/software_writer/how-to-access-rails-activerecord-models-inside-a-rake-task-5c76)
 
 ## DONE
+
+### 2022-12-04
+
+09:35 background_jobs
+16:45 asset_workday_sum
+
+### 2022-12-03
+
+09:45 background_jobs
+20:00 -
+
+### 2022-12-02
+
+07:15 background_jobs
+17:00 -
 
 ### 2022-12-01
 

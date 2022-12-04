@@ -28,7 +28,8 @@ class User < AbstractResource
   #
   def self.default_scope
     #   where("assetable" deleted_at: nil)
-    User.all.joins(:participant)
+    joins(:participant).where('participants.account_id=users.account_id')
+    # User.all.joins(:participant)
   end
 
   def name

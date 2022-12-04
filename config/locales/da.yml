@@ -54,137 +54,8 @@ da:
   INVENTORY: Optalt
   #
   klass_not_background_job: Det angivne er ikke et baggrundsjob!
-  
-  breadcrumbs:
-    home: 'Instrumentbrædt'
-    accounts: 'Konti'
-    dashboards: "Instrumentbrædder/skabeloner"
-    locations: "Arbejdssteder"
-    employees: "Medarbejdere"
-    products: "Produkter"
-    punch_clocks: "Stempelure"
-    services: "Tjenester"
-    stocks: "Lagre"
-    stock_items: "Serier/Batch"
-    stocked_products: Lagervarer
-    stock_locations: "Lagerlokationer"
-    stock_item_transactions: "Lagerbevægelser"
-    suppliers: "Leverandører"
-    teams: 'Grupper'
-    users: 'Brugere'
-    work_schedules: 'Normtider'
-    asset_work_transactions: 'Tidsstemplinger'
-    asset_workday_sums: 'Stempelkort'
-    background_jobs: 'Baggrundsjobs'
 
-  navigation:
-    super_user_component:
-      accounts: Konti 
-      users: Brugere
-      dashboards: Instrumentpaneler
-      background_jobs: Baggrundsjobs
-      services: Tjenester 
-    menu_component:
-      dashboard: Instrumentpanel
-      stocked_products: Lagervarer
-      Products: Varer
-      Stocks: Lagre
-      Suppliers: Leverandører
-      StockLocations: Lagerlokationer
-      Roles: Roller
-      Teams: Brugergrupper
-    service_component:
-      employees: Medarbejdere
-      locations: Lokationer
-      printservers: Printservere
-      products: Produkter
-      punch_clocks: Stempelure
-      pupils: Elever
-      roles: Roller 
-      stocked_products: Lagervarer
-      stock_locations: Lagerlokationer
-      stocks: Lagre
-      suppliers: Leverandører
-      teams: Arbejdsgrupper/Teams
-      work_schedules: Vagtskemaer
-
-      
-  topbar:
-    search: "Søg overalt..."
-
-  menu:
-    component:
-      products: "Produkter"
-      stocks: "Lagre"
-      stock_locations: "Lager lokationer"
-      employees: "Medarbejdere"
-      punch_clocks: "Stempelure"
-
-  
-
-  confirmations:
-    new:
-      request_confirmation_email_title: "Bekræftelse af din email adresse"
-      request_confirmation_email_instruction: "Vi forsøgte at sende en email til den adresse, din profil er blevet oprettet under, men når du står her, er der noget, der siger os, at det gik skævt. <p> Her kan du bede os sende en ny email med et særligt link, som du bruger til at bekræfte den email adresse, du har oplyst."
-      request_confirmation_email_button: "Send mig en email nu!"
-      login: "Gå til login"
-      reset_password: "Nulstil adgangskode"
-
-    create:
-      we_sent_a_confirmation_email: "Vi har sendt en email til email adressen: "
-      email_confirmed_already: "Pudsigt! Du har allerede bekræftet email adressen: "
-      no_email_found: "Vi kan desværre ikke se at du har en profil hos os med email adressen: "
-
-    edit: 
-      email_confirmed: "Du har bekræftet din email - tak for det!"
-      something_went_wrong: "Noget gik ikke som forventet - prøv gerne igen (eller kontakt os)"
-      invalid_token: "Det særlige ord, vi har delt med dig, virker ikke bekendt! Kontakt os gerne!!"
-
-  passwords:
-    new: 
-      reset_password_title: "Nulstil dine oplysninger"
-      reset_password_instruction: "Herfra kan du selv nulstille dit brugernavn og din adgangskode. <p>Har du flere brugernavne, sender vi en nulstillingskode til dem alle.</p><p class='pt-4'><strong>- og så er det din opgave at vælge den profil, du ønsker at nulstille!</strong></p>"
-      reset_password_button: "Nulstil!"
-      login: "Gå til login"
-      request_confirmation_email: "Send mig en ny emailbekræftigelse"
-    edit:
-      invalid_expired_token: "Det særlige link er ikke længere gyldigt. <p class='text-sm leading-5 font-medium'>Gå tilbage og bed om en ny email til nulstilling af dine oplysninger!</p>"
-      reset_user_profile_title: "Nulstil dine profil adgangs oplysninger"
-      reset_user_profile_instruction: "Vær varsom! <p>Herfra ændrer du adgangsoplysningerne til din profil. <br/</p><p>Kan du ikke huske hverken brugernavn eller adgangskode <strong class='text-red-400'>bør du kontakte os i stedet</strong> - det er ikke sikkert systemet kan ændre dine oplysninger baseret alene på din email adresse!</p>"
-      reset_profile_button: "Nulstil!"
-      user_name: "Dit brugernavn - undgå at ændre det!"
-      password: "Din nye adgangskode"
-      password_confirmation: "Gentag adgangskoden"
-      password_placeholder: "eksempel: 2'-ki9#m,K"
-      repeat_password_placeholder: "gentag: 2'-ki9#m,K"
-    create:
-      confirm_email_first: "Du mangle at bekræfte din email adresse: "
-      no_email_found: "Vi kan desværre ikke se at du har en profil hos os med email adressen: "
-      we_sent_a_reset_email: "Vi har sendt en email med et særligt link - til email adressen: "
-    update:
-      password_updated_now_sign_in: "Dine oplysninger blev opdateret korrekt - nu kan du logge på med dem."
-              
-  sessions:
-    new:
-      user_name: Brugernavn
-      password: Adgangskode
-      login: Log ind!
-      sign_in: 'Log på med din profil'
-      alternative_to_sign_in: '- eller hvis du endnu ikke har en profil, tilbyder vi dig at '
-      start_free_trial: 'oprette en profil, som du frit kan bruge i 14 dage!'
-      remember_me: 'Husk mig til næste gang'
-      forgot_your_password: 'Glemt dine oplysninger?'
-      request_confirmation_email: "Mangler du at bekræfte din email adresse?"
-    create:
-      signed_in: "Du er blevet logget korrekt på!"
-      request_confirmation_email: "Måske har du aldrig fået den email, vi sendte? Du mangler at bekræfte din email adresse!"
-      incorrect_name_password: "Du har enten tastet forkert - eller angivet et forkert brugernavn og/eller adgangskode! <p class='text-sm leading-5 font-medium'> Prøv igen (indtil 3 gange) eller tryk på link'et ovenfor: Glemt dine oplysninger"
-    destroy:
-      signed_out: "Du er blevet logget korrekt af!"
-
-  shared:
-    topbar:
-      search: "Søg overalt"
+# -- A-Z
 
   Account:
     index: "Oversigt over (SaaS) konti"
@@ -224,7 +95,7 @@ da:
 
     index_columns:
       klass: Navn (på job objektklassen)
-      schedule: Afvikles (hvornår)
+      schedule: Afvikles (UTC)
       params: Argumenter
       job_id: Proces ID
       next_run_at: Afvikles næste gang
@@ -233,9 +104,50 @@ da:
       new_description: "Du kan oprette et nyt baggrundsjob her. Baggrundsjob afvikles typisk på tidspunkter, hvor der er mindre pres på."
       edit: "Ret baggrundsjob"
       edit_description: "Du kan rette et baggrundsjob her. Baggrundsjob afvikles typisk på tidspunkter, hvor der er mindre pres på."
-      work: Navn (på job objektklassen)
-      execute_at: Afvikles (hvornår)
+      klass: Navn (på job objektklassen)
+      schedule: Afvikles (hvornår - angiv i UTC)
+      active: Aktiv?
       params: Argumenter
+  
+  breadcrumbs:
+    home: 'Instrumentbrædt'
+    accounts: 'Konti'
+    dashboards: "Instrumentbrædder/skabeloner"
+    locations: "Arbejdssteder"
+    employees: "Medarbejdere"
+    products: "Produkter"
+    punch_clocks: "Stempelure"
+    services: "Tjenester"
+    stocks: "Lagre"
+    stock_items: "Serier/Batch"
+    stocked_products: Lagervarer
+    stock_locations: "Lagerlokationer"
+    stock_item_transactions: "Lagerbevægelser"
+    suppliers: "Leverandører"
+    teams: 'Grupper'
+    users: 'Brugere'
+    work_schedules: 'Normtider'
+    asset_work_transactions: 'Tidsstemplinger'
+    asset_workday_sums: 'Stempelkort'
+    background_jobs: 'Baggrundsjobs'
+
+  confirmations:
+    new:
+      request_confirmation_email_title: "Bekræftelse af din email adresse"
+      request_confirmation_email_instruction: "Vi forsøgte at sende en email til den adresse, din profil er blevet oprettet under, men når du står her, er der noget, der siger os, at det gik skævt. <p> Her kan du bede os sende en ny email med et særligt link, som du bruger til at bekræfte den email adresse, du har oplyst."
+      request_confirmation_email_button: "Send mig en email nu!"
+      login: "Gå til login"
+      reset_password: "Nulstil adgangskode"
+
+    create:
+      we_sent_a_confirmation_email: "Vi har sendt en email til email adressen: "
+      email_confirmed_already: "Pudsigt! Du har allerede bekræftet email adressen: "
+      no_email_found: "Vi kan desværre ikke se at du har en profil hos os med email adressen: "
+
+    edit: 
+      email_confirmed: "Du har bekræftet din email - tak for det!"
+      something_went_wrong: "Noget gik ikke som forventet - prøv gerne igen (eller kontakt os)"
+      invalid_token: "Det særlige ord, vi har delt med dig, virker ikke bekendt! Kontakt os gerne!!"
 
   Dashboard:
     index: "Oversigt over instrumentbrædder/skabeloner"
@@ -246,8 +158,6 @@ da:
     index_description: <span>Oversigten viser alle de medarbejdere, der er oprettet. Du kan se medarbejdernes &nbsp; <a class="text-indigo-500" target="_blank" href="/pos/employees"> fremmøde status her</a> &nbsp;og normtider definerer du &nbsp; <a class="text-indigo-500"  href="/work_schedules">her</a></span>.
     new_button: 'Ny medarbejder'
 
-
-    
   employees:
     form:
       new: 'Ny medarbejder'
@@ -271,6 +181,15 @@ da:
       employee: Medarbejder
       asset_work_transactions: Komme/Gå stemplinger
 
+  Invitation:
+    new: 'Ny bruger (invitation)'
+    new_description: 'Du opretter en ny bruger ved at sende hen en invitation'
+
+  invitations:
+    form:
+      new: "Ny bruger (invitation)"
+      new_description: "Du kan oprette en ny bruger ved at sende hen en invitation. <p class='text-sm text-gray-500'>Har vedkommende ikke en email adresse - eller har du ikke mulighed for at bruge den - kan email'en sendes til en anden adresse, og link'et bruges fra denne adresse!</p>"
+
   Location:
     index: "Oversigt over arbejdssteder"
     index_description: "Denne oversigt viser dig alle de 'arbejdssteder' dvs de 'steder' hvor virksomhedens 'produkter/tjenester' produceres/leveres/forædles. "
@@ -287,15 +206,69 @@ da:
       edit: "Ret arbejdssted"
       edit_description: "Du kan rette et arbejdssted her."
 
-  Invitation:
-    new: 'Ny bruger (invitation)'
-    new_description: 'Du opretter en ny bruger ved at sende hen en invitation'
+  menu:
+    component:
+      products: "Produkter"
+      stocks: "Lagre"
+      stock_locations: "Lager lokationer"
+      employees: "Medarbejdere"
+      punch_clocks: "Stempelure"
 
-  invitations:
-    form:
-      new: "Ny bruger (invitation)"
-      new_description: "Du kan oprette en ny bruger ved at sende hen en invitation. <p class='text-sm text-gray-500'>Har vedkommende ikke en email adresse - eller har du ikke mulighed for at bruge den - kan email'en sendes til en anden adresse, og link'et bruges fra denne adresse!</p>"
-    
+  navigation:
+    super_user_component:
+      accounts: Konti 
+      users: Brugere
+      dashboards: Instrumentpaneler
+      background_jobs: Baggrundsjobs
+      services: Tjenester 
+    menu_component:
+      dashboard: Instrumentpanel
+      stocked_products: Lagervarer
+      Products: Varer
+      Stocks: Lagre
+      Suppliers: Leverandører
+      StockLocations: Lagerlokationer
+      Roles: Roller
+      Teams: Brugergrupper
+    service_component:
+      employees: Medarbejdere
+      locations: Lokationer
+      printservers: Printservere
+      products: Produkter
+      punch_clocks: Stempelure
+      pupils: Elever
+      roles: Roller 
+      stocked_products: Lagervarer
+      stock_locations: Lagerlokationer
+      stocks: Lagre
+      suppliers: Leverandører
+      teams: Arbejdsgrupper/Teams
+      work_schedules: Vagtskemaer
+
+  passwords:
+    new: 
+      reset_password_title: "Nulstil dine oplysninger"
+      reset_password_instruction: "Herfra kan du selv nulstille dit brugernavn og din adgangskode. <p>Har du flere brugernavne, sender vi en nulstillingskode til dem alle.</p><p class='pt-4'><strong>- og så er det din opgave at vælge den profil, du ønsker at nulstille!</strong></p>"
+      reset_password_button: "Nulstil!"
+      login: "Gå til login"
+      request_confirmation_email: "Send mig en ny emailbekræftigelse"
+    edit:
+      invalid_expired_token: "Det særlige link er ikke længere gyldigt. <p class='text-sm leading-5 font-medium'>Gå tilbage og bed om en ny email til nulstilling af dine oplysninger!</p>"
+      reset_user_profile_title: "Nulstil dine profil adgangs oplysninger"
+      reset_user_profile_instruction: "Vær varsom! <p>Herfra ændrer du adgangsoplysningerne til din profil. <br/</p><p>Kan du ikke huske hverken brugernavn eller adgangskode <strong class='text-red-400'>bør du kontakte os i stedet</strong> - det er ikke sikkert systemet kan ændre dine oplysninger baseret alene på din email adresse!</p>"
+      reset_profile_button: "Nulstil!"
+      user_name: "Dit brugernavn - undgå at ændre det!"
+      password: "Din nye adgangskode"
+      password_confirmation: "Gentag adgangskoden"
+      password_placeholder: "eksempel: 2'-ki9#m,K"
+      repeat_password_placeholder: "gentag: 2'-ki9#m,K"
+    create:
+      confirm_email_first: "Du mangle at bekræfte din email adresse: "
+      no_email_found: "Vi kan desværre ikke se at du har en profil hos os med email adressen: "
+      we_sent_a_reset_email: "Vi har sendt en email med et særligt link - til email adressen: "
+    update:
+      password_updated_now_sign_in: "Dine oplysninger blev opdateret korrekt - nu kan du logge på med dem."
+      
   pos:
     employees:
       show:
@@ -353,6 +326,9 @@ da:
       name: Navn 
       time_spent_minutes: Forbrugt tid
       status: 
+      
+  topbar:
+    search: "Søg overalt..."
 
   Service:
     index: "Oversigt over tjenester"
@@ -373,6 +349,28 @@ da:
       service_group: Kategori 
       service_model: Afregningsform
       menu_icon: Icon (SVG)
+              
+  sessions:
+    new:
+      user_name: Brugernavn
+      password: Adgangskode
+      login: Log ind!
+      sign_in: 'Log på med din profil'
+      alternative_to_sign_in: '- eller hvis du endnu ikke har en profil, tilbyder vi dig at '
+      start_free_trial: 'oprette en profil, som du frit kan bruge i 14 dage!'
+      remember_me: 'Husk mig til næste gang'
+      forgot_your_password: 'Glemt dine oplysninger?'
+      request_confirmation_email: "Mangler du at bekræfte din email adresse?"
+    create:
+      signed_in: "Du er blevet logget korrekt på!"
+      request_confirmation_email: "Måske har du aldrig fået den email, vi sendte? Du mangler at bekræfte din email adresse!"
+      incorrect_name_password: "Du har enten tastet forkert - eller angivet et forkert brugernavn og/eller adgangskode! <p class='text-sm leading-5 font-medium'> Prøv igen (indtil 3 gange) eller tryk på link'et ovenfor: Glemt dine oplysninger"
+    destroy:
+      signed_out: "Du er blevet logget korrekt af!"
+
+  shared:
+    topbar:
+      search: "Søg overalt"
 
   Stock:
     index: "Oversigt over lagre"
@@ -487,6 +485,7 @@ da:
     index: Oversigt over normtider
     index_description: <span>Oversigten viser alle de normtider, der er oprettet. Du kan tildele normtider til <a class="text-indigo-500"  href="/teams"> grupper</a> &nbsp; eller <a class="text-indigo-500"  href="/employees">enkelte medarbejdere</a>.</span>
 
+# Standard localization ------------------------------
 
   activerecord:
     models:

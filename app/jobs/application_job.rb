@@ -76,6 +76,12 @@ class ApplicationJob < ActiveJob::Base
   # Most jobs are safe to ignore if the underlying records are no longer available
   discard_on ActiveJob::DeserializationError
 
+  # make sure to update the job starting this
+  after_perform :update_background_job
+
+  # make user we try to set the locale right
+  around_perform :switch_locale
+
   #
   # allow jobs to say what they need to say
   #
@@ -84,5 +90,21 @@ class ApplicationJob < ActiveJob::Base
     Rails.logger.info msg
     Rails.logger.info "----------------------------------------------------------------------"
   end
-  
+
+  private
+
+    def update_background_job
+      BackgroundJob.all.where(job_id: provider_job_id).each{ |j| j.job_done }
+    end
+ 
+    def switch_locale(&action)
+      locale = Current.user.profile.locale rescue set_user_locale
+      locale ||= (locale || I18n.default_locale)
+      I18n.with_locale(locale, &action)
+    end
+
+    def set_user_locale
+      return nil unless self.respond_to? :user_id
+      User.unscoped.find(self.user_id).profile.locale
+    end
 end
