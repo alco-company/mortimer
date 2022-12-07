@@ -53,6 +53,8 @@ da:
   SHIP: Udleveret
   INVENTORY: Optalt
   #
+  app_punch_clock_used: Brugeren stemplede med sin telefon/app
+  #
   klass_not_background_job: Det angivne er ikke et baggrundsjob!
 
 # -- A-Z
@@ -83,6 +85,13 @@ da:
   asset_work_transactions:
     index_columns:
       name: Navn
+    show:
+      name: Stemplet af
+      punch_asset: Stemplet med
+      punched_at: Stemplingstidspunkt
+      geo_location: Stemplet hvor (ca)
+      created_at: Oprettet i DB
+      updated_at: Sidst rettet i DB
 
   BackgroundJob:
     index: 'Oversigt over baggrundsjobs'

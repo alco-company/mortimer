@@ -35,6 +35,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * Building of background_jobs, taking cues from Sidekiq [Mike Perham](https://github.com/mperham/sidekiq/wiki/Ent-Periodic-Jobs)
 * Custom Validations [Sylvia Vargas](https://dev.to/sylwiavargas/rails-custom-validations-58mo)
 * Authentication Zero [lazaronixon](https://github.com/lazaronixon/authentication-zero)
+* Geolocation API with Promises [Adam Bar](https://whatwebcando.today/articles/use-geolocation-api-promises/)
 
 ## Resources
 
@@ -56,6 +57,10 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * [Build a Tableeditor with TRIX](https://blog.appsignal.com/2022/10/26/build-a-table-editor-with-trix-and-turbo-frames-in-rails.html)
 * [Passwordless Authentication](https://blog.testdouble.com/posts/2022-10-25-building-passwordless-email-auth-in-rails/)
 * [Custom JOINS](https://thoughtbot.com/upcase/videos/advanced-querying-custom-joins)
+* [Where to get info on the client (IP)](https://ip-api.com/)
+* [How to enable location services for Chrome, more](https://docs.buddypunch.com/en/articles/919258-how-to-enable-location-services-for-chrome-safari-edge-and-android-ios-devices-gps-setting)
+* [How to query PostgreSQL for location - long/lat](https://postindustria.com/postgresql-geo-queries-made-easy/)
+* [How to embed open street map in a webpage](https://medium.com/@nargessmi87/how-to-embede-open-street-map-in-a-webpage-like-google-maps-8968fdad7fe4)
 
 [ Concepts of doing Advanced Datebase Computing using PostgreSQL ](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)
 https://blog.alco.dk/2021/03/18/tailwind-hotwire-more/

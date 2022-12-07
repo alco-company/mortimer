@@ -16,6 +16,8 @@ class PupilTransactionService < EventService
         update_pupil_transaction pupil, resource.assetable, params
       end
     end
+  rescue
+    say "-- probably no Pupils provided"
   end
 
   def add_pupil_transaction pupil, employee, params

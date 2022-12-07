@@ -93,6 +93,10 @@ apt-get install --no-install-recommends dokku
 
 06:05 asset_workday_sum
 08:30 pos/employees/:id/show layout
+10:32 navigator.geopos
+14:28 employee pbx_extension
+16:54 get pos location data
+
 
 ### 2022-12-06
 

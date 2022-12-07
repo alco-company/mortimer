@@ -36,6 +36,24 @@ module ApplicationHelper
     raw "<span class='hidden'>dt is empty or not a date nor a (date)time</span>"
   end
 
+  # location is "lat,long,text"
+  def display_geo_tab location 
+    geo = location.split(",")[0..1] rescue nil
+    return "" if (geo.nil? or (geo[0] == 0 and geo[1] == 0))
+    link_to "https://www.openstreetmap.org/search?query=#{geo[0]}%2C#{geo[1]}#map=14", target: "_blank" do 
+      raw %(
+        #{geo.join(", ")}
+        <span class="material-symbols-outlined">
+        open_in_new
+      </span>)
+    end
+  end
+
+  def display_punch_clock resource
+    return t('app_punch_clock_used') if resource.punch_asset.assetable_type == 'Employee'
+    link_to resource.punch_asset.name, punch_clock_url(resource.punch_asset.assetable) 
+  end
+
   def tailwind_classes_for(flash_type)
     {
       notice: "bg-green-400 border-l-4 border-green-700 text-white",

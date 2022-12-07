@@ -29,11 +29,15 @@ export default class EmployeePosController extends Controller {
     employeeAssetId: String,
   }
 
+
   //
   // 1 Initialize/Connect
   //
   // first we initialize the handset - on every connect
   connect() {
+    // alert('Det er nødvendigt at kende din lokation - for at sikre dig mod at andre misbruger denne tjeneste! Tillad derfor venligst at programmet må slå op, hvor du befinder dig. På forhånd tak <3')
+    this.geo_position = ''
+    this.find_my_location()
   }
 
   disconnect() {
@@ -99,7 +103,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching in
   punch_in(e){
-
+    this.find_my_location()
     this.enableButtons([this.pauseButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget])    
 
     let data = { "asset_work_transaction": { 
@@ -113,6 +117,7 @@ export default class EmployeePosController extends Controller {
   }
 
   punch_pupil(e) {
+    this.find_my_location()
     if(e.srcElement.dataset['disabled']=='disabled')
     return
 
@@ -138,6 +143,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching p-time
   punch_in_xtra(e){
+    this.find_my_location()
     this.extraModalTarget.classList.remove("hidden")
   }
 
@@ -165,6 +171,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching substitute
   punch_in_sub(e){
+    this.find_my_location()
     this.substituteModalTarget.classList.remove("hidden")
   }
 
@@ -192,6 +199,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching out
   punch_out(e){
+    this.find_my_location()
     this.stopModalTarget.classList.remove("hidden")
   }
 
@@ -220,6 +228,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching pause/resume
   punch_pause(e){
+    this.find_my_location()
     this.enableButtons([this.pauseButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.freeButtonTarget] )    
 
     const elems = document.querySelectorAll('#pupils td.bg-blue-100')
@@ -237,6 +246,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching sick
   punch_in_sick(e){
+    this.find_my_location()
     this.sickModalTarget.classList.remove("hidden")
   }
   
@@ -266,6 +276,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching free
   punch_in_free(e){
+    this.find_my_location()
     this.freeModalTarget.classList.remove("hidden")
   }
   
@@ -299,8 +310,20 @@ export default class EmployeePosController extends Controller {
   //
   // process input - send good scans to the background worker
 
-  // - process dependant function
-
+  // - find navigator location
+  find_my_location(){
+    try{
+      this.get_position()
+      .then( coords => this.geo_position = `${coords.latitude},${coords.longitude},location retrieved!` )
+      .catch( error => {
+        fetch('http://ip-api.com/json')
+        .then( response => response.json())
+        .then( json =>  this.geo_position = `${json.lat},${json.lon},(approx) location retrieved - user probably declined GeoLocation services (${error} )!`)
+      })
+    } catch (err) {
+      console.log(`hvad sker der: ${err}`)
+    }
+  }
 
   //
   // 4 Output
@@ -333,6 +356,29 @@ export default class EmployeePosController extends Controller {
   handleMessages(e){
     // console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
   }
+
+  get_position(options) {
+    return new Promise((resolve, reject) =>
+      navigator.permissions ?
+
+        // Permission API is implemented
+        navigator.permissions.query({
+          name: 'geolocation'
+        }).then(permission =>
+          // is geolocation granted?
+          permission.state === "granted"
+            ? navigator.geolocation.getCurrentPosition(pos => resolve(pos.coords)) 
+            : reject(new Error("User did not grant permission to access device geolocation information"))
+        ) :
+
+      // Permission API was not implemented
+      navigator.geolocation ?
+          navigator.geolocation.getCurrentPosition(pos => resolve(pos.coords)) :
+      reject(new Error("Permission API is not supported - and navigator.geolocation not available"))
+    )
+  }
+
+
 
   // postPunch
   // transmits the punch
@@ -371,6 +417,8 @@ export default class EmployeePosController extends Controller {
         url = `${this.urlValue}/punch?api_key=${this.apikeyValue}`
       else
         url = `${url}?api_key=${this.apikeyValue}`
+
+      data.asset_work_transaction.location = this.geo_position
 
       let options = {
         method: 'POST',

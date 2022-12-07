@@ -21,7 +21,7 @@ class AssetWorkdaySumJob < ApplicationJob
       Account.all.each do |account|
         Current.account = account
         Asset.all.employees.where(state: PROCESSABLE_EMPLOYEE_STATES).each do |employee_asset|
-          say "....running for #{employe_asset.name}"
+          say "....running for #{employee_asset.name}"
           dt = DateTime.tomorrow
           employee_asset.calendar.punch_work_related_events dt.yesterday, employee_asset
           employee_asset.asset_workday_sums.where(work_date: dt.yesterday).first.calculate_on_transactions( employee_asset) rescue nil
