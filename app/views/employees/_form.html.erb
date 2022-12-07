@@ -105,6 +105,18 @@
           </div>
         </div>
 
+        <!-- pbx_extension -->
+        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div>
+            <label for="pbx_extension" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%= t ".pbx_extension" %>
+            </label>
+          </div>
+          <div class="sm:col-span-2 flex">
+            <%= employee.text_field :pbx_extension %>
+          </div>
+        </div>
+
         <!-- job_title -->
         <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
           <div>

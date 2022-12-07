@@ -47,7 +47,7 @@ class EmployeesController < AssetsController
       #
       params[:asset][:assetable_attributes][:hired_at] = DateTime.parse params[:asset][:assetable_attributes][:hired_at]
       params.require(:asset).permit(:assetable_type, :name, :state, :account_id, teams: [], work_schedules: [], 
-        assetable_attributes: [ :id, :pin_code, :hired_at, :job_title, :birthday, :base_salary, :norm_time, :description, :mug_shot, signed_pupils: {} ] )
+        assetable_attributes: [ :id, :pin_code, :pbx_extension, :hired_at, :job_title, :birthday, :base_salary, :norm_time, :description, :mug_shot, signed_pupils: {} ] )
     end
 
     # def punch_params

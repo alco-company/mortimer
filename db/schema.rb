@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_04_162205) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_07_121431) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,6 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_04_162205) do
     t.integer "extra_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "punched_geo"
     t.index ["asset_id"], name: "index_asset_work_transactions_on_asset_id"
   end
 
@@ -186,6 +187,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_04_162205) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "norm_time"
+    t.string "pbx_extension"
   end
 
   create_table "employees_pupils", id: false, force: :cascade do |t|
