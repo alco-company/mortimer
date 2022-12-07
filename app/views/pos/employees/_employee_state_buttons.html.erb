@@ -66,4 +66,16 @@
     </span>
     <span class="pl-1">Syg!</span>
   </button>
+  
+  <button 
+    data-employee-pos-target="freeButton" 
+    data-action="employee-pos#punch_in_free" 
+    type="button" 
+    <%= 'disabled' if ['BREAK','SICK', 'IN'].include? resource.state %> 
+    class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+    <span class="material-symbols-outlined">
+    beach_access
+    </span>
+    <span class="pl-1">Fri</span>
+  </button>
 </div>

@@ -55,6 +55,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * [Using ActiveInteraction to service ActiveModel](https://github.com/AaronLasseigne/active_interaction)
 * [Build a Tableeditor with TRIX](https://blog.appsignal.com/2022/10/26/build-a-table-editor-with-trix-and-turbo-frames-in-rails.html)
 * [Passwordless Authentication](https://blog.testdouble.com/posts/2022-10-25-building-passwordless-email-auth-in-rails/)
+* [Custom JOINS](https://thoughtbot.com/upcase/videos/advanced-querying-custom-joins)
 
 [ Concepts of doing Advanced Datebase Computing using PostgreSQL ](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)
 https://blog.alco.dk/2021/03/18/tailwind-hotwire-more/

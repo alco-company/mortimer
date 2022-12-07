@@ -17,7 +17,7 @@ class AssetWorkTransactionService < EventService
   def create_automated_employee_punch_transaction resource, params
     set_current_data resource 
 
-    params["state"] = "OUT"
+    params["state"] ||= "OUT"
     create_asset_work_transaction( resource, params )
   end
 
@@ -41,7 +41,7 @@ class AssetWorkTransactionService < EventService
 
     # now perform any calculations required based on the current state 
     # TODO make this part a job to perform_later
-    calculate_punch_consequence awt, params
+    # calculate_punch_consequence awt, params
   # rescue RuntimeError => err
   #   Rails.logger.info "[asset_work_transaction] Error: (AssetWorkTransaction) #{err.message}"
   end

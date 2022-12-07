@@ -89,10 +89,29 @@ apt-get install --no-install-recommends dokku
 
 ## DONE
 
+### 2022-12-07
+
+06:05 asset_workday_sum
+08:30 pos/employees/:id/show layout
+
+### 2022-12-06
+
+06:40 asset_workday_sum
+13:30 Sindico - markedsafsøgning
+16:00 pause
+19:30 asset_workday_sum
+22:30 -
+
+### 2022-12-05
+
+06:55 asset_workday_sum
+20:30 -
+
 ### 2022-12-04
 
 09:35 background_jobs
 16:45 asset_workday_sum
+21:30 -
 
 ### 2022-12-03
 
