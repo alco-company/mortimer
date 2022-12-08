@@ -119,26 +119,27 @@ da:
       params: Argumenter
   
   breadcrumbs:
-    home: 'Instrumentbrædt'
     accounts: 'Konti'
+    asset_work_transactions: 'Tidsstemplinger'
+    asset_workday_sums: 'Stempelkort'
+    background_jobs: 'Baggrundsjobs'
     dashboards: "Instrumentbrædder/skabeloner"
-    locations: "Arbejdssteder"
     employees: "Medarbejdere"
+    home: 'Instrumentbrædt'
+    locations: "Arbejdssteder"
     products: "Produkter"
     punch_clocks: "Stempelure"
+    pupils: Elever
     services: "Tjenester"
-    stocks: "Lagre"
-    stock_items: "Serier/Batch"
-    stocked_products: Lagervarer
-    stock_locations: "Lagerlokationer"
     stock_item_transactions: "Lagerbevægelser"
+    stock_items: "Serier/Batch"
+    stock_locations: "Lagerlokationer"
+    stocked_products: Lagervarer
+    stocks: "Lagre"
     suppliers: "Leverandører"
     teams: 'Grupper'
     users: 'Brugere'
     work_schedules: 'Normtider'
-    asset_work_transactions: 'Tidsstemplinger'
-    asset_workday_sums: 'Stempelkort'
-    background_jobs: 'Baggrundsjobs'
 
   confirmations:
     new:

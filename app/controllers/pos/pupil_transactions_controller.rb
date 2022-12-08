@@ -25,7 +25,7 @@ module Pos
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def resource_params
-        params.require(:pupil_transaction).permit(:pupil_id, :state, :punched_at)
+        params.require(:pupil_transaction).permit(:pupil_id, :state, :location, :employee_asset_id, :punched_at)
       end
 
       #
@@ -38,6 +38,7 @@ module Pos
 
       def token_approved
         Current.account = parent.account
+        Current.user ||= Current.account.users.first
         parent.access_token == params[:api_key]
       end
 

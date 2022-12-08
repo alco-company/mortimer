@@ -132,6 +132,7 @@ Rails.application.routes.draw do
   end
 
   resources :asset_work_transactions, concerns: [:cloneable, :modalable, :exportable]
+  resources :pupil_transactions
 
   
   resources :pupils, concerns: [:cloneable, :modalable] do

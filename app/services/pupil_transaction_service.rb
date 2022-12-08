@@ -1,7 +1,8 @@
 class PupilTransactionService < EventService
     
   def create_pupil_transaction params, employee
-    pupil = employee.pupils.where( id: params['pupil_id']).first
+    pupil = Pupil.unscoped.find( params['pupil_id'])
+    return unless pupil
     return if params['state'] == pupil.state
     case params['state']
     when 'IN'; add_pupil_transaction pupil, employee, params
@@ -21,10 +22,11 @@ class PupilTransactionService < EventService
   end
 
   def add_pupil_transaction pupil, employee, params
-    parms = { asset: employee.asset,
+    parms = { asset_id: params[:employee_asset_id],          # employee.asset
       pupil: pupil,
       state: 'IN',
       punched_at: params['punched_at'],
+      punched_geo: params[:location],
       work_minutes: 0
     }
     acc = employee.asset.account
@@ -39,12 +41,13 @@ class PupilTransactionService < EventService
   end
 
   def update_pupil_transaction pupil, employee, params 
-    last_pt = pupil.pupil_transactions.where(asset: employee.asset).where(state: 'IN').where(work_minutes: 0).where('punched_at < ?', params['punched_at']).last
+    last_pt = pupil.pupil_transactions.where(asset: params[:employee_asset_id]).where(state: 'IN').where('punched_at < ?', params['punched_at']).last         # .where(work_minutes: 0)
     unless last_pt.nil?
-      parms = { asset: employee.asset,
+      parms = { asset_id: params[:employee_asset_id],
         pupil: pupil,
         state: 'OUT',
         punched_at: params['punched_at'],
+        punched_geo: params["location"],
         work_minutes: calc_work_minutes(params['punched_at'], last_pt)#event.eventable.asset_workday_sum.work_minutes,
       }
       acc = employee.account
