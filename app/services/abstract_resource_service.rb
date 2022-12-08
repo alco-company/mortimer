@@ -88,6 +88,16 @@ class AbstractResourceService
       @status == :deleted
     end
   end
+
+
+
+  def say msg 
+    return unless Rails.env.development?
+    Rails.logger.info '--------------------------------------------------------'
+    Rails.logger.info msg
+    Rails.logger.info '--------------------------------------------------------'
+  end
+  
 end
 
   

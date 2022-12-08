@@ -89,6 +89,11 @@ apt-get install --no-install-recommends dokku
 
 ## DONE
 
+### 2022-12-08
+
+08:10 modals layout
+10:36 asset_work_transaction & asset_workday_sum - calc time spent
+
 ### 2022-12-07
 
 06:05 asset_workday_sum
@@ -96,6 +101,8 @@ apt-get install --no-install-recommends dokku
 10:32 navigator.geopos
 14:28 employee pbx_extension
 16:54 get pos location data
+19:30 modals layout
+22:30 -
 
 
 ### 2022-12-06

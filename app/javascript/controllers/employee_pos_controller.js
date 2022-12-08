@@ -151,7 +151,8 @@ export default class EmployeePosController extends Controller {
 
     this.enableButtons([this.extraButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget])    
 
-    let comment = document.getElementById('comment').value
+    let comment = document.getElementById('xtra_comment').value
+    document.getElementById('xtra_comment').value = ''
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T10:07:38.249Z", "state"=>"IN", "xtra_time"=>"true", "comment"=>"laver noget skrammel for nogen"}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
@@ -180,11 +181,11 @@ export default class EmployeePosController extends Controller {
     this.enableButtons([this.substituteButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget])    
 
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:20:32.079Z", "state"=>"IN", "location"=>"3", "substitute"=>"true"}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
-    let location = document.getElementById('location').value
+    let substitute_reason = document.getElementById('substitute_reason').value
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "IN", 
-      "location": location,
+      "substitute_reason": substitute_reason,
       "substitute": "true"
       }
     }
@@ -207,7 +208,8 @@ export default class EmployeePosController extends Controller {
   punch_out_ok(e){
     this.enableButtons([this.stopButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget] )    
 
-    let comment = document.getElementById('comment').value
+    let comment = document.getElementById('stop_comment').value
+    document.getElementById('stop_comment').value = ''
     const elems = document.querySelectorAll('#pupils td.bg-blue-100')
     let pupils = {}
     document.querySelectorAll('#pupils td.bg-blue-100').forEach( e => pupils[e.id]='off')
@@ -257,10 +259,12 @@ export default class EmployeePosController extends Controller {
 
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:29:53.731Z", "state"=>"SICK", "sick_hrs"=>"3.5", "punched_pupils"=>{}}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
     let sick_hrs = document.getElementById('sick_hrs').value
+    let sick_reason = document.getElementById('sick_reason').value
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "SICK", 
       "sick_hrs": sick_hrs,
+      "sick_reason": sick_reason,
       "punched_pupils": pupils,
       }
     }
@@ -286,11 +290,11 @@ export default class EmployeePosController extends Controller {
     this.enableButtons([this.freeButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.freeButtonTarget] )    
 
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:29:53.731Z", "state"=>"SICK", "sick_hrs"=>"3.5", "punched_pupils"=>{}}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
-    let free_type = document.getElementById('free').value
+    let free_reason = document.getElementById('free_reason').value
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "FREE", 
-      "free_type": free_type,
+      "free_reason": free_reason,
       }
     }
 

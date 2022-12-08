@@ -25,17 +25,17 @@ class AssetWorkTransaction < AbstractResource
     broadcast_prepend_later_to model_name.plural, 
       target: "asset_work_transaction_list", 
       partial: self,
-      locals: { resource: self, current_user: Current.user }
+      locals: { resource: self, user: Current.user }
 
     broadcast_replace_later_to "employee_#{self.asset.id}_state", 
       partial: "pos/employees/employee_state", 
       target: "employee_state", 
-      locals: { resource: self.asset, current_user: Current.user }
+      locals: { resource: self.asset, user: Current.user }
         
     broadcast_replace_later_to "employee_#{self.asset.id}_state_buttons", 
       partial: "pos/employees/employee_state_buttons", 
       target: "employee_state_buttons", 
-      locals: { resource: self.asset, current_user: Current.user }
+      locals: { resource: self.asset, user: Current.user }
   end
 
 end
