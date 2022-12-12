@@ -61,6 +61,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * [How to enable location services for Chrome, more](https://docs.buddypunch.com/en/articles/919258-how-to-enable-location-services-for-chrome-safari-edge-and-android-ios-devices-gps-setting)
 * [How to query PostgreSQL for location - long/lat](https://postindustria.com/postgresql-geo-queries-made-easy/)
 * [How to embed open street map in a webpage](https://medium.com/@nargessmi87/how-to-embede-open-street-map-in-a-webpage-like-google-maps-8968fdad7fe4)
+* [How to use Percent signs in Ruby - Faraaz](https://deepsource.io/blog/ruby-percent-notation/)
 
 [ Concepts of doing Advanced Datebase Computing using PostgreSQL ](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)
 https://blog.alco.dk/2021/03/18/tailwind-hotwire-more/

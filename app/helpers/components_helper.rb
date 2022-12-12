@@ -51,4 +51,17 @@ module ComponentsHelper
   rescue 
     ''
   end
+
+  def combo_select_for items, key='id', value='name'
+    case items.class.to_s
+    # 'key,value|key,value|...|key,value'
+    when 'String'
+      items.split("|").map{|i|i.split(",")}
+    #[ [key,value], [key,value], ..., [key,value] ]
+    when 'Array'
+      items
+    when /ActiveRecord/
+      items.map{|i|[i.send(key),i.send(value)]}
+    end
+  end
 end

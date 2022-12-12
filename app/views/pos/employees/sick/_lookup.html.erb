@@ -3,17 +3,17 @@
 
   Highlighted: "text-white bg-indigo-600", Not Highlighted: "text-gray-900"
 -->
-<% selected = values.include?( resource ) rescue false %>
+<% selected = values.include?( resource[0] ) rescue false %>
 <li 
   class="focus-visible:text-white focus-visible:bg-indigo-600/25 text-gray-900 flex justify-items-start cursor-default select-none relative py-2 pl-3 pr-9" 
   tabindex="-1" 
   data-action="click->resource--combo-component#clickListItem"
-  data-record-id="<%= resource %>"
+  data-record-id="<%= resource[0] %>"
   role="option">
   <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
   <span 
-    data-record-id="<%= resource %>"
-    class="<%= selected ? "font-semibold" : "font-normal"%> block truncate"> <%= resource %> 
+    data-record-id="<%= resource[0] %>"
+    class="<%= selected ? "font-semibold" : "font-normal"%> block truncate"> <%= resource[1] %> 
   </span>
 
   <!--

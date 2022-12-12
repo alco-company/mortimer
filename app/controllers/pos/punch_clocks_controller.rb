@@ -72,6 +72,7 @@ module Pos
 
       def token_approved
         Current.account = resource.account
+        Current.user ||= Current.account.users.first
         resource.assetable.access_token == params[:api_key]
       end
   

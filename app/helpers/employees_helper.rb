@@ -18,14 +18,14 @@ module EmployeesHelper
     end
   end
 
-  def show_employee_attendance_state resource
-    case resource.state 
-    when "IN"; "Du er mødt (startet) #{ asset_state_time_updated resource }"
-    when "OUT"; "Du er mødt ud (stoppet) #{ asset_state_time_updated resource }"
-    when "BREAK"; "Du har pauseret siden #{ asset_state_time_updated resource }"
-    when "SICK"; "Du meldte dig syg #{ asset_state_time_updated resource }"
-    when "FREE"; "Du har oprettet en kalenderaftale, hvor du har fri fra x til y"
-    when "LEAVE"; "Du har oprettet en kalenderaftale, hvor du har orlov fra x til y"
+  def show_employee_attendance_state resource, reason=''
+    reason = t(reason) unless reason==''
+    case resource.state
+    when "IN"; "Du er mødt (stemplet ind) #{reason} #{ asset_state_time_updated resource }"
+    when "OUT"; "Du er mødt ud (stemplet ud) #{reason} #{ asset_state_time_updated resource }"
+    when "BREAK"; "Du gik til pause #{ asset_state_time_updated resource }"
+    when "SICK"; "Du har meldt dig syg #{reason} #{ asset_state_time_updated resource }"
+    when "FREE"; "Du holder fri #{reason}, siden #{ asset_state_time_updated resource } "
     end
   end
 
@@ -69,6 +69,12 @@ module EmployeesHelper
     when 'FREE'; 'bg-blue-100'
     else 'bg-white'
     end
+  end
+
+  def eligible_pupils resource, params
+    say "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+    say params    
+    return resource.assetable.pupils 
   end
 
 end

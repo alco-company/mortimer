@@ -119,7 +119,7 @@ export default class EmployeePosController extends Controller {
   punch_pupil(e) {
     this.find_my_location()
     if(e.srcElement.dataset['disabled']=='disabled')
-    return
+      return
 
     let state=null
     if (e.srcElement.classList.contains('bg-blue-100')){
@@ -132,6 +132,7 @@ export default class EmployeePosController extends Controller {
 
     let data = { "pupil_transaction": { 
       "punched_at": new Date().toISOString(), 
+      "employee_asset_id": this.employeeAssetIdValue,
       "state": state, 
       "pupil_id": e.target.dataset.id,
       }
@@ -157,7 +158,8 @@ export default class EmployeePosController extends Controller {
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "IN", 
-      "extra_time": "true",
+      "punched_pupils": this.close_active_pupils({}),
+      "reason": "XTRA",
       "comment": comment,
       }
     }
@@ -181,12 +183,12 @@ export default class EmployeePosController extends Controller {
     this.enableButtons([this.substituteButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget])    
 
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:20:32.079Z", "state"=>"IN", "location"=>"3", "substitute"=>"true"}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
-    let substitute_reason = document.getElementById('substitute_reason').value
+    let reason = document.getElementById('substitute_reason').value
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "IN", 
-      "substitute_reason": substitute_reason,
-      "substitute": "true"
+      "punched_pupils": this.close_active_pupils({}),
+      "reason": reason,
       }
     }
 
@@ -210,12 +212,10 @@ export default class EmployeePosController extends Controller {
 
     let comment = document.getElementById('stop_comment').value
     document.getElementById('stop_comment').value = ''
-    const elems = document.querySelectorAll('#pupils td.bg-blue-100')
-    let pupils = {}
-    document.querySelectorAll('#pupils td.bg-blue-100').forEach( e => pupils[e.id]='off')
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "OUT", 
+      "punched_pupils": this.close_active_pupils({}),
       "comment": comment,
       }
     }
@@ -233,13 +233,11 @@ export default class EmployeePosController extends Controller {
     this.find_my_location()
     this.enableButtons([this.pauseButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.freeButtonTarget] )    
 
-    const elems = document.querySelectorAll('#pupils td.bg-blue-100')
     let pupils = {}
-    document.querySelectorAll('#pupils td.bg-blue-100').forEach( e => pupils[e.id]='off')
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": 'BREAK', 
-      "punched_pupils": pupils,
+      "punched_pupils": this.close_active_pupils({}),
       }
     }
 
@@ -259,13 +257,14 @@ export default class EmployeePosController extends Controller {
 
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:29:53.731Z", "state"=>"SICK", "sick_hrs"=>"3.5", "punched_pupils"=>{}}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
     let sick_hrs = document.getElementById('sick_hrs').value
-    let sick_reason = document.getElementById('sick_reason').value
+    let reason = document.getElementById('sick_reason').value
+    document.getElementById('sick_reason').value=''
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "SICK", 
       "sick_hrs": sick_hrs,
-      "sick_reason": sick_reason,
-      "punched_pupils": pupils,
+      "reason": reason,
+      "punched_pupils": this.close_active_pupils({}),
       }
     }
 
@@ -290,11 +289,13 @@ export default class EmployeePosController extends Controller {
     this.enableButtons([this.freeButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.freeButtonTarget] )    
 
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:29:53.731Z", "state"=>"SICK", "sick_hrs"=>"3.5", "punched_pupils"=>{}}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
-    let free_reason = document.getElementById('free_reason').value
+    let reason = document.getElementById('free_reason').value
+    document.getElementById('free_reason').value=''
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
+      "punched_pupils": this.close_active_pupils({}),
       "state": "FREE", 
-      "free_reason": free_reason,
+      "reason": reason,
       }
     }
 
@@ -313,6 +314,15 @@ export default class EmployeePosController extends Controller {
   // 3 Process Input
   //
   // process input - send good scans to the background worker
+
+  // 
+  // make sure we close all currently running counters 
+  //
+  close_active_pupils(pupils){
+    const elems = document.querySelectorAll('#pupils td.bg-blue-100')
+    document.querySelectorAll('#pupils td.bg-blue-100').forEach( e => pupils[e.id]='off')
+    return pupils
+  }
 
   // - find navigator location
   find_my_location(){
@@ -422,7 +432,11 @@ export default class EmployeePosController extends Controller {
       else
         url = `${url}?api_key=${this.apikeyValue}`
 
-      data.asset_work_transaction.location = this.geo_position
+      try {
+        data.asset_work_transaction.location = this.geo_position
+      } catch ( err ) {
+        data.pupil_transaction.location = this.geo_position
+      }
 
       let options = {
         method: 'POST',

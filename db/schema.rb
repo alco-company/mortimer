@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_08_130703) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_09_082955) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,6 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_130703) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "punched_geo"
+    t.string "reason"
     t.index ["asset_id"], name: "index_asset_work_transactions_on_asset_id"
   end
 

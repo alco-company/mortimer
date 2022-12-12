@@ -88,7 +88,7 @@ export default class ComboComponentController extends Controller {
 
     // clicking any item in the list will select it
     async clickListItem(e){
-        if (this.isAddValue && e.srcElement.dataset.recordId==0){
+        if (this.isAddValue && e.srcElement.dataset.recordId==0 && this.urlValue){
             post(this.urlValue, { 
                 body: JSON.stringify({ role: {account_id: this.accountIdValue, name: e.srcElement.dataset.recordName, context: " ", role: [] } }),
                 responseKind: "json"
@@ -132,7 +132,8 @@ export default class ComboComponentController extends Controller {
         this.setOption(e.srcElement.dataset.recordId)
         this.toggleHidden(e.srcElement.nextElementSibling)
         this.updateSelect(e.srcElement.dataset.recordName)
-        this.updateInputWithServerValues()
+        if (this.urlValue)
+            this.updateInputWithServerValues()
         this.updateList()
     }
 

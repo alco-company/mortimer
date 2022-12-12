@@ -57,8 +57,14 @@ module Pos
     end
     
     #
-    # Parameters: { "asset_work_transaction"=>{"punched_at"=>"2022-10-13T07:48:37.239Z", "state"=>"IN", 
-    #               "punched_pupils"=>{"pupil_2"=>"on", "pupil_6"=>"on"}}, "api_key"=>"[FILTERED]", "id"=>"2", "employee"=>{}}
+    # Parameters: {"asset_work_transaction"=>{"punched_at"=>"2022-12-07T21:51:06.851Z", 
+    #              "state"=>"OUT", "comment"=>"blev bare hængende lidt", 
+    #              "state"=>"IN", "reason"=>"XTRA", "comment"=>"en helt igennem speciel opgave",
+    #              "state"=>"IN", "reason"=>"4", (substitute)
+    #              "state"=>"SICK", "sick_hrs"=>"3.5", "reason"=>"CHILD", 
+    #              "location"=>"56.1669506,9.5618007,location retrieved!", 
+    #              "punched_pupils"=>{"pupil_2"=>"on", "pupil_6"=>"on"}}, "api_key"=>"[FILTERED]", "id"=>"4", "employee"=>{}}
+    #
     def punch 
       head 301 and return unless token_approved
       event = AssetWorkTransactionService.new.create_employee_punch_transaction( resource, resource_params )
@@ -83,7 +89,8 @@ module Pos
         params["asset_work_transaction"]["employee_asset_id"] = resource.id
         params["asset_work_transaction"]["punch_asset_id"] = resource.id # the user's own device
         params.require(:asset_work_transaction).permit(:punched_at, :state, :ip_addr, 
-          :punch_asset_id, :p_time, :substitute, :location, :extra_time, :comment, :sick_hrs, :employee_asset_id, punched_pupils: {} )
+          :punch_asset_id, :p_time, :substitute, :location, :extra_time, :comment, 
+          :sick_hrs, :reason, :employee_asset_id, punched_pupils: {} )
       end
 
       #
@@ -96,9 +103,9 @@ module Pos
 
       def token_approved
         Current.account = resource.account
+        Current.user ||= Current.account.users.first
         resource.assetable.access_token == params[:api_key]
-      end
-  
+      end  
 
   end
 end

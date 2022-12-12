@@ -6,7 +6,7 @@ class Resource::ComboComponent < ViewComponent::Base
   renders_one :footer
 
     #
-    # form*           - the form element 
+    # form*           - the form element (or nil if no form present)
     # attr*           - the attribute or association holding the data element
     # label           - (translated) field title 
     #
@@ -26,7 +26,7 @@ class Resource::ComboComponent < ViewComponent::Base
     #                   so a few example types would be: single_list, multi_drop, 
     #                   multi_tags, single_drop_search, multi_list_search_add
     #
-    # url             - this is the URL which will support a 'lookup' method/action
+    # url             - this is the URL which will support a 'lookup' method/action / nil if no lookup
     # partial         - if different from '/#{url}/lookup'      (but the /lookup part is fixed in combo_component.html.erb)
     # lookup_target   - if different from '#{url}'              - where to list elements on lookup
     # values          - if different from attr                  - current value(s)

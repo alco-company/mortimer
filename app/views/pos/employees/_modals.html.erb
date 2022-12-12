@@ -156,7 +156,11 @@
             <div class="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title"> Jeg er nødt til at melde mig syg </h3>
               <div class="mt-2 w-full">
-                <%= render_component "resource/combo", form: nil, attr: :sick_reason, label: "Årsagen er ", type: :single_list, url: "/pos/employees/sick", values: [], items: [ 'jeg er syg', 'mit barn er syg', 'tabt arbejdsfortjeneste', 'paragraf 56', 'omsorg' ] %>
+                <%= render_component "resource/combo", 
+                    form: nil, attr: :sick_reason, label: "Årsagen er ", 
+                    type: :single_list, url: "/pos/employees/sick", 
+                    values: [], 
+                    items: combo_select_for( [[ 'ME', 'jeg er syg'], [ 'CHILD','mit barn er syg'], [ 'LOST_WORK','tabt arbejdsfortjeneste'], [ 'P56','paragraf 56'], [ 'NURSING','omsorg'] ] ) %>
               </div>
             </div>
           </div>
@@ -224,7 +228,11 @@
             <div class="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Jeg holder fri</h3>
               <div class="mt-2 w-full">
-                <%= render_component "resource/combo", form: nil, attr: :free, label: t('.free'), type: :single_list, url: "/pos/employees/free", values: [], items: [ 'fri', 'ferie/fri', 'senior', 'uden løn', 'barsel', 'orlov' ] %>
+                <%= render_component "resource/combo", 
+                    form: nil, attr: :free_reason, label: t('.free'), 
+                    type: :single_list, url: "/pos/employees/free", 
+                    values: [], 
+                    items: combo_select_for( [[ '-', 'jeg holder ferie'], [ 'RR','jeg bruger af min ferie/fri konto'], [ 'SENIOR','jeg bruger af min senior konto'], [ 'UNPAID','jeg betaler selv'], [ 'MATERNITY','jeg holder barsel'], [ 'LEAVE','jeg er på orlov'] ] ) %>
               </div>
             </div>
           </div>

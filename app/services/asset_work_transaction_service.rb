@@ -65,7 +65,25 @@ class AssetWorkTransactionService < EventService
         awt.punch_asset_ip_addr = params["ip_addr"]
         awt.punched_at = params["punched_at"]
         awt.punched_geo = params["location"]
-        awt.extra_time = params["extra_time"] ? 0 : nil 
+        awt.reason = params["reason"]
+
+        comment = case awt.reason 
+        when nil; comment
+        when ""; comment
+        when "-"; "ferie"
+        when "XTRA"; "overtid " + comment
+        when "ME"; "er selv syg"
+        when "RR"; "ferie/fri"
+        when "CHILD"; "barn syg"
+        when "NURSING"; "omsorg"
+        when "SENIOR"; "senior"
+        when "UNPAID"; "selvbetalt"
+        when "LOST_WORK"; "tabt arbejdsfortjeneste"
+        when "MATERNITY"; "barsel"
+        when "LEAVE"; "orlov"
+        when "P56"; "paragraf 56"
+        end
+
         e = Event.create( 
           account: Current.account, 
           name: comment,

@@ -89,6 +89,24 @@ apt-get install --no-install-recommends dokku
 
 ## DONE
 
+### 2022-12-12
+
+07:45 email from LHL RT
+08:15 planlæg PILEA m/Andreas
+09:05 RT problem med printserver på Vindø - rootCA.pem faldet ud (igen)
+11:30 printserver Vindø printer ikke korrekt spillekort
+15:30 asset_work_transactions + asset_workday_sum
+
+### 2022-12-10
+
+10:00 Move STEN to a new server on servicepoint
+17:10 -
+
+### 2022-12-09
+
+07:15 forgot what I did today :(
+14:15 -
+
 ### 2022-12-08
 
 08:10 modals layout
