@@ -7,6 +7,11 @@ module AssetWorkdaySumsHelper
     "-"
   end
 
+
+  def display_awds_minutes resource, field, range
+    "%s min" % resource.asset_workday_sums.where(work_date: range ).sum( field )
+  end
+
   # # t.integer "work_minutes"                  IN          -           a           reason if substitute
   # # t.integer "break_minutes"                 BREAK       -           -           -
   # # t.integer "ot1_minutes"                   IN          -           XTRA        not nil            

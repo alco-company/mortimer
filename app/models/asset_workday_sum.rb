@@ -67,7 +67,7 @@ class AssetWorkdaySum < AbstractResource
       when 'IN'
         calc_last_stint awt, from, punch_type
         from = awt.punched_at
-        punch_type = awt.reason == "XTRA" ? :ot1_minutes : :work_minutes
+        punch_type = awt.reason.upcase == "XTRA" ? :ot1_minutes : :work_minutes
 
       # break_minutes
       when 'BREAK'
@@ -116,7 +116,7 @@ class AssetWorkdaySum < AbstractResource
 
       end
 
-      puts "state: #{awt.state}, reason: #{awt.reason}, comment, #{awt.name}, punch_type: #{punch_type }, from: #{from}"
+      # puts "state: #{awt.state}, reason: #{awt.reason}, comment, #{awt.name}, punch_type: #{punch_type }, from: #{from}"
     end
 
     # the employee did not punch out - for some reason!
@@ -124,7 +124,7 @@ class AssetWorkdaySum < AbstractResource
       # send email to someone
     end
 
-    say "processed #{awts.count} punches........"
+    # say "processed #{awts.count} punches........"
     # move any free_minutes to free_prev_minutes
     # next year on this day
     if prev_year_awd

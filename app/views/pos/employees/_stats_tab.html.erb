@@ -13,150 +13,37 @@
       <table class="min-w-full divide-y divide-gray-300">
         <thead>
           <tr>
-            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0">Beskrivelse</th>
-            <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell">Timer/dage</th>
-            <%# <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell">Pris</th>
-            <th scope="col" class="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0">Ialt</th> %>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0"> <%= t(".description") %></th>
+            <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell"><%= I18n.localize Date.today, format: :week_string %></th>
+            <%# <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell">Pris</th> %>
+            <th scope="col" class="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0 w-48"> <%= I18n.localize Date.today, format: :month_name %> måned</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="border-b border-gray-200">
-            <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-              <div class="font-medium text-gray-900">Timer i denne uge</div>
-              <div class="mt-0.5 text-gray-500 sm:hidden"> <%= display_hours_this_week resource %></div>
-            </td>
-            <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_hours_this_week resource %></td>
-            <%# <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell">175,00</td>
-            <td class="py-4 pl-3 pr-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">2.100,00</td> %>
+          <% fields = [ :work_minutes, :break_minutes, :ot1_minutes, :ot2_minutes, :sick_minutes, :child_sick_minutes ] %>
+          <% fields.each do |field| %>
+            <%= render partial: "asset_workday_sums/stats", locals: { resource: resource, field: field, label: t(field), ranges: [Date.today.at_beginning_of_week..Date.today.at_end_of_week,Date.today.at_beginning_of_month..Date.today.at_end_of_month] } %>
+          <% end %>
+        </tbody>
+      </table>
+
+      <table class="min-w-full divide-y divide-gray-300">
+        <thead>
+          <tr>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0"></th>
+            <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell"><%= I18n.localize Date.today, format: :week_string %></th>
+            <%# <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell">Pris</th> %>
+            <th scope="col" class="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0 sm:table-cell w-48"> <%= Date.today.year %>
           </tr>
-          <tr class="border-b border-gray-200">
-            <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-              <div class="font-medium text-gray-900">Timer i denne måned</div>
-              <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_hours_this_month resource %></div>
-            </td>
-            <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_hours_this_month resource %></td>
-            <%# <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell">175,00</td>
-            <td class="py-4 pl-3 pr-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">13.300,00</td> %>
-          </tr>
-          <tr class="border-b border-gray-200">
-            <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-              <div class="font-medium text-gray-900">Overarbejde i denne uge</div>
-              <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_ot_hours_this_week resource %></div>
-            </td>
-            <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_ot_hours_this_week resource %></td>
-            <%# <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell">262,50</td>
-            <td class="py-4 pl-3 pr-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">262,50</td> %>
-          </tr>
-          <tr class="border-b border-gray-200">
-            <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-              <div class="font-medium text-gray-900">Overarbejde i denne måned</div>
-              <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_ot_hours_this_month resource %></div>
-            </td>
-            <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_ot_hours_this_month resource %></td>
-            <%# <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell">262,50</td>
-            <td class="py-4 pl-3 pr-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">262,50</td> %>
-          </tr>
-
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">Ferie/Fri konto forbrug</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_rr_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_rr_account resource %></td>
-            </tr>
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">Senior konto forbrugt</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_senior_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_senior_account resource %></td>
-            </tr>
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">Sygdom</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_sick_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_sick_account resource %></td>
-            </tr>
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">Ferie forbrugt</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_free_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_free_account resource %></td>
-            </tr>
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">Børns sygdom</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_child_sick_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_child_sick_account resource %></td>
-            </tr>
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">Omsorg</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_nursing_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_nursing_account resource %></td>
-            </tr>
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">Selvbetalt fri</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_unpaid_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_unpaid_account resource %></td>
-            </tr>
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">Tabt arbejdsfortjeneste</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_lost_work_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_lost_work_account resource %></td>
-            </tr>
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">Barsel forbrugt</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_child_leave_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_child_leave_account resource%></td>
-            </tr>
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">Orlovskonto forbrugt</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_leave_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_leave_account resource %></td>
-            </tr>
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">Ferie forbrugt sidste år</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_free_prev_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_free_prev_account resource %></td>
-            </tr>
-
-            <tr class="border-b border-gray-200">
-              <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                <div class="font-medium text-gray-900">§56 konto forbrugt</div>
-                <div class="mt-0.5 text-gray-500 sm:hidden"><%= display_pgf56_account resource %></div>
-              </td>
-              <td class="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"><%= display_pgf56_account resource %></td>
-            </tr>
-
-
-
-          <!-- More projects... -->
+        </thead>
+        <tbody>
+          <% fields = [ :free_minutes, :free_prev_minutes, :holiday_free_minutes, 
+            :nursing_minutes, :senior_minutes, :unpaid_free_minutes, 
+            :lost_work_revenue_minutes, :child_leave_minutes, :leave_minutes, :pgf56_minutes, ] %>
+          <% fields.each do |field| %>
+            <%= render partial: "asset_workday_sums/stats", 
+                locals: { resource: resource, field: field, label: t(field), ranges: [Date.today.at_beginning_of_week..Date.today.at_end_of_week,Date.today.at_beginning_of_month..Date.today.at_end_of_month] } %>
+          <% end %>
         </tbody>
         <%# <tfoot>
           <tr>

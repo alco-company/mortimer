@@ -569,6 +569,7 @@ da:
       short: "%e. %b %Y"
       short_iso: "%Y-%m-%d"
       week_number: "%W"
+      week_string: "uge %W"
       month_name: "%B"
     month_names:
     - 
