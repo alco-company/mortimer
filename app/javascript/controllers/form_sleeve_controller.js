@@ -32,6 +32,7 @@ export default class FormSleeveController extends Controller {
       }))
       
       document.getElementById('form_slideover').querySelectorAll('form')[0].id = document.getElementById('form_slideover').dataset.current_form_slideover || "dashboard_form"
+      history.back() 
     }
   }
 
@@ -66,9 +67,6 @@ export default class FormSleeveController extends Controller {
   handleMessages(e){
     console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
 
-    // if(e.detail.message==='Escape' && e.detail.sender==='form'){
-    //   this._hide()
-    // }
     if(e.detail.message==='submit form'){
       this.formTarget.requestSubmit() 
     }
