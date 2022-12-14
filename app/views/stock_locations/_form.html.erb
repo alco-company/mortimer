@@ -99,6 +99,6 @@
   <% end %>
 
 
-  <%= render_component "action_button", resource: resource, delete_url: form_stock_location_url(resource), deleteable: true %>
+  <%= render_component "action_button", resource: resource, delete_url: form_stock_location_url(resource), deleteable: !resource.new_record? %>
 
 <% end %>

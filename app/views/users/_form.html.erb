@@ -280,7 +280,7 @@
 
       </div>
 
-      <%= render_component "action_button", resource: resource, delete_url: resource_url(resource), deleteable: (resource != current_user) %>
+      <%= render_component "action_button", resource: resource, delete_url: resource_url(resource), deleteable: (resource != current_user && !resource.new_record?) %>
 
     </div>
   <% end %>

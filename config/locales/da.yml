@@ -34,6 +34,7 @@ da:
   your_credentials_dont_match: "Dine brugeroplysninger blev ikke fundet - CSRF fejl!"
   record_not_found: "(404) Den post, du bad om, blev desværre ikke fundet"
   not_authorized: "(401) Den post/den handling, du bad om, har du desværre ikke adgang til!"
+  no more records: "Ikke flere poster!"
   dashboard: "oversigt"
   register_time: "tid"
   calendar: "kalender"

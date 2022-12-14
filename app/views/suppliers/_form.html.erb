@@ -67,6 +67,6 @@
   <% end %>
 
 
-  <%= render_component "action_button", resource: resource, delete_url: resource_url(resource.participantable), deleteable: true %>
+  <%= render_component "action_button", resource: resource, delete_url: resource_url(resource.participantable), deleteable: !resource.new_record? %>
 
 <% end %>

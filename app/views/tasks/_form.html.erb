@@ -61,7 +61,7 @@
   <% end %>
 
 
-  <%= render_component "action_button", resource: resource, delete_url: resource_url(resource.eventable), deleteable: true %>
+  <%= render_component "action_button", resource: resource, delete_url: resource_url(resource.eventable), deleteable: !resource.new_record? %>
 
 <% end %>
 
