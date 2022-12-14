@@ -4,10 +4,10 @@
 <%= turbo_stream.remove "spinner" %>
 <%= turbo_stream.append "#{resource_class.to_s.underscore}_list" do %>
   <% resources.each do |rec| %>
-    <%= render partial: resource_class.to_s.underscore, locals: { resource: rec } %>
+    <%= render partial: resource_class.to_s.underscore, locals: { resource: rec, user: Current.user } %>
   <% end if resources %>
   <% unless (((params[:page].to_i + 1) rescue 1) < @pagy.pages) %>
-    <tr class="hidden" data-pagination-target="noRecords"><td>no more records</td></tr>
+    <tr class="hidden" data-pagination-target="noRecords"><td> <%= t("no_more_records") %></td></tr>
   <% end %>
 <% end %>
 <%= turbo_stream.replace "pagination_foot" do %>
