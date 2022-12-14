@@ -223,6 +223,9 @@ class AbstractResourcesController < ApplicationController
   # but then the cloning kicks in! Using the deep_clone gem this
   # method will pull details for an order, attachments for an email, etc
   #
+  # TODO the authorize should accommodate for the 'clonez' action 
+  # but until then - verify that the user can 'create'
+  #
   def clonez
     authorize(:create) ? respond_with(:clone) : not_authorized
   end
@@ -306,7 +309,7 @@ class AbstractResourcesController < ApplicationController
     #
     # list_resources is basically here to be overwritten
     # by you if necessary - otherwise it will let
-    # the /views/application/index.html.erb do it's job
+    # the /views/application/index.html.erb (or index.turbo_stream.erb) do it's job
     # along with the @resources (from concerns/resource_control.rb)
     # and the /views/[resources]/_index_columns.html.erb 
     # and /views/[resources]/_[resource].html.erb
@@ -375,7 +378,7 @@ class AbstractResourcesController < ApplicationController
     # tell the UI
     def create_update_response
       respond_to do |format|
-        format.turbo_stream { head :ok }
+        format.turbo_stream { redirect_to resources_url, status: :see_other }
         format.html { head :ok }
         format.js { head 201 }
         format.json { render json: resource }
