@@ -89,12 +89,14 @@ export default class ListController extends Controller {
     this.getData(`${this.urlValue}/${id}`)
   }
   
+  // really does nothing - as the get() solves it with Turbo
   openModalForm(){
-    window.dispatchEvent( new CustomEvent("speicherMessage", {
-      detail: {
-        message: 'open ui-modal'
-      }
-    }));    
+    // window.dispatchEvent( new CustomEvent("speicherMessage", {
+    //   detail: {
+    //     message: 'open ui-modal'
+    //   }
+    // }));    
+    // console.log('0')
     this.listAwaitingFocus = true
   }
 
@@ -108,6 +110,7 @@ export default class ListController extends Controller {
 
   keydownHandler(e){    
     e.cancelBubble = true;
+
     if( e.stopPropagation ) e.stopPropagation();
 
     switch(e.key){
@@ -133,6 +136,7 @@ export default class ListController extends Controller {
         this.focusList()
         break;
 
+      case '-':
       case 'd':
       case 'D':
       case 'Delete':
@@ -152,12 +156,15 @@ export default class ListController extends Controller {
       
       case 'f':
       case 'F':
+        e.preventDefault()
         this.flagItems(e)
         break;
   
       case 'n':
       case 'N':
-      case '+': this.cursorPositionValue = this.cursorPositionValue + 1; this.openForm('new'); break;
+      case '+': 
+        e.preventDefault()
+        this.cursorPositionValue = this.cursorPositionValue + 1; this.openForm('new'); break;
 
       case 'e':
       case 'E':

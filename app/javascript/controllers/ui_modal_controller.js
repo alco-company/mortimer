@@ -11,10 +11,11 @@ export default class UiModalController extends Controller {
   connect() {
     super.connect()
     this.toggleClass = "hidden";
+    this.modalReady=false
     this.open()
   }
 
-  focus(){
+  focusModal() {
     this.cancelactionTarget.focus()
   }
 
@@ -23,11 +24,17 @@ export default class UiModalController extends Controller {
   // and ordinary letters a-z as well
   //
   keyupHandler(e){
-    e.cancelBubble = true;
-    if( e.stopPropagation ) e.stopPropagation();
+    // e.cancelBubble = true;
+    // if( e.stopPropagation ) e.stopPropagation();
     // console.log("up " + e.key);
+    if (!this.modalReady){
+      this.modalReady=true
+      return
+    }
+
     switch(true){
-      case (e.key === '-'): e.preventDefault(); this.close(); return;
+      case (e.key === '-'): 
+        e.preventDefault(); this.close(); return;
       case (e.key === 'Escape'): e.preventDefault(); this.close(); return;
       case (e.key === 'Enter'): e.preventDefault(); return;
       case (e.key === '+'): 
@@ -61,6 +68,7 @@ export default class UiModalController extends Controller {
   }
 
   close(is_deleted) {
+    this.modalReady=false
     let action = is_deleted ? "delete" : ""
     this.containerTarget.classList.add(this.toggleClass);
     window.dispatchEvent( new CustomEvent("speicherMessage", {
@@ -74,9 +82,12 @@ export default class UiModalController extends Controller {
 
   handleMessages(e){
     // console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
-    if(e.detail.message==='open ui-modal'){
-      this.focus()
-    }
+    // if(e.detail.message==='open ui-modal'){
+    //   console.log('4')
+    //   console.log(`modalReady? ${this.modalReady}`)
+    //   this.modalReady=true
+    //   this.focusModal()
+    // }
 
   }
 }
