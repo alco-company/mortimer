@@ -14,7 +14,4 @@ class EventService < AbstractResourceService
     end
     result
   end
-
-
-  
 end

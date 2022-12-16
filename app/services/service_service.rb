@@ -1,0 +1,2 @@
+class ServiceService < AbstractResourceService
+end

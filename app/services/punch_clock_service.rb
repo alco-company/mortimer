@@ -1,0 +1,2 @@
+class PunchClockService < AssetService
+end

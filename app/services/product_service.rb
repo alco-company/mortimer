@@ -18,6 +18,14 @@ class ProductService < AssetService
     return result.record if result.created?
     nil
   end
+
+  def update resource, resource_params, resource_class=nil
+    result = super(resource, resource_params, resource_class)
+    if result.updated?
+      resource.assetable.stocked_products.each{ |r| r.asset.update name: resource.name } if resource.assetable and resource.assetable.stocked_products.any?
+    end
+    result
+  end
   
   def get_stocked_product s, sl, prod, parm
     return nil if prod.nil? or prod.assetable.nil?

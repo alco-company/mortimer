@@ -1,0 +1,3 @@
+class PupilService < AssetService
+
+end

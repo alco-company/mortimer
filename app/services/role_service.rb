@@ -1,0 +1,2 @@
+class RoleService < AbstractResourceService
+end

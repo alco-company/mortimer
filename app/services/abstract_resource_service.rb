@@ -5,7 +5,7 @@
 # ActiveRecord
 #
 class AbstractResourceService
-  def create( resource )
+  def create( resource, resource_class=nil )
     begin
       # puts "called-------------\n"
       # puts resource.errors.to_json unless resource.valid?
@@ -24,7 +24,7 @@ class AbstractResourceService
     end
   end
   
-  def update( resource, resource_params )
+  def update( resource, resource_params, resource_class=nil )
     begin        
       resource.update resource_params 
       resource.valid? ? 
