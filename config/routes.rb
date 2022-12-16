@@ -73,7 +73,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :punch_clocks
+  resources :punch_clocks, concerns: [:cloneable, :modalable, :selectable] 
   resources :asset_workday_sums
   resources :work_schedules, concerns: [:cloneable, :modalable, :selectable]
   resources :locations, concerns: [:cloneable, :modalable, :selectable] do
