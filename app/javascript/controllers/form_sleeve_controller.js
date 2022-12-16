@@ -33,6 +33,7 @@ export default class FormSleeveController extends Controller {
       
       document.getElementById('form_slideover').querySelectorAll('form')[0].id = document.getElementById('form_slideover').dataset.current_form_slideover || "dashboard_form"
       history.back() 
+      this._hide()
     }
   }
 

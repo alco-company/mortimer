@@ -36,8 +36,9 @@ export default class ListController extends Controller {
   }
 
   focusList(){
-    document.getElementById("form-sleeve").classList.add("hidden")
     try{
+      console.log(document.getElementById("form-sleeve"))
+      document.getElementById("form-sleeve").classList.add("hidden")
       this.element.querySelectorAll("input[type=checkbox]")[this.cursorPositionValue].focus()
     } catch( err ){
       this.element.querySelectorAll("#toggle-all-rows")[0].focus()
@@ -112,7 +113,7 @@ export default class ListController extends Controller {
     e.cancelBubble = true;
 
     if( e.stopPropagation ) e.stopPropagation();
-
+    
     switch(e.key){
       // console.log("down " + e.key);
       // if (e.key === 'Escape') {
@@ -218,7 +219,8 @@ export default class ListController extends Controller {
     }
 
     if(e.detail.message==='Submitted' && e.detail.sender==='form'){
-      this.focusList()
+      setTimeout(() => this.focusList(), 300)
+      // this.focusList()
     }
 
     if(e.detail.message==='Escape' && e.detail.sender==='form'){

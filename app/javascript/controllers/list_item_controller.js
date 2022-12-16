@@ -4,11 +4,11 @@ export default class ListItemController extends Controller {
 
   connect() {
     super.connect()
-    window.dispatchEvent( new CustomEvent("speicherMessage", {
-      detail: {
-        message: 'refocus cursor_position'
-      }
-    }));    
+    // window.dispatchEvent( new CustomEvent("speicherMessage", {
+    //   detail: {
+    //     message: 'refocus cursor_position'
+    //   }
+    // }));    
   }
 
   tap(e){
