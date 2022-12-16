@@ -33,6 +33,7 @@ module StockLocationsHelper
 
   def collect_stock_locations(stocked_product)
     locations = StockLocation.where( id: stocked_product.stock_items.pluck( :stock_location_id))
-    raw locations.collect{ |l| link_to( l.name, l )}.join( ", ")
+    return raw locations.collect{ |l| link_to( l.name, l )}.join( ", ") if locations.any?
+    raw "<span class='text-red-500'>stock_location missing!</span>"
   end
 end
