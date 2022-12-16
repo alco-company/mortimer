@@ -92,7 +92,15 @@ apt-get install --no-install-recommends dokku
 ### 2022-12-16
 
 07:35 mail mm
-08:30 
+08:30 support på stregkoder - Nordthy
+09:00 Sindico - opkald Mia - voicemail
+09:15 ret lagervare navn når produkt navn rettes
+10:15 support på TTF - Firewalla
+10:30 service component to every controller
+14:15 RT ny bruger på Vindø
+14:30 service component to every controller
+15:30 allow delete for role and punch_clock
+16:40 depstage
 
 ### 2022-12-15
 

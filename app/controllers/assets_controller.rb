@@ -22,29 +22,29 @@ class AssetsController < DelegatedController
   # being created
   # it will render a 303 to satisfy Turbo when success
   #
-  def create_resource    
-    # result = "#{resource_class.to_s}Service".constantize.new.create resource
-    result = AssetService.new.create resource(), resource_class()
-    resource= result.record
-    case result.status
-    when :created; redirect_to resources_url, status: :see_other
-    else render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
-    end
-  end
+  # def create_resource    
+  #   # result = "#{resource_class.to_s}Service".constantize.new.create resource
+  #   result = AssetService.new.create resource(), resource_class()
+  #   resource= result.record
+  #   case result.status
+  #   when :created; redirect_to resources_url, status: :see_other
+  #   else render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
+  #   end
+  # end
 
   #
   # it will render 303 to satisfy Turbo
   #
-  def update_resource
-    return if params.include? "edit_all"
+  # def update_resource
+  #   return if params.include? "edit_all"
 
-    result = AssetService.new.update resource(), resource_params, resource_class()
-    resource= result.record
-    case result.status
-    when :updated; redirect_to resources_url, status: :see_other
-    when :not_valid; render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
-    end
-  end
+  #   result = AssetService.new.update resource(), resource_params, resource_class()
+  #   resource= result.record
+  #   case result.status
+  #   when :updated; redirect_to resources_url, status: :see_other
+  #   when :not_valid; render turbo_stream: turbo_stream.replace( resource_form, partial: 'form' ), status: :unprocessable_entity
+  #   end
+  # end
 
   def delete_it
     return resource.update(deleted_at: DateTime.current) if params[:purge].blank?

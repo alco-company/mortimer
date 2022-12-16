@@ -349,8 +349,8 @@ class AbstractResourcesController < ApplicationController
       return create_update_response if edit_all_posts
 
       # Each resource could have it's own - 
-      # result = "#{resource_class.to_s}Service".constantize.new.create resource
-      result = AbstractResourceService.new.create resource
+      result = "#{resource_class.to_s}Service".constantize.new.create resource(), resource_class()
+      # result = AbstractResourceService.new.create resource
       resource= result.record
       case result.status
       when :created; create_update_response
@@ -365,8 +365,8 @@ class AbstractResourcesController < ApplicationController
     # and call update on it, returning an instance of Result (defined on AbstractResourceService)
     def update_resource
       # Each resource could have it's own - 
-      # result = "#{resource_class.to_s}Service".constantize.new.create resource
-      result = AbstractResourceService.new.update resource, resource_params
+      result = "#{resource_class.to_s}Service".constantize.new.update  resource(), resource_params, resource_class()
+      # result = AbstractResourceService.new.update resource, resource_params
       resource= result.record
       case result.status
       when :updated; create_update_response
