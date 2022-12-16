@@ -4,7 +4,7 @@
     <%= link_to resource.asset.name, stock_item_path(resource), data: { turbo_frame: "_top" } %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= link_to resource.stock_location.name, resource.stock_location %>
+    <%= link_to( resource.stock_location.name, resource.stock_location) rescue raw "<span class='text-red-500'>stock_location missing!</span>" %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
     <%= resource.batch_number %>
