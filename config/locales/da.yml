@@ -128,6 +128,7 @@ da:
     employees: "Medarbejdere"
     home: 'Instrumentbrædt'
     locations: "Arbejdssteder"
+    printservers: "Printservere"
     products: "Produkter"
     punch_clocks: "Stempelure"
     pupils: Elever

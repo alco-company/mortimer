@@ -89,6 +89,25 @@ apt-get install --no-install-recommends dokku
 
 ## DONE
 
+### 2022-12-16
+
+07:35 mail mm
+08:30 
+
+### 2022-12-15
+
+06:40 Nordthy forligs- / statusmøde
+13:30 gennemgå timeregistrering m/Bo til Elmelund
+17:35 printserver ip/port
+
+### 2022-12-14
+
+07:45 glemt
+
+### 2022-12-13
+
+07:45 glemt
+
 ### 2022-12-12
 
 07:45 email from LHL RT

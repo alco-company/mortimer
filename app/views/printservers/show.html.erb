@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @printserver %>
+
+<div>
+  <%= link_to "Edit this printserver", edit_printserver_path(@printserver) %> |
+  <%= link_to "Back to printservers", printservers_path %>
+
+  <%= button_to "Destroy this printserver", @printserver, method: :delete %>
+</div>

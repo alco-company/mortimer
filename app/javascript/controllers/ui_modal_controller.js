@@ -11,7 +11,6 @@ export default class UiModalController extends Controller {
   connect() {
     super.connect()
     this.toggleClass = "hidden";
-    this.modalReady=false
     this.open()
   }
 
@@ -27,10 +26,6 @@ export default class UiModalController extends Controller {
     // e.cancelBubble = true;
     // if( e.stopPropagation ) e.stopPropagation();
     // console.log("up " + e.key);
-    if (!this.modalReady){
-      this.modalReady=true
-      return
-    }
 
     switch(true){
       case (e.key === '-'): 
@@ -68,7 +63,6 @@ export default class UiModalController extends Controller {
   }
 
   close(is_deleted) {
-    this.modalReady=false
     let action = is_deleted ? "delete" : ""
     this.containerTarget.classList.add(this.toggleClass);
     window.dispatchEvent( new CustomEvent("speicherMessage", {

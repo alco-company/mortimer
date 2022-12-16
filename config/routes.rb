@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   
   # concerns ----
+
+  # mostly used by collections/resources
+  # to afford deleting posts
+  #
   concern :modalable do
     collection do
       get 'modal'
@@ -62,6 +66,12 @@ Rails.application.routes.draw do
   resources :profiles
   resources :time_zones, concerns: [:selectable ]
   resources :system_parameters, concerns: [:cloneable, :modalable, :selectable]
+  resources :printservers, concerns: [:cloneable, :modalable, :selectable] do
+    collection do
+      get "port"
+      get "ip"
+    end
+  end
 
   resources :punch_clocks
   resources :asset_workday_sums
