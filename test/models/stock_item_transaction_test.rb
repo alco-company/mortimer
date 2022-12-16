@@ -1,7 +1,8 @@
 require "test_helper"
 
 #
-# http://www.barcode-generator.org/
+# http://www.barcode-generator.org/ 
+# https://barcode.tec-it.com/en/Code128?data=915001
 #
 # Product barcode
 # Application Identifiers:
