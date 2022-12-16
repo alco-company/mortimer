@@ -338,9 +338,30 @@ da:
       name: Navn 
       time_spent_minutes: Forbrugt tid
       status: 
-      
-  topbar:
-    search: "Søg overalt..."
+
+  Role:
+    index: Oversigt over roller
+    index_description: Denne oversigt viser dig de roller, brugere kan tildeles - enten direkte eller via de teams/grupper, brugeren er en del af.
+
+  roles: 
+    form: 
+      edit: Ret rollen
+      edit_description: Du kan rette en eksisterende rolle her. Rollens kontekst skal indeholde enten et mellemrum (hvis rollen har global rækkevidde) eller en liste af klasser som den skal dække - fx <strong>team user employee</strong>
+      name: Navn 
+      context: Kontekst 
+
+      authorization_title: Rettigheder
+      authorization_description: Der er 9 grundlæggende rettigheder (til hver klasse). <p class='mt-1 max-w-2xl text-sm text-gray-500'>De 2 <sup>*</sup> markerede viser dig en formular, men giver ikke i sig selv retten til at skrive oplysningerne til databasen.</p><p class='mt-1 max-w-2xl text-sm text-gray-500'>Det kan du bruge til at tillade en bruger at se en indtastningsform uden at kunne rette i den.</p>
+      auth_index_description: List alle poster
+      auth_show_description: Læs en post 
+      auth_new_description: Lav en ny post<sup>*</sup>
+      auth_edit_description: Redigér en post<sup>*</sup>
+      auth_create_description: Opret en post 
+      auth_update_description: Opdatér en post 
+      auth_delete_description: Slet en post 
+      auth_print_description: Udskriv en post 
+      auth_forward_description: Videresend en post 
+
 
   Service:
     index: "Oversigt over tjenester"
@@ -477,6 +498,9 @@ da:
   Team:
     index: Oversigt over grupper
     index_description: <span>Oversigten viser alle de grupper, der er oprettet, til at styre roller og arbejdsgrupper. </span>.
+      
+  topbar:
+    search: "Søg overalt..."
 
   User:
     index: "Oversigt over brugere"

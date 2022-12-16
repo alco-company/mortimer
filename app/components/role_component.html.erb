@@ -6,6 +6,6 @@
     <label for="role" class="font-medium text-gray-700">
     <%= @auth %>
     </label>
-    <p class="text-gray-500"><%= @description[@index] %></p>
+    <p class="text-gray-500"><%= helpers.raw_t @description.downcase %></p>
   </div>
 </div>
