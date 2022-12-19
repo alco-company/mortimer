@@ -142,6 +142,7 @@ da:
     teams: 'Grupper'
     users: 'Brugere'
     work_schedules: 'Normtider'
+    system_parameters: Konto indstillinger
 
   confirmations:
     new:
@@ -233,6 +234,7 @@ da:
       dashboards: Instrumentpaneler
       background_jobs: Baggrundsjobs
       services: Tjenester 
+      system_parameters: Konto indstillinger
     menu_component:
       dashboard: Instrumentpanel
       stocked_products: Lagervarer
@@ -494,6 +496,31 @@ da:
       name: "Navn"
       product_resource: "Sti til leverandørens produktoversigt"
       gtin_prefix: GTIN firma præfix
+
+  SystemParameter:
+    index: Oversigt over konto indstillinger
+    index_description: Denne oversigt viser dig alle de indstillinger, der er oprettet for en konto
+    new_button: Ny indstilling
+    delete:
+      title: "Slet %{name}"
+      description: Er du sikker på at du vil slette denne konto indstilling?
+
+  system_parameters:
+    index_columns:
+      name: Navn
+      system_key: Nøgle
+      position: rækkefølge
+      value: Værdi
+    form:
+      new: Ny konto indstilling
+      new_description:  Du kan oprette en ny konto indstilling her. <p class='mt-1 max-w-2xl text-sm text-gray-500'>Konto indstillinger er specifikke for en funktion, et skærmbillede, en proces, og typisk skrevet specifikt til en konto.</p>
+      edit: Ret konto indstilling
+      edit_description: Du kan rette en allerede oprettet konto indstilling her.<p class='mt-1 max-w-2xl text-sm text-gray-500'>Konto indstillinger er specifikke for en funktion, et skærmbillede, en proces, og typisk skrevet specifikt til en konto.</p>
+      name: Navn 
+      system_key: System nøgle 
+      position: sorting/rækkefølge 
+      value: Værdi
+
 
   Team:
     index: Oversigt over grupper

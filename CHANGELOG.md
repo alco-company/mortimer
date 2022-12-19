@@ -42,7 +42,6 @@ In the REFERENCES you will find a lot of people, resources, etc
 - write some serious tests for people, partners, participants, events, 
 - add Participant addressability - by means of basically one table :0 (URLs are not just webpages, but really any adressable resource!!)
 - add second **main feature** - documents (in all their glory and multiversatility, like notes, messages, contracts, SOP's, NDA's, invoices, orders, quotes, etc)
-- add Team - People are grouped into teams, either in a permanent position as fx a Sales rep in the Sales Team, or a temporary/matrix position as Data Analyst in the Finance Team/Department
 - make  H E R M E S  a PWA - use [Kevin Basset's Progressier](https://progressier.com/) &  https://dev.to/zippytyro/how-to-convert-any-website-webpage-into-an-installable-progressive-web-app-pwa-59ai
 - Connecting customer specific data through DT (Delegated Types)
 - use Chartkick.js for [Presentational Graphics](https://github.com/ankane/chartkick.js)
@@ -50,11 +49,6 @@ In the REFERENCES you will find a lot of people, resources, etc
 - using imagekit.io to building the image library - remember new UI from TailwindUI
 - ideas for wms - https://www.youtube.com/watch?v=Nphpy0PH2BE
 - ideas for handset/pos  - https://www.youtube.com/watch?v=6yu883oEq7A
-- checkbox on stock to scan 92___ own barcode w/fixed quantity
-- checkbox on stock to scan 93___ own barcode manual entry of quantity
-- checkbox on stock to manual entry of quantity on GTIN EAN14
-- checkbox on stock to manual entry of best-before on GTIN EAN14
-- stock_item_transaction_processing_job has to start every 2 minute to check if any items to process - ajob for whenever
 - [whenever gem](https://medium.com/swlh/automate-tasks-in-rails-using-the-whenever-gem-46f9708ab002)
 - [cron](https://dokku.com/docs/processes/scheduled-cron-tasks/)
 - always type '?' in any inputfield (even if it cannot be presented - like checkboxes and radiobuttons) to get to the on screen documentation and help
@@ -67,27 +61,22 @@ In the REFERENCES you will find a lot of people, resources, etc
 - use [truemail](https://github.com/truemail-rb/truemail )
 - use [rrule](https://github.com/jakubroztocil/rrule)
 - user [Authentication Zero](https://codewithrails.com/rails-authentication)
-
-
-## Particular sets of commands
-
-### deploying to staging
-
-! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying - or better - just run 'bin/depstage'
-
-### upgrading just dokku
-
-```bash
-apt-get update
-apt-get install --no-install-recommends dokku
-```
-
-### how to work with rake
-
-[This post defines most of what is to say about rake tasks](https://www.rubyguides.com/2019/02/ruby-rake/)
-[How to access Rails ActiveRecord models from inside rake tasks](https://dev.to/software_writer/how-to-access-rails-activerecord-models-inside-a-rake-task-5c76)
+- make has_secure_tokens a modal view
+- checkbox on stock to scan 92___ own barcode w/fixed quantity
+- checkbox on stock to scan 93___ own barcode manual entry of quantity
+- checkbox on stock to manual entry of quantity on GTIN EAN14
+- checkbox on stock to manual entry of best-before on GTIN EAN14
+- stock_item_transaction_processing_job has to start every 2 minute to check if any items to process - ajob for whenever
+- show team colleagues/all employees status on tab in pos/employees/:id?api...
+- 
+- 
 
 ## DONE
+
+### 2022-12-19
+
+09:45 system_parameters
+20:05 depstage
 
 ### 2022-12-16
 
@@ -475,7 +464,8 @@ stayed with Bo while Anne was in Münster on business
 * run jobs in debug mode
 * depstaging POS
 * deviate from events controller on new_resource
-* allow for create of teams
+* allow for create of teams 
+  - (add Team - People are grouped into teams, either in a permanent position as fx a Sales rep in the Sales Team, or a temporary/matrix position as Data Analyst in the Finance Team/Department)
 * depstage
 
 ### 2022-08-03

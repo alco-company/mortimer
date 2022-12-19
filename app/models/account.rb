@@ -5,6 +5,7 @@ class Account < AbstractResource
   has_many :events, inverse_of: :account
   has_many :participants, inverse_of: :account
   has_many :assets, inverse_of: :account
+  has_many :system_parameters, inverse_of: :account
 
   belongs_to :calendar, optional: true
   has_and_belongs_to_many :services
@@ -40,6 +41,13 @@ class Account < AbstractResource
     return if srv.keys.map{|k|k.to_i}.sort == services.pluck( :id).sort
     services.delete_all
     srv.keys.each { |k| services << Service.find(k) }
+  end
+
+  def system_parameters_include system_key, value=nil
+    parm = system_parameters.where(system_key: system_key).first rescue nil
+    return false if parm.nil?
+    return parm.value if (parm and value.nil?) rescue nil
+    parm.value.include? value
   end
 
   #
