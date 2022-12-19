@@ -1,5 +1,24 @@
 # Knowledgebase
 
+## Particular sets of commands
+
+### deploying to staging
+
+! always run `dokku repo:purge-cache staging.greybox.speicher.ltd` before deploying - or better - just run 'bin/depstage'
+
+### upgrading just dokku
+
+```bash
+apt-get update
+apt-get install --no-install-recommends dokku
+```
+
+### how to work with rake
+
+[This post defines most of what is to say about rake tasks](https://www.rubyguides.com/2019/02/ruby-rake/)
+[How to access Rails ActiveRecord models from inside rake tasks](https://dev.to/software_writer/how-to-access-rails-activerecord-models-inside-a-rake-task-5c76)
+
+
 ## cannot delete instance using the delete modal
 
 And if you look in the log you see something like

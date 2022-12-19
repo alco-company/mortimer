@@ -1,0 +1,18 @@
+<div id="enter_leave_tab" class=" py-4 px-4  space-y-6" data-tabs-target="panel">
+
+  <!-- This example requires Tailwind CSS v2.0+ -->
+  <!-- Be sure to use this with a layout container that is full-width on mobile -->
+  <div id="work_status" class="bg-white overflow-hidden shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6 flex h-30 w-full ">
+      <!-- Content goes here -->
+      <%= turbo_stream_from "employee_#{resource.id}_state"  %>
+      <%= turbo_frame_tag "employee_state" do %>
+        <%= render partial: "pos/employees/employee_state", locals: { resource: resource } %>
+      <% end %>
+    </div>
+
+    <%= render "modals" %>
+  </div>
+
+  <%= render "tasks" %>
+</div>
