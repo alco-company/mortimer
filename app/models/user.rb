@@ -16,6 +16,15 @@ class User < AbstractResource
   validates :unconfirmed_email, format: { with: URI::MailTo::EMAIL_REGEXP, allow_blank: true }
   validates :user_name, presence: true, uniqueness: true
 
+  # TODO - password complexity
+  #
+  # validate :password_complexity
+  # def password_complexity
+  #   return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}$/
+  #   errors.add :password, I18n.t("activerecord.errors.models.user.attributes.password.complexity")
+  # end
+
+
   attr_accessor :current_password
 
   has_one :profile, dependent: :destroy
