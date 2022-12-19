@@ -6,6 +6,7 @@ enterprise resource planning
 
 make a fast buck or a teleportation gadget to wear on your wrist
 
+
 ## Assets
 
 machines - without them you don't need any of the other (if that very machine is essential of cause)
