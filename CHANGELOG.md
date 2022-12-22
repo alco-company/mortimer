@@ -68,10 +68,24 @@ In the REFERENCES you will find a lot of people, resources, etc
 - checkbox on stock to manual entry of best-before on GTIN EAN14
 - stock_item_transaction_processing_job has to start every 2 minute to check if any items to process - ajob for whenever
 - show team colleagues/all employees status on tab in pos/employees/:id?api...
-- 
-- 
+- use [passkeys](https://www.passkeys.io/)
+- use <https://cuelang.org/> for validate, define, and use dynamic and text-based data
+- use github.com/ulid/spec for unique distributed ids
+- use Ubers H3 geo indexing <https://www.uber.com/en-CA/blog/h3/>
+- use <https://www.nordicsemi.com/Products/Matter> for HOME automation
+
 
 ## DONE
+
+### 2022-12-21
+
+07:03 finish documentation for NUXT site
+09:30 
+
+### 2022-12-20
+
+07:30 Pilea product hunt
+21:00 RT add PG_AFSNIT to bordprinter label
 
 ### 2022-12-19
 
