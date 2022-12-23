@@ -103,6 +103,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching in
   punch_in(e){
+    this.focus_enter_leave()
     this.find_my_location()
     this.enableButtons([this.pauseButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget])    
 
@@ -117,6 +118,7 @@ export default class EmployeePosController extends Controller {
   }
 
   punch_pupil(e) {
+    this.focus_enter_leave()
     this.find_my_location()
     if(e.srcElement.dataset['disabled']=='disabled')
       return
@@ -144,6 +146,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching p-time
   punch_in_xtra(e){
+    this.focus_enter_leave()
     this.find_my_location()
     this.extraModalTarget.classList.remove("hidden")
   }
@@ -174,6 +177,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching substitute
   punch_in_sub(e){
+    this.focus_enter_leave()
     this.find_my_location()
     this.substituteModalTarget.classList.remove("hidden")
   }
@@ -202,6 +206,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching out
   punch_out(e){
+    this.focus_enter_leave()
     this.find_my_location()
     this.stopModalTarget.classList.remove("hidden")
   }
@@ -230,6 +235,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching pause/resume
   punch_pause(e){
+    this.focus_enter_leave()
     this.find_my_location()
     this.enableButtons([this.pauseButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.freeButtonTarget] )    
 
@@ -246,6 +252,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching sick
   punch_in_sick(e){
+    this.focus_enter_leave()
     this.find_my_location()
     this.sickModalTarget.classList.remove("hidden")
   }
@@ -279,6 +286,7 @@ export default class EmployeePosController extends Controller {
 
   // button to register employee punching free
   punch_in_free(e){
+    this.focus_enter_leave()
     this.find_my_location()
     this.freeModalTarget.classList.remove("hidden")
   }
@@ -365,6 +373,11 @@ export default class EmployeePosController extends Controller {
     console.log(`map ${type} ${ map.get(type) }: `)
     console.log(`${json}`)
     console.log('Show Map ------------------------------ done')
+  }
+
+  focus_enter_leave(){
+    var enter_leave_tab = document.getElementById('enter_leave_tab');
+    enter_leave_tab.click();    
   }
 
   handleMessages(e){
