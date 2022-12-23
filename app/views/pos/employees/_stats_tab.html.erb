@@ -15,14 +15,14 @@
           <tr>
             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0"> <%= t(".description") %></th>
             <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell"><%= I18n.localize Date.today, format: :week_string %></th>
-            <%# <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell">Pris</th> %>
-            <th scope="col" class="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0 w-48"> <%= I18n.localize Date.today, format: :month_name %> måned</th>
+            <th scope="col" class="py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:hidden"> <%= t(".minutes") %></th>
+            <th scope="col" class="hidden sm:table-cell py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0 w-48"> <%= I18n.localize Date.today, format: :month_name %> måned</th>
           </tr>
         </thead>
         <tbody>
           <% fields = [ :work_minutes, :break_minutes, :ot1_minutes, :ot2_minutes, :sick_minutes, :child_sick_minutes ] %>
           <% fields.each do |field| %>
-            <%= render partial: "asset_workday_sums/stats", locals: { resource: resource, field: field, label: t(field), ranges: [Date.today.at_beginning_of_week..Date.today.at_end_of_week,Date.today.at_beginning_of_month..Date.today.at_end_of_month] } %>
+            <%= render partial: "asset_workday_sums/stats", locals: { resource: resource, field: field, label: t(".#{field}"), ranges: [Date.today.at_beginning_of_week..Date.today.at_end_of_week,Date.today.at_beginning_of_month..Date.today.at_end_of_month] } %>
           <% end %>
         </tbody>
       </table>
@@ -32,7 +32,6 @@
           <tr>
             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0"></th>
             <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell"><%= I18n.localize Date.today, format: :week_string %></th>
-            <%# <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell">Pris</th> %>
             <th scope="col" class="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0 sm:table-cell w-48"> <%= Date.today.year %>
           </tr>
         </thead>
@@ -42,26 +41,9 @@
             :lost_work_revenue_minutes, :child_leave_minutes, :leave_minutes, :pgf56_minutes, ] %>
           <% fields.each do |field| %>
             <%= render partial: "asset_workday_sums/stats", 
-                locals: { resource: resource, field: field, label: t(field), ranges: [Date.today.at_beginning_of_week..Date.today.at_end_of_week,Date.today.at_beginning_of_month..Date.today.at_end_of_month] } %>
+                locals: { resource: resource, field: field, label: t(".#{field}"), ranges: [Date.today.at_beginning_of_week..Date.today.at_end_of_week,Date.today.at_beginning_of_month..Date.today.at_end_of_month] } %>
           <% end %>
         </tbody>
-        <%# <tfoot>
-          <tr>
-            <th scope="row" colspan="3" class="hidden pl-6 pr-3 pt-6 text-right text-sm font-normal text-gray-500 sm:table-cell md:pl-0">Subtotal</th>
-            <th scope="row" class="pl-4 pr-3 pt-6 text-left text-sm font-normal text-gray-500 sm:hidden">Subtotal</th>
-            <td class="pl-3 pr-4 pt-6 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">$3,900.00</td>
-          </tr>
-          <tr>
-            <th scope="row" colspan="3" class="hidden pl-6 pr-3 pt-4 text-right text-sm font-normal text-gray-500 sm:table-cell md:pl-0">Tax</th>
-            <th scope="row" class="pl-4 pr-3 pt-4 text-left text-sm font-normal text-gray-500 sm:hidden">Tax</th>
-            <td class="pl-3 pr-4 pt-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">$585.00</td>
-          </tr>
-          <tr>
-            <th scope="row" colspan="3" class="hidden pl-6 pr-3 pt-4 text-right text-sm font-semibold text-gray-900 sm:table-cell md:pl-0">Total</th>
-            <th scope="row" class="pl-4 pr-3 pt-4 text-left text-sm font-semibold text-gray-900 sm:hidden">Total</th>
-            <td class="pl-3 pr-4 pt-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0">$4,485.00</td>
-          </tr>
-        </tfoot> %>
       </table>
     </div>
   </div>

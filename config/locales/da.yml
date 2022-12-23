@@ -290,6 +290,26 @@ da:
         calendar: "Kalender"
         info: "Info"
 
+      stats_tab:
+        minutes: minutter
+        work_minutes: arbejde
+        break_minutes: pauser
+        ot1_minutes: første 180min overarbejde
+        ot2_minutes: overarbejde ud over 180min
+        sick_minutes: syg
+        child_sick_minutes: barn syg
+
+        free_minutes: fri
+        free_prev_minutes: fri (forrige år)
+        holiday_free_minutes: ferie/fri
+        nursing_minutes: omsorg
+        senior_minutes: senior ordning
+        unpaid_free_minutes: fri uden løn
+        lost_work_revenue_minutes: tabt arbejdsfortjeneste
+        child_leave_minutes: barsel
+        leave_minutes: orlov
+        pg56_minutes: pgf 56
+
   Product: 
     index: "Oversigt over produkter"
     index_description: "Denne oversigt viser dig de produkter, I selv fremstiller, eller som jeres leverandører har i deres kataloger."
