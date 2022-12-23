@@ -22,9 +22,11 @@ class AssetWorkdaySumJob < ApplicationJob
         Current.account = account
         Asset.all.employees.where(state: PROCESSABLE_EMPLOYEE_STATES).each do |employee_asset|
           say "....running for #{employee_asset.name}"
-          dt = Rails.env.development? ? DateTime.tomorrow : DateTime.today
-          employee_asset.calendar.punch_work_related_events dt.yesterday, employee_asset
-          employee_asset.asset_workday_sums.where(work_date: dt.yesterday).first.calculate_on_transactions( employee_asset) rescue nil
+          # dt = Rails.env.development? ? DateTime.tomorrow : Date.today
+          dt = Date.today
+          # did the employee add anything to their calendar?
+          employee_asset.calendar.punch_work_related_events dt, employee_asset
+          employee_asset.asset_workday_sums.where(work_date: dt).first.calculate_on_transactions( employee_asset) rescue nil
         end
       end
 
