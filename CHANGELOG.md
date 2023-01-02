@@ -73,14 +73,36 @@ In the REFERENCES you will find a lot of people, resources, etc
 - use github.com/ulid/spec for unique distributed ids
 - use Ubers H3 geo indexing <https://www.uber.com/en-CA/blog/h3/>
 - use <https://www.nordicsemi.com/Products/Matter> for HOME automation
-
+- perhaps user <https://codewithrails.com/rails-authentication> for authentication
+- how to nest comments <https://medium.com/@tirnavanalessandra/rails-7-turbo-hotwire-reddit-like-nested-comments-92d475e3bbd4>
+- 
 
 ## DONE
+
+### 2022-12-02
+
+08:30 cont' work on tasks for employee
+08:57 yarn upgrade-interactive <- important to run periodically!
+11:30 bundle update
+
+
+### 2022-12-27
+
+11:05 work on tasks for employee
+
+### 2022-12-26
+
+11:05 parameterize buttons, employee "tasks"
+11:19 start work on tasks for employee
+13:45 -
 
 ### 2022-12-21
 
 07:03 finish documentation for NUXT site
-09:30 
+09:30 fixing output on pos/employee stats_tab
+12:30 etablish backup script on docker4
+13:30 installing sniffnet - not that it works though 
+14:20 fixing clicks on enter/leave buttons when other tabs are in focus
 
 ### 2022-12-20
 
