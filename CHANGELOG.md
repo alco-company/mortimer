@@ -75,9 +75,24 @@ In the REFERENCES you will find a lot of people, resources, etc
 - use <https://www.nordicsemi.com/Products/Matter> for HOME automation
 - perhaps user <https://codewithrails.com/rails-authentication> for authentication
 - how to nest comments <https://medium.com/@tirnavanalessandra/rails-7-turbo-hotwire-reddit-like-nested-comments-92d475e3bbd4>
+- use <https://youtu.be/OicvfL8kKds> for charting and event logging and realtime analytics
 - 
 
 ## DONE
+
+### 2022-12-04
+
+08:30 fix ProfileService error
+08:50 fix PrintserverService error
+
+### 2022-12-03
+
+08:10 cont' work on tasks for employees
+12:30 Pilea project interview with Blue Capital asset manager
+13:30 working on Outlet attributes on elements
+15:00 break
+21:30 cont' working on Outlet attributes on elements
+
 
 ### 2022-12-02
 

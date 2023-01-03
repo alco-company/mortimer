@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class TopbarComponentController extends Controller {
+  static outlets = [ "navigation--mobile-sidebar-component" ]
 
   connect() {
     super.connect()
@@ -14,24 +15,25 @@ export default class TopbarComponentController extends Controller {
         .join('')
         .replace(/^\w/, c => c.toLowerCase())
       })(this.identifier)] = this;
-
   }
 
   closeSidebar(e){
-    window.dispatchEvent( new CustomEvent("speicherMessage", {
-      detail: {
-        message: 'close mobile sidebar',
-        event: e
-      }
-    }))
+    this.navigationMobileSidebarComponentOutlet.closeSidebar(e)
+    // window.dispatchEvent( new CustomEvent("speicherMessage", {
+    //   detail: {
+    //     message: 'close mobile sidebar',
+    //     event: e
+    //   }
+    // }))
   }
 
   openSidebar(e){
-    window.dispatchEvent( new CustomEvent("speicherMessage", {
-      detail: {
-        message: 'open mobile sidebar'
-      }
-    }))
+    this.navigationMobileSidebarComponentOutlet.openSidebar(e)
+    // window.dispatchEvent( new CustomEvent("speicherMessage", {
+    //   detail: {
+    //     message: 'open mobile sidebar'
+    //   }
+    // }))
   }
 
   // toggleUsermenu(e){

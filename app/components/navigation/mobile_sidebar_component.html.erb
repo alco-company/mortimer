@@ -1,9 +1,10 @@
 <div 
+  id="mobile-sidebar"
   data-controller="navigation--mobile-sidebar-component"
-  data-action="speicherMessage@window->navigation--mobile-sidebar-component#handleMessages"
   data-navigation--mobile-sidebar-component-target="mobilesidebar"
   class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
   <!--
+  data-action="speicherMessage@window->navigation--mobile-sidebar-component#handleMessages"
     Off-canvas menu backdrop, show/hide based on off-canvas menu state.
 
     Entering: "transition-opacity ease-linear duration-300"
@@ -14,7 +15,7 @@
       To: "opacity-0"
   -->
   <div
-    data-action="click->navigation--mobile-sidebar-component#bing"
+    data-action="click->navigation--mobile-sidebar-component#closeSidebar"
     class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
 
   <div class="fixed inset-0 flex z-40">
@@ -41,7 +42,7 @@
       -->
       <div class="absolute top-0 right-0 -mr-12 pt-2">
         <button 
-          data-action="click->navigation--mobile-sidebar-component#closeMobileSidebar"
+          data-action="click->navigation--mobile-sidebar-component#closeSidebar"
           type="button" 
           class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
           <span class="sr-only">Close sidebar</span>

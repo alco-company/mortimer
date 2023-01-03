@@ -8,6 +8,8 @@
     <%= form.hidden_field :assetable_type, value: "PunchClock" %>
     <div class="flex-1 relative "
       data-controller="form"
+      data-form-form-sleeve-outlet="#form-sleeve"
+      data-form-list-outlet="#list"
       data-form-clipboard-prefix-value="<%= pos_punch_clock_url(resource.assetable) unless resource.new_record? %>"
       data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"    
       >

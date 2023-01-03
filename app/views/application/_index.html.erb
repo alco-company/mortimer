@@ -1,7 +1,9 @@
 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
   <%= turbo_frame_tag resources_target do %>
     <table 
+      id="list"
       data-controller="list flag pagination" 
+      data-list-form-sleeve-outlet="#form-sleeve"
       data-list-url-value="<%= resources_url %>"
       data-pagination-url-value="<%= resources_url %>"
       data-pagination-page-value="<%= 2 %>"

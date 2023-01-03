@@ -20,7 +20,7 @@ export default class MobileSidebarComponentController extends Controller {
     leave(this.mobilesidebarTarget)
   }
 
-  closeMobileSidebar(event){
+  closeSidebar(event){
     leave(this.mobilesidebarTarget)
   }
   

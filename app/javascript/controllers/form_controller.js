@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class FormController extends Controller {
+  static outlets = [ "list", "form-sleeve" ]
   static targets = [ "focus", "copytext" ]
   static values = {
     clipboardPrefix: String
@@ -33,21 +34,23 @@ export default class FormController extends Controller {
     
     if (e.key === 'Enter') {
       e.preventDefault()
-      window.dispatchEvent( new CustomEvent("speicherMessage", {
-        detail: {
-          message: 'submit form'
-        }
-      }))
+      this.formSleeveOutlet.submitForm()
+      // window.dispatchEvent( new CustomEvent("speicherMessage", {
+      //   detail: {
+      //     message: 'submit form'
+      //   }
+      // }))
     }
     if (e.key === 'Escape') {
       e.preventDefault()
-      window.dispatchEvent( new CustomEvent("speicherMessage", {
-        detail: {
-          message: "Escape",
-          sender: 'form'
-        },
-        bubbles: true
-      }))
+      this.listOutlet.focusList()
+      // window.dispatchEvent( new CustomEvent("speicherMessage", {
+      //   detail: {
+      //     message: "Escape",
+      //     sender: 'form'
+      //   },
+      //   bubbles: true
+      // }))
     }
   }
 

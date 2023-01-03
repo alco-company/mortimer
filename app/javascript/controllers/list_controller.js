@@ -1,6 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class ListController extends Controller {
+  static outlets = [ "form-sleeve" ]
+
   static values = {
     url: String,        // /suppliers/lookup
     cursorPosition: Number,
@@ -59,12 +61,13 @@ export default class ListController extends Controller {
     console.log('focusForm')
 
     if (this.formAwaitingFocus){
-      console.log('will ask someone to show the window...')
-      window.dispatchEvent( new CustomEvent("speicherMessage", {
-        detail: {
-          message: 'open form'
-        }
-      }));  
+      this.formSleeveOutlet.showForm()
+      // console.log('will ask someone to show the window...')
+      // window.dispatchEvent( new CustomEvent("speicherMessage", {
+      //   detail: {
+      //     message: 'open form'
+      //   }
+      // }));  
       this.formAwaitingFocus = false
     }
   }
@@ -223,18 +226,18 @@ export default class ListController extends Controller {
       // this.focusList()
     }
 
-    if(e.detail.message==='Escape' && e.detail.sender==='form'){
-      history.back() 
-      this.focusList()
-    }
+    // if(e.detail.message==='Escape' && e.detail.sender==='form'){
+    //   history.back() 
+    //   this.focusList()
+    // }
 
     if(e.detail.message==='focus form'){
       this.focusForm()
     }
 
-    if(e.detail.message==='focus list'){
-      this.focusList()
-    }
+    // if(e.detail.message==='focus list'){
+    //   this.focusList()
+    // }
 
     if(e.detail.message==='new form'){
         this.newForm(e.detail.value)

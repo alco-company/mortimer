@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class FormSleeveController extends Controller {
+  static outlets = [ "list" ]
   static targets = [ "wrapper", "form", "errors", "menu", "overlay" ]
   static classes = [ "elevated" ]
 
@@ -33,7 +34,7 @@ export default class FormSleeveController extends Controller {
       
       document.getElementById('form_slideover').querySelectorAll('form')[0].id = document.getElementById('form_slideover').dataset.current_form_slideover || "dashboard_form"
       history.back() 
-      this._hide()
+      this.hideForm()
     }
   }
 
@@ -44,11 +45,12 @@ export default class FormSleeveController extends Controller {
       document.getElementById("form-sleeve").classList.add("hidden")
       this.formTarget.reset()
     }
-    window.dispatchEvent( new CustomEvent("speicherMessage", {
-      detail: {
-        message: 'focus list'
-      }
-    }));    
+    this.listOutlet.focusList()
+    // window.dispatchEvent( new CustomEvent("speicherMessage", {
+    //   detail: {
+    //     message: 'focus list'
+    //   }
+    // }));    
   }
 
   clearErrors() {
@@ -57,27 +59,31 @@ export default class FormSleeveController extends Controller {
     }
   }
 
-  _hide(){
+  hideForm(){
     this.wrapperTarget.classList.add('hidden')
   }
 
-  _show(){
+  showForm(){
     this.wrapperTarget.classList.remove('hidden')
+  }
+
+  submitForm(){
+    this.formTarget.requestSubmit() 
   }
 
   handleMessages(e){
     console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
 
-    if(e.detail.message==='submit form'){
-      this.formTarget.requestSubmit() 
-    }
+    // if(e.detail.message==='submit form'){
+    //   this.formTarget.requestSubmit() 
+    // }
     if(e.detail.message==='close slideover'){
       this.clearErrors()
       this.formTarget.reset()
-      this._hide()
+      this.hideForm()
     }
     if(e.detail.message==='open form'){
-      this._show()
+      this.showForm()
       window.dispatchEvent( new CustomEvent("speicherMessage", {
         detail: {
           message: 'focus form field'
@@ -85,7 +91,7 @@ export default class FormSleeveController extends Controller {
       }));  
     }
     if(e.detail.message==='open list form'){
-      this._show()
+      this.showForm()
       window.dispatchEvent( new CustomEvent("speicherMessage", {
         detail: {
           message: 'focus form field'

@@ -3,32 +3,41 @@
 
 import { application } from "../javascript/controllers/application"
 
-import Navigation__MobileSidebarComponentController from "./navigation/mobile_sidebar_component_controller.js"
+import Navigation__MobileSidebarComponentController from "./navigation/mobile_sidebar_component_controller"
 application.register("navigation--mobile-sidebar-component", Navigation__MobileSidebarComponentController)
 
-import Navigation__SidebarComponentController from "./navigation/sidebar_component_controller.js"
+import Navigation__SidebarComponentController from "./navigation/sidebar_component_controller"
 application.register("navigation--sidebar-component", Navigation__SidebarComponentController)
 
-import Navigation__TopbarComponentController from "./navigation/topbar_component_controller.js"
+import Navigation__TopbarComponentController from "./navigation/topbar_component_controller"
 application.register("navigation--topbar-component", Navigation__TopbarComponentController)
 
-import Resource__ComboComponentController from "./resource/combo_component_controller.js"
+import Resource__ComboComponentController from "./resource/combo_component_controller"
 application.register("resource--combo-component", Resource__ComboComponentController)
 
-import Resource__FileuploadComponentController from "./resource/fileupload_component_controller.js"
+import Resource__FileuploadComponentController from "./resource/fileupload_component_controller"
 application.register("resource--fileupload-component", Resource__FileuploadComponentController)
 
-import Resource__UserAccountComponentController from "./resource/user_account_component_controller.js"
-application.register("resource--user-account-component", Resource__UserAccountComponentController)
-
-import Resource__UserProfileComponentController from "./resource/user_profile_component_controller.js"
-application.register("resource--user-profile-component", Resource__UserProfileComponentController)
-
-import Resource__InputBooleanComponentController from "./resource/input_boolean_component_controller.js"
+import Resource__InputBooleanComponentController from "./resource/input_boolean_component_controller"
 application.register("resource--input-boolean-component", Resource__InputBooleanComponentController)
 
-import Resource__InputCalendarComponentController from "./resource/input_calendar_component_controller.js"
+import Resource__InputCalendarComponentController from "./resource/input_calendar_component_controller"
 application.register("resource--input-calendar-component", Resource__InputCalendarComponentController)
 
-import Resource__InputStringComponentController from "./resource/input_string_component_controller.js"
+import Resource__InputDateComponentController from "./resource/input_date_component_controller"
+application.register("resource--input-date-component", Resource__InputDateComponentController)
+
+import Resource__InputStringComponentController from "./resource/input_string_component_controller"
 application.register("resource--input-string-component", Resource__InputStringComponentController)
+
+import Resource__InputTextComponentController from "./resource/input_text_component_controller"
+application.register("resource--input-text-component", Resource__InputTextComponentController)
+
+import Resource__InputTimeComponentController from "./resource/input_time_component_controller"
+application.register("resource--input-time-component", Resource__InputTimeComponentController)
+
+import Resource__UserAccountComponentController from "./resource/user_account_component_controller"
+application.register("resource--user-account-component", Resource__UserAccountComponentController)
+
+import Resource__UserProfileComponentController from "./resource/user_profile_component_controller"
+application.register("resource--user-profile-component", Resource__UserProfileComponentController)
