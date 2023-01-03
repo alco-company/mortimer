@@ -54,6 +54,9 @@ module Pos
     
     def show 
       redirect_to root_path and return unless token_approved
+
+      # xtra sub start pause stop sick free
+      @buttons = Current.account.system_parameters_include("pos/employee/buttons")
     end
     
     #

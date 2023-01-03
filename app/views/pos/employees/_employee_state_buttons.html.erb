@@ -1,81 +1,99 @@
 <div id="employee_state_buttons" class="mt-12 columns-2 md:columns-3 justify-stretch">
-  <button 
-    data-employee-pos-target="extraButton" 
-    data-action="employee-pos#punch_in_xtra" 
-    type="button" 
-    <%= 'disabled' if ['IN'].include? resource.state %>
-    class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
-    <span class="material-symbols-outlined">
-    login
-    </span>                  
-    <span class="pl-1">xtra tid</span>
-  </button>
-  <button 
-    data-employee-pos-target="substituteButton" 
-    data-action="employee-pos#punch_in_sub" 
-    type="button" 
-    <%= 'disabled' if ['IN'].include? resource.state %>
-    class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
-    <span class="material-symbols-outlined">
-    login
-    </span>                  
-    <span class="pl-1">Vikar</span>
-  </button>
 
-  <button 
-    data-employee-pos-target="startButton" 
-    data-action="employee-pos#punch_in" 
-    type="button" 
-    <%= 'disabled' if ['IN'].include? resource.state %>
-    class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
-    <span class="material-symbols-outlined">login</span>                  
-    <span class="pl-1">Start</span>
-  </button>
-  
-  <button 
-    data-employee-pos-target="pauseButton" 
-    data-action="employee-pos#punch_pause" 
-    type="button" 
-    <%= 'disabled' if !['IN'].include? resource.state %> 
-    class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
-    <span class="material-symbols-outlined">
-    pause
-    </span>
-    <span class="pl-1">Pause</span>
-  </button>
-  <button 
-    data-employee-pos-target="stopButton" 
-    data-action="employee-pos#punch_out" 
-    type="button" 
-    <%= 'disabled' if !['IN'].include? resource.state %> 
-    class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
-    <span class="material-symbols-outlined">
-    logout
-    </span>
-    <span class="pl-1">Stop</span>
-  </button>
-  
-  <button 
-    data-employee-pos-target="sickButton" 
-    data-action="employee-pos#punch_in_sick" 
-    type="button" 
-    <%= 'disabled' if ['BREAK','SICK'].include? resource.state %> 
-    class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
-    <span class="material-symbols-outlined">
-    sick
-    </span>
-    <span class="pl-1">Syg!</span>
-  </button>
-  
-  <button 
-    data-employee-pos-target="freeButton" 
-    data-action="employee-pos#punch_in_free" 
-    type="button" 
-    <%= 'disabled' if ['BREAK','SICK', 'IN'].include? resource.state %> 
-    class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
-    <span class="material-symbols-outlined">
-    beach_access
-    </span>
-    <span class="pl-1">Fri</span>
-  </button>
+  <% if @buttons =~/xtra/ %>
+    <button 
+      data-employee-pos-target="extraButton" 
+      data-action="employee-pos#punch_in_xtra" 
+      type="button" 
+      <%= 'disabled' if ['IN'].include? resource.state %>
+      class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+      <span class="material-symbols-outlined">
+      login
+      </span>                  
+      <span class="pl-1">xtra tid</span>
+    </button>
+  <% end %>
+
+  <% if @buttons =~/sub/ %>
+    <button 
+      data-employee-pos-target="substituteButton" 
+      data-action="employee-pos#punch_in_sub" 
+      type="button" 
+      <%= 'disabled' if ['IN'].include? resource.state %>
+      class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+      <span class="material-symbols-outlined">
+      login
+      </span>                  
+      <span class="pl-1">Vikar</span>
+    </button>
+  <% end %>
+
+  <% if @buttons =~/start/ %>
+    <button 
+      data-employee-pos-target="startButton" 
+      data-action="employee-pos#punch_in" 
+      type="button" 
+      <%= 'disabled' if ['IN'].include? resource.state %>
+      class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+      <span class="material-symbols-outlined">login</span>                  
+      <span class="pl-1">Start</span>
+    </button>
+  <% end %>
+
+  <% if @buttons =~/pause/ %>    
+    <button 
+      data-employee-pos-target="pauseButton" 
+      data-action="employee-pos#punch_pause" 
+      type="button" 
+      <%= 'disabled' if !['IN'].include? resource.state %> 
+      class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+      <span class="material-symbols-outlined">
+      pause
+      </span>
+      <span class="pl-1">Pause</span>
+    </button>
+  <% end %>
+
+  <% if @buttons =~/stop/ %>
+    <button 
+      data-employee-pos-target="stopButton" 
+      data-action="employee-pos#punch_out" 
+      type="button" 
+      <%= 'disabled' if !['IN'].include? resource.state %> 
+      class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+      <span class="material-symbols-outlined">
+      logout
+      </span>
+      <span class="pl-1">Stop</span>
+    </button>
+  <% end %>
+
+  <% if @buttons =~/sick/ %>  
+    <button 
+      data-employee-pos-target="sickButton" 
+      data-action="employee-pos#punch_in_sick" 
+      type="button" 
+      <%= 'disabled' if ['BREAK','SICK'].include? resource.state %> 
+      class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+      <span class="material-symbols-outlined">
+      sick
+      </span>
+      <span class="pl-1">Syg!</span>
+    </button>
+  <% end %>
+
+  <% if @buttons =~/free/ %>    
+    <button 
+      data-employee-pos-target="freeButton" 
+      data-action="employee-pos#punch_in_free" 
+      type="button" 
+      <%= 'disabled' if ['BREAK','SICK', 'IN'].include? resource.state %> 
+      class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+      <span class="material-symbols-outlined">
+      beach_access
+      </span>
+      <span class="pl-1">Fri</span>
+    </button>
+  <% end %>
+
 </div>
