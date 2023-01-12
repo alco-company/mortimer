@@ -1,8 +1,11 @@
+
+# Configure Sidekiq-specific session middleware
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
-  
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
-  
+
+  mount Sidekiq::Web => '/sidekiq', constraints: RoutingConstraint
+
   # concerns ----
 
   # mostly used by collections/resources
