@@ -16,7 +16,7 @@
         <%= render partial: "pos/employees/employee_state", locals: { resource: resource } %>
       <% end %>
     </div>
-    <%= render partial: "employee_state_buttons_turbo", locals: { resource: resource } %>
+    <%= render partial: "employee_state_buttons_turbo", locals: { resource: resource, buttons: @buttons } %>
 
     <%= render "modals" %>
   </div>

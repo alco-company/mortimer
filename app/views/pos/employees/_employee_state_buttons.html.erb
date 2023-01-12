@@ -1,7 +1,7 @@
-<% @buttons ||= buttons %>
+
 <div id="employee_state_buttons" class="mt-12 columns-2 md:columns-3 justify-stretch">
 
-  <% if @buttons =~/xtra/ %>
+  <% if buttons =~/xtra/ %>
     <button 
       data-employee-pos-target="extraButton" 
       data-action="employee-pos#punch_in_xtra" 
@@ -15,7 +15,7 @@
     </button>
   <% end %>
 
-  <% if @buttons =~/sub/ %>
+  <% if buttons =~/sub/ %>
     <button 
       data-employee-pos-target="substituteButton" 
       data-action="employee-pos#punch_in_sub" 
@@ -29,7 +29,7 @@
     </button>
   <% end %>
 
-  <% if @buttons =~/start/ %>
+  <% if buttons =~/start/ %>
     <button 
       data-employee-pos-target="startButton" 
       data-action="employee-pos#punch_in" 
@@ -41,7 +41,7 @@
     </button>
   <% end %>
 
-  <% if @buttons =~/pause/ %>    
+  <% if buttons =~/pause/ %>    
     <button 
       data-employee-pos-target="pauseButton" 
       data-action="employee-pos#punch_pause" 
@@ -55,7 +55,7 @@
     </button>
   <% end %>
 
-  <% if @buttons =~/stop/ %>
+  <% if buttons =~/stop/ %>
     <button 
       data-employee-pos-target="stopButton" 
       data-action="employee-pos#punch_out" 
@@ -69,7 +69,7 @@
     </button>
   <% end %>
 
-  <% if @buttons =~/sick/ %>  
+  <% if buttons =~/sick/ %>  
     <button 
       data-employee-pos-target="sickButton" 
       data-action="employee-pos#punch_in_sick" 
@@ -83,7 +83,7 @@
     </button>
   <% end %>
 
-  <% if @buttons =~/free/ %>    
+  <% if buttons =~/free/ %>    
     <button 
       data-employee-pos-target="freeButton" 
       data-action="employee-pos#punch_in_free" 
