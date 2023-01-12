@@ -76,9 +76,27 @@ In the REFERENCES you will find a lot of people, resources, etc
 - perhaps user <https://codewithrails.com/rails-authentication> for authentication
 - how to nest comments <https://medium.com/@tirnavanalessandra/rails-7-turbo-hotwire-reddit-like-nested-comments-92d475e3bbd4>
 - use <https://youtu.be/OicvfL8kKds> for charting and event logging and realtime analytics
+- use <https://web-crunch.com/posts/custom-error-page-ruby-on-rails> for custom error pages
+- use <https://chriskottom.com/articles/testing-rails-background-workers/> for testing background workers
 - 
 
 ## DONE
+
+### 2022-12-12
+
+07:40 work on pos/employees UI
+11:30 work on /sidekiq authentication
+13:50 work on pos/employees UI
+13:50 add error_controller
+18:15 depstage
+
+
+### 2022-12-11
+
+had a visit from Nykredit - real estate agent giving an evaluation of Drosselvej 21
+
+08:30 work on pos/employees UI
+18:30 -
 
 ### 2022-12-04
 

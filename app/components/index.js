@@ -3,6 +3,9 @@
 
 import { application } from "../javascript/controllers/application"
 
+import Navigation__PosFooterComponentController from "./navigation/pos_footer_component_controller"
+application.register("navigation--pos-footer-component", Navigation__PosFooterComponentController)
+
 import Navigation__MobileSidebarComponentController from "./navigation/mobile_sidebar_component_controller"
 application.register("navigation--mobile-sidebar-component", Navigation__MobileSidebarComponentController)
 

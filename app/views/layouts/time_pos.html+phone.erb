@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html class="h-full">
   <head>
-    <title>Mortimer</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Mortimer" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- find settings in content_for :head -->
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -25,8 +20,7 @@
   <body 
     id="switchboard" 
     class="h-full bg-slate-100" 
-    data-controller="switchboard" 
-    data-action="speicherMessage@window->switchboard#handleMessages"
+    data-controller="tabs" 
     >
 
     <div data-controller="extended-slideover" 
@@ -47,15 +41,14 @@
         </main>
 
       </div>
-      <%#= turbo_frame_tag 'form_slideover'  %>
-      <%#= render Resource::FormComponent.new %>
       <div id="modal_content"></div>
 
     </div>
 
-    <%= render "shared/takiro" %>
     <%= render partial: "shared/notifications" %>
 
+    <%= render partial: "pos/employees/footer" %>
+    
   </body>    
 
 

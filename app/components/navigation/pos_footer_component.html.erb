@@ -1,0 +1,21 @@
+<nav
+  id="pos_footer_menu" 
+  class="lg:flex lg:space-x-8 lg:py-2" 
+  aria-label="Tabs">
+
+  <span class="text-slate-200 p-2 float-left material-symbols-outlined">menu</span>
+
+  <% @links.each do |tab| %>
+    <%= link_to tab[:url], 
+        id: tab[:id],
+        data: { tabs_target: "tab", action: tab[:action], turbo_frame: tab[:turbo_frame], content_loader_url_param: tab[:url], content_loader_target_param: tab[:turbo_frame]},
+        class: "border-transparent text-gray-500 rounded-md py-2 px-3 inline-flex items-center text-sm font-medium whitespace-nowrap font-medium text-sm", 
+        role: "menuitem", 
+        aria_current: "page" do %>
+      <span class="material-symbols-outlined"><%= tab[:icon] %></span>
+    <% end %>
+  <% end %>
+
+  <span class="text-slate-200 p-2 float-right material-symbols-outlined">menu</span>
+
+</nav>

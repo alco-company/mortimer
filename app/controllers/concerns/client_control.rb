@@ -11,6 +11,7 @@ module ClientControl
   end
 
   def evaluate_client_platform
+
     case request.user_agent
     when /iPad/
       request.variant = :tablet

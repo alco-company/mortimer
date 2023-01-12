@@ -57,6 +57,12 @@ da:
   app_punch_clock_used: Brugeren stemplede med sin telefon/app
   #
   klass_not_background_job: Det angivne er ikke et baggrundsjob!
+  #
+  dashboard_button: Oversigt
+  enter_leave_button: Komme/Gå
+  stat_button: Statistik
+  task_button: Opgaver
+  info_button: Info
 
 # -- A-Z
 
@@ -285,6 +291,12 @@ da:
       
   pos:
     employees:
+      footer:
+        enter_leave_icon: login
+        stats_icon: bar_chart
+        tasks_icon: task
+        info_icon: info
+        pupils_icon: escalator_warning
       show:
         enter_leave: "Komme/Gå"
         calendar: "Kalender"
@@ -541,7 +553,26 @@ da:
       position: sorting/rækkefølge 
       value: Værdi
 
+  Task:
+    index: Oversigt over opgaver 
+    index_description: Her er en oversigt over alle opgaver 
+    new_button: Ny opgave 
+    delete: 
+      title: "Slet %{name}"
+      description: Er du sikker på at du vil slette denne opgave?
 
+  tasks:
+    index_columns: 
+      name: Opgave beskrivelse 
+    form: 
+      new: Ny opgave 
+      new_description: Her kan du oprette en ogpave - husk at angive om den skal 'FAK' eller '-' (status)
+      edit: Ret en opgave
+      edit_description: Her kan du rette en ogpave - husk at angive om den skal 'FAK' eller '-' (status)
+      name: Opgavebeskrivelse
+      location: Kunde 
+      duration: Varighed 
+      state: Status (FAK/-)
   Team:
     index: Oversigt over grupper
     index_description: <span>Oversigten viser alle de grupper, der er oprettet, til at styre roller og arbejdsgrupper. </span>.

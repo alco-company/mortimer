@@ -80,11 +80,13 @@ class Employee < AbstractResource
       partial: "pos/employees/employee_state", 
       target: "employee_state", 
       locals: { resource: self.asset, user: Current.user }
+
+    buttons = Current.account.system_parameters_include("pos/employee/buttons")
         
     broadcast_replace_later_to "employee_#{self.asset.id}_state_buttons", 
       partial: "pos/employees/employee_state_buttons", 
       target: "employee_state_buttons", 
-      locals: { resource: self.asset, user: Current.user }
+      locals: { resource: self.asset, user: Current.user, buttons: buttons }
 
   end
 

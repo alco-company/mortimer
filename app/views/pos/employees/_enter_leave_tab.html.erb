@@ -2,7 +2,13 @@
 
   <!-- This example requires Tailwind CSS v2.0+ -->
   <!-- Be sure to use this with a layout container that is full-width on mobile -->
-  <div id="work_status" class="bg-white overflow-hidden shadow sm:rounded-lg">
+  <div 
+    id="work_status" 
+    data-controller="employee-pos"
+    data-employee-pos-apikey-value="<%= resource.assetable.access_token %>"
+    data-employee-pos-url-value="<%= pos_employee_url(resource.assetable) %>"
+    data-employee-pos-employee-asset-id-value="<%= resource.id %>"
+    class=" overflow-hidden shadow sm:rounded-lg">
     <div class="px-4 py-5 sm:p-6 flex h-30 w-full ">
       <!-- Content goes here -->
       <%= turbo_stream_from "employee_#{resource.id}_state"  %>
@@ -10,9 +16,9 @@
         <%= render partial: "pos/employees/employee_state", locals: { resource: resource } %>
       <% end %>
     </div>
+    <%= render partial: "employee_state_buttons_turbo", locals: { resource: resource } %>
 
     <%= render "modals" %>
   </div>
 
-  <%= render "tasks" %>
 </div>
