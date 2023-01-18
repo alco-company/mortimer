@@ -250,7 +250,7 @@ export default class ListController extends Controller {
     if(e.detail.message==='refocus cursor_position'){
       if ( this.listAwaitingFocus === true ){
         if (e.detail.sender === 'ui-modal') {
-          history.back()
+          // history.back()
           try{
             document.getElementById('modal_content').innerHTML=""
             document.getElementById('action-buttons').classList.add('hidden')
