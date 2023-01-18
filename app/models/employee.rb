@@ -13,8 +13,6 @@ class Employee < AbstractResource
   accepts_nested_attributes_for :pupils, allow_destroy: true
 
   validates :pin_code, uniqueness: true
-
-  delegate :asset_work_transactions, :asset_workday_sums, :teams, to: :asset
   
   def self.working
     where('assets.state': ['IN','BREAK'])

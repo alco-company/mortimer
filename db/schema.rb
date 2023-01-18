@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_14_123810) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_17_113038) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -168,6 +168,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_123810) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string "job_title"
+    t.bigint "participant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["participant_id"], name: "index_contacts_on_participant_id"
+  end
+
   create_table "dashboards", force: :cascade do |t|
     t.string "name"
     t.string "layout"
@@ -283,7 +291,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_123810) do
     t.string "location"
     t.string "ip_addr"
     t.datetime "last_punch_at"
-    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "access_token"
@@ -449,11 +456,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_123810) do
     t.datetime "updated_at", null: false
     t.datetime "started_at"
     t.datetime "ended_at"
+    t.bigint "contact"
+    t.bigint "invoice_to"
   end
 
   create_table "teams", force: :cascade do |t|
     t.bigint "task_id"
-    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_teams_on_task_id"
@@ -504,6 +512,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_123810) do
   add_foreign_key "assignments", "events"
   add_foreign_key "background_jobs", "accounts"
   add_foreign_key "background_jobs", "users"
+  add_foreign_key "contacts", "participants"
   add_foreign_key "events", "accounts"
   add_foreign_key "events", "calendars"
   add_foreign_key "participant_teams", "participants"

@@ -1,0 +1,17 @@
+<tbody id="tasks" class="divide-y divide-gray-200 bg-white">
+  <% if ['IN'].include? resource.state  %>
+    <% eligible_tasks(resource,params).each do |task| %>
+      <tr>
+        <td
+          id="<%= dom_id task %>" 
+          data-action="click->employee-pos#punch_task"  
+          data-id="<%= task.id %>"        
+          data-disabled="<%= 'disabled' if ['OUT','BREAK','SICK','FREE'].include? resource.state %>"
+          class="<%= color_task task %>whitespace-nowrap cursor-pointer py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"> 
+          <%= task.name %>
+          <button type="button" class="float-right inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">ret</button>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</tbody>

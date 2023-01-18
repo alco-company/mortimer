@@ -1,15 +1,16 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <!-- Be sure to use this with a layout container that is full-width on mobile -->
 <div
-  id="task_list" 
-  data-employee-pos-target="pupilsList" 
-  class="bg-white overflow-hidden shadow sm:rounded-lg"
+  id="pupils_tab" 
+  data-tasks-target="pupilsList" 
+  data-tabs-target="panel"
+  class="hidden py-4 px-4 " 
   >
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="px-4 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-center">
       <div class="mt-5 sm:flex-auto">
-        <h1 class="text-xl font-semibold text-gray-900">Dine elever</h1>
+        <h1 class="text-xl font-semibold text-gray-900"> <%= t('.your_pupils') %></h1>
         <%# <p class="mt-2 text-sm text-gray-700">Vælg fra listen af elever, når du arbejder med den. Mens du arbejder med dem, er de markeret med svagt blåt.</p>
         <p class="mt-2 text-sm text-gray-700">Når du [stopper] fjernes markeringen fra alle.</p> %>
       </div>
@@ -24,7 +25,7 @@
             <table class="min-w-full divide-y divide-gray-300">
               <thead class="bg-gray-50">
                 <tr>
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Navn</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"> <%= t('.name') %></th>
                   <%# <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Role</th>

@@ -23,7 +23,7 @@ class TasksController < EventsController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      params.require(:event).permit(:name, :account_id, :eventable_type, eventable_attributes: [ :id, :duration ], assignments_attributes: [ :id, :assignable_id, :assignable_type, :assignable_role, :_destroy ]  )
+      params.require(:event).permit(:name, :account_id, :state, :eventable_type, eventable_attributes: [ :id, :location, :duration ], assignments_attributes: [ :id, :assignable_id, :assignable_type, :assignable_role, :_destroy ]  )
     end
 
     #

@@ -72,9 +72,13 @@ module EmployeesHelper
   end
 
   def eligible_pupils resource, params
+    return resource.assetable.pupils 
+  end
+
+  def eligible_tasks resource, params
     say "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
     say params    
-    return resource.assetable.pupils 
+    return resource.assetable.tasks
   end
 
   

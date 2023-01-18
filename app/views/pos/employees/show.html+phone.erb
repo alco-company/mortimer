@@ -23,6 +23,10 @@
   >
 
   <div 
+    data-controller="employee-pos"
+    data-employee-pos-apikey-value="<%= resource.assetable.access_token %>"
+    data-employee-pos-url-value="<%= pos_employee_url(resource.assetable) %>"
+    data-employee-pos-employee-asset-id-value="<%= resource.id %>"
     class="px-4 md:flex mb-2">
     <article>
       <!-- Profile header -->
