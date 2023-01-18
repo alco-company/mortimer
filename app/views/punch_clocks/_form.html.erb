@@ -1,5 +1,5 @@
 <%= form_with model: resource, 
-  url: url_for(resource.assetable), 
+  url: resource_url(), 
   id: resource_form, 
   data: { form_sleeve_target: 'form' }, 
   class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>

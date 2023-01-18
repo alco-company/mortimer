@@ -61,8 +61,15 @@ module ResourcesHelper
   #
   # resource_url returns the current entity's url
   def resource_url options={}
-    return url_for(options) unless options=={}
-    return url_for(resource)
+    parr = request.path.split("/")
+    p = case params[:action]
+      when 'new','edit','destroy'; parr[0..-2].join("/")
+      else parr.join("/")
+      end
+    url_for(p)
+
+    # return url_for(options) unless options=={}
+    # return url_for(resource)
     # case resource_class.to_s
     # when 'Asset', 'Product'; url_for resource.assetable
     # when 'Participant'; url_for resource.participantable

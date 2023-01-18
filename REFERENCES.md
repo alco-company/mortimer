@@ -79,6 +79,10 @@ https://labs.k.io/lessons-learned-with-hotwire/
 https://github.com/excid3/tailwindcss-stimulus-components
 https://www.colby.so/posts/handling-modal-forms-with-rails-and-hotwire
 
+### How to setup Mailers somewhat easier 
+
+<https://boringrails.com/articles/writing-better-action-mailers/> 
+
 ### Project management - alternative to JIRA perhaps?
 
 https://linear.app

@@ -19,3 +19,12 @@ two:
   state: MyString
   ancestry: MyString
   deleted_at: 
+
+three:
+  account: one
+  participantable: one (Contact)
+  name: Elvis
+  state: Ok
+  ancestry: 
+  deleted_at: 
+  calendar: one

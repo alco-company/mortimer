@@ -78,9 +78,16 @@ In the REFERENCES you will find a lot of people, resources, etc
 - use <https://youtu.be/OicvfL8kKds> for charting and event logging and realtime analytics
 - use <https://web-crunch.com/posts/custom-error-page-ruby-on-rails> for custom error pages
 - use <https://chriskottom.com/articles/testing-rails-background-workers/> for testing background workers
+- copy.ai for copywriting, buildai.space for building AI, kartiv.com for eediting images, otter.ai for transcribing audio, axiom.ai for automating tasks, and more
 - 
 
 ## DONE
+
+### 2022-12-17
+
+06:45 start work on refactoring abstract_{controller,service}, more
+01:14 commit af ændringer til resource_url + abstract_ & _service 
+
 
 ### 2022-12-12
 
