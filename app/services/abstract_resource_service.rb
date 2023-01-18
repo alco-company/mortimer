@@ -4,32 +4,32 @@
 # a status and a record persisting the
 # ActiveRecord
 #
+# upsert, create and update and delete
+# usually will be called from the controller
+# and will return a Result hash with a status
+#
 class AbstractResourceService
-  def create( resource, resource_class=nil )
+
+  def upsert( resource, resource_params )
+    resource.new_record? ? create(resource) : update(resource, resource_params)
+  end
+
+  def create( resource )
     begin
-      # puts "called-------------\n"
-      # puts resource.errors.to_json unless resource.valid?
-      # puts "er resource klar til at blive gemt? #{resource.valid?}"
       resource.save
-      # puts "saved"
-      resource.valid? ? 
-        Result.new(status: :created, record: resource) :
-        Result.new(status: :not_valid, record: resource)
+      Result.new record: resource, status: :created
       
     rescue Exception => exception
-      # puts "SQL error in #{ resource.save.explain }"
-      # puts "SQL error #{ exception }"
       ActiveRecord::Base.connection.execute 'ROLLBACK' 
       Result.new status: :error, record: resource      
     end
   end
   
-  def update( resource, resource_params, resource_class=nil )
+  def update( resource, resource_params )
     begin        
       resource.update resource_params 
-      resource.valid? ? 
-      Result.new(status: :updated, record: resource) :
-      Result.new(status: :not_valid, record: resource)
+      Result.new record: resource, status: :updated
+
     rescue => exception
       ActiveRecord::Base.connection.execute 'ROLLBACK' 
       resource.errors.add(:base, exception)
@@ -42,10 +42,18 @@ class AbstractResourceService
   # by ways of updating the deleted_at attribute with the
   # current timestamp
   #
-  def delete( resource )
+  # some (few) resources may be deleted permanently (if they do not respond_to?(:deleted_at) )
+  # or if the resource_params[:purge] is set to true
+  #
+  def delete( resource, resource_params )
     begin        
-      resource.update_attribute :deleted_at, DateTime.current
-      Result.new(status: :deleted, record: resource)
+      if resource_params[:purge].blank? && resource.respond_to?(:deleted_at)
+        resource.update_attribute :deleted_at, DateTime.current
+      else
+        resource.destroy
+      end
+      Result.new record: resource, status: :deleted
+
     rescue => exception
       ActiveRecord::Base.connection.execute 'ROLLBACK' 
       resource.errors.add(:base, exception)
@@ -72,7 +80,11 @@ class AbstractResourceService
   class Result 
     attr_reader :record, :status
     def initialize(status:, record:)
-      @status = status
+      case status
+      when :created; @status = record.valid? ? :created : :not_valid
+      when :updated; @status = record.valid? ? :updated : :not_valid 
+      when :deleted; @status = (record.destroyed? || !record.deleted_at.nil?) ? :deleted : :not_valid
+      end
       @record = record
     end
 
@@ -99,58 +111,3 @@ class AbstractResourceService
   end
   
 end
-
-  
-  
-      # CREATE
-      # head 401 and return unless @authorized
-      # @resource = resource_class.new(resource_params) if @resource.nil?
-      # unless resource.valid?
-      #   render action: "new", resource: resource, status: 422 and return
-      # else
-      #   resource.save
-      #   # render :show, resource: resource, status: :created and return
-      # end
-      # unless resource.valid? 
-      #   render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
-      # else
-      #   begin        
-      #     resource.save
-      #     respond_to do |format|
-      #       format.turbo_stream { head :ok }
-      #       format.html { head :ok }
-      #       format.json { render json: resource }
-      #     end
-      #   rescue => exception
-      #     resource.errors.add(:base, exception)
-      #     render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
-      #   end
-      # end
-
-      # render head: 401 and return unless @authorized
-      # return if params.include? "edit_all"
-      # unless resource.update resource_params
-      #   render action: "edit", resource: resource, status: 422 and return
-      # else
-      #   render action: "show", resource: resource, layout: false, status: :created and return
-      # end
-
-      # UPDATE
-      # begin        
-      #   say resource.to_json
-      #   say Current.account.to_json
-      #   say Current.user.to_json
-      #   say resource_params.to_json
-      #   unless resource.update resource_params
-      #     render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
-      #   else
-      #     respond_to do |format|
-      #       format.turbo_stream { head :ok }
-      #       format.html { head :ok }
-      #       format.json { render json: resource }
-      #     end
-      #   end
-      # rescue => exception
-      #   resource.errors.add(:base, exception)
-      #   render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
-      # end

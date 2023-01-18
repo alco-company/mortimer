@@ -9,7 +9,7 @@ class SupplierService < ParticipantService
     # search the https://gepir.gs1.org/index.php/search-by-gtin somwhow to find the correct supplier
     #
     resource = Participant.new( name: parm["ean14"][4,4], account: account, participantable: Supplier.new( gtin_prefix: parm["ean14"][4,4] ))
-    result = create( resource, Supplier )
+    result = create( resource )
     return result.record.participantable if result.created?
     nil
   end

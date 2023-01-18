@@ -1,13 +1,10 @@
 class RolesController < SpeicherController
 
-  def lookup 
+  def lookup_resources
     @target=params[:target]
     @values=params[:values].split(',')
     @element_classes=params[:element_classes]
     @selected_classes=params[:selected_classes]
-    respond_to do |format|
-      format.turbo_stream
-    end
   end
 
   private 

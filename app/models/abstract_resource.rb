@@ -103,9 +103,7 @@ class AbstractResource < ApplicationRecord
   end
 
   def broadcast_destroy
-    after_destroy_commit { broadcast_remove_to self, 
-      partial: self, 
-      locals: { resource: self, user: Current.user } }
+    broadcast_remove_to model_name.plural, target: self
   end
 
   private

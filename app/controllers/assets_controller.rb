@@ -46,10 +46,10 @@ class AssetsController < DelegatedController
   #   end
   # end
 
-  def delete_it
-    return resource.update(deleted_at: DateTime.current) if params[:purge].blank?
-    resource.destroy
-  end
+  # def delete_it
+  #   return resource.update(deleted_at: DateTime.current) if params[:purge].blank?
+  #   resource.destroy
+  # end
 
 
 end

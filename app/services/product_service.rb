@@ -14,13 +14,13 @@ class ProductService < AssetService
     sup = SupplierService.new.get_by :supplier_barcode, acc, parm
     prod = Product.new( supplier: sup, supplier_barcode: parm["ean14"] )
     resource = Asset.new account: acc, name: parm["ean14"], assetable: prod
-    result = create(resource, Product)
+    result = create(resource)
     return result.record if result.created?
     nil
   end
 
-  def update resource, resource_params, resource_class=nil
-    result = super(resource, resource_params, resource_class)
+  def update resource, resource_params
+    result = super(resource, resource_params)
     if result.updated?
       resource.assetable.stocked_products.each{ |r| r.asset.update name: resource.name } if resource.assetable and resource.assetable.stocked_products.any?
     end

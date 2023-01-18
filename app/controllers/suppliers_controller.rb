@@ -4,14 +4,11 @@ class SuppliersController < ParticipantsController
     @resource_class= Supplier
   end
 
-  def lookup 
+  def lookup_resources 
     @target=params[:target]
     @value=params[:value]
     @element_classes=params[:element_classes]
     @selected_classes=params[:selected_classes]
-    respond_to do |format|
-      format.turbo_stream
-    end
   end
 
   private 

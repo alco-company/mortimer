@@ -1,5 +1,5 @@
 class EventService < AbstractResourceService
-  def create( resource, resource_class )
+  def create( resource )
     result = super(resource)
     if result.status != :created 
       resource.eventable = resource_class.new if resource.eventable.nil?
@@ -7,7 +7,7 @@ class EventService < AbstractResourceService
     result
   end
 
-  def update( resource, resource_params, resource_class )
+  def update( resource, resource_params )
     result = super(resource,resource_params)
     if result.status != :updated 
       resource.eventable = resource_class.new if resource.eventable.nil?

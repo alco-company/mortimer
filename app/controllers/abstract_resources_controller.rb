@@ -13,6 +13,8 @@ class AbstractResourcesController < ApplicationController
   # from the AbstractResourcesController - 
   # but as always you may skip it on any controller by
   # overriding the CRUD method definitions (show,new,index,..)
+  # in which case you will have to take care of the
+  # authorization yourself!
   #
   include Authorization
 
@@ -51,8 +53,13 @@ class AbstractResourcesController < ApplicationController
   # and further set_user_info and more, through UserInfo
   # allowing _non_users_ like punch_clocks access setting Current.punch_clock
   #
-  # now in concerns/resource_control.rb: before_action :set_resource
-  # now in concerns/resource_control.rb: before_action :set_paper_trail_whodunnit
+  # in concerns/resource_control.rb: before_action :set_resource
+  #
+  # if you - for some reason - do not want this to happen
+  # you may skip it by overriding the `before_action :set_resource`
+  # in which case you will have to take care of the
+  # resource control yourself, ie setup a new resource, find /resource/:id, etc!
+  #
   include ResourceControl
 
   #
@@ -136,24 +143,26 @@ class AbstractResourcesController < ApplicationController
 
   #
   # lookup does the same job as index - except it only returns TURBO_STREAM - and does not care about authorization
-  # expecting the caller to otherwise be allowed to!
+  # expecting the caller to otherwise be allowed to! This clearly is a way into the system and should be guarded!
+  # Best bet is guard it with accepting only TURBO_STREAM requests!
   #
   # used by components like combo_component, and more
   #
   # TODO! this obviously is a ways into the system and should be guarding
   #
   def lookup
-    respond_with :lookup 
+    request.format.symbol == :turbo_stream ? respond_with(:lookup) : not_authorized(true)
   end
   
   #
   # selected usually works in a combination with lookup - allowing the client to POST a set of selected record ids
   # and returning a TURBO_STREAM driven template
   #
-  # TODO! this obviously is a ways into the system and should be guarding
+  # TODO! this obviously is a ways into the system and should be guarding - like 
+  # with lookup fx guarding it with accepting only TURBO_STREAM requests!
   #
   def selected
-    respond_with :selected 
+    request.format.symbol == :turbo_stream ? respond_with(:selected) : not_authorized
   end
 
   #
@@ -166,18 +175,6 @@ class AbstractResourcesController < ApplicationController
   #
   def create
     authorize(:create) ? respond_with(:create) : not_authorized
-
-    # unless authorize(:create)
-    #   not_authorized
-    # else
-    #   if edit_all_posts
-    #     respond_to do |format|
-    #       format.js { head 201 }
-    #     end
-    #   else
-    #     respond_with :create
-    #   end
-    # end
   end
 
   #
@@ -261,8 +258,6 @@ class AbstractResourcesController < ApplicationController
 
     #
     def show_resource
-      # render head: 401 and return unless @authorized
-      # render action: "show", layout: false, resource: resource
       render action: "show", resource: resource
       # respond_to do |format|
       #   format.json { }
@@ -272,7 +267,6 @@ class AbstractResourcesController < ApplicationController
 
     #
     def show_modal
-      # render head: 401 and return unless @authorized
       url = resources_url
       render turbo_stream: turbo_stream.replace( "modal_content", partial: "shared/modals/#{params[:action_content]}", locals: { resource: resource, url: url } )  
     end
@@ -302,7 +296,6 @@ class AbstractResourcesController < ApplicationController
     end
 
     def edit_resource
-      # render head: 401 and return unless @authorized
       render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } )
     end
 
@@ -322,11 +315,15 @@ class AbstractResourcesController < ApplicationController
     # and because concerns/resource_control takes care of actually getting the content
     # no real code is needed in this method
     #
+    # this method only exists to be overwritten by you if necessary
+    #
     def lookup_resources
     end
 
     #
     # will be serviced by application/selected.turbo_stream.erb and views/[resource]/_selected.html.erb
+    #
+    # this method only exists to be overwritten by you if necessary
     #
     def selected_resources
     end
@@ -349,8 +346,7 @@ class AbstractResourcesController < ApplicationController
       return create_update_response if edit_all_posts
 
       # Each resource could have it's own - 
-      result = "#{resource_class.to_s}Service".constantize.new.create resource(), resource_class()
-      # result = AbstractResourceService.new.create resource
+      result = "#{resource_class.to_s}Service".constantize.new.create resource()
       resource= result.record
       case result.status
       when :created; create_update_response
@@ -365,8 +361,7 @@ class AbstractResourcesController < ApplicationController
     # and call update on it, returning an instance of Result (defined on AbstractResourceService)
     def update_resource
       # Each resource could have it's own - 
-      result = "#{resource_class.to_s}Service".constantize.new.update  resource(), resource_params, resource_class()
-      # result = AbstractResourceService.new.update resource, resource_params
+      result = "#{resource_class.to_s}Service".constantize.new.update  resource(), resource_params
       resource= result.record
       case result.status
       when :updated; create_update_response
@@ -386,37 +381,14 @@ class AbstractResourcesController < ApplicationController
     end
 
     def delete_resource
-      # render head: 401 and return unless @authorized
-      #
       # TODO: this is not the correct way to respond - with deletes being done by modals!
       #
-      unless delete_it
-        render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
-      else
-        render turbo_stream: turbo_stream.remove( resource ), status: 303
+      result = "#{resource_class.to_s}Service".constantize.new.delete resource(), params
+      case result.status
+      when :deleted; render turbo_stream: turbo_stream.remove( resource ), status: 303
+      when :not_valid; render turbo_stream: turbo_stream.replace( resource_form, partial: 'form', locals: { resource: resource } ), status: :unprocessable_entity
       end
-      #   # hands me this: undefined method `start_with?' for Dashboard:Class
-      #   # notice = t('deleted_correctly', resource: t(@resource_class))
-      #   respond_to do |format|
-      #     format.html { redirect_to resources_url, notice: notice }
-      #     format.js { head :no_content}
-      #     format.json { head :no_content}
-      #   end
-      # else
-      #   notice = t('was not deleted', resource: t(@resource_class))
-      #   respond_to do |format|
-      #     format.html { redirect_to resources_url, notice: notice }
-      #     format.js { head :unprocessable_entity}
-      #     format.json { head :unprocessable_entity}
-      #   end
-      # end
     end
-
-    def delete_it
-      return resource.update(deleted_at: DateTime.current) if params[:purge].blank? && resource.respond_to?(:deleted_at)
-      resource.destroy
-    end
-
 
 end
 

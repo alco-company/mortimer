@@ -88,8 +88,12 @@ module ResourceControl
     
     p = resource_params
     p=p.compact.first if p.class==Array
-    return r.new(p) if r.ancestors.include? ActiveRecord::Base
-    r.new
+    rr= r.ancestors.include?( ActiveRecord::Base) ? r.new(p) : r.new
+    if parent? && rr.respond_to?(:assignments)
+      rr.assignments.new( assignable: (parent_class.find(parent.id) rescue nil))
+    end
+    rr
+
   rescue => err
     raise "new_resource failed due to #{err}"
   end
@@ -168,8 +172,14 @@ module ResourceControl
   # /users/1
   # /accounts/2/users/1
   #
-  def resource_url options={}
-    url_for(resource)
+  def resource_url entity={}
+    url_for resource
+    # parr = request.path.split("/")
+    # p = case params[:action]
+    #   when 'new','edit','destroy'; parr[0..-2].join("/")
+    #   else parr.join("/")
+    #   end
+    # url_for(p)
     # r=request.path
     # id=params[:id]
     # options = case params[:action]

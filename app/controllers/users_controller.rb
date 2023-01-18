@@ -27,7 +27,7 @@ class UsersController < ParticipantsController
   #
   def create_resource
     # @resource= User.new(resource_params)
-    result = UserService.new.create resource(), resource_params, resource_class()
+    result = UserService.new.create resource(), resource_params
     resource= result.record
     case result.status
     when :created; user_signed_in? ? create_update_response : redirect_to( root_path, notice: t('.check_email_for_confirmation') )
@@ -35,18 +35,6 @@ class UsersController < ParticipantsController
     end
   end
 
-  def delete_it
-    name = resource.participantable.user_name
-    while User.find_by( user_name: name) do
-      name = SecureRandom.hex
-    end
-    if params[:purge].blank?
-      resource.participantable.update user_name: name
-      return resource.update(deleted_at: DateTime.current)
-    else
-      resource.destroy
-    end
-  end
 
   private
 

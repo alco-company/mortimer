@@ -25,22 +25,4 @@ class AssetWorkTransactionsController < EventsController
       AssetWorkTransaction.search AssetWorkTransaction.all, params[:q]
     end
 
-    #
-    # delete_it gets called from the abstract_resources_controller
-    # and overwrites the events_controller -
-    # in order to either add or subtract quantity from
-    # the stock_item
-    def delete_it
-
-      case resource.state
-      when "RECEIVE"; resource.eventable.stock_item.update_attribute :quantity, resource.eventable.stock_item.quantity - resource.eventable.quantity
-      when "SHIP","SCRAP"; resource.eventable.stock_item.update_attribute :quantity, resource.eventable.stock_item.quantity + resource.eventable.quantity
-      # when "INVENTORY"; 
-      end
-
-      return resource.update(deleted_at: DateTime.current) if params[:purge].blank?
-      resource.destroy
-    end
-  
-
 end

@@ -4,7 +4,7 @@ class PosEmployeeService < AbstractResourceService
     
   end
 
-  def create( resource, resource_class )
+  def create( resource )
     # resource.calendar = CalendarService.new.create(resource, resource_class) if resource.calendar.blank?
     resource.calendar = Calendar.new(name: resource.name) if resource.calendar_id.blank?
     result = super(resource)
@@ -14,7 +14,7 @@ class PosEmployeeService < AbstractResourceService
     result
   end
 
-  def update( resource, resource_params, resource_class )
+  def update( resource, resource_params )
     result = super(resource,resource_params)
     if result.status != :updated
       resource.participantable = resource_class.new if resource.participantable.nil?

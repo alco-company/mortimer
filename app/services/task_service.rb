@@ -1,0 +1,2 @@
+class TaskService < AbstractResourceService
+end

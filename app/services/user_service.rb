@@ -1,6 +1,6 @@
 class UserService < ParticipantService
-  def create( resource, resource_params, resource_class )
-    result = super(resource, resource_class)
+  def create( resource, resource_params )
+    result = super(resource)
     if result.status != :created 
       resource.participantable = resource_class.new if resource.participantable.nil?
     else
@@ -12,13 +12,28 @@ class UserService < ParticipantService
     result
   end
 
-  def update( resource, resource_params, resource_class )
-    result = super(resource,resource_params)
+  def update( resource, resource_params )
+    result = super(resource,resource_params )
     if result.status != :updated
       resource.participantable = resource_class.new if resource.participantable.nil?
     end
     result
   end
+
+  def delete( resource, resource_params )
+    
+    name = resource.participantable.user_name
+
+    # anonymize user's name
+    while User.find_by( user_name: name) do
+      name = SecureRandom.hex
+    end
+    resource.participantable.update_attribute :user_name, name
+    super(resource, resource_params)
+
+  end
+
+
 
   def update_roles_teams result, params 
     result.record.roles= params["roles"] 
