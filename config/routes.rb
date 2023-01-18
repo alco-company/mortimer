@@ -134,6 +134,9 @@ Rails.application.routes.draw do
     resources :products
   end
   
+  resources :contacts, concerns: [:cloneable, :modalable, :selectable] do
+  end
+  
   # resources :events
   resources :employees, concerns: [:cloneable, :modalable, :exportable] do
     resources :asset_work_transactions, concerns: [:cloneable, :modalable, :exportable]
@@ -151,6 +154,7 @@ Rails.application.routes.draw do
   resources :pupils, concerns: [:cloneable, :modalable] do
     resources :pupil_transactions
   end
+
   resources :stock_item_transactions, concerns: [:cloneable, :modalable]
   resources :stocked_products
   resources :tasks, concerns: [:cloneable, :modalable]
