@@ -29,6 +29,9 @@ class Account < AbstractResource
     self.calendar = Calendar.create(name:) if calendar.nil?
   end
 
+  def service_groups
+    services.map(&:service_group).uniq
+  end
   #
   # default_scope returns all posts that have not been marked for deletion yet
   # define default_scope on model if different

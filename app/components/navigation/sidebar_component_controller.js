@@ -2,7 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 import { enter, leave } from "el-transition"
 
 export default class SidebarComponentController extends Controller {
-  static targets = [ "sidebar" ]
+  static targets = [ "sidebar", "accordion" ]
+  static values = { index: Number }
 
   connect() {
     super.connect()
@@ -22,6 +23,18 @@ export default class SidebarComponentController extends Controller {
 
   close(event) {
     // leave(this.menuTarget)
+  }
+
+  toggleGroup(event) {
+    this.accordionTargets.forEach((accordion, index) => {
+      let accordionIndex = accordion.id.split('-')[1]
+      let currentIndex = event.currentTarget.id.split('_')[2]
+      if (accordionIndex != currentIndex) {
+        accordion.classList.add('hidden')
+      } else {
+        accordion.classList.contains('hidden') ? accordion.classList.remove('hidden') : accordion.classList.add('hidden')
+      }
+    })
   }
 
   openSidebar() {

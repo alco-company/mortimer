@@ -19,7 +19,50 @@
     </a>
 
     <div id="user_<%= @user_id %>_services" class="space-y-1">
-      <%= render( Navigation::ServiceComponent.with_collection @current.account.services, current: @current, css: @link_classes) if @current && @current.account %>
+
+      <div class="bg-gray-100">
+        <div class="w-full divide-y-2 divide-gray-200 p-1">
+          <dl class="mt-6 space-y-2 divide-y divide-gray-200">
+            <% index=0; @current.account.service_groups.each do |group| %>
+              <div class="pt-2">
+                <dt class="text-sm text-gray-500">
+                  <!-- Expand/collapse question button -->
+                  <button 
+                    type="button" 
+                    data-action="click->navigation--sidebar-component#toggleGroup"                    
+                    id="button_group_<%= index %>"
+                    class="flex w-full items-start text-left" 
+                    aria-controls="accordion-0" 
+                    aria-expanded="false">
+                    <%= helpers.service_group_icon group %>
+                    <span class="ml-1 font-medium pt-2"> <%= t(".#{group}") %> </span>
+                    <span class="w-full grid h-7 items-center justify-items-end">
+                      <!--
+                        Expand/collapse icon, toggle classes based on question open state.
+
+                        Heroicon name: outline/chevron-down
+
+                        Open: "-rotate-180", Closed: "rotate-0"
+                      -->
+                      <svg class="rotate-0 h-5 w-5 transform text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-widivh="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </span>
+                  </button>
+                </dt>
+                <dd class="mt-2 hidden" id="accordion-<%= index %>" 
+                  data-navigation--sidebar-component-target="accordion">
+                  <p class="text-base text-gray-500">
+                    <%= render( Navigation::ServiceComponent.with_collection @current.account.services.where(service_group: group), current: @current, css: @link_classes) if @current && @current.account %>
+                  </p>
+                </dd>
+              </div>
+            <% index=index+1;end %>
+          </dl>
+        </div>
+      </div>
+      
+
     </div>
 
 
@@ -27,4 +70,9 @@
   <% end %>
 
 </nav>
+
+
+
+
+
 
