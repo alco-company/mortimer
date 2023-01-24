@@ -5,7 +5,7 @@ module ComponentsHelper
  
   def search_field name:, value:, placeholder: '', component_method:
     raw %(
-      <div class="mt-1 relative rounded-md shadow-sm">
+      <div class="pt-[2px] sm:pt-1 relative rounded-md shadow-sm">
         <input 
           type="search" 
           name="#{name.to_s}" 
@@ -13,7 +13,7 @@ module ComponentsHelper
           data-search-target="input"
           data-action="keydown->#{component_method}"
           value="#{params[name]}" 
-          class="focus:ring-slate-500 focus:border-slate-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" 
+          class="focus:ring-slate-500 focus:border-slate-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md w-full" 
           placeholder="#{placeholder}">
         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
           <!-- Heroicon name: solid/search -->

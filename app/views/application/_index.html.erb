@@ -1,5 +1,11 @@
-<div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+<div 
+  data-controller="search"
+  class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
   <%= turbo_frame_tag resources_target do %>
+
+    <%= render_component "element/search_and_button" %>
+
+
     <table 
       id="list"
       data-controller="list flag pagination" 
