@@ -45,7 +45,7 @@ class AssetWorkdaySum < AbstractResource
 
   # find all asset_work_transactions and
   # increment all counters
-  def calculate_on_transactions punched_by_asset, prev_year_awd
+  def calculate_on_transactions
 
     # t.bigint "asset_id", null: false
     # t.bigint "asset_workday_sum_id"
@@ -67,7 +67,7 @@ class AssetWorkdaySum < AbstractResource
       when 'IN'
         calc_last_stint awt, from, punch_type
         from = awt.punched_at
-        punch_type = awt.reason.upcase == "XTRA" ? :ot1_minutes : :work_minutes
+        punch_type = for_reason awt, "XTRA", :ot1_minutes, :work_minutes
 
       # break_minutes
       when 'BREAK'
@@ -83,12 +83,16 @@ class AssetWorkdaySum < AbstractResource
       when 'SICK'
         calc_last_stint awt, from, punch_type
         from = awt.punched_at
-        punch_type = case awt.reason.upcase
-          when "ME"; :sick_minutes                  
-          when "CHILD"; :child_sick_minutes            
-          when "NURSING"; :nursing_minutes               
-          when "LOST_WORK"; :lost_work_revenue_minutes     
-          when "P56"; :pgf56_minutes                 
+        unless awt.reason.nil?
+          punch_type = case awt.reason.upcase
+            when "ME"; :sick_minutes                  
+            when "CHILD"; :child_sick_minutes            
+            when "NURSING"; :nursing_minutes               
+            when "LOST_WORK"; :lost_work_revenue_minutes     
+            when "P56"; :pgf56_minutes                 
+          end
+        else
+          puts ">>>>>>>>>>>> error - no reason for SICK punch <<<<<<<<<<<<<<<<"
         end
 
       # free_minutes
@@ -100,13 +104,17 @@ class AssetWorkdaySum < AbstractResource
       when 'FREE'
         calc_last_stint awt, from, punch_type
         from = awt.punched_at
-        punch_type = case awt.reason.upcase
-          when "-"; :free_minutes
-          when "RR"; :holiday_free_minutes
-          when "SENIOR"; :senior_minutes
-          when "UNPAID"; :unpaid_free_minutes
-          when "MATERNITY"; :child_leave_minutes
-          when "LEAVE"; :leave_minutes
+        unless awt.reason.nil?            
+          punch_type = case awt.reason.upcase
+            when "-"; :free_minutes
+            when "RR"; :holiday_free_minutes
+            when "SENIOR"; :senior_minutes
+            when "UNPAID"; :unpaid_free_minutes
+            when "MATERNITY"; :child_leave_minutes
+            when "LEAVE"; :leave_minutes
+          end
+        else
+          puts ">>>>>>>>>>>> error - no reason for FREE punch <<<<<<<<<<<<<<<<"
         end
 
       when 'OUT'
@@ -123,16 +131,15 @@ class AssetWorkdaySum < AbstractResource
     unless from.nil? and punch_type.nil? 
       # send email to someone
     end
-
-    # say "processed #{awts.count} punches........"
-    # move any free_minutes to free_prev_minutes
-    # next year on this day
-    if prev_year_awd
-      self.update_column :free_prev_minutes, prev_year_awd.free_minutes
-    end
     
   rescue Exception => e
     puts e
+  end
+
+  def for_reason awt, reason, reason_type, otherwise
+    awt.reason.upcase == reason ? reason_type : otherwise
+  rescue
+    otherwise
   end
 
   #
@@ -163,6 +170,7 @@ class AssetWorkdaySum < AbstractResource
 
   def calc_work minutes, punch_type      
     return false unless %w( work_minutes ot1_minutes ot2_minutes ).include? punch_type.to_s
+    asset.assetable.norm_time = 30 if asset.assetable.norm_time.nil?
 
     if punch_type.to_s == 'work_minutes'
       minutes = work_minutes + minutes

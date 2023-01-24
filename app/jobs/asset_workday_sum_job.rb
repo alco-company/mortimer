@@ -26,7 +26,7 @@ class AssetWorkdaySumJob < ApplicationJob
           dt = Date.today
           # did the employee add anything to their calendar?
           employee_asset.calendar.punch_work_related_events dt, employee_asset
-          employee_asset.asset_workday_sums.where(work_date: dt).first.calculate_on_transactions( employee_asset) rescue nil
+          employee_asset.asset_workday_sums.where(work_date: dt).first.calculate_on_transactions rescue nil
         end
       end
 
