@@ -143,12 +143,6 @@ class AssetWorkdaySum < AbstractResource
     puts e
   end
 
-  def for_reason awt, reason, reason_type, otherwise
-    awt.reason.upcase == reason ? reason_type : otherwise
-  rescue
-    otherwise
-  end
-
   #
   # we will calculate the number of minutes
   # they spent on this last stint doing whatever
@@ -199,6 +193,12 @@ class AssetWorkdaySum < AbstractResource
     end
     return true
 
+  end
+
+  def for_reason awt, reason, reason_type, otherwise
+    awt.reason.upcase == reason ? reason_type : otherwise
+  rescue
+    otherwise
   end
 
   def reset_values

@@ -10,7 +10,7 @@
 class BackgroundJob < AbstractResource
   #
   # prepareable makes it possible to
-  # run cron_task and rrule on background_jobs
+  # `cron_runs` cron_task or `rrule_runs` on background_jobs
   # in order to prepare them for processing
   # as ActiveJobs (backed by Sidekiq)
   #
