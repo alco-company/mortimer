@@ -1,7 +1,7 @@
 class Product < AbstractResource
   include Assetable
 
-  belongs_to :supplier
+  belongs_to :supplier, class_name: "Organization", optional: true
   has_many :stocked_products, dependent: :destroy
   has_many :stock_locations, through: :stocked_products
   has_many :stock_item_transactions, through: :stocked_products

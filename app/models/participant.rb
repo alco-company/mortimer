@@ -11,7 +11,7 @@ class Participant < AbstractResource
   has_many :roleables, as: :roleable, dependent: :delete_all
   has_many :roles, through: :roleables
   
-  delegated_type :participantable, types: %w[ Contact Customer Supplier User Team ], dependent: :destroy
+  delegated_type :participantable, types: %w[ Contact Customer Organization Supplier User Team ], dependent: :destroy
   accepts_nested_attributes_for :participantable
 
   accepts_nested_attributes_for :roles

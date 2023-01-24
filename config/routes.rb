@@ -130,7 +130,7 @@ Rails.application.routes.draw do
   end
   
   
-  resources :suppliers, concerns: [:cloneable, :modalable, :selectable] do
+  resources :organizations, concerns: [:cloneable, :modalable, :selectable] do
     resources :products
   end
   

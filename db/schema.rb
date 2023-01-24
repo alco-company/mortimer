@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_17_113038) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_20_160548) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -232,6 +232,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_17_113038) do
   create_table "locations", force: :cascade do |t|
     t.string "long_lat"
     t.text "asset_requirements"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "cvr_number"
+    t.string "gtin_prefix"
+    t.string "product_resource"
+    t.string "partner_roles"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -518,7 +527,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_17_113038) do
   add_foreign_key "participant_teams", "participants"
   add_foreign_key "participant_teams", "teams"
   add_foreign_key "participants", "accounts"
-  add_foreign_key "products", "suppliers"
   add_foreign_key "profiles", "users"
   add_foreign_key "pupil_transactions", "assets"
   add_foreign_key "pupil_transactions", "pupils"
