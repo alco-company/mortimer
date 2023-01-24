@@ -64,6 +64,9 @@ class Employee < AbstractResource
     #   partial: "employees/calendar", 
     #   target: "employee_#{self.id}_calendar", 
     #   locals: { resource: self, user: Current.user }
+
+    buttons = Current.account.system_parameters_include("pos/employee/buttons")
+
     broadcast_replace_later_to "pos_employees", 
       partial: "pos/employees/list_employee", 
       target: "pos_employees_#{self.id}", 
@@ -79,7 +82,6 @@ class Employee < AbstractResource
       target: "employee_state", 
       locals: { resource: self.asset, user: Current.user }
 
-    buttons = Current.account.system_parameters_include("pos/employee/buttons")
         
     broadcast_replace_later_to "employee_#{self.asset.id}_state_buttons", 
       partial: "pos/employees/employee_state_buttons", 

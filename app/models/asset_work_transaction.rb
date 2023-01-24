@@ -22,6 +22,9 @@ class AssetWorkTransaction < AbstractResource
   end
 
   def broadcast_create
+
+    buttons = Current.account.system_parameters_include("pos/employee/buttons")
+
     broadcast_prepend_later_to model_name.plural, 
       target: "asset_work_transaction_list", 
       partial: self,
@@ -35,7 +38,7 @@ class AssetWorkTransaction < AbstractResource
     broadcast_replace_later_to "employee_#{self.asset.id}_state_buttons", 
       partial: "pos/employees/employee_state_buttons", 
       target: "employee_state_buttons", 
-      locals: { resource: self.asset, user: Current.user }
+      locals: { resource: self.asset, user: Current.user, buttons: buttons }
   end
 
 end
