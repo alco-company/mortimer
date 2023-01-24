@@ -43,6 +43,13 @@ class AssetWorkdaySum < AbstractResource
     
   end
 
+  #
+  # move free_time_minutes from this year to last year
+  # arguments: aws - asset_workday_sums (array of two records  this year and last year)
+  def self.move_free_time aws 
+    aws[1].update(free_prev_minutes: aws[0].free_minutes) if aws[0].free_minutes.to_i > 0    
+  end
+
   # find all asset_work_transactions and
   # increment all counters
   def calculate_on_transactions
