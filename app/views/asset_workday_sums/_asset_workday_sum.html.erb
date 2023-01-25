@@ -1,52 +1,60 @@
-<div id="<%= dom_id asset_workday_sum %>">
-  <p>
-    <strong>Account:</strong>
-    <%= asset_workday_sum.account_id %>
-  </p>
-
-  <p>
-    <strong>Asset:</strong>
-    <%= asset_workday_sum.asset_id %>
-  </p>
-
-  <p>
-    <strong>Work date:</strong>
-    <%= asset_workday_sum.work_date %>
-  </p>
-
-  <p>
-    <strong>Work minutes:</strong>
-    <%= asset_workday_sum.work_minutes %>
-  </p>
-
-  <p>
-    <strong>Break minutes:</strong>
-    <%= asset_workday_sum.break_minutes %>
-  </p>
-
-  <p>
-    <strong>Ot1 minutes:</strong>
-    <%= asset_workday_sum.ot1_minutes %>
-  </p>
-
-  <p>
-    <strong>Ot2 minutes:</strong>
-    <%= asset_workday_sum.ot2_minutes %>
-  </p>
-
-  <p>
-    <strong>Sick minutes:</strong>
-    <%= asset_workday_sum.sick_minutes %>
-  </p>
-
-  <p>
-    <strong>Free minutes:</strong>
-    <%= asset_workday_sum.free_minutes %>
-  </p>
-
-  <p>
-    <strong>Deleted at:</strong>
-    <%= asset_workday_sum.deleted_at %>
-  </p>
-
-</div>
+<tr id="<%= dom_id resource %>"  data-controller="list-item">
+  <%= render_component "resource/list_checkbox", resource: resource %>
+<!--  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+    <%= link_to resource.asset.name, "/employees/#{resource.id}", data: { 'turbo-frame': '_top' } %>
+  </td> -->
+  <td class="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= display_time resource.work_date, user %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.work_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.break_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.ot1_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.ot2_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.sick_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.free_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.holiday_free_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.child_sick_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.nursing_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.senior_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.unpaid_free_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.lost_work_revenue_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.child_leave_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.leave_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.free_prev_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+    <%= resource.pgf56_minutes %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+    <%= render_component "edit", resource: resource, url: edit_resource_url(resource) %>
+  </td>
+</tr>  

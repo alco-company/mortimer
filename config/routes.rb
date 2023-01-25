@@ -140,6 +140,7 @@ Rails.application.routes.draw do
   # resources :events
   resources :employees, concerns: [:cloneable, :modalable, :exportable] do
     resources :asset_work_transactions, concerns: [:cloneable, :modalable, :exportable]
+    resources :asset_workday_sums, concerns: [:cloneable, :modalable, :exportable]
     resources :calendars
     resources :tasks, concerns: [:cloneable, :modalable]
     resources :pupils, concerns: [:cloneable, :modalable] do

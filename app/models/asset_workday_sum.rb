@@ -36,6 +36,13 @@ class AssetWorkdaySum < AbstractResource
   belongs_to :asset
   has_many :asset_work_transactions
 
+  #
+  # default_scope returns all posts that have not been marked for deletion yet
+  #  
+  def self.default_scope
+    AssetWorkdaySum.all.joins(:asset)
+  end
+
   def broadcast_create
 
   end
