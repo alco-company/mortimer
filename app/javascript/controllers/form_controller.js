@@ -26,8 +26,6 @@ export default class FormController extends Controller {
     copyField.select();
     copyField.setSelectionRange(0, 99999); /* For mobile devices */
     navigator.clipboard.writeText(`${this.clipboardPrefixValue}?api_key=${copyField.value}`);
-
-    console.log(`Copied the text: ${copyField.value}`)    
   }
 
   keydownHandler(e){

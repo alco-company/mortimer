@@ -81,6 +81,21 @@ module EmployeesHelper
     return resource.assetable.tasks
   end
 
+  # 
+  #  display employee access token link
+  #  for POS
+  #
+  def display_token_link resource
+    raw %(
+      <button id="bat_#{dom_id(resource)}" class="grow ml-1" type="button" data-action="list#copy_text" >
+        <input type="hidden" id="iat_#{dom_id(resource)}" value="#{ pos_employee_url(resource)}?api_key=#{resource.access_token}">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+        </svg>            
+      </button>
+    )
+  end
+
   
 
 end

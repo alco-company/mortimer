@@ -210,6 +210,20 @@ export default class ListController extends Controller {
     }));    
   }
 
+  // copy_text copies the text from the (hidden) input field to the clipboard
+  //
+  copy_text(e){
+    // let copyField = document.getElementById("asset_assetable_attributes_access_token");
+    let copyField = document.getElementById("iat_" + e.currentTarget.id.split("_").slice(1).join("_"))
+    
+    /* Select the text field */
+    // copyField.focus()
+    // copyField.select();
+    // copyField.setSelectionRange(0, 99999); /* For mobile devices */
+    navigator.clipboard.writeText(copyField.value);
+  }
+
+
   handleMessages(e){
     console.log(`an event ${e} with ${e.detail.message} was received in ${this.identifier}`)
 
