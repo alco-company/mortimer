@@ -35,5 +35,7 @@
 
 /node_modules
 
+/db/sql_dumps
+
 # ignore Mac file descriptors
 .DS_Store
