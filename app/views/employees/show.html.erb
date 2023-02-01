@@ -73,7 +73,7 @@
   </div>
   
   
-  <div id="awds_tab" class="hidden shadow overflow-hidden border-b border-gray-200 sm:rounded-lg" data-tabs-target="panel">
+  <div id="awds_tab" class="hidden shadow overflow-hidden overflow-x-auto border-b border-gray-200 sm:rounded-lg" data-tabs-target="panel">
     <%= turbo_stream_from "asset_workday_sums"  %>
     <%= turbo_frame_tag "asset_workday_sums", loading: "lazy", src: employee_asset_workday_sums_url(resource) do %>
       <span class="py-2 px2">

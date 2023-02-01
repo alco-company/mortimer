@@ -1,6 +1,6 @@
 <div 
   data-controller="search"
-  class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+  class="shadow overflow-hidden overflow-x-auto border-b border-gray-200 sm:rounded-lg">
   <%= turbo_frame_tag resources_target do %>
 
     <%= render_component "element/search_and_button" %>
@@ -14,7 +14,7 @@
       data-pagination-url-value="<%= resources_url %>"
       data-pagination-page-value="<%= 2 %>"
       data-action="scroll@window->pagination#scroll keydown->list#keydownHandler keyup->list#keyupHandler speicherMessage@window->list#handleMessages speicherMessage@window->flag#handleMessages"
-      class="min-w-full max-w-full lg:max-w-screen-2xl divide-y divide-gray-200"
+      class="min-w-full max-w-full lg:max-w-screen-2xl divide-y bg-gray-50 divide-gray-200"
       >
       <thead class="bg-gray-50">
         <tr>
@@ -34,10 +34,10 @@
       </tbody>
       <tfoot id="pagination_foot" class="bg-gray-50 pl-4 pr-4 z-10 <%= @pagy.nil? ? "h-10" : ""%>">
         <tr>
-          <td data-pagination-target="pagy" class="pl-4 pr-4" colspan=10><%== pagy_nav(@pagy) %></td>
+          <td data-pagination-target="pagy" class="pl-4 pr-4" colspan=99><%== pagy_nav(@pagy) %></td>
         </tr>
         <tr>
-          <td class="pl-4 pr-4 text-center" colspan=10><%== pagy_info(@pagy, i18n_key: "activerecord.models.#{resource_name}" ) %></td>
+          <td class="pl-4 pr-4 text-center" colspan=99><%== pagy_info(@pagy, i18n_key: "activerecord.models.#{resource_name}" ) %></td>
         </tr>
       </tfoot>
     </table>
