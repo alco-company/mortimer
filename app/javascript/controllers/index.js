@@ -49,7 +49,6 @@ application.register("switchboard", SwitchboardController)
 import UiModalController from "./ui_modal_controller"
 application.register("ui-modal", UiModalController)
 
-
 import { Alert } from "tailwindcss-stimulus-components"
 application.register('alert', Alert)
 

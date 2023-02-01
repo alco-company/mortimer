@@ -46,6 +46,7 @@ da:
   new: "Ny"
   edit: Ret
   loading: "Indlæser..."
+  not_active: Ikke aktiv
   delete: Slet
   cancel: Fortryd
   update: Opdatér
