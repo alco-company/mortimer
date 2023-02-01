@@ -17,6 +17,14 @@ class AssetWorkTransaction < AbstractResource
     AssetWorkTransaction.all.joins(:event,:asset)
   end
 
+  #
+  # implement on every model where search makes sense
+  # get's called from controller specific find_resources_queried
+  #
+  def self.search_by_model_fields(_lot, query)
+    default_scope.where "assets.name like '%#{query}%' "
+  end
+
   def punched_pupils=(ppls)
 
   end
@@ -33,7 +41,7 @@ class AssetWorkTransaction < AbstractResource
     broadcast_replace_later_to "employee_#{self.asset.id}_state", 
       partial: "pos/employees/employee_state", 
       target: "employee_state", 
-      locals: { resource: self.asset, user: Current.user }
+      locals: { resource: self.asset, reason: self.name, user: Current.user }
         
     broadcast_replace_later_to "employee_#{self.asset.id}_state_buttons", 
       partial: "pos/employees/employee_state_buttons", 
