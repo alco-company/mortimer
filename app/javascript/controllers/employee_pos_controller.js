@@ -39,6 +39,10 @@ export default class EmployeePosController extends Controller {
     // alert('Det er nødvendigt at kende din lokation - for at sikre dig mod at andre misbruger denne tjeneste! Tillad derfor venligst at programmet må slå op, hvor du befinder dig. På forhånd tak <3')
     this.geo_position = ''
     this.find_my_location()
+    // this.socket = new WebSocket('ws://localhost:3000/cable'); // 'wss://staging.greybox.speicher.ltd/cable'
+    // if (window.cable){
+    //   console.log(window.cable)
+    // }
   }
 
   disconnect() {
@@ -185,12 +189,13 @@ export default class EmployeePosController extends Controller {
     this.enableButtons([this.substituteButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget])    
 
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:20:32.079Z", "state"=>"IN", "location"=>"3", "substitute"=>"true"}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
-    let reason = document.getElementById('substitute_reason').value
+    let location = document.getElementById('substitute_reason').value
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "IN", 
       "punched_pupils": this.close_active_pupils({}),
-      "reason": reason,
+      "reason": "SUB",
+      "comment": location
       }
     }
 
@@ -344,7 +349,7 @@ export default class EmployeePosController extends Controller {
         .then( json =>  this.geo_position = `${json.lat},${json.lon},(approx) location retrieved - user probably declined GeoLocation services (${error} )!`)
       })
     } catch (err) {
-      console.log(`hvad sker der: ${err}`)
+      console.log(`find_my_location: ${err}`)
     }
   }
 
@@ -444,7 +449,8 @@ export default class EmployeePosController extends Controller {
       try {
         data.asset_work_transaction.location = this.geo_position
       } catch ( err ) {
-        data.pupil_transaction.location = this.geo_position
+        // data.pupil_transaction.location = this.geo_position
+        console.log(`no location: ${err}`)
       }
 
       let options = {
