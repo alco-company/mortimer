@@ -7,7 +7,7 @@
     <%= resource.schedule %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= display_time resource.next_run_at, user %>
+    <%= display_time resource.next_run_at, user if resource.active %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
     <%= delete_job resource, user %>
