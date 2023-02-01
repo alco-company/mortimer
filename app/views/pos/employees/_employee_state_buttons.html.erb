@@ -1,5 +1,5 @@
 
-<div id="employee_state_buttons" class="mt-12 columns-2 md:columns-3 justify-stretch">
+<div id="employee_state_buttons" class=" mb-2 mt-2 gap-2 columns-2  md:columns-3 justify-stretch mr-2">
 
   <% if buttons =~/xtra/ %>
     <button 
@@ -7,11 +7,11 @@
       data-action="employee-pos#punch_in_xtra" 
       type="button" 
       <%= 'disabled' if ['IN'].include? resource.state %>
-      class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
-      <span class="material-symbols-outlined">
-      login
-      </span>                  
-      <span class="pl-1">xtra tid</span>
+      class="ml-1 mr-1 w-full mb-2 px-4 py-3 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-500 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+      <div class="flex justify-center">      
+        <span class="material-symbols-outlined"> login </span>                  
+        <span class="pl-1">xtra tid</span>
+      </div>
     </button>
   <% end %>
 
@@ -21,11 +21,11 @@
       data-action="employee-pos#punch_in_sub" 
       type="button" 
       <%= 'disabled' if ['IN'].include? resource.state %>
-      class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
-      <span class="material-symbols-outlined">
-      login
-      </span>                  
-      <span class="pl-1">Vikar</span>
+      class="ml-1 mr-1 w-full mb-2 px-4 py-3 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-500 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+      <div class="flex justify-center">      
+        <span class="material-symbols-outlined"> login </span>                  
+        <span class="pl-1">Vikar</span>
+      </div>
     </button>
   <% end %>
 
@@ -35,11 +35,13 @@
       data-action="employee-pos#punch_in" 
       type="button" 
       <%= 'disabled' if ['IN'].include? resource.state %>
-      class="w-full mb-2 justify-center px-4 py-2 border  border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
-      <span class="material-symbols-outlined">login</span>                  
-      <span class="pl-1">Start</span>
-    </button>
-  <% end %>
+      class="ml-1 mr-1 w-full mb-2 px-4 py-3 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-500 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" >
+      <div class="flex justify-center">      
+        <span class="material-symbols-outlined">login</span>                  
+        <span class="pl-1">Start</span>
+      </div>
+      </button>
+    <% end %>
 
   <% if buttons =~/pause/ %>    
     <button 
@@ -47,11 +49,11 @@
       data-action="employee-pos#punch_pause" 
       type="button" 
       <%= 'disabled' if !['IN'].include? resource.state %> 
-      class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
-      <span class="material-symbols-outlined">
-      pause
-      </span>
-      <span class="pl-1">Pause</span>
+      class="ml-1 mr-1 w-full mb-2 px-4 py-3 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-500 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+      <div class="flex justify-center">      
+        <span class="material-symbols-outlined"> pause </span>
+        <span class="pl-1">Pause</span>
+      </div>
     </button>
   <% end %>
 
@@ -61,11 +63,11 @@
       data-action="employee-pos#punch_out" 
       type="button" 
       <%= 'disabled' if !['IN'].include? resource.state %> 
-      class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
-      <span class="material-symbols-outlined">
-      logout
-      </span>
-      <span class="pl-1">Stop</span>
+      class="ml-1 mr-1 w-full mb-2 px-4 py-3 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-500 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+      <div class="flex justify-center">      
+        <span class="material-symbols-outlined"> logout </span>
+        <span class="pl-2">Stop</span>
+      </div>
     </button>
   <% end %>
 
@@ -75,11 +77,11 @@
       data-action="employee-pos#punch_in_sick" 
       type="button" 
       <%= 'disabled' if ['BREAK','SICK'].include? resource.state %> 
-      class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
-      <span class="material-symbols-outlined">
-      sick
-      </span>
-      <span class="pl-1">Syg!</span>
+      class="ml-1 mr-1 w-full mb-2 px-4 py-3 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-500 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+      <div class="flex justify-center">      
+        <span class="material-symbols-outlined"> sick </span>
+        <span class="pl-1">Syg!</span>
+      </div>
     </button>
   <% end %>
 
@@ -89,11 +91,11 @@
       data-action="employee-pos#punch_in_free" 
       type="button" 
       <%= 'disabled' if ['BREAK','SICK', 'IN'].include? resource.state %> 
-      class="w-full mb-2 justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
-      <span class="material-symbols-outlined">
-      beach_access
-      </span>
-      <span class="pl-1">Fri</span>
+      class="ml-1 mr-1 w-full mb-2 px-4 py-3 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-500 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+      <div class="flex justify-center">      
+        <span class="material-symbols-outlined"> beach_access </span>
+        <span class="pl-1">Fri</span>
+      </div>
     </button>
   <% end %>
 
