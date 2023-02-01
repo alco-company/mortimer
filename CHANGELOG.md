@@ -11,77 +11,68 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## TODO
 
-- use [Squasher to compress old ActiveRecord migrations](https://github.com/jalkoby/squasher)
-- start [using BabySqueel](https://github.com/rzane/baby_squeel)
-- use [encrypted fields and queries](https://enquo.org/components/pg_enquo/)
-- make entire system 'loggable' using [Fluentd et al](https://docs.fluentd.org/how-to-guides/free-alternative-to-splunk-by-fluentd)
-- job offering portal, application, interview, assessment, background check 
-- signature like https://www.hellosign.com/products/api
-- a 'workshop' with free slots available for companies to come and get prototypes of projects - use railway.app as foundation
-- switch to good_job background job worker
-- consider using https://github.com/unabridged/motion and|or https://avohq.io
-- add manpower employees/interns/more
-- employees portal (to allowing employees a GDPR safe view on the information stored, links to refute, confirm, resign,more)
-- equipment/real estate/tools/cars/more (TCO, depreciation,identification,location,usage,more)
-- product (variant) design/calculation/planning - PIM work in a number of domains (graphics, patents/documents,more ) - collaboration
-- leads/supplier
-- purchase inquiries
-- call (to making notes/comments on phone calls, and uptake leads, and sales inquiries/orders)
-- lead/customer portal (to allow the lead/customer a GDPR safe view on their engagement with the company, recent offers, orders, invoices, more)
-- order confirmation
-- ..
-- picklist
-- b/l aka receipt
-- freight/carrier documents
-- invoice
-- all the documents should be pixel perfect 'on screen' as well as in print
-- radio_field
-- use Trilogy gem instead of mysql2
-- TODO: use has_secure_token to allow 'user-less' users access without logging in!
-- steps_field - like when you want the user to first finish typing in [fieldset] and then continue to the next [fieldset]
-- write some serious tests for people, partners, participants, events, 
-- add Participant addressability - by means of basically one table :0 (URLs are not just webpages, but really any adressable resource!!)
-- add second **main feature** - documents (in all their glory and multiversatility, like notes, messages, contracts, SOP's, NDA's, invoices, orders, quotes, etc)
-- make  H E R M E S  a PWA - use [Kevin Basset's Progressier](https://progressier.com/) &  https://dev.to/zippytyro/how-to-convert-any-website-webpage-into-an-installable-progressive-web-app-pwa-59ai
-- Connecting customer specific data through DT (Delegated Types)
-- use Chartkick.js for [Presentational Graphics](https://github.com/ankane/chartkick.js)
-- fixing [issues with current_user](https://blog.cloud66.com/making-hotwire-and-devise-play-nicely-with-viewcomponents/) when using Hotwire
-- using imagekit.io to building the image library - remember new UI from TailwindUI
-- ideas for wms - https://www.youtube.com/watch?v=Nphpy0PH2BE
-- ideas for handset/pos  - https://www.youtube.com/watch?v=6yu883oEq7A
-- [whenever gem](https://medium.com/swlh/automate-tasks-in-rails-using-the-whenever-gem-46f9708ab002)
-- [cron](https://dokku.com/docs/processes/scheduled-cron-tasks/)
-- always type '?' in any inputfield (even if it cannot be presented - like checkboxes and radiobuttons) to get to the on screen documentation and help
-- use github actions (or gitlab equivalent) to do automagic deploys on git push to staging/production branches
-- notification when adding new products, suppliers, etc via POS
-- use [to improve image handling](https://austingil.com/better-html-images)
-- use [maglev](https://www.maglev.dev/)
-- use [passwordless](https://blog.testdouble.com/posts/2022-10-25-building-passwordless-email-auth-in-rails/ )
-- use [table editoer](https://blog.appsignal.com/2022/10/26/build-a-table-editor-with-trix-and-turbo-frames-in-rails.html)
-- use [truemail](https://github.com/truemail-rb/truemail )
-- use [rrule](https://github.com/jakubroztocil/rrule)
-- user [Authentication Zero](https://codewithrails.com/rails-authentication)
-- make has_secure_tokens a modal view
-- checkbox on stock to scan 92___ own barcode w/fixed quantity
-- checkbox on stock to scan 93___ own barcode manual entry of quantity
-- checkbox on stock to manual entry of quantity on GTIN EAN14
-- checkbox on stock to manual entry of best-before on GTIN EAN14
-- stock_item_transaction_processing_job has to start every 2 minute to check if any items to process - ajob for whenever
-- show team colleagues/all employees status on tab in pos/employees/:id?api...
-- use [passkeys](https://www.passkeys.io/)
-- use <https://cuelang.org/> for validate, define, and use dynamic and text-based data
-- use github.com/ulid/spec for unique distributed ids
-- use Ubers H3 geo indexing <https://www.uber.com/en-CA/blog/h3/>
-- use <https://www.nordicsemi.com/Products/Matter> for HOME automation
-- perhaps user <https://codewithrails.com/rails-authentication> for authentication
-- how to nest comments <https://medium.com/@tirnavanalessandra/rails-7-turbo-hotwire-reddit-like-nested-comments-92d475e3bbd4>
-- use <https://youtu.be/OicvfL8kKds> for charting and event logging and realtime analytics
-- use <https://web-crunch.com/posts/custom-error-page-ruby-on-rails> for custom error pages
-- use <https://chriskottom.com/articles/testing-rails-background-workers/> for testing background workers
-- copy.ai for copywriting, buildai.space for building AI, kartiv.com for eediting images, otter.ai for transcribing audio, axiom.ai for automating tasks, and more
-- 
+Upgrade to Rails 7.1 asap - we need default_url_options for Hotwire and TurboStream
+
+setup necessary domains:
+
+* mortimer.green
+* mortimer.guru
+* mortimer.ltd
+* mortimer.plus
+* mortimer.pro
+* mortimer.run
+* mortimer.today
+* mortimer.watch
+
+green for testing/demo, guru for wiki/docs, ltd for production, plus for business+, pro for business, run for backgroundjobs, today for marketing, watch for monitoring
+
+Entities to be added:
+
+* employees portal (to allowing employees a GDPR safe view on the information stored, links to refute, confirm, resign,more)
+* equipment/real estate/tools/cars/more (TCO, depreciation,identification,location,usage,more)
+* product (variant) design/calculation/planning - PIM work in a number of domains (graphics, patents/documents,more ) - collaboration
+* leads/supplier
+* purchase inquiries
+* call (to making notes/comments on phone calls, and uptake leads, and sales inquiries/orders)
+* lead/customer portal (to allow the lead/customer a GDPR safe view on their engagement with the company, recent offers, orders, invoices, more)
+* order confirmation
+* picklist
+* b/l aka receipt
+* freight/carrier documents
+* invoice
+* all the documents should be pixel perfect 'on screen' as well as in print
 
 ## DONE
+
+### 2023-02-01 
+
+changed to publishing pdf's in the docs folder
+
+### 2022-12-26
+
+08:00 phone support
+14:30 looking for produts for PILEA
+18:00 done
+
+
+### 2022-12-25
+
+08:00 deliver switch to TTF
+09:05 work on asset_workday_sum
+18:15 done
+19:00 meeting in Fund Manegement Board for Enghavehuset
+
+### 2022-12-24
+
+06:45 work on asset_workday_sum
+14:30 move free_time to last_year
+18:10 setting buttons right on employee
+21:30 added organizations
+23:45 search 'n new button
+
+### 2022-12-23
+
+07:45 uris for all the things - phone, email, address, website, more
 
 ### 2022-12-17
 

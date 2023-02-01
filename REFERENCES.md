@@ -62,6 +62,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * [How to query PostgreSQL for location - long/lat](https://postindustria.com/postgresql-geo-queries-made-easy/)
 * [How to embed open street map in a webpage](https://medium.com/@nargessmi87/how-to-embede-open-street-map-in-a-webpage-like-google-maps-8968fdad7fe4)
 * [How to use Percent signs in Ruby - Faraaz](https://deepsource.io/blog/ruby-percent-notation/)
+* [How to warn user of lost connection](https://webinuse.com/how-to-warn-users-when-the-connection-is-lost/)
 
 [ Concepts of doing Advanced Datebase Computing using PostgreSQL ](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)
 https://blog.alco.dk/2021/03/18/tailwind-hotwire-more/
