@@ -43,6 +43,7 @@ export default class EmployeePosController extends Controller {
     // if (window.cable){
     //   console.log(window.cable)
     // }
+    this.addOfflineListener()
   }
 
   disconnect() {
@@ -50,6 +51,16 @@ export default class EmployeePosController extends Controller {
   }
 
   // -- initialize dependant functions
+
+  addOfflineListener() {
+    window.addEventListener('offline', (event) => {
+      document.getElementById('work_status').innerHTML='<span class="">Du har ingen netværksforbindelse - og kan derfor ikke registrere din arbejdstid. Vent venligst på at du får forbindelse igen, og prøv så igen.</span>'
+      document.getElementById('work_status').classList.add('px-2', 'py-2', 'bg-red-200', 'text-red-800')
+    })
+    window.addEventListener('online', (event) => {
+      window.location.reload()
+    })
+  }
 
   setReload() {
     if (this.scanset.length < 1) {
@@ -296,12 +307,14 @@ export default class EmployeePosController extends Controller {
     this.enableButtons([this.freeButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.freeButtonTarget] )    
 
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:29:53.731Z", "state"=>"SICK", "sick_hrs"=>"3.5", "punched_pupils"=>{}}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
+    let free_hrs = document.getElementById('free_hrs').value
     let reason = document.getElementById('free_reason').value
     document.getElementById('free_reason').value=''
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "punched_pupils": this.close_active_pupils({}),
       "state": "FREE", 
+      "free_hrs": free_hrs,
       "reason": reason,
       }
     }

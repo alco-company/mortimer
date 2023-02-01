@@ -168,9 +168,9 @@
             <h3 class="text-md font-medium leading-6 text-gray-900" id="modal-title">Jeg skulle have arbejdet</h3>
             <div class="mt-2">
               <div>
-                <label for="sick_hrs" class="pl-3 block text-sm font-medium text-gray-700">timer i dag</label>
+                <label for="sick_hrs" class="pl-3 block text-sm font-medium text-gray-700">timer i dag (tast evt timer,minutter)</label>
                 <div class="mt-1">
-                  <input type="number" name="sick_hrs" id="sick_hrs" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" >
+                  <input type="text" name="sick_hrs" id="sick_hrs" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" >
                 </div>
               </div>
             </div>
@@ -233,6 +233,17 @@
                     type: :single_list, url: "/pos/employees/free", 
                     values: [], 
                     items: combo_select_for( [[ 'OT', 'jeg afspadserer overarbejde'], [ '-', 'jeg holder ferie'], [ 'RR','jeg bruger af min ferie/fri konto'], [ 'SENIOR','jeg bruger af min senior konto'], [ 'UNPAID','jeg betaler selv'], [ 'MATERNITY','jeg holder barsel'], [ 'LEAVE','jeg er på orlov'] ] ) %>
+              </div>
+            </div>
+          </div>
+          <div class="w-full mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <h3 class="text-md font-medium leading-6 text-gray-900" id="modal-title">Antal timer</h3>
+            <div class="mt-2">
+              <div>
+                <label for="sick_hrs" class="pl-3 block text-sm font-medium text-gray-700">timer (tast evt timer,minutter)</label>
+                <div class="mt-1">
+                  <input type="text" name="free_hrs" id="free_hrs" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" >
+                </div>
               </div>
             </div>
           </div>

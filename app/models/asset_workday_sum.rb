@@ -68,7 +68,10 @@ class AssetWorkdaySum < AbstractResource
     # t.datetime "punched_at"
     # t.integer "extra_time"
     # t.datetime "created_at", null: false
-    from = punch_type = hrs_today = nil
+
+    # from holds the last punch time
+    # punch_type holds the last punch type
+    from = punch_type = nil
     reset_values    
 
     awts = asset_work_transactions.includes(:event).references(:event).order(punched_at: :asc)
@@ -79,25 +82,26 @@ class AssetWorkdaySum < AbstractResource
       # ot1_minutes
       # ot2_minutes
       when 'IN'
-        calc_last_stint awt, from, punch_type
+        calc_since_prev_punch awt, from, punch_type
         from = awt.punched_at
         punch_type = for_reason awt, "XTRA", :ot1_minutes, :work_minutes
 
       # break_minutes
       when 'BREAK'
-        calc_last_stint awt, from, punch_type
+        calc_since_prev_punch awt, from, punch_type
         from = awt.punched_at
         punch_type = :break_minutes
-
-      # sick_minutes
-      # child_sick_minutes
-      # nursing_minutes
-      # lost_work_revenue_minutes
-      # pgf56_minutes
+        
+        # sick_minutes
+        # child_sick_minutes
+        # nursing_minutes
+        # lost_work_revenue_minutes
+        # pgf56_minutes
       when 'SICK'
-        calc_last_stint awt, from, punch_type
+        calc_since_prev_punch awt, from, punch_type
         from = awt.punched_at
         unless awt.reason.nil?
+          punch_type = nil
           punch_type = case awt.reason.upcase
             when "ME"; :sick_minutes                  
             when "CHILD"; :child_sick_minutes            
@@ -105,6 +109,9 @@ class AssetWorkdaySum < AbstractResource
             when "LOST_WORK"; :lost_work_revenue_minutes     
             when "P56"; :pgf56_minutes                 
           end
+          self.update_column punch_type, awt.event.minutes_spent unless punch_type.nil?
+          # presumably this is the last punch today
+          from = punch_type = nil
         else
           puts ">>>>>>>>>>>> error - no reason for SICK punch <<<<<<<<<<<<<<<<"
         end
@@ -116,9 +123,10 @@ class AssetWorkdaySum < AbstractResource
       # unpaid_free_minutes
       # leave_minutes
       when 'FREE'
-        calc_last_stint awt, from, punch_type
+        calc_since_prev_punch awt, from, punch_type
         from = awt.punched_at
-        unless awt.reason.nil?            
+        unless awt.reason.nil?
+          punch_type = nil
           punch_type = case awt.reason.upcase
             when "-"; :free_minutes
             when "RR"; :holiday_free_minutes
@@ -127,12 +135,15 @@ class AssetWorkdaySum < AbstractResource
             when "MATERNITY"; :child_leave_minutes
             when "LEAVE"; :leave_minutes
           end
+          self.update_column punch_type, awt.event.minutes_spent unless punch_type.nil?
+          # presumably this is the last punch today
+          from = punch_type = nil
         else
           puts ">>>>>>>>>>>> error - no reason for FREE punch <<<<<<<<<<<<<<<<"
         end
 
       when 'OUT'
-        calc_last_stint awt, from, punch_type
+        calc_since_prev_punch awt, from, punch_type
         from = nil
         punch_type = nil
 
@@ -155,7 +166,7 @@ class AssetWorkdaySum < AbstractResource
   # they spent on this last stint doing whatever
   # by looking at the current awt.punched_at and the from datetime
   #
-  def calc_last_stint awt, from, punch_type
+  def calc_since_prev_punch awt, from, punch_type
     return if from.nil?
     minutes = calc_minutes from, awt.punched_at
     unless calc_work(minutes,punch_type)
@@ -178,7 +189,7 @@ class AssetWorkdaySum < AbstractResource
 
   def calc_work minutes, punch_type      
     return false unless %w( work_minutes ot1_minutes ot2_minutes ).include? punch_type.to_s
-    asset.assetable.norm_time = 30 if asset.assetable.norm_time.nil?
+    asset.assetable.norm_time = 37 if asset.assetable.norm_time.nil?
 
     if punch_type.to_s == 'work_minutes'
       minutes = work_minutes + minutes

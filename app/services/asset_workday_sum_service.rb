@@ -21,7 +21,7 @@ class AssetWorkdaySumService < AbstractResourceService
   def get_todays_worksum employee_asset, dato 
     awd = employee_asset.asset_workday_sums.where(work_date: dato).first
     if awd.nil?
-      result = create( new_from_employee_asset( employee_asset, dato), employee_asset.class ) 
+      result = create( new_from_employee_asset( employee_asset, dato) ) 
       raise "AssetWorkdaySum could not be created!" unless result.created?
       awd = result.record
     end
@@ -51,6 +51,10 @@ class AssetWorkdaySumService < AbstractResourceService
       leave_minutes: 0,
       pgf56_minutes: 0,
     )
+  end
+
+  def update_workday_sum( resource, event )
+    event.eventable.asset_workday_sum.calculate_on_transactions
   end
 
   # def create( resource, resource_class )

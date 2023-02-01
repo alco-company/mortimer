@@ -94,7 +94,7 @@ module Pos
         params["asset_work_transaction"]["punch_asset_id"] = resource.id # the user's own device
         params.require(:asset_work_transaction).permit(:punched_at, :state, :ip_addr, 
           :punch_asset_id, :p_time, :substitute, :location, :extra_time, :comment, 
-          :sick_hrs, :reason, :employee_asset_id, punched_pupils: {} )
+          :sick_hrs, :free_hrs, :reason, :employee_asset_id, punched_pupils: {} )
       end
 
       #
