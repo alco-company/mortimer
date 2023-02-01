@@ -1,15 +1,15 @@
-<div id="enter_leave_tab" class=" py-4 px-4  space-y-6" data-tabs-target="panel">
+<div id="enter_leave_tab" class=" py-4 px-2 space-y-6" data-tabs-target="panel">
 
   <!-- This example requires Tailwind CSS v2.0+ -->
   <!-- Be sure to use this with a layout container that is full-width on mobile -->
   <div 
     id="work_status" 
-    class=" overflow-hidden shadow sm:rounded-lg">
+    class=" overflow-hidden shadow sm:rounded-lg w-full">
     <div class="px-4 py-5 sm:p-6 flex h-30 w-full ">
       <!-- Content goes here -->
       <%= turbo_stream_from "employee_#{resource.id}_state"  %>
       <%= turbo_frame_tag "employee_state" do %>
-        <%= render partial: "pos/employees/employee_state", locals: { resource: resource } %>
+        <%= render partial: "pos/employees/employee_state", locals: { resource: resource, reason: "" } %>
       <% end %>
     </div>
     <%= render partial: "employee_state_buttons_turbo", locals: { resource: resource, buttons: @buttons } %>
