@@ -39,7 +39,8 @@ module Pos
     def punch 
       head 301 and return unless token_approved
       event = AssetWorkTransactionService.new.create_employee_punch_transaction( resource, resource_params )
-      if event && (['OUT','SICK','BREAK'].include? resource_params['state']) 
+      if event && (['OUT','SICK','BREAK','FREE'].include? resource_params['state']) 
+        AssetWorkdaySumService.new.update_workday_sum( resource, event )
         ev = PupilTransactionService.new.close_active_pupils( resource, event, resource_params ) if resource_params[:punched_pupils]
       end
       head 200
