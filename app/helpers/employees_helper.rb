@@ -19,7 +19,7 @@ module EmployeesHelper
   end
 
   def show_employee_attendance_state resource, reason=''
-    reason = t(reason) unless reason==''
+    reason = t(reason) if reason =~ /^\./
     case resource.state
     when "IN"; "Du er mødt (stemplet ind) #{reason} #{ asset_state_time_updated resource }"
     when "OUT"; "Du er mødt ud (stemplet ud) #{reason} #{ asset_state_time_updated resource }"

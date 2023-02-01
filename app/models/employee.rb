@@ -66,6 +66,7 @@ class Employee < AbstractResource
     #   locals: { resource: self, user: Current.user }
 
     buttons = Current.account.system_parameters_include("pos/employee/buttons")
+    reason = self.asset.asset_work_transactions.last.try(:event).try(:name) || ""
 
     broadcast_replace_later_to "pos_employees", 
       partial: "pos/employees/list_employee", 
@@ -80,7 +81,7 @@ class Employee < AbstractResource
     broadcast_replace_later_to "employee_#{self.asset.id}_state", 
       partial: "pos/employees/employee_state", 
       target: "employee_state", 
-      locals: { resource: self.asset, user: Current.user }
+      locals: { resource: self.asset, reason: reason, user: Current.user }
 
         
     broadcast_replace_later_to "employee_#{self.asset.id}_state_buttons", 
