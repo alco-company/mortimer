@@ -309,9 +309,18 @@ module ResourceControl
     return r if params[:edit_all]=='1'
 
     #
-    # we wouldn't like a error here due to a 'nilled' resources-set
+    # we wouldn't like an error here due to a 'nilled' resources-set
     unless r.nil?
-      @pagy, r = pagy(r, items: params.fetch(:items,10) )
+      begin
+        @pagy, r = pagy(r, items: params.fetch(:items,10) )
+      rescue Pagy::OverflowError => e
+        if e.message =~ /\:page/
+          params[:page] = 1
+          @pagy, r = pagy(r, items: params.fetch(:items,10) )
+        else
+          raise e
+        end
+      end
     end
     r
   end
