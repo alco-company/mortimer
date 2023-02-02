@@ -85,6 +85,30 @@ da:
       edit: "Ret konto"
       edit_description: "Du kan rette en konto her. Angiv et navn og vælg hvilke tjenester, kontoens brugere skal have adgang til."
 
+  AssetWorkdaySum:
+    index: Oversigt over Stempelkort
+    index_description: Oversigten viser dig alle anvendte stempelkort, som udgangspunkt sorteret efter medarbejder. <br/>OT=Overtid, F/F=Ferie/Fri, Barn=Barn syg, EB=Fri uden løn, TA=Tabt arbejdsfortjeneste, FSÅ=Fri sidste år
+
+  asset_workday_sums:
+    index_columns:
+      work_date: Dato 
+      work_minutes: Arbejde
+      break_minutes: Pauser
+      ot1_minutes: "OT1"
+      ot2_minutes: OT2
+      sick_minutes: Syg 
+      free_minutes: Fri
+      holiday_free_minutes: F/F 
+      child_sick_minutes: Barn
+      nursing_minutes: Omsorg 
+      unpaid_free_minutes: EB
+      lost_work_revenue_minutes: TA 
+      child_leave_minutes: Barsel
+      leave_minutes: Orlov 
+      senior_minutes: senior 
+      pg56_minutes: pgf56
+      free_prev_minutes: FSÅ
+
   AssetWorkTransaction:
     index: "Oversigt over komme/gå registreringer"
     index_description: "Denne oversigt viser dig alle de 'stemplinger' som medarbejdere kan registreret, enten på deres app, på deres eget device, eller på de stempelure, der sidder rundt om."

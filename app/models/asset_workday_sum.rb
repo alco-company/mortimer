@@ -43,6 +43,14 @@ class AssetWorkdaySum < AbstractResource
     AssetWorkdaySum.all.joins(:asset)
   end
 
+  #
+  # implement on every model where search makes sense
+  # get's called from controller specific find_resources_queried
+  #
+  def self.search_by_model_fields(_lot, query)
+    default_scope.where( "assets.name like '%#{query}%'").references(:asset)
+  end
+
   def broadcast_create
 
   end

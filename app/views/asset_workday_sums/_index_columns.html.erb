@@ -1,59 +1,61 @@
 <th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
   <%= table_header_checkbox  %>
 </th>
-<!-- <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+<% unless parent? %>
+<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
   <%= sort_link_to t('.name'), :name, data: { turbo_action: "advance"} %>
-</th> -->
+</th>
+<% end %>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('work_date'), :work_date, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.work_date'), :work_date, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('work_minutes'), :work_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.work_minutes'), :work_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('break_minutes'), :break_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.break_minutes'), :break_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('ot1_minutes'), :ot1_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.ot1_minutes'), :ot1_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('ot2_minutes'), :ot2_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.ot2_minutes'), :ot2_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('sick_minutes'), :sick_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.sick_minutes'), :sick_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('free_minutes'), :free_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.free_minutes'), :free_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('holiday_free_minutes'), :holiday_free_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.holiday_free_minutes'), :holiday_free_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('child_sick_minutes'), :child_sick_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.child_sick_minutes'), :child_sick_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('nursing_minutes'), :nursing_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.nursing_minutes'), :nursing_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('senior_minutes'), :senior_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.senior_minutes'), :senior_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('unpaid_free_minutes'), :unpaid_free_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.unpaid_free_minutes'), :unpaid_free_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('lost_work_revenue_minutes'), :lost_work_revenue_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.lost_work_revenue_minutes'), :lost_work_revenue_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('child_leave_minutes'), :child_leave_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.child_leave_minutes'), :child_leave_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('leave_minutes'), :leave_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.leave_minutes'), :leave_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('free_prev_minutes'), :free_prev_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.free_prev_minutes'), :free_prev_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('pgf56_minutes'), :pgf56_minutes, data: { turbo_action: "advance" } %>
+  <%= sort_link_to raw_t('.pgf56_minutes'), :pgf56_minutes, data: { turbo_action: "advance" } %>
 </th>
 <th scope="col" class="relative px-6 py-3">
   <span class="sr-only">Edit</span>
