@@ -23,7 +23,8 @@
       <div class="bg-gray-100">
         <div class="w-full divide-y-2 divide-gray-200 p-1">
           <%= helpers.render_component "element/accordion", 
-            current: @current || Current,
+            user: @current.user,
+            index: 0,
             link_classes: @link_classes,
             accordions: (@current.account.service_groups - %w(scope service supporting)),
             accordion_items: @current.account.services %>
@@ -32,7 +33,7 @@
 
     </div>
 
-    <%= helpers.render_component "navigation/super_user", current: @current if (@current && @current.user && @current.user.is_a_god?) %>
+    <%= helpers.render_component "navigation/super_user", user: @current.user if (@current && @current.user && @current.user.is_a_god?) %>
 
   <% end %>
 

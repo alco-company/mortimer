@@ -2,8 +2,9 @@
 
 class Element::AccordionComponent < ApplicationComponent
 
-  def initialize( current:, accordions:, accordion_items:, link_classes: )
-    @current = current
+  def initialize( user:, index:, accordions:, accordion_items:, link_classes: )
+    @user = user
+    @index_starts_at = index
     @accordions = accordions
     @accordion_items = accordion_items
     @link_classes = link_classes

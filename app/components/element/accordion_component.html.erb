@@ -1,5 +1,5 @@
 <dl class="space-y-2 divide-y divide-gray-200">
-  <% index=0; @accordions.each do |group| %>
+  <% index=@index_starts_at; @accordions.each do |group| %>
     <div class="pt-2">
       <dt class="text-sm text-gray-500">
         <!-- Expand/collapse question button -->
@@ -29,7 +29,7 @@
       <dd class="mt-2 hidden" id="accordion-<%= index %>" 
         data-navigation--sidebar-component-target="accordion">
         <p class="text-base text-gray-500">
-          <%= render( Navigation::ServiceComponent.with_collection @accordion_items.where(service_group: group), current: @current, css: @link_classes) if @current && @current.account %>
+          <%= render( Navigation::ServiceComponent.with_collection @accordion_items.where(service_group: group), user: @user, css: @link_classes)  %>
         </p>
       </dd>
     </div>

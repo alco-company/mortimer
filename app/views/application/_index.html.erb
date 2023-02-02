@@ -16,22 +16,20 @@
       data-action="scroll@window->pagination#scroll keydown->list#keydownHandler keyup->list#keyupHandler speicherMessage@window->list#handleMessages speicherMessage@window->flag#handleMessages"
       class="min-w-full max-w-full lg:max-w-screen-2xl divide-y bg-gray-50 divide-gray-200"
       >
+
       <thead class="bg-gray-50">
         <tr>
           <%= render partial: "index_columns", locals: {resource: resource} %>
         </tr>
       </thead>
-      <tbody 
-        id="<%= resource_class.to_s.underscore %>_list" 
-        class="bg-white divide-y divide-gray-200"
-        >
+
+      <tbody id="<%= resource_class.to_s.underscore %>_list" class="bg-white divide-y divide-gray-200" >
         <% resources.each do |rec| %>
           <%= render partial: resource_class.to_s.underscore, locals: { resource: rec, user: Current.user } %>
         <% end if resources %>
-        <% if @pagy.nil? or (((params[:page].to_i + 1) rescue 1) > @pagy.pages) %>
-          <tr class="hidden" data-pagination-target="noRecords"><td>no more records</td></tr>
-        <% end %>
+        <%= more_records? %>
       </tbody>
+
       <tfoot id="pagination_foot" class="bg-gray-50 pl-4 pr-4 z-10 <%= @pagy.nil? ? "h-10" : ""%>">
         <tr>
           <td data-pagination-target="pagy" class="pl-4 pr-4" colspan=99><%== pagy_nav(@pagy) %></td>
@@ -40,6 +38,7 @@
           <td class="pl-4 pr-4 text-center" colspan=99><%== pagy_info(@pagy, i18n_key: "activerecord.models.#{resource_name}" ) %></td>
         </tr>
       </tfoot>
+      
     </table>
   <% end %>
 </div>

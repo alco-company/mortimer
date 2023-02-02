@@ -8,6 +8,9 @@ module ServicesHelper
     scm: '<span class="p-1 material-symbols-outlined">conveyor_belt</span>',
     pim: '<span class="p-1 material-symbols-outlined">trolley</span>',
     crm: '<span class="p-1 material-symbols-outlined">tenancy</span>',
+    scope: '<span class="p-1 material-symbols-outlined">roofing</span>',
+    service: '<span class="p-1 material-symbols-outlined">dry_cleaning</span>',
+    supporting: '<span class="p-1 material-symbols-outlined">settings</span>',
   }
 
   def service_group_icon service

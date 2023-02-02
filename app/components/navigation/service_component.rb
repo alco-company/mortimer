@@ -3,9 +3,9 @@
 class Navigation::ServiceComponent < ViewComponent::Base
   with_collection_parameter :service
 
-  def initialize(service:, current:, css:)
+  def initialize(service:, user:, css:)
     @service = service
-    @current = current
+    @user = user
     @css = css
   end
 

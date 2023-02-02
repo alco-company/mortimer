@@ -146,10 +146,11 @@ da:
     stocked_products: Lagervarer
     stocks: "Lagre"
     suppliers: "Leverandører"
+    system_parameters: Konto indstillinger
     teams: 'Grupper'
+    uri_schemes: URI Skemaer
     users: 'Brugere'
     work_schedules: 'Normtider'
-    system_parameters: Konto indstillinger
 
   confirmations:
     new:
@@ -236,13 +237,16 @@ da:
 
   navigation:
     super_user_component:
-      accounts: Konti 
-      users: Brugere
-      dashboards: Instrumentpaneler
-      background_jobs: Baggrundsjobs
-      services: Tjenester 
-      system_parameters: Konto indstillinger
+      scope: Omfang
+      service: Tjenester 
+      supporting: Tilpasning
     menu_component:
+      pim: Produkter Information
+      wms: Lagerstyring
+      scm: Leverance kæde
+      hr: Personale
+      asset: Aktiver iøvrigt
+      time: Tidsregistrering
       dashboard: Instrumentpanel
       stocked_products: Lagervarer
       Products: Varer
@@ -252,6 +256,12 @@ da:
       Roles: Roller
       Teams: Brugergrupper
     service_component:
+      accounts: Konti 
+      background_jobs: Baggrundsjobs
+      dashboards: Instrumentpaneler
+      system_parameters: Konto indstillinger
+      services: Tjenester 
+      users: Brugere
       employees: Medarbejdere
       locations: Lokationer
       printservers: Printservere
@@ -580,6 +590,10 @@ da:
       
   topbar:
     search: "Søg overalt..."
+
+  UriScheme:
+    index: Oversigt over URI skemaer
+    index_description: "URI skemaer er de formater unikke ressource identifikatorer anvender -- &nbsp;<i>mailto:</i> &nbsp;og&nbsp; <i>https:</i>&nbsp; er eksempler på URI skemaer."
 
   User:
     index: "Oversigt over brugere"

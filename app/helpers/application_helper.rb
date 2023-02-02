@@ -95,6 +95,12 @@ module ApplicationHelper
     link_to lbl, request.params.merge(s: column, d: direction), **options
   end
 
+  def more_records?
+    return raw %(
+      <tr class="hidden" data-pagination-target="noRecords"><td>no more records</td></tr> 
+    ) if @pagy.nil? or (((params[:page].to_i + 1) rescue 1) > @pagy.pages)
+  end
+
   def render_component(component_path, collection: nil, **options, &block)
     component_klass = "#{component_path.classify}Component".constantize
   
