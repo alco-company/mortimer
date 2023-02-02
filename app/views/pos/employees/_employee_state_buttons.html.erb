@@ -99,4 +99,18 @@
     </button>
   <% end %>
 
+  <% if buttons =~/15min/ %>    
+    <button 
+      data-employee-pos-target="15minButton" 
+      data-action="employee-pos#punch_in_15min" 
+      type="button" 
+      <%#= 'disabled' if ['BREAK','SICK', 'IN'].include? resource.state %> 
+      class="ml-1 mr-1 w-full mb-2 px-4 py-3 border border-gray-300 shadow-sm text-sm font-medium rounded-md disabled:opacity-25 text-gray-500 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+      <div class="flex justify-center">      
+        <span class="material-symbols-outlined"> nightlight </span>
+        <span class="pl-1">15min extratid</span>
+      </div>
+    </button>
+  <% end %>
+
 </div>
