@@ -5,7 +5,6 @@
 
     <%= render_component "element/search_and_button" %>
 
-
     <table 
       id="list"
       data-controller="list flag pagination" 
@@ -18,6 +17,10 @@
       >
 
       <thead class="bg-gray-50">
+        <tr id="tr-action-buttons" class="collapse" colspan="99">
+          <th>&nbsp;</th>
+          <th class=""><%= render_component "element/action_button" %></th>
+        </tr>
         <tr>
           <%= render partial: "index_columns", locals: {resource: resource} %>
         </tr>
@@ -40,5 +43,7 @@
       </tfoot>
       
     </table>
+
+
   <% end %>
 </div>

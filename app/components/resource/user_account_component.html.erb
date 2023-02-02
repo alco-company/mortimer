@@ -1,8 +1,9 @@
 <div 
+  id="user_account"
   data-controller="resource--user-account-component"
   class="px-3 pt-2 relative inline-block text-left">
   <div>
     <%= render LoginComponent.new current: @current %>
   </div>
-  <%= render Resource::UserProfileComponent.new current: @current, container_classes: "z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none", labelledby: "options-menu-button" %>
+  <%= render Resource::UserProfileComponent.new current: @current, destination: "side_bar", container_classes: "z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none", labelledby: "options-menu-button" %>
 </div>
