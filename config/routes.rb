@@ -66,6 +66,7 @@ Rails.application.routes.draw do
   
   
   # resources ----
+  resources :uri_schemes, concerns: [:cloneable, :modalable, :selectable]
   resources :profiles
   resources :time_zones, concerns: [:selectable ]
   resources :system_parameters, concerns: [:cloneable, :modalable, :selectable]

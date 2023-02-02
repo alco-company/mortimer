@@ -1,0 +1,2 @@
+class UriSchemeService < AbstractResourceService
+end

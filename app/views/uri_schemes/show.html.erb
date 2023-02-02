@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @uri_scheme %>
+
+<div>
+  <%= link_to "Edit this uri scheme", edit_uri_scheme_path(@uri_scheme) %> |
+  <%= link_to "Back to uri schemes", uri_schemes_path %>
+
+  <%= button_to "Destroy this uri scheme", @uri_scheme, method: :delete %>
+</div>
