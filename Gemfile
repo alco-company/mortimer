@@ -66,6 +66,12 @@ group :development do
   gem "web-console"
   gem "hotwire-livereload"
   gem 'brakeman'
+
+  # preparing for extending the design system of Mortimer by using Lookbook
+  gem 'listen'
+  gem 'actioncable'
+  gem 'lookbook'
+  
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 

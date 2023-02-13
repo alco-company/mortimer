@@ -4,6 +4,10 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  if Rails.env.development?
+    mount Lookbook::Engine, at: "/lookbook"
+  end
+
   mount Sidekiq::Web => '/sidekiq', constraints: RoutingConstraint
 
   # concerns ----

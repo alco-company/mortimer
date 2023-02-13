@@ -64,6 +64,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * [How to use Percent signs in Ruby - Faraaz](https://deepsource.io/blog/ruby-percent-notation/)
 * [How to warn user of lost connection](https://webinuse.com/how-to-warn-users-when-the-connection-is-lost/)
 
+
 [ Concepts of doing Advanced Datebase Computing using PostgreSQL ](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)
 https://blog.alco.dk/2021/03/18/tailwind-hotwire-more/
 
