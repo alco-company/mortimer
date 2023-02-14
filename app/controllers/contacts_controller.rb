@@ -11,7 +11,7 @@ class ContactsController  < ParticipantsController
 
     p = resource_params
     emp = p[:participantable_attributes].delete :employer
-    emp = ParticipantService.new.get_by( :name, emp, {name: emp}, Contact) if emp
+    emp = ParticipantService.new.get_by( :name, emp, {name: emp}, Organization) if emp
     p=p.compact.first if p.class==Array
     rr= r.ancestors.include?( ActiveRecord::Base) ? r.new(p) : r.new
     rr.participantable.employer = emp
