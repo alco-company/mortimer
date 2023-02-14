@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     mount Lookbook::Engine, at: "/lookbook"
   end
 
+  # make sure the user can in fact look at the sidekiq dashboard
   mount Sidekiq::Web => '/sidekiq', constraints: RoutingConstraint
 
   # concerns ----

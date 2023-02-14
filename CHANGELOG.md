@@ -11,6 +11,26 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## TODO
 
+### Consider using Railway
+
+<https://railway.app/>
+
+### Download button - CSV
+
+<button
+  type="submit"
+  class="btn btn-primary btn-link"
+  name="format"
+  value="xls">Download Excel</button>
+
+(standard Rails controller catches the format parameter and renders the appropriate template)
+respond_to do |format|
+  format.html
+  format.xls { csv=@users.to_csv(col_sep: "\t"); send_data csv, filename: "users-#{Date.today}.xls"
+end
+
+
+
 Upgrade to Rails 7.1 asap - we need default_url_options for Hotwire and TurboStream
 
 setup necessary domains:

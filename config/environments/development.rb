@@ -73,6 +73,9 @@ Rails.application.configure do
   config.hotwire_livereload.listen_paths << Rails.root.join("app/assets/builds")
 
   config.action_controller.default_url_options = { host: 'localhost', port: 3000 }
+
+  # view_component previews showing source code
+  config.view_component.show_previews_source = true
 end
 
 
