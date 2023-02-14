@@ -51,6 +51,10 @@ export default class ListController extends Controller {
     this.listAwaitingFocus = false
   }
 
+  logThis(msg){
+    alert(msg)
+  }
+
 
   // document.getElementById('form_slideover').dataset.current_form_slideover=document.getElementById('form_slideover').querySelectorAll('form')[0].id
   // console.log('list form: ', document.getElementById('form_slideover').dataset.current_form_slideover)

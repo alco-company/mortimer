@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class ListItemController extends Controller {
+  static outlets = [ "list" ]
 
   connect() {
     super.connect()
@@ -12,12 +13,13 @@ export default class ListItemController extends Controller {
   }
 
   tap(e){
-    window.dispatchEvent( new CustomEvent("speicherMessage", {
-      detail: {
-        message: 'tap item',
-        event: e
-      }
-    }));    
+    this.listOutlet.logThis('bing')
+    // window.dispatchEvent( new CustomEvent("speicherMessage", {
+    //   detail: {
+    //     message: 'tap item',
+    //     event: e
+    //   }
+    // }));    
   }
   
   handleMessages(e) {
