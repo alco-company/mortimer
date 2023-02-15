@@ -1,9 +1,0 @@
-<p style="color: green"><%= notice %></p>
-
-<h1 class="prose lg:prose-xl">Dashboards</h1>
-
-<div id="dashboards">
-  <%= render Resource::IndexTableComponent.with_collection @dashboards %>
-</div>
-
-<%= link_to t(:new), new_dashboard_path %>

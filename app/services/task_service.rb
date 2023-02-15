@@ -1,2 +1,0 @@
-class TaskService < AbstractResourceService
-end

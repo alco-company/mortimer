@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  product_resource: MyString
-  gtin_prefix: 4321
-
-two:
-  product_resource: MyString
-  gtin_prefix: MyString

@@ -1,2 +1,0 @@
-class SystemParameterService < AbstractResourceService
-end

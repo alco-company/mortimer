@@ -1,5 +1,0 @@
-WAIT=10
-TIMEOUT=5
-ATTEMPTS=6
-
-/check.txt  check_ok

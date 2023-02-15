@@ -1,2 +1,0 @@
-class AccountService < AbstractResourceService
-end

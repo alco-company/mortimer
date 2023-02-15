@@ -1,2 +1,0 @@
-class TeamService < AbstractResourceService
-end

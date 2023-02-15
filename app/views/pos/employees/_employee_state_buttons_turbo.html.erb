@@ -1,4 +1,0 @@
-<%= turbo_stream_from "employee_#{resource.id}_state_buttons"  %>
-<%= turbo_frame_tag "employee_state_buttons" do %>
-  <%= render partial: "pos/employees/employee_state_buttons", locals: { resource: resource, buttons: buttons } %>
-<% end %>
