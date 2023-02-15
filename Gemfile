@@ -70,7 +70,7 @@ group :development do
   # preparing for extending the design system of Mortimer by using Lookbook
   gem 'listen'
   gem 'actioncable'
-  gem 'lookbook'
+  gem 'lookbook', "~> 1.0"
   
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -110,3 +110,5 @@ gem 'httparty', '~> 0.20.0'
 gem "activerecord-session_store", "~> 2.0"
 
 gem "rrule", "~> 0.5.0"
+
+gem "phlex-rails", "~> 0.6.1"

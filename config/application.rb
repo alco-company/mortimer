@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -8,10 +8,14 @@ Bundler.require(*Rails.groups)
 
 module Greybox
   class Application < Rails::Application
+
+    # Phlex needs this
+    config.autoload_paths << "#{root}/app"
+    
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.i18n.available_locales = [:da, :de, :en]
-    config.i18n.default_locale = :'da'
+    config.i18n.available_locales = %i[da de en]
+    config.i18n.default_locale = :da
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -22,18 +26,15 @@ module Greybox
 
     # background job executioner
     config.active_job.queue_adapter = :sidekiq
-    
+
     # Since we're using Redis for Sidekiq, we might as well use Redis to back
     # our cache store. This keeps our application stateless as well.
     config.cache_store = :redis_cache_store, { url: ENV['CACHE_URL'],
 
-      connect_timeout:    30,  # Defaults to 20 seconds
-      read_timeout:       0.2, # Defaults to 1 second
-      write_timeout:      0.2, # Defaults to 1 second
-      reconnect_attempts: 1,   # Defaults to 0
-      
-    }    
-
+                                               connect_timeout: 30, # Defaults to 20 seconds
+                                               read_timeout: 0.2, # Defaults to 1 second
+                                               write_timeout: 0.2, # Defaults to 1 second
+                                               reconnect_attempts: 1 } # Defaults to 0
 
     # config.time_zone = "Central Time (US & Canada)"
     #
@@ -41,11 +42,10 @@ module Greybox
     # we'll add a few in there, eventually
     # config.eager_load_paths << Rails.root.join("extras")
     #
-    config.eager_load_paths << Rails.root.join("lib")
+    config.eager_load_paths << Rails.root.join('lib')
 
     #
     # previewing the components
     config.view_component.preview_paths << "#{Rails.root}/test/components/previews"
-
   end
 end
