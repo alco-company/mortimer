@@ -4,4 +4,7 @@
 
 layout: home
 ---
-so this is home!
+# Mortimer
+
+You could label **Mortimer** an Enterprise Resource Planning system an be right - perhaps even more right than
+quite a few other offerings carrying that attachment!
