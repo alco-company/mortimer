@@ -101,9 +101,89 @@
   
 </div>
 
-<div id="subclasses">
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Background jobs inherited from ApplicationJob and the ‘structure’ getting erected is like this</p>
+
+<p>“job”: {</p>
+
+<pre class="code ruby"><code class="ruby">&quot;retry&quot;: true,
+&quot;queue&quot;: &quot;default&quot;,
+&quot;class&quot;: &quot;ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper&quot;,
+&quot;wrapped&quot;: &quot;Turbo::Streams::ActionBroadcastJob&quot;,
+&quot;args&quot;: [
+  {
+    &quot;job_class&quot;: &quot;Turbo::Streams::ActionBroadcastJob&quot;,
+    &quot;job_id&quot;: &quot;adb7339e-61c7-4bfb-a693-c28e21364d6a&quot;,
+    &quot;provider_job_id&quot;: null,
+    &quot;queue_name&quot;: &quot;default&quot;,
+    &quot;priority&quot;: null,
+    &quot;arguments&quot;: [ 
+      &quot;background_jobs&quot;,
+      {
+        &quot;action&quot;: {
+          &quot;_aj_serialized&quot;: &quot;ActiveJob::Serializers::SymbolSerializer&quot;,
+          &quot;value&quot;: &quot;prepend&quot;
+        },
+        &quot;target&quot;: &quot;background_job_list&quot;,
+        &quot;targets&quot;: null,
+        &quot;partial&quot;: {
+          &quot;_aj_globalid&quot;: &quot;gid://greybox/BackgroundJob/2&quot;
+        },
+        &quot;locals&quot;: {
+          &quot;background_job&quot;: {
+            &quot;_aj_globalid&quot;: &quot;gid://greybox/BackgroundJob/2&quot;
+          },
+          &quot;resource&quot;: {
+            &quot;_aj_globalid&quot;: &quot;gid://greybox/BackgroundJob/2&quot;
+          },
+          &quot;user&quot;: {
+            &quot;_aj_globalid&quot;: &quot;gid://greybox/User/1&quot;
+          },
+          &quot;_aj_symbol_keys&quot;: [
+            &quot;background_job&quot;,
+            &quot;resource&quot;
+            ,&quot;user&quot;
+            ]
+        },
+        &quot;_aj_ruby2_keywords&quot;: [
+          &quot;action&quot;,
+          &quot;target&quot;,
+          &quot;targets&quot;,
+          &quot;partial&quot;,
+          &quot;locals&quot;
+         ]
+      }
+    ],
+    &quot;executions&quot;: 0,
+    &quot;exception_executions&quot;: {},
+    &quot;locale&quot;: &quot;da&quot;,
+    &quot;timezone&quot;: &quot;Copenhagen&quot;,
+    &quot;enqueued_at&quot;: &quot;2022-11-30T19:41:40Z&quot;
+  }
+],
+&quot;jid&quot;: &quot;c452a423b63c0ba39dbee81e&quot;,
+&quot;created_at&quot;: 1669837300.247402,
+&quot;enqueued_at&quot;: 1669837398.703516,
+&quot;error_message&quot;: &quot;undefined method `generate_key&#39; for nil:NilClass\n\n          secret = request.key_generator.generate_key(request.encrypted_cookie_salt, key_len)\n                                        ^^^^^^^^^^^^^&quot;,
+&quot;error_class&quot;: &quot;ActionView::Template::Error&quot;,
+&quot;failed_at&quot;: 1669837300.286945,
+&quot;retry_count&quot;: 2, 
+&quot;retried_at&quot;: 1669837337.930997
+</code></pre>
+
+<p>}</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="StockItemTransactionProcessingJob.html" title="StockItemTransactionProcessingJob (class)">StockItemTransactionProcessingJob</a></span></p>
+  <p class="children"><span class='object_link'><a href="AssetWorkdaySumJob.html" title="AssetWorkdaySumJob (class)">AssetWorkdaySumJob</a></span>, <span class='object_link'><a href="AssetWorkdaySumLastYearJob.html" title="AssetWorkdaySumLastYearJob (class)">AssetWorkdaySumLastYearJob</a></span>, <span class='object_link'><a href="BackgroundProcessingJob.html" title="BackgroundProcessingJob (class)">BackgroundProcessingJob</a></span>, <span class='object_link'><a href="StockItemTransactionProcessingJob.html" title="StockItemTransactionProcessingJob (class)">StockItemTransactionProcessingJob</a></span>, <span class='object_link'><a href="VersionJob.html" title="VersionJob (class)">VersionJob</a></span></p>
 </div>
 
 
@@ -138,7 +218,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Most jobs are safe to ignore if the underlying records are no longer available discard_on ActiveJob::DeserializationError.</p>
+<p>allow jobs to say what they need to say.</p>
 </div></span>
   
 </li>
@@ -166,7 +246,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Most jobs are safe to ignore if the underlying records are no longer available discard_on ActiveJob::DeserializationError</p>
+<p>allow jobs to say what they need to say</p>
 
 
   </div>
@@ -180,14 +260,14 @@
       <pre class="lines">
 
 
-7
-8
-9
-10
-11</pre>
+88
+89
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/jobs/application_job.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'app/jobs/application_job.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_say'>say</span> <span class='id identifier rubyid_msg'>msg</span> 
   <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>----------------------------------------------------------------------</span><span class='tstring_end'>&quot;</span></span>
@@ -204,7 +284,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:35 2022 by
+  Generated on Wed Feb 15 12:14:53 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

@@ -293,7 +293,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#resource_form-instance_method" title="#resource_form (instance method)">#<strong>resource_form</strong>  &#x21d2; Object </a>
+      <a href="#resource_form-instance_method" title="#resource_form (instance method)">#<strong>resource_form</strong>(rs = nil)  &#x21d2; Object </a>
     
 
     
@@ -583,17 +583,17 @@
       <pre class="lines">
 
 
-230
-231
-232
-233
-234
-235
-236
-237</pre>
+239
+240
+241
+242
+243
+244
+245
+246</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 230</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 239</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_build_resource_url'>build_resource_url</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_print_options'>print_options</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:print</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -634,15 +634,6 @@
       <pre class="lines">
 
 
-160
-161
-162
-163
-164
-165
-166
-167
-168
 169
 170
 171
@@ -665,10 +656,19 @@
 188
 189
 190
-191</pre>
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 169</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_build_resources_url'>build_resources_url</span> <span class='id identifier rubyid_resources'>resources</span><span class='op'>=</span><span class='ivar'>@resources</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='comment'>#
@@ -733,13 +733,6 @@
       <pre class="lines">
 
 
-107
-108
-109
-110
-111
-112
-113
 114
 115
 116
@@ -747,10 +740,17 @@
 118
 119
 120
-121</pre>
+121
+122
+123
+124
+125
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_edit_resource_url'>edit_resource_url</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%s/edit</span><span class='tstring_end'>&quot;</span></span> <span class='op'>%</span> <span class='id identifier rubyid_url_for'>url_for</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
@@ -852,16 +852,16 @@
       <pre class="lines">
 
 
-97
-98
-99
-100
-101
-102
-103</pre>
+104
+105
+106
+107
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new_resource_url'>new_resource_url</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_opt'>opt</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -1024,7 +1024,7 @@
       <div class="method_details ">
   <h3 class="signature " id="resource_form-instance_method">
   
-    #<strong>resource_form</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>resource_form</strong>(rs = nil)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1047,16 +1047,20 @@
       <pre class="lines">
 
 
-137
-138
-139</pre>
+144
+145
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 137</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 144</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_resource_form'>resource_form</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%s_form</span><span class='tstring_end'>&quot;</span></span> <span class='op'>%</span> <span class='lparen'>(</span><span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span> <span class='kw'>rescue</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>form</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_resource_form'>resource_form</span> <span class='id identifier rubyid_rs'>rs</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='comment'># rs ||= resource
+</span>  <span class='kw'>return</span> <span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>form_%s</span><span class='tstring_end'>&quot;</span></span> <span class='op'>%</span> <span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Current.html" title="Current (class)">Current</a></span></span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='kw'>rescue</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='comment'># if rs.nil?
+</span>  <span class='comment'># &quot;%s_%s_form&quot; % [rs.class.to_s.underscore, (rs.id rescue &#39;new&#39;)]
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1118,13 +1122,13 @@
       <pre class="lines">
 
 
-90
-91
-92
-93</pre>
+97
+98
+99
+100</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_options'>resource_options</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_merge!'>merge!</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_except'>except</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>controller</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>action</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>utf8</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_method</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>authenticity_token</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span>
@@ -1227,15 +1231,29 @@
 85
 86
 87
-88</pre>
+88
+89
+90
+91
+92
+93
+94
+95</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_url'>resource_url</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_url_for'>url_for</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_options'>options</span><span class='op'>==</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_url_for'>url_for</span><span class='lparen'>(</span><span class='id identifier rubyid_resource'>resource</span><span class='rparen'>)</span>
-  <span class='comment'># case resource_class.to_s
+  <span class='id identifier rubyid_parr'>parr</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='kw'>case</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:action</span><span class='rbracket'>]</span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>new</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>edit</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>destroy</span><span class='tstring_end'>&#39;</span></span><span class='semicolon'>;</span> <span class='id identifier rubyid_parr'>parr</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='op'>-</span><span class='int'>2</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='kw'>else</span> <span class='id identifier rubyid_parr'>parr</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='id identifier rubyid_url_for'>url_for</span><span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='rparen'>)</span>
+
+  <span class='comment'># return url_for(options) unless options=={}
+</span>  <span class='comment'># return url_for(resource)
+</span>  <span class='comment'># case resource_class.to_s
 </span>  <span class='comment'># when &#39;Asset&#39;, &#39;Product&#39;; url_for resource.assetable
 </span>  <span class='comment'># when &#39;Participant&#39;; url_for resource.participantable
 </span>  <span class='comment'># else
@@ -1289,12 +1307,12 @@
       <pre class="lines">
 
 
-128
-129
-130</pre>
+135
+136
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 135</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resources'>resources</span>
   <span class='ivar'>@resources</span>
@@ -1371,12 +1389,12 @@
       <pre class="lines">
 
 
-145
-146
-147</pre>
+154
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resources_target'>resources_target</span>
   <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_pluralize'>pluralize</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span> 
@@ -1401,16 +1419,16 @@
       <pre class="lines">
 
 
-150
-151
-152
-153
-154
-155
-156</pre>
+159
+160
+161
+162
+163
+164
+165</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 150</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resources_url'>resources_url</span> <span class='id identifier rubyid_resources'>resources</span><span class='op'>=</span><span class='ivar'>@resources</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_resources'>resources</span> <span class='op'>==</span> <span class='ivar'>@resources</span> 
@@ -1439,15 +1457,6 @@
       <pre class="lines">
 
 
-196
-197
-198
-199
-200
-201
-202
-203
-204
 205
 206
 207
@@ -1457,10 +1466,19 @@
 211
 212
 213
-214</pre>
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 196</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 205</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show_resource_active'>show_resource_active</span> <span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_linkable'>linkable</span><span class='op'>=</span><span class='kw'>true</span>
   <span class='kw'>unless</span> <span class='id identifier rubyid_linkable'>linkable</span>
@@ -1512,17 +1530,17 @@
       <pre class="lines">
 
 
-218
-219
-220
-221
-222
-223
-224
-225</pre>
+227
+228
+229
+230
+231
+232
+233
+234</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 218</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/resources_helper.rb', line 227</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show_resource_delete_icon'>show_resource_delete_icon</span> <span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_lbl'>lbl</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span>
   <span class='id identifier rubyid_link_to'>link_to</span> <span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='label'>class:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>delete_link</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span> <span class='label'>delete_title:</span> <span class='id identifier rubyid_t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_title</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>delete_prompt:</span> <span class='id identifier rubyid_t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_prompt</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>item:</span> <span class='id identifier rubyid_t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_modal.</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>delete_confirm:</span> <span class='id identifier rubyid_t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_confirm</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>balloon:</span> <span class='id identifier rubyid_t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>balloons.delete</span><span class='tstring_end'>&quot;</span></span> <span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>balloon_pos:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>left</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>url:</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span> <span class='id identifier rubyid_lbl'>lbl</span> <span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>id:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>remove:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#tr-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_content'>-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_item'>item</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span> <span class='kw'>do</span>
@@ -1542,7 +1560,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:33 2022 by
+  Generated on Wed Feb 15 12:14:52 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

@@ -64,6 +64,9 @@ Entities to be added:
 
 ## DONE
 
+### 2023-02-15 
+
+publishing PDFs doesn't work either - 
 ### 2023-02-01 
 
 changed to publishing pdf's in the docs folder

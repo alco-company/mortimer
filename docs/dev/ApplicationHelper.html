@@ -123,6 +123,52 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#display_geo_tab-instance_method" title="#display_geo_tab (instance method)">#<strong>display_geo_tab</strong>(location)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>location is “lat,long,text”.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#display_punch_clock-instance_method" title="#display_punch_clock (instance method)">#<strong>display_punch_clock</strong>(resource)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#display_time-instance_method" title="#display_time (instance method)">#<strong>display_time</strong>(dt, user)  &#x21d2; Object </a>
     
 
@@ -255,6 +301,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#more_records%3F-instance_method" title="#more_records? (instance method)">#<strong>more_records?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#raw_t-instance_method" title="#raw_t (instance method)">#<strong>raw_t</strong>(msg)  &#x21d2; Object </a>
     
 
@@ -301,7 +369,51 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#render_column-instance_method" title="#render_column (instance method)">#<strong>render_column</strong>(css: &quot;&quot;, content:)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#render_component-instance_method" title="#render_component (instance method)">#<strong>render_component</strong>(component_path, collection: nil, **options, &amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_row-instance_method" title="#render_row (instance method)">#<strong>render_row</strong>(attribs: {}, &amp;block)  &#x21d2; Object </a>
     
 
     
@@ -476,21 +588,124 @@
       <pre class="lines">
 
 
-28
-29
-30
-31
-32
-33</pre>
+33
+34
+35
+36
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 33</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_display_date'>display_date</span> <span class='id identifier rubyid_dt'>dt</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span> 
-  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_dt'>dt</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>    
-  <span class='id identifier rubyid_l'>l</span> <span class='id identifier rubyid_dt'>dt</span><span class='period'>.</span><span class='id identifier rubyid_in_time_zone'>in_time_zone</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_time_zone'>time_zone</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='symbol'>:date</span>
-<span class='kw'>rescue</span> 
+<span class='kw'>def</span> <span class='id identifier rubyid_display_date'>display_date</span><span class='lparen'>(</span><span class='id identifier rubyid_dt'>dt</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_dt'>dt</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
+
+  <span class='const'>I18n</span><span class='period'>.</span><span class='id identifier rubyid_localize'>localize</span> <span class='id identifier rubyid_dt'>dt</span><span class='period'>.</span><span class='id identifier rubyid_in_time_zone'>in_time_zone</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_time_zone'>time_zone</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='symbol'>:date</span>
+<span class='kw'>rescue</span> <span class='const'>StandardError</span>
   <span class='id identifier rubyid_raw'>raw</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;span class=&#39;hidden&#39;&gt;dt is empty or not a date nor a (date)time&lt;/span&gt;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display_geo_tab-instance_method">
+  
+    #<strong>display_geo_tab</strong>(location)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>location is “lat,long,text”</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_display_geo_tab'>display_geo_tab</span><span class='lparen'>(</span><span class='id identifier rubyid_location'>location</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_geo'>geo</span> <span class='op'>=</span> <span class='kw'>begin</span>
+    <span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>,</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='int'>1</span><span class='rbracket'>]</span>
+  <span class='kw'>rescue</span> <span class='const'>StandardError</span>
+    <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_geo'>geo</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>or</span> <span class='lparen'>(</span><span class='id identifier rubyid_geo'>geo</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='int'>0</span> <span class='kw'>and</span> <span class='id identifier rubyid_geo'>geo</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='int'>0</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_link_to'>link_to</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://www.openstreetmap.org/search?query=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_geo'>geo</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>%2C</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_geo'>geo</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>#map=14</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>target:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>_blank</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_raw'>raw</span> <span class='tstring'><span class='tstring_beg'>%(</span><span class='tstring_content'>
+      </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_geo'>geo</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>, </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>
+      &lt;span class=&quot;material-symbols-outlined&quot;&gt;
+      open_in_new
+    &lt;/span&gt;</span><span class='tstring_end'>)</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="display_punch_clock-instance_method">
+  
+    #<strong>display_punch_clock</strong>(resource)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 59</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_display_punch_clock'>display_punch_clock</span><span class='lparen'>(</span><span class='id identifier rubyid_resource'>resource</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_t'>t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>app_punch_clock_used</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_punch_asset'>punch_asset</span><span class='period'>.</span><span class='id identifier rubyid_assetable_type'>assetable_type</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Employee</span><span class='tstring_end'>&#39;</span></span>
+
+  <span class='id identifier rubyid_link_to'>link_to</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_punch_asset'>punch_asset</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_punch_clock_url'>punch_clock_url</span><span class='lparen'>(</span><span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_punch_asset'>punch_asset</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -518,17 +733,27 @@
 23
 24
 25
-26</pre>
+26
+27
+28
+29
+30
+31</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 20</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_display_time'>display_time</span> <span class='id identifier rubyid_dt'>dt</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span> 
-  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_dt'>dt</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>    
-  <span class='id identifier rubyid_l'>l</span> <span class='id identifier rubyid_dt'>dt</span><span class='period'>.</span><span class='id identifier rubyid_in_time_zone'>in_time_zone</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_time_zone'>time_zone</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='symbol'>:long</span>
-<span class='kw'>rescue</span> 
+<span class='kw'>def</span> <span class='id identifier rubyid_display_time'>display_time</span><span class='lparen'>(</span><span class='id identifier rubyid_dt'>dt</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_dt'>dt</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
+
+  <span class='const'>I18n</span><span class='period'>.</span><span class='id identifier rubyid_localize'>localize</span> <span class='id identifier rubyid_dt'>dt</span><span class='period'>.</span><span class='id identifier rubyid_in_time_zone'>in_time_zone</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_time_zone'>time_zone</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='symbol'>:long</span>
+<span class='kw'>rescue</span> <span class='const'>StandardError</span>
   <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user'>user</span><span class='embexpr_end'>}</span><span class='tstring_content'>, dt </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_dt'>dt</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_raw'>raw</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;span class=&#39;hidden&#39;&gt;dt is empty or not a date nor a (date)time&lt;/span&gt;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span>
+    <span class='id identifier rubyid_raw'>raw</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;span class=&#39;hidden&#39;&gt;dt is empty or not a date nor a (date)time&lt;/span&gt;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raw'>raw</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_dt'>dt</span><span class='embexpr_end'>}</span><span class='tstring_content'>&lt;span class=&#39;hidden&#39;&gt;user empty or not a User&lt;/span&gt;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -550,15 +775,25 @@
       <pre class="lines">
 
 
-121
-122
-123</pre>
+173
+174
+175
+176
+177
+178
+179
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 173</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_enumerate_datetime'>enumerate_datetime</span><span class='lparen'>(</span><span class='id identifier rubyid_start'>start</span><span class='comma'>,</span> <span class='id identifier rubyid_stop'>stop</span><span class='comma'>,</span> <span class='id identifier rubyid_gap'>gap</span><span class='rparen'>)</span>
-  <span class='const'>Enumerator</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_y'>y</span><span class='op'>|</span> <span class='id identifier rubyid_loop'>loop</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_y'>y</span><span class='period'>.</span><span class='id identifier rubyid_yield'>yield</span> <span class='id identifier rubyid_start'>start</span><span class='semicolon'>;</span> <span class='id identifier rubyid_start'>start</span> <span class='op'>+=</span> <span class='id identifier rubyid_gap'>gap</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_take_while'>take_while</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span> <span class='id identifier rubyid_d'>d</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_stop'>stop</span> <span class='rbrace'>}</span>
+  <span class='const'>Enumerator</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_y'>y</span><span class='op'>|</span>
+    <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
+      <span class='id identifier rubyid_y'>y</span><span class='period'>.</span><span class='id identifier rubyid_yield'>yield</span> <span class='id identifier rubyid_start'>start</span>
+      <span class='id identifier rubyid_start'>start</span> <span class='op'>+=</span> <span class='id identifier rubyid_gap'>gap</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span><span class='period'>.</span><span class='id identifier rubyid_take_while'>take_while</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span> <span class='id identifier rubyid_d'>d</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_stop'>stop</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -580,12 +815,12 @@
       <pre class="lines">
 
 
-117
-118
-119</pre>
+169
+170
+171</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 169</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_enumerate_days'>enumerate_days</span><span class='lparen'>(</span><span class='id identifier rubyid_start'>start</span><span class='comma'>,</span> <span class='id identifier rubyid_stop'>stop</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_enumerate_datetime'>enumerate_datetime</span><span class='lparen'>(</span><span class='id identifier rubyid_start'>start</span><span class='comma'>,</span> <span class='id identifier rubyid_stop'>stop</span><span class='comma'>,</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_day'>day</span><span class='rparen'>)</span>
@@ -610,12 +845,12 @@
       <pre class="lines">
 
 
-113
-114
-115</pre>
+165
+166
+167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 165</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_enumerate_hours'>enumerate_hours</span><span class='lparen'>(</span><span class='id identifier rubyid_start'>start</span><span class='comma'>,</span> <span class='id identifier rubyid_stop'>stop</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_enumerate_datetime'>enumerate_datetime</span><span class='lparen'>(</span><span class='id identifier rubyid_start'>start</span><span class='comma'>,</span> <span class='id identifier rubyid_stop'>stop</span><span class='comma'>,</span> <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_hour'>hour</span><span class='rparen'>)</span>
@@ -640,15 +875,15 @@
       <pre class="lines">
 
 
-90
-91
-92</pre>
+144
+145
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 144</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_form_header_description'>form_header_description</span>
-  <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:action</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new</span><span class='tstring_end'>&quot;</span></span> <span class='op'>?</span> <span class='id identifier rubyid_raw_t'>raw_t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.new_description</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_raw_t'>raw_t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.edit_description</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:action</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>new</span><span class='tstring_end'>&#39;</span></span> <span class='op'>?</span> <span class='id identifier rubyid_raw_t'>raw_t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.new_description</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_raw_t'>raw_t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.edit_description</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -670,15 +905,83 @@
       <pre class="lines">
 
 
-86
-87
-88</pre>
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 86</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 140</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_form_header_title'>form_header_title</span> 
-  <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:action</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new</span><span class='tstring_end'>&quot;</span></span> <span class='op'>?</span> <span class='id identifier rubyid_raw_t'>raw_t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.new</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_raw_t'>raw_t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.edit</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_form_header_title'>form_header_title</span>
+  <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:action</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>new</span><span class='tstring_end'>&#39;</span></span> <span class='op'>?</span> <span class='id identifier rubyid_raw_t'>raw_t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.new</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_raw_t'>raw_t</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.edit</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="more_records?-instance_method">
+  
+    #<strong>more_records?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_more_records?'>more_records?</span>
+  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='ivar'>@pagy</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>or</span> <span class='lparen'>(</span><span class='kw'>begin</span>
+    <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:page</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='kw'>rescue</span> <span class='const'>StandardError</span>
+    <span class='int'>1</span>
+  <span class='kw'>end</span> <span class='op'>&gt;</span> <span class='ivar'>@pagy</span><span class='period'>.</span><span class='id identifier rubyid_pages'>pages</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_raw'>raw</span> <span class='tstring'><span class='tstring_beg'>%(</span><span class='tstring_content'>
+      &lt;tr class=&quot;hidden&quot; data-pagination-target=&quot;noRecords&quot;&gt;&lt;td&gt;no more records&lt;/td&gt;&lt;/tr&gt;
+    </span><span class='tstring_end'>)</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -718,7 +1021,7 @@
     <td>
       <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 10</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_raw_t'>raw_t</span> <span class='id identifier rubyid_msg'>msg</span> 
+<span class='kw'>def</span> <span class='id identifier rubyid_raw_t'>raw_t</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raw'>raw</span> <span class='id identifier rubyid_t'>t</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -750,10 +1053,40 @@
     <td>
       <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 14</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_record_state'>record_state</span> <span class='id identifier rubyid_rec'>rec</span> 
+<span class='kw'>def</span> <span class='id identifier rubyid_record_state'>record_state</span><span class='lparen'>(</span><span class='id identifier rubyid_rec'>rec</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raw_t'>raw_t</span><span class='lparen'>(</span><span class='id identifier rubyid_rec'>rec</span><span class='period'>.</span><span class='id identifier rubyid_state'>state</span><span class='rparen'>)</span>
-<span class='kw'>rescue</span>
+<span class='kw'>rescue</span> <span class='const'>StandardError</span>
   <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>N/A</span><span class='tstring_end'>&#39;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_column-instance_method">
+  
+    #<strong>render_column</strong>(css: &quot;&quot;, content:)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 136</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_render_column'>render_column</span><span class='lparen'>(</span><span class='label'>css:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>content:</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_render'>render</span> <span class='const'>Views</span><span class='op'>::</span><span class='const'>Index</span><span class='op'>::</span><span class='const'>Column</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>css:</span><span class='comma'>,</span> <span class='label'>content:</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -775,18 +1108,18 @@
       <pre class="lines">
 
 
-76
-77
-78
-79
-80
-81
-82
-83
-84</pre>
+122
+123
+124
+125
+126
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 122</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_render_component'>render_component</span><span class='lparen'>(</span><span class='id identifier rubyid_component_path'>component_path</span><span class='comma'>,</span> <span class='label'>collection:</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_options'>options</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_component_klass'>component_klass</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_component_path'>component_path</span><span class='period'>.</span><span class='id identifier rubyid_classify'>classify</span><span class='embexpr_end'>}</span><span class='tstring_content'>Component</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_constantize'>constantize</span>
@@ -796,6 +1129,36 @@
   <span class='kw'>else</span>
     <span class='id identifier rubyid_render'>render</span> <span class='id identifier rubyid_component_klass'>component_klass</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
   <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_row-instance_method">
+  
+    #<strong>render_row</strong>(attribs: {}, &amp;block)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+132
+133
+134</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 132</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_render_row'>render_row</span><span class='lparen'>(</span><span class='label'>attribs:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_render'>render</span> <span class='const'>Views</span><span class='op'>::</span><span class='const'>Index</span><span class='op'>::</span><span class='const'>Row</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='label'>attribs:</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -817,17 +1180,19 @@
       <pre class="lines">
 
 
+2
 3
 4
 5
 6</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 3</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 2</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_say'>say</span> <span class='id identifier rubyid_msg'>msg</span> 
+<span class='kw'>def</span> <span class='id identifier rubyid_say'>say</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_env'>env</span><span class='period'>.</span><span class='id identifier rubyid_development?'>development?</span>
-  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='id identifier rubyid_msg'>msg</span> 
+
+  <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='id identifier rubyid_msg'>msg</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -849,45 +1214,41 @@
       <pre class="lines">
 
 
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111</pre>
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 148</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_show_account_logo'>show_account_logo</span> <span class='id identifier rubyid_current_user'>current_user</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_show_account_logo'>show_account_logo</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_original'>original</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>%(</span><span class='tstring_content'>
     &lt;img class=&quot;h-8 w-auto&quot; src=&quot;https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg&quot; alt=&quot;Workflow&quot;&gt;
   </span><span class='tstring_end'>)</span></span>
 
   <span class='kw'>unless</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
     <span class='comment'># raw image_tag &quot;logo-rgb.png&quot;, class: &quot;block h-8 w-auto&quot;
-</span>  <span class='kw'>else</span>
-  <span class='kw'>end</span>
-    <span class='id identifier rubyid_raw'>raw</span> <span class='tstring'><span class='tstring_beg'>%(</span><span class='tstring_content'>
+</span>  <span class='kw'>end</span>
+  <span class='id identifier rubyid_raw'>raw</span> <span class='tstring'><span class='tstring_beg'>%(</span><span class='tstring_content'>
       &lt;span class=&quot;sr-only&quot;&gt;Open sidebar&lt;/span&gt;
         &lt;!-- Heroicon name: outline/menu-alt-2 --&gt;
         &lt;svg class=&quot;h-6 w-6&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; fill=&quot;none&quot; viewBox=&quot;0 0 24 24&quot; stroke=&quot;currentColor&quot; aria-hidden=&quot;true&quot;&gt;
           &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M4 6h16M4 12h16M4 18h7&quot; /&gt;
         &lt;/svg&gt;
     </span><span class='tstring_end'>)</span></span>
-
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -909,24 +1270,24 @@
       <pre class="lines">
 
 
-67
-68
-69
-70
-71
-72
-73
-74</pre>
+101
+102
+103
+104
+105
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 101</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_sort_link_to'>sort_link_to</span> <span class='id identifier rubyid_lbl'>lbl</span><span class='comma'>,</span> <span class='id identifier rubyid_column'>column</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_options'>options</span> 
-  <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='id identifier rubyid_column'>column</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
-    <span class='id identifier rubyid_direction'>direction</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:d</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>asc</span><span class='tstring_end'>&quot;</span></span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>desc</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>asc</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_direction'>direction</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>asc</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_sort_link_to'>sort_link_to</span> <span class='id identifier rubyid_lbl'>lbl</span><span class='comma'>,</span> <span class='id identifier rubyid_column'>column</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_options'>options</span>
+  <span class='id identifier rubyid_direction'>direction</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='id identifier rubyid_column'>column</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+                <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:d</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>asc</span><span class='tstring_end'>&#39;</span></span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>desc</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>asc</span><span class='tstring_end'>&#39;</span></span>
+              <span class='kw'>else</span>
+                <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>asc</span><span class='tstring_end'>&#39;</span></span>
+              <span class='kw'>end</span>
   <span class='id identifier rubyid_link_to'>link_to</span> <span class='id identifier rubyid_lbl'>lbl</span><span class='comma'>,</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='label'>s:</span> <span class='id identifier rubyid_column'>column</span><span class='comma'>,</span> <span class='label'>d:</span> <span class='id identifier rubyid_direction'>direction</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_options'>options</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -949,28 +1310,28 @@
       <pre class="lines">
 
 
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54</pre>
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_table_header_checkbox'>table_header_checkbox</span>
   <span class='id identifier rubyid_raw'>raw</span> <span class='tstring'><span class='tstring_beg'>%(</span><span class='tstring_content'>&lt;div class=&quot;relative flex table-cell&quot;&gt;
-    &lt;input 
-    id=&quot;toggle-all-rows&quot; 
-    name=&quot;color[]&quot; 
-    value=&quot;white&quot; 
-    type=&quot;checkbox&quot; 
+    &lt;input
+    id=&quot;toggle-all-rows&quot;
+    name=&quot;color[]&quot;
+    value=&quot;white&quot;
+    type=&quot;checkbox&quot;
     data-action=&quot;click-&gt;list-item-actions#tap keydown-&gt;list-item-actions#keydownHandler speicherMessage@window-&gt;list-item-actions#handleMessages &quot;
     class=&quot;h-4 w-4 mr-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500&quot;&gt;
   &lt;/div&gt;</span><span class='tstring_end'>)</span></span>
@@ -995,26 +1356,34 @@
       <pre class="lines">
 
 
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65</pre>
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 86</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_table_row_checkbox'>table_row_checkbox</span> <span class='id identifier rubyid_rec'>rec</span><span class='op'>=</span><span class='kw'>nil</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_table_row_checkbox'>table_row_checkbox</span><span class='lparen'>(</span><span class='id identifier rubyid_rec'>rec</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raw'>raw</span> <span class='tstring'><span class='tstring_beg'>%(</span><span class='tstring_content'>&lt;div class=&quot;table-cell&quot; &gt;
-    &lt;input id=&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_dom_id'>dom_id</span> <span class='id identifier rubyid_rec'>rec</span> <span class='kw'>rescue</span> <span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>12341234</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>_check&quot; 
-      name=&quot;row_selected[]&quot; 
-      value=&quot;white&quot; 
-      type=&quot;checkbox&quot; 
+    &lt;input id=&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>begin</span>
+      <span class='id identifier rubyid_dom_id'>dom_id</span> <span class='id identifier rubyid_rec'>rec</span>
+    <span class='kw'>rescue</span> <span class='const'>StandardError</span>
+      <span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>12_341_234</span><span class='rparen'>)</span>
+    <span class='kw'>end</span><span class='embexpr_end'>}</span><span class='tstring_content'>_check&quot;
+      name=&quot;row_selected[]&quot;
+      value=&quot;white&quot;
+      type=&quot;checkbox&quot;
       data-action=&quot;click-&gt;list-item#tap&quot;
       class=&quot;h-4 w-4 mr-4 border-slate-300 rounded text-slate-600 focus:ring-slate-500&quot;&gt;
   &lt;/div&gt;</span><span class='tstring_end'>)</span></span>
@@ -1039,24 +1408,24 @@
       <pre class="lines">
 
 
-35
-36
-37
-38
-39
-40
-41
-42</pre>
+65
+66
+67
+68
+69
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'app/helpers/application_helper.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tailwind_classes_for'>tailwind_classes_for</span><span class='lparen'>(</span><span class='id identifier rubyid_flash_type'>flash_type</span><span class='rparen'>)</span>
   <span class='lbrace'>{</span>
-    <span class='label'>notice:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bg-green-400 border-l-4 border-green-700 text-white</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='label'>warning:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bg-yellow-300 border-l-4 border-yellow-500 text-amber-600</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='label'>alert:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bg-yellow-300 border-l-4 border-yellow-500 text-amber-600</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-    <span class='label'>error:</span>   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bg-red-400 border-l-4 border-red-700 text-red-700</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>notice:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>bg-green-400 border-l-4 border-green-700 text-white</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>warning:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>bg-yellow-300 border-l-4 border-yellow-500 text-amber-600</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>alert:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>bg-yellow-300 border-l-4 border-yellow-500 text-amber-600</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>error:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>bg-red-400 border-l-4 border-red-700 text-red-700</span><span class='tstring_end'>&#39;</span></span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_stringify_keys'>stringify_keys</span><span class='lbracket'>[</span><span class='id identifier rubyid_flash_type'>flash_type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_flash_type'>flash_type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1069,7 +1438,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:32 2022 by
+  Generated on Wed Feb 15 12:14:52 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

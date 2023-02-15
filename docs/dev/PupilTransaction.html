@@ -95,7 +95,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="Eventable.html" title="Eventable (module)">Eventable</a></span></dd>
+      <dd>Eventable</dd>
   </dl>
   
   
@@ -149,14 +149,85 @@
       
     </ul>
   
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#broadcast_create-instance_method" title="#broadcast_create (instance method)">#<strong>broadcast_create</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>methods supporting broadcasting.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#broadcast_destroy-instance_method" title="#broadcast_destroy (instance method)">#<strong>broadcast_destroy</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#broadcast_update-instance_method" title="#broadcast_update (instance method)">#<strong>broadcast_update</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
 
 
-  
-  
-  
-  
-  
-  
   
   
   
@@ -167,7 +238,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="AbstractResource.html" title="AbstractResource (class)">AbstractResource</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="AbstractResource.html#broadcast_create-instance_method" title="AbstractResource#broadcast_create (method)">#broadcast_create</a></span>, <span class='object_link'><a href="AbstractResource.html#broadcast_destroy-instance_method" title="AbstractResource#broadcast_destroy (method)">#broadcast_destroy</a></span>, <span class='object_link'><a href="AbstractResource.html#broadcast_update-instance_method" title="AbstractResource#broadcast_update (method)">#broadcast_update</a></span>, <span class='object_link'><a href="AbstractResource.html#clone_from-instance_method" title="AbstractResource#clone_from (method)">#clone_from</a></span>, <span class='object_link'><a href="AbstractResource.html#excluded_associations_from_cloning-instance_method" title="AbstractResource#excluded_associations_from_cloning (method)">#excluded_associations_from_cloning</a></span>, <span class='object_link'><a href="AbstractResource.html#name-instance_method" title="AbstractResource#name (method)">#name</a></span>, <span class='object_link'><a href="AbstractResource.html#new_rec-class_method" title="AbstractResource.new_rec (method)">new_rec</a></span>, <span class='object_link'><a href="AbstractResource.html#say-instance_method" title="AbstractResource#say (method)">#say</a></span>, <span class='object_link'><a href="AbstractResource.html#say-class_method" title="AbstractResource.say (method)">say</a></span>, <span class='object_link'><a href="AbstractResource.html#search_by_model_fields-instance_method" title="AbstractResource#search_by_model_fields (method)">#search_by_model_fields</a></span>, <span class='object_link'><a href="AbstractResource.html#valid_attributes%3F-instance_method" title="AbstractResource#valid_attributes? (method)">#valid_attributes?</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="AbstractResource.html#clone_from-instance_method" title="AbstractResource#clone_from (method)">#clone_from</a></span>, <span class='object_link'><a href="AbstractResource.html#excluded_associations_from_cloning-instance_method" title="AbstractResource#excluded_associations_from_cloning (method)">#excluded_associations_from_cloning</a></span>, <span class='object_link'><a href="AbstractResource.html#name-instance_method" title="AbstractResource#name (method)">#name</a></span>, <span class='object_link'><a href="AbstractResource.html#new_rec-class_method" title="AbstractResource.new_rec (method)">new_rec</a></span>, <span class='object_link'><a href="AbstractResource.html#say-instance_method" title="AbstractResource#say (method)">#say</a></span>, <span class='object_link'><a href="AbstractResource.html#say-class_method" title="AbstractResource.say (method)">say</a></span>, <span class='object_link'><a href="AbstractResource.html#search_by_model_fields-instance_method" title="AbstractResource#search_by_model_fields (method)">#search_by_model_fields</a></span>, <span class='object_link'><a href="AbstractResource.html#valid_attributes%3F-instance_method" title="AbstractResource#valid_attributes? (method)">#valid_attributes?</a></span></p>
 
   
   
@@ -216,10 +287,141 @@
     
   </div>
 
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="broadcast_create-instance_method">
+  
+    #<strong>broadcast_create</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>methods supporting broadcasting</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/pupil_transaction.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_broadcast_create'>broadcast_create</span>
+  <span class='id identifier rubyid_broadcast_prepend_later_to'>broadcast_prepend_later_to</span> <span class='id identifier rubyid_model_name'>model_name</span><span class='period'>.</span><span class='id identifier rubyid_plural'>plural</span><span class='comma'>,</span> 
+    <span class='label'>target:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pupil_transaction_list</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> 
+    <span class='label'>partial:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pupil_transactions/pupil_transaction</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='label'>locals:</span> <span class='lbrace'>{</span> <span class='label'>resource:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>user:</span> <span class='const'><span class='object_link'><a href="Current.html" title="Current (class)">Current</a></span></span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="broadcast_destroy-instance_method">
+  
+    #<strong>broadcast_destroy</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/pupil_transaction.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_broadcast_destroy'>broadcast_destroy</span>
+  <span class='comment'># after_destroy_commit { broadcast_remove_to self, 
+</span>  <span class='comment'>#   partial: self, 
+</span>  <span class='comment'>#   locals: { resource: self, user: Current.user } }
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="broadcast_update-instance_method">
+  
+    #<strong>broadcast_update</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/pupil_transaction.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_broadcast_update'>broadcast_update</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_deleted_at'>deleted_at</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_broadcast_replace_later_to'>broadcast_replace_later_to</span> <span class='id identifier rubyid_model_name'>model_name</span><span class='period'>.</span><span class='id identifier rubyid_plural'>plural</span><span class='comma'>,</span> 
+      <span class='label'>target:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pupil_transaction_list</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> 
+      <span class='label'>partial:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pupil_transactions/pupil_transaction</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='label'>locals:</span> <span class='lbrace'>{</span> <span class='label'>resource:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>user:</span> <span class='const'><span class='object_link'><a href="Current.html" title="Current (class)">Current</a></span></span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span> <span class='rbrace'>}</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_broadcast_remove_to'>broadcast_remove_to</span> <span class='id identifier rubyid_model_name'>model_name</span><span class='period'>.</span><span class='id identifier rubyid_plural'>plural</span><span class='comma'>,</span> <span class='label'>target:</span> <span class='kw'>self</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:36 2022 by
+  Generated on Wed Feb 15 12:14:53 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

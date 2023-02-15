@@ -84,6 +84,32 @@
 </div>
 
 
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="SG-constant" class="">SG =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='label'>time:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;span class=&quot;p-1 material-symbols-outlined&quot;&gt;schedule&lt;/span&gt;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>hr:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;span class=&quot;p-1 material-symbols-outlined&quot;&gt;wc&lt;/span&gt;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>asset:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;span class=&quot;p-1 material-symbols-outlined&quot;&gt;corporate_fare&lt;/span&gt;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>wms:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;span class=&quot;p-1 material-symbols-outlined&quot;&gt;pallet&lt;/span&gt;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>scm:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;span class=&quot;p-1 material-symbols-outlined&quot;&gt;conveyor_belt&lt;/span&gt;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>pim:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;span class=&quot;p-1 material-symbols-outlined&quot;&gt;trolley&lt;/span&gt;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>crm:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;span class=&quot;p-1 material-symbols-outlined&quot;&gt;tenancy&lt;/span&gt;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>scope:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;span class=&quot;p-1 material-symbols-outlined&quot;&gt;roofing&lt;/span&gt;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>service:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;span class=&quot;p-1 material-symbols-outlined&quot;&gt;dry_cleaning&lt;/span&gt;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='label'>supporting:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;span class=&quot;p-1 material-symbols-outlined&quot;&gt;settings&lt;/span&gt;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+<span class='rbrace'>}</span></pre></dd>
+      
+    </dl>
+  
 
 
 
@@ -91,11 +117,81 @@
 
 
 
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#service_group_icon-instance_method" title="#service_group_icon (instance method)">#<strong>service_group_icon</strong>(service)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="service_group_icon-instance_method">
+  
+    #<strong>service_group_icon</strong>(service)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/services_helper.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_service_group_icon'>service_group_icon</span> <span class='id identifier rubyid_service'>service</span>
+  <span class='id identifier rubyid_raw'>raw</span> <span class='const'><span class='object_link'><a href="#SG-constant" title="ServicesHelper::SG (constant)">SG</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_service'>service</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:33 2022 by
+  Generated on Wed Feb 15 12:14:52 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

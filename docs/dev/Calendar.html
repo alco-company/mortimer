@@ -69,7 +69,7 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName"><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></span>
+      <span class="inheritName"><span class='object_link'><a href="AbstractResource.html" title="AbstractResource (class)">AbstractResource</a></span></span>
       
         <ul class="fullTree">
           <li>Object</li>
@@ -77,6 +77,8 @@
             <li class="next">ActiveRecord::Base</li>
           
             <li class="next"><span class='object_link'><a href="ApplicationRecord.html" title="ApplicationRecord (class)">ApplicationRecord</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="AbstractResource.html" title="AbstractResource (class)">AbstractResource</a></span></li>
           
             <li class="next">Calendar</li>
           
@@ -110,6 +112,83 @@
 
 
 
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_scope-class_method" title="default_scope (class method)">.<strong>default_scope</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#punch_work_related_events-instance_method" title="#punch_work_related_events (instance method)">#<strong>punch_work_related_events</strong>(datetime, owner_asset)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>find all events pertaining to date and punch them.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="AbstractResource.html" title="AbstractResource (class)">AbstractResource</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="AbstractResource.html#broadcast_create-instance_method" title="AbstractResource#broadcast_create (method)">#broadcast_create</a></span>, <span class='object_link'><a href="AbstractResource.html#broadcast_destroy-instance_method" title="AbstractResource#broadcast_destroy (method)">#broadcast_destroy</a></span>, <span class='object_link'><a href="AbstractResource.html#broadcast_update-instance_method" title="AbstractResource#broadcast_update (method)">#broadcast_update</a></span>, <span class='object_link'><a href="AbstractResource.html#clone_from-instance_method" title="AbstractResource#clone_from (method)">#clone_from</a></span>, <span class='object_link'><a href="AbstractResource.html#excluded_associations_from_cloning-instance_method" title="AbstractResource#excluded_associations_from_cloning (method)">#excluded_associations_from_cloning</a></span>, <span class='object_link'><a href="AbstractResource.html#name-instance_method" title="AbstractResource#name (method)">#name</a></span>, <span class='object_link'><a href="AbstractResource.html#new_rec-class_method" title="AbstractResource.new_rec (method)">new_rec</a></span>, <span class='object_link'><a href="AbstractResource.html#say-instance_method" title="AbstractResource#say (method)">#say</a></span>, <span class='object_link'><a href="AbstractResource.html#say-class_method" title="AbstractResource.say (method)">say</a></span>, <span class='object_link'><a href="AbstractResource.html#search_by_model_fields-instance_method" title="AbstractResource#search_by_model_fields (method)">#search_by_model_fields</a></span>, <span class='object_link'><a href="AbstractResource.html#valid_attributes%3F-instance_method" title="AbstractResource#valid_attributes? (method)">#valid_attributes?</a></span></p>
 
   
   
@@ -121,11 +200,104 @@
   
   
   
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="default_scope-class_method">
+  
+    .<strong>default_scope</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+7
+8
+9</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/calendar.rb', line 7</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_default_scope'>default_scope</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>deleted_at:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="punch_work_related_events-instance_method">
+  
+    #<strong>punch_work_related_events</strong>(datetime, owner_asset)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>find all events pertaining to date and punch them</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15
+16
+17
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/calendar.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_punch_work_related_events'>punch_work_related_events</span> <span class='id identifier rubyid_datetime'>datetime</span><span class='comma'>,</span> <span class='id identifier rubyid_owner_asset'>owner_asset</span>
+  <span class='comment'># events.where.not(eventable_type: &quot;AssetWorkTransaction&quot;).where(started_at: [..datetime.end_of_day])
+</span>  <span class='comment'># Event.unscoped.where( calendar_id: id, eventable_type: nil, started_at: (datetime.at_beginning_of_day)..((datetime+1.day).at_beginning_of_day)).each do |e|
+</span>  <span class='comment'>#   params = []
+</span>  <span class='comment'>#   AssetWorkTransactionService.new.create_automated_employee_punch_transaction owner_asset, params
+</span>  <span class='comment'>#   say &quot;punch_work_related_events #{e.id}&quot;
+</span>  <span class='comment'># end
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:35 2022 by
+  Generated on Wed Feb 15 12:14:53 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

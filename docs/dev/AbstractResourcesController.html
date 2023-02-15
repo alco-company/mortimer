@@ -93,7 +93,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="Authorization.html" title="Authorization (module)">Authorization</a></span>, <span class='object_link'><a href="Breadcrumbs.html" title="Breadcrumbs (module)">Breadcrumbs</a></span>, <span class='object_link'><a href="ParentControl.html" title="ParentControl (module)">ParentControl</a></span>, <span class='object_link'><a href="ResourceControl.html" title="ResourceControl (module)">ResourceControl</a></span></dd>
+      <dd>Authorization, Breadcrumbs, ParentControl, ResourceControl</dd>
   </dl>
   
   
@@ -121,7 +121,7 @@
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="Pos/StocksController.html" title="Pos::StocksController (class)">Pos::StocksController</a></span>, <span class='object_link'><a href="SpeicherController.html" title="SpeicherController (class)">SpeicherController</a></span></p>
+  <p class="children"><span class='object_link'><a href="SpeicherController.html" title="SpeicherController (class)">SpeicherController</a></span></p>
 </div>
 
 
@@ -276,7 +276,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>lookup does the same job as index - except it only returns TURBO_STREAM - and does not care about authorization expecting the caller to otherwise be allowed to!.</p>
+<p>lookup does the same job as index - except it only returns TURBO_STREAM - and does not care about authorization expecting the caller to otherwise be allowed to! This clearly is a way into the system and should be guarded! Best bet is guard it with accepting only TURBO_STREAM requests!.</p>
 </div></span>
   
 </li>
@@ -462,86 +462,9 @@
   
   
   
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="ParentControl.html" title="ParentControl (module)">ParentControl</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="ParentControl.html#find_parent-instance_method" title="ParentControl#find_parent (method)">#find_parent</a></span>, <span class='object_link'><a href="ParentControl.html#parent-instance_method" title="ParentControl#parent (method)">#parent</a></span>, <span class='object_link'><a href="ParentControl.html#parent%3F-instance_method" title="ParentControl#parent? (method)">#parent?</a></span>, <span class='object_link'><a href="ParentControl.html#parent_class-instance_method" title="ParentControl#parent_class (method)">#parent_class</a></span>, <span class='object_link'><a href="ParentControl.html#parent_class=-instance_method" title="ParentControl#parent_class= (method)">#parent_class=</a></span>, <span class='object_link'><a href="ParentControl.html#parent_reflections-instance_method" title="ParentControl#parent_reflections (method)">#parent_reflections</a></span>, <span class='object_link'><a href="ParentControl.html#parent_url-instance_method" title="ParentControl#parent_url (method)">#parent_url</a></span>, <span class='object_link'><a href="ParentControl.html#recognise_parent-instance_method" title="ParentControl#recognise_parent (method)">#recognise_parent</a></span>, <span class='object_link'><a href="ParentControl.html#recognise_path-instance_method" title="ParentControl#recognise_path (method)">#recognise_path</a></span>, <span class='object_link'><a href="ParentControl.html#recognise_resource-instance_method" title="ParentControl#recognise_resource (method)">#recognise_resource</a></span>, <span class='object_link'><a href="ParentControl.html#set_ancestry-instance_method" title="ParentControl#set_ancestry (method)">#set_ancestry</a></span>, <span class='object_link'><a href="ParentControl.html#set_parents-instance_method" title="ParentControl#set_parents (method)">#set_parents</a></span>, <span class='object_link'><a href="ParentControl.html#update_parenthood-instance_method" title="ParentControl#update_parenthood (method)">#update_parenthood</a></span></p>
-
   
   
   
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="ResourceControl.html" title="ResourceControl (module)">ResourceControl</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="ResourceControl.html#_filter-instance_method" title="ResourceControl#_filter (method)">#_filter</a></span>, <span class='object_link'><a href="ResourceControl.html#_id-instance_method" title="ResourceControl#_id (method)">#_id</a></span>, <span class='object_link'><a href="ResourceControl.html#_paginate-instance_method" title="ResourceControl#_paginate (method)">#_paginate</a></span>, <span class='object_link'><a href="ResourceControl.html#_search-instance_method" title="ResourceControl#_search (method)">#_search</a></span>, <span class='object_link'><a href="ResourceControl.html#_sort-instance_method" title="ResourceControl#_sort (method)">#_sort</a></span>, <span class='object_link'><a href="ResourceControl.html#edit_resource_url-instance_method" title="ResourceControl#edit_resource_url (method)">#edit_resource_url</a></span>, <span class='object_link'><a href="ResourceControl.html#find_all_resources-instance_method" title="ResourceControl#find_all_resources (method)">#find_all_resources</a></span>, <span class='object_link'><a href="ResourceControl.html#find_parent_resources-instance_method" title="ResourceControl#find_parent_resources (method)">#find_parent_resources</a></span>, <span class='object_link'><a href="ResourceControl.html#find_resources-instance_method" title="ResourceControl#find_resources (method)">#find_resources</a></span>, <span class='object_link'><a href="ResourceControl.html#find_resources_queried-instance_method" title="ResourceControl#find_resources_queried (method)">#find_resources_queried</a></span>, <span class='object_link'><a href="ResourceControl.html#ids-instance_method" title="ResourceControl#ids (method)">#ids</a></span>, <span class='object_link'><a href="ResourceControl.html#new_resource-instance_method" title="ResourceControl#new_resource (method)">#new_resource</a></span>, <span class='object_link'><a href="ResourceControl.html#new_resource%3F-instance_method" title="ResourceControl#new_resource? (method)">#new_resource?</a></span>, <span class='object_link'><a href="ResourceControl.html#policy_scope-instance_method" title="ResourceControl#policy_scope (method)">#policy_scope</a></span>, <span class='object_link'><a href="ResourceControl.html#resource-instance_method" title="ResourceControl#resource (method)">#resource</a></span>, <span class='object_link'><a href="ResourceControl.html#resource=-instance_method" title="ResourceControl#resource= (method)">#resource=</a></span>, <span class='object_link'><a href="ResourceControl.html#resource%3F-instance_method" title="ResourceControl#resource? (method)">#resource?</a></span>, <span class='object_link'><a href="ResourceControl.html#resource_class-instance_method" title="ResourceControl#resource_class (method)">#resource_class</a></span>, <span class='object_link'><a href="ResourceControl.html#resource_class=-instance_method" title="ResourceControl#resource_class= (method)">#resource_class=</a></span>, <span class='object_link'><a href="ResourceControl.html#resource_form-instance_method" title="ResourceControl#resource_form (method)">#resource_form</a></span>, <span class='object_link'><a href="ResourceControl.html#resource_name-instance_method" title="ResourceControl#resource_name (method)">#resource_name</a></span>, <span class='object_link'><a href="ResourceControl.html#resource_options-instance_method" title="ResourceControl#resource_options (method)">#resource_options</a></span>, <span class='object_link'><a href="ResourceControl.html#resource_params-instance_method" title="ResourceControl#resource_params (method)">#resource_params</a></span>, <span class='object_link'><a href="ResourceControl.html#resource_symbol-instance_method" title="ResourceControl#resource_symbol (method)">#resource_symbol</a></span>, <span class='object_link'><a href="ResourceControl.html#resource_url-instance_method" title="ResourceControl#resource_url (method)">#resource_url</a></span>, <span class='object_link'><a href="ResourceControl.html#resources-instance_method" title="ResourceControl#resources (method)">#resources</a></span>, <span class='object_link'><a href="ResourceControl.html#resources_name-instance_method" title="ResourceControl#resources_name (method)">#resources_name</a></span>, <span class='object_link'><a href="ResourceControl.html#resources_target-instance_method" title="ResourceControl#resources_target (method)">#resources_target</a></span>, <span class='object_link'><a href="ResourceControl.html#resources_url-instance_method" title="ResourceControl#resources_url (method)">#resources_url</a></span>, <span class='object_link'><a href="ResourceControl.html#set_resource-instance_method" title="ResourceControl#set_resource (method)">#set_resource</a></span>, <span class='object_link'><a href="ResourceControl.html#set_resource_class-instance_method" title="ResourceControl#set_resource_class (method)">#set_resource_class</a></span>, <span class='object_link'><a href="ResourceControl.html#set_resources-instance_method" title="ResourceControl#set_resources (method)">#set_resources</a></span>, <span class='object_link'><a href="ResourceControl.html#sorting_direction-instance_method" title="ResourceControl#sorting_direction (method)">#sorting_direction</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="UserInfo.html" title="UserInfo (module)">UserInfo</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="UserInfo.html#approve_access-instance_method" title="UserInfo#approve_access (method)">#approve_access</a></span>, <span class='object_link'><a href="UserInfo.html#set_user_info-instance_method" title="UserInfo#set_user_info (method)">#set_user_info</a></span>, <span class='object_link'><a href="UserInfo.html#speicher_punch_clock-instance_method" title="UserInfo#speicher_punch_clock (method)">#speicher_punch_clock</a></span>, <span class='object_link'><a href="UserInfo.html#speicher_punch_clock=-class_method" title="UserInfo.speicher_punch_clock= (method)">speicher_punch_clock=</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="Breadcrumbs.html" title="Breadcrumbs (module)">Breadcrumbs</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Breadcrumbs.html#breadcrumbs-instance_method" title="Breadcrumbs#breadcrumbs (method)">#breadcrumbs</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="Authorization.html" title="Authorization (module)">Authorization</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Authorization.html#authorize-instance_method" title="Authorization#authorize (method)">#authorize</a></span>, <span class='object_link'><a href="Authorization.html#not_authorized-instance_method" title="Authorization#not_authorized (method)">#not_authorized</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="ClientControl.html" title="ClientControl (module)">ClientControl</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="ClientControl.html#evaluate_client_platform-instance_method" title="ClientControl#evaluate_client_platform (method)">#evaluate_client_platform</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods included from <span class='object_link'><a href="Authentication.html" title="Authentication (module)">Authentication</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Authentication.html#authenticate_user!-instance_method" title="Authentication#authenticate_user! (method)">#authenticate_user!</a></span>, <span class='object_link'><a href="Authentication.html#forget-instance_method" title="Authentication#forget (method)">#forget</a></span>, <span class='object_link'><a href="Authentication.html#login-instance_method" title="Authentication#login (method)">#login</a></span>, <span class='object_link'><a href="Authentication.html#logout-instance_method" title="Authentication#logout (method)">#logout</a></span>, <span class='object_link'><a href="Authentication.html#redirect_if_authenticated-instance_method" title="Authentication#redirect_if_authenticated (method)">#redirect_if_authenticated</a></span>, <span class='object_link'><a href="Authentication.html#remember-instance_method" title="Authentication#remember (method)">#remember</a></span>, <span class='object_link'><a href="Authentication.html#store_location-instance_method" title="Authentication#store_location (method)">#store_location</a></span></p>
-
   
   
 
@@ -565,6 +488,8 @@
 
 <p>it is by itself an ordinary GET of an existing record but then the cloning kicks in! Using the deep_clone gem this method will pull details for an order, attachments for an email, etc</p>
 
+<p>TODO the authorize should accommodate for the ‘clonez’ action  but until then - verify that the user can ‘create’</p>
+
 
   </div>
 </div>
@@ -577,12 +502,12 @@
       <pre class="lines">
 
 
-220
-221
-222</pre>
+226
+227
+228</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 220</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 226</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clonez'>clonez</span>
   <span class='id identifier rubyid_authorize'>authorize</span><span class='lparen'>(</span><span class='symbol'>:create</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_respond_with'>respond_with</span><span class='lparen'>(</span><span class='symbol'>:clone</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span>
@@ -620,40 +545,16 @@
       <pre class="lines">
 
 
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175</pre>
+176
+177
+178</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 176</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span>
   <span class='id identifier rubyid_authorize'>authorize</span><span class='lparen'>(</span><span class='symbol'>:create</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_respond_with'>respond_with</span><span class='lparen'>(</span><span class='symbol'>:create</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span>
-
-  <span class='comment'># unless authorize(:create)
-</span>  <span class='comment'>#   not_authorized
-</span>  <span class='comment'># else
-</span>  <span class='comment'>#   if edit_all_posts
-</span>  <span class='comment'>#     respond_to do |format|
-</span>  <span class='comment'>#       format.js { head 201 }
-</span>  <span class='comment'>#     end
-</span>  <span class='comment'>#   else
-</span>  <span class='comment'>#     respond_with :create
-</span>  <span class='comment'>#   end
-</span>  <span class='comment'># end
-</span><span class='kw'>end</span></pre>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -687,12 +588,12 @@
       <pre class="lines">
 
 
-192
-193
-194</pre>
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 192</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 195</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_destroy'>destroy</span>
   <span class='id identifier rubyid_authorize'>authorize</span><span class='lparen'>(</span><span class='symbol'>:destroy</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_respond_with'>respond_with</span><span class='lparen'>(</span><span class='symbol'>:destroy</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span>
@@ -728,12 +629,12 @@
       <pre class="lines">
 
 
-109
-110
-111</pre>
+118
+119
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_edit'>edit</span>
   <span class='id identifier rubyid_authorize'>authorize</span><span class='lparen'>(</span><span class='symbol'>:edit</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_respond_with'>respond_with</span><span class='lparen'>(</span><span class='symbol'>:edit</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span>
@@ -757,11 +658,11 @@
     
 <p>the standard list of existing records GET /controllers</p>
 
-<p>index calls [resources](resource_control#ressources) which will return a [Pagy]() paginated set of records and set a @pagy variable used on the index.html.* template</p>
+<p>index calls [resources](resource_control#ressources) which will return a [Pagy]() paginated set of records and set a @pagy variable used on the index.html.* template (unless provided with an ids params in which case the identified records are returned)</p>
 
 <p>a few params are chipping in:</p>
 
-<p><a href=":q">params</a> - search <a href=":f">params</a> - filter <a href=":s">params</a> - sort <a href=":ids">params</a> - narrow the elements to return</p>
+<p><a href=":q">params</a> - search <a href=":f">params</a> - filter <a href=":s">params</a> - sort <a href=":d">params</a> - sorting direction <a href=":ids">params</a> - narrow the elements to return</p>
 
 <p>and along the way it also sets a @sorting_direction variable for the current (field) sorting</p>
 
@@ -777,12 +678,12 @@
       <pre class="lines">
 
 
-129
-130
-131</pre>
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 129</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
   <span class='id identifier rubyid_authorize'>authorize</span><span class='lparen'>(</span><span class='symbol'>:index</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_respond_with'>respond_with</span><span class='lparen'>(</span><span class='symbol'>:index</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span><span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span>
@@ -804,7 +705,9 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>lookup does the same job as index - except it only returns TURBO_STREAM - and does not care about authorization expecting the caller to otherwise be allowed to!</p>
+<p>lookup does the same job as index - except it only returns TURBO_STREAM - and does not care about authorization expecting the caller to otherwise be allowed to! This clearly is a way into the system and should be guarded! Best bet is guard it with accepting only TURBO_STREAM requests!</p>
+
+<p>used by components like combo_component, and more</p>
 
 <p>TODO! this obviously is a ways into the system and should be guarding</p>
 
@@ -820,15 +723,15 @@
       <pre class="lines">
 
 
-139
-140
-141</pre>
+153
+154
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 153</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_lookup'>lookup</span>
-  <span class='id identifier rubyid_respond_with'>respond_with</span> <span class='symbol'>:lookup</span> 
+  <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_symbol'>symbol</span> <span class='op'>==</span> <span class='symbol'>:turbo_stream</span> <span class='op'>?</span> <span class='id identifier rubyid_respond_with'>respond_with</span><span class='lparen'>(</span><span class='symbol'>:lookup</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span><span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -861,12 +764,12 @@
       <pre class="lines">
 
 
-93
-94
-95</pre>
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_modal'>modal</span> 
   <span class='id identifier rubyid_authorize'>authorize</span><span class='lparen'>(</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:action_content</span><span class='rbracket'>]</span> <span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_respond_with'>respond_with</span><span class='lparen'>(</span><span class='symbol'>:modal</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span>
@@ -902,12 +805,12 @@
       <pre class="lines">
 
 
-101
-102
-103</pre>
+110
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span>
   <span class='id identifier rubyid_authorize'>authorize</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_respond_with'>respond_with</span><span class='lparen'>(</span><span class='symbol'>:new</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span>
@@ -943,9 +846,6 @@
       <pre class="lines">
 
 
-199
-200
-201
 202
 203
 204
@@ -954,10 +854,13 @@
 207
 208
 209
-210</pre>
+210
+211
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 199</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 202</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_remove_image'>remove_image</span>
   <span class='kw'>unless</span> <span class='id identifier rubyid_authorize'>authorize</span><span class='lparen'>(</span><span class='symbol'>:destroy</span><span class='rparen'>)</span>
@@ -990,7 +893,7 @@
     
 <p>selected usually works in a combination with lookup - allowing the client to POST a set of selected record ids and returning a TURBO_STREAM driven template</p>
 
-<p>TODO! this obviously is a ways into the system and should be guarding</p>
+<p>TODO! this obviously is a ways into the system and should be guarding - like  with lookup fx guarding it with accepting only TURBO_STREAM requests!</p>
 
 
   </div>
@@ -1004,15 +907,15 @@
       <pre class="lines">
 
 
-149
-150
-151</pre>
+164
+165
+166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 164</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_selected'>selected</span>
-  <span class='id identifier rubyid_respond_with'>respond_with</span> <span class='symbol'>:selected</span> 
+  <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_format'>format</span><span class='period'>.</span><span class='id identifier rubyid_symbol'>symbol</span> <span class='op'>==</span> <span class='symbol'>:turbo_stream</span> <span class='op'>?</span> <span class='id identifier rubyid_respond_with'>respond_with</span><span class='lparen'>(</span><span class='symbol'>:selected</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1045,12 +948,12 @@
       <pre class="lines">
 
 
-84
-85
-86</pre>
+93
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
   <span class='id identifier rubyid_authorize'>authorize</span><span class='lparen'>(</span><span class='symbol'>:show</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_respond_with'>respond_with</span><span class='lparen'>(</span><span class='symbol'>:show</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span>
@@ -1086,12 +989,12 @@
       <pre class="lines">
 
 
-182
-183
-184</pre>
+185
+186
+187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 182</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 185</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
   <span class='id identifier rubyid_authorize'>authorize</span><span class='lparen'>(</span><span class='symbol'>:update</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_respond_with'>respond_with</span><span class='lparen'>(</span><span class='symbol'>:update</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_not_authorized'>not_authorized</span>
@@ -1127,12 +1030,12 @@
       <pre class="lines">
 
 
-39
-40
-41</pre>
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/abstract_resources_controller.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_user_for_paper_trail'>user_for_paper_trail</span>
   <span class='id identifier rubyid_user_signed_in?'>user_signed_in?</span> <span class='op'>?</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>API user</span><span class='tstring_end'>&#39;</span></span>  <span class='comment'># or whatever
@@ -1147,7 +1050,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:33 2022 by
+  Generated on Wed Feb 15 12:14:52 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

@@ -95,7 +95,7 @@
   
   <dl>
       <dt>Includes:</dt>
-      <dd><span class='object_link'><a href="Assetable.html" title="Assetable (module)">Assetable</a></span>, <span class='object_link'><a href="Assignable.html" title="Assignable (module)">Assignable</a></span></dd>
+      <dd>Assetable, Assignable</dd>
   </dl>
   
   
@@ -144,6 +144,30 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>default_scope returns all posts that have not been marked for deletion yet.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#search_by_model_fields-class_method" title="search_by_model_fields (class method)">.<strong>search_by_model_fields</strong>(lot, query)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>implement on every model where search makes sense get’s called from controller specific find_resources_queried.</p>
 </div></span>
   
 </li>
@@ -240,18 +264,6 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="AbstractResource.html" title="AbstractResource (class)">AbstractResource</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="AbstractResource.html#broadcast_destroy-instance_method" title="AbstractResource#broadcast_destroy (method)">#broadcast_destroy</a></span>, <span class='object_link'><a href="AbstractResource.html#clone_from-instance_method" title="AbstractResource#clone_from (method)">#clone_from</a></span>, <span class='object_link'><a href="AbstractResource.html#name-instance_method" title="AbstractResource#name (method)">#name</a></span>, <span class='object_link'><a href="AbstractResource.html#new_rec-class_method" title="AbstractResource.new_rec (method)">new_rec</a></span>, <span class='object_link'><a href="AbstractResource.html#say-instance_method" title="AbstractResource#say (method)">#say</a></span>, <span class='object_link'><a href="AbstractResource.html#say-class_method" title="AbstractResource.say (method)">say</a></span>, <span class='object_link'><a href="AbstractResource.html#search_by_model_fields-instance_method" title="AbstractResource#search_by_model_fields (method)">#search_by_model_fields</a></span>, <span class='object_link'><a href="AbstractResource.html#valid_attributes%3F-instance_method" title="AbstractResource#valid_attributes? (method)">#valid_attributes?</a></span></p>
 
@@ -296,17 +308,58 @@
       <pre class="lines">
 
 
-10
-11
 12
-13</pre>
+13
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/pupil.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'app/models/pupil.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_default_scope'>default_scope</span>
 <span class='comment'>#   where(&quot;assetable&quot; deleted_at: nil)
 </span>  <span class='const'><span class='object_link'><a href="" title="Pupil (class)">Pupil</a></span></span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='period'>.</span><span class='id identifier rubyid_joins'>joins</span><span class='lparen'>(</span><span class='symbol'>:asset</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="search_by_model_fields-class_method">
+  
+    .<strong>search_by_model_fields</strong>(lot, query)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>implement on every model where search makes sense get’s called from controller specific find_resources_queried</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/pupil.rb', line 21</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_search_by_model_fields'>search_by_model_fields</span> <span class='id identifier rubyid_lot'>lot</span><span class='comma'>,</span> <span class='id identifier rubyid_query'>query</span>
+  <span class='id identifier rubyid_default_scope'>default_scope</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>assets.name ilike &#39;%</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_query'>query</span><span class='embexpr_end'>}</span><span class='tstring_content'>%&#39; or pin_code=&#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_query'>query</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -334,12 +387,12 @@
       <pre class="lines">
 
 
-24
-25
-26</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/pupil.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'app/models/pupil.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_broadcast_create'>broadcast_create</span>
 
@@ -364,17 +417,17 @@
       <pre class="lines">
 
 
-28
-29
-30
-31
-32
-33
-34
-35</pre>
+38
+39
+40
+41
+42
+43
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/pupil.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'app/models/pupil.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_broadcast_update'>broadcast_update</span>
   <span class='id identifier rubyid_employees'>employees</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_employee'>employee</span><span class='op'>|</span>
@@ -415,12 +468,12 @@
       <pre class="lines">
 
 
-20
-21
-22</pre>
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/pupil.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'app/models/pupil.rb', line 30</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_excluded_associations_from_cloning'>excluded_associations_from_cloning</span>
   <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -435,7 +488,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:36 2022 by
+  Generated on Wed Feb 15 12:14:53 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

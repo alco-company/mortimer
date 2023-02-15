@@ -186,7 +186,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="AbstractResourceService.html" title="AbstractResourceService (class)">AbstractResourceService</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="AbstractResourceService.html#create-instance_method" title="AbstractResourceService#create (method)">#create</a></span>, <span class='object_link'><a href="AbstractResourceService.html#delete-instance_method" title="AbstractResourceService#delete (method)">#delete</a></span>, <span class='object_link'><a href="AbstractResourceService.html#edit_all-instance_method" title="AbstractResourceService#edit_all (method)">#edit_all</a></span>, <span class='object_link'><a href="AbstractResourceService.html#update-instance_method" title="AbstractResourceService#update (method)">#update</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="AbstractResourceService.html#create-instance_method" title="AbstractResourceService#create (method)">#create</a></span>, <span class='object_link'><a href="AbstractResourceService.html#delete-instance_method" title="AbstractResourceService#delete (method)">#delete</a></span>, <span class='object_link'><a href="AbstractResourceService.html#edit_all-instance_method" title="AbstractResourceService#edit_all (method)">#edit_all</a></span>, <span class='object_link'><a href="AbstractResourceService.html#say-instance_method" title="AbstractResourceService#say (method)">#say</a></span>, <span class='object_link'><a href="AbstractResourceService.html#update-instance_method" title="AbstractResourceService#update (method)">#update</a></span>, <span class='object_link'><a href="AbstractResourceService.html#upsert-instance_method" title="AbstractResourceService#upsert (method)">#upsert</a></span></p>
 
 
   <div id="instance_method_details" class="method_details_list">
@@ -226,7 +226,7 @@
 </span>  <span class='comment'># search the https://gepir.gs1.org/index.php/search-by-gtin somwhow to find the correct supplier
 </span>  <span class='comment'>#
 </span>  <span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Participant.html" title="Participant (class)">Participant</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='label'>name:</span> <span class='id identifier rubyid_parm'>parm</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ean14</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='int'>4</span><span class='comma'>,</span><span class='int'>4</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>account:</span> <span class='id identifier rubyid_account'>account</span><span class='comma'>,</span> <span class='label'>participantable:</span> <span class='const'><span class='object_link'><a href="Supplier.html" title="Supplier (class)">Supplier</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='label'>gtin_prefix:</span> <span class='id identifier rubyid_parm'>parm</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ean14</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='int'>4</span><span class='comma'>,</span><span class='int'>4</span><span class='rbracket'>]</span> <span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="Supplier.html" title="Supplier (class)">Supplier</a></span></span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span> <span class='id identifier rubyid_resource'>resource</span> <span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_record'>record</span><span class='period'>.</span><span class='id identifier rubyid_participantable'>participantable</span> <span class='kw'>if</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_created?'>created?</span>
   <span class='kw'>nil</span>
 <span class='kw'>end</span></pre>
@@ -270,7 +270,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:36 2022 by
+  Generated on Wed Feb 15 12:14:54 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
