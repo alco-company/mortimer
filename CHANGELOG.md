@@ -68,11 +68,13 @@ Entities to be added:
 
 ## DONE
 
-### 2023-02-15 
+### 2023-02-15
 
-publishing PDFs doesn't work either - 
+publishing PDFs doesn't work either -
 created bin/commit to automate rbc, yardoc, git add, and git commit
-### 2023-02-01 
+isolating doc in greybox/doc and using <https://www.honeybadger.io/blog/documentation-worklow-rails/> to generate docs @ <https://mortimer.guru>
+
+### 2023-02-01
 
 changed to publishing pdf's in the docs folder
 

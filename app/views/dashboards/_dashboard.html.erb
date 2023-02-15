@@ -1,12 +1,6 @@
-<tr id="<%= dom_id resource %>"  data-controller="list-item">
+<%= render_row attribs: { id: dom_id(resource), data: { controller: "list-item2" }} do %>
   <%= render_component "resource/list_checkbox", resource: resource %>
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= resource.name %>
-  </td>
-  <td class="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= resource.layout %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-    <%= render_component "edit", resource: resource, url: edit_resource_url(resource) %>
-  </td>
-</tr>  
+  <%= render_column css: " text-gray-900 font-medium ", content: resource.name %>
+  <%= render_column css: "hidden sm:table-cell ", content: resource.layout %>
+  <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
+<% end %>
