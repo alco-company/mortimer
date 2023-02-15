@@ -367,7 +367,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   listen
-  lookbook
+  lookbook (~> 1.0)
   mini_magick
   omniauth-oauth2 (~> 1.8.0)
   omniauth-rails_csrf_protection (~> 1.0.1)

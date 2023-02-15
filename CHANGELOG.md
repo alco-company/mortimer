@@ -73,6 +73,7 @@ Entities to be added:
 publishing PDFs doesn't work either -
 created bin/commit to automate rbc, yardoc, git add, and git commit
 isolating doc in greybox/doc and using <https://www.honeybadger.io/blog/documentation-worklow-rails/> to generate docs @ <https://mortimer.guru>
+bin/commit will allow you to commit with a message from the command line - e.g. bin/commit "added documentation" - it will also commit the docs
 
 ### 2023-02-01
 
