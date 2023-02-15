@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: WorkSchedulesHelper
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "WorkSchedulesHelper";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (W)</a> &raquo;
+    
+    
+    <span class="title">WorkSchedulesHelper</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: WorkSchedulesHelper
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>app/helpers/work_schedules_helper.rb</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#day_classes-instance_method" title="#day_classes (instance method)">#<strong>day_classes</strong>(week)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Top left day, include: “rounded-tl-lg” Top right day, include: “rounded-tr-lg” Bottom left day, include: “rounded-bl-lg” Bottom right day, include: “rounded-br-lg”.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#day_number-instance_method" title="#day_number (instance method)">#<strong>day_number</strong>(day, week_planning)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>return either true day number - or nothing all depending on boolean @week_planning.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_team_work_schedules-instance_method" title="#show_team_work_schedules (instance method)">#<strong>show_team_work_schedules</strong>(resource)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#time_classes-instance_method" title="#time_classes (instance method)">#<strong>time_classes</strong>(day)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Always include: “mx-auto flex h-7 w-7 items-center justify-center rounded-full” Is selected and is today, include: “bg-indigo-600” Is selected and is not today, include: “bg-gray-900”.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#week_number-instance_method" title="#week_number (instance method)">#<strong>week_number</strong>(day, week, week_planning)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>return either true week number - or 1-indexed week number all depending on boolean @week_planning.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#weekdays-instance_method" title="#weekdays (instance method)">#<strong>weekdays</strong>(eu = false)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>set eu false if week has to start with sunday (en/us format) returns [ “S”, “M”, “T”, “O”, “T”, “F”, “L” ].</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="day_classes-instance_method">
+  
+    #<strong>day_classes</strong>(week)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Top left day, include: “rounded-tl-lg” Top right day, include: “rounded-tr-lg” Bottom left day, include: “rounded-bl-lg” Bottom right day, include: “rounded-br-lg”</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52
+53
+54
+55
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/work_schedules_helper.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_day_classes'>day_classes</span> <span class='id identifier rubyid_week'>week</span> 
+  <span class='lbracket'>[</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rounded-tl-lg</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rounded-bl-lg</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_week'>week</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="day_number-instance_method">
+  
+    #<strong>day_number</strong>(day, week_planning)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>return either true day number - or nothing all depending on boolean @week_planning</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+32
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/work_schedules_helper.rb', line 32</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_day_number'>day_number</span> <span class='id identifier rubyid_day'>day</span><span class='comma'>,</span> <span class='id identifier rubyid_week_planning'>week_planning</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_week_planning'>week_planning</span>
+  <span class='id identifier rubyid_day'>day</span><span class='period'>.</span><span class='id identifier rubyid_day'>day</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="show_team_work_schedules-instance_method">
+  
+    #<strong>show_team_work_schedules</strong>(resource)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+6
+7
+8
+9</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/work_schedules_helper.rb', line 6</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_show_team_work_schedules'>show_team_work_schedules</span> <span class='id identifier rubyid_resource'>resource</span> 
+  <span class='id identifier rubyid_ws'>ws</span> <span class='op'>=</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_teams'>teams</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:work_schedules</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span> <span class='op'>-</span> <span class='id identifier rubyid_resource'>resource</span><span class='period'>.</span><span class='id identifier rubyid_work_schedules'>work_schedules</span>
+  <span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_w'>w</span><span class='op'>|</span> <span class='id identifier rubyid_link_to'>link_to</span> <span class='id identifier rubyid_w'>w</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_w'>w</span><span class='comma'>,</span> <span class='label'>target:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_blank</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> | </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="time_classes-instance_method">
+  
+    #<strong>time_classes</strong>(day)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Always include: “mx-auto flex h-7 w-7 items-center justify-center rounded-full” Is selected and is today, include: “bg-indigo-600” Is selected and is not today, include: “bg-gray-900”</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/work_schedules_helper.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_time_classes'>time_classes</span> <span class='id identifier rubyid_day'>day</span> 
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="week_number-instance_method">
+  
+    #<strong>week_number</strong>(day, week, week_planning)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>return either true week number - or 1-indexed week number all depending on boolean @week_planning</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/work_schedules_helper.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_week_number'>week_number</span> <span class='id identifier rubyid_day'>day</span><span class='comma'>,</span> <span class='id identifier rubyid_week'>week</span><span class='comma'>,</span> <span class='id identifier rubyid_week_planning'>week_planning</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_week'>week</span> <span class='kw'>if</span> <span class='id identifier rubyid_week_planning'>week_planning</span>
+  <span class='const'>I18n</span><span class='period'>.</span><span class='id identifier rubyid_localize'>localize</span><span class='lparen'>(</span> <span class='id identifier rubyid_day'>day</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='symbol'>:week_number</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="weekdays-instance_method">
+  
+    #<strong>weekdays</strong>(eu = false)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>set eu false if week has to start with sunday (en/us format) returns [ “S”, “M”, “T”, “O”, “T”, “F”, “L” ]</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/helpers/work_schedules_helper.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_weekdays'>weekdays</span> <span class='id identifier rubyid_eu'>eu</span><span class='op'>=</span><span class='kw'>false</span>
+  <span class='id identifier rubyid_wd'>wd</span> <span class='op'>=</span> <span class='const'>I18n</span><span class='period'>.</span><span class='id identifier rubyid_translate'>translate</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>date.day_names</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span> <span class='id identifier rubyid_d'>d</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_capitalize'>capitalize</span> <span class='rbrace'>}</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_wd'>wd</span> <span class='kw'>unless</span> <span class='id identifier rubyid_eu'>eu</span> 
+  <span class='id identifier rubyid_wd'>wd</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='id identifier rubyid_wd'>wd</span><span class='period'>.</span><span class='id identifier rubyid_shift'>shift</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Wed Feb 15 15:40:06 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-3.1.2).
+</div>
+
+    </div>
+  </body>
+</html>
