@@ -170,12 +170,14 @@
 25
 26
 27
-28</pre>
+28
+29</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/controllers/concerns/client_control.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_evaluate_client_platform'>evaluate_client_platform</span>
+
   <span class='kw'>case</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_user_agent'>user_agent</span>
   <span class='kw'>when</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>iPad</span><span class='regexp_end'>/</span></span>
     <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_variant'>variant</span> <span class='op'>=</span> <span class='symbol'>:tablet</span>
@@ -201,7 +203,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:32 2022 by
+  Generated on Wed Feb 15 15:40:06 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

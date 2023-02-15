@@ -212,7 +212,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Parameters: { “asset_work_transaction”=&gt;“state”=&gt;“IN”,                “punched_pupils”=&gt;{“pupil_2”=&gt;“on”, “pupil_6”=&gt;“on”}, “<a href="FILTERED">api_key”=>“</a>”, “id”=&gt;“2”, “employee”=&gt;{}}.</p>
+<p>Parameters:               “state”=&gt;“OUT”, “comment”=&gt;“blev bare hængende lidt”,               “state”=&gt;“IN”, “reason”=&gt;“XTRA”, “comment”=&gt;“en helt igennem speciel opgave”,              “state”=&gt;“IN”, “reason”=&gt;“4”, (substitute)              “state”=&gt;“SICK”, “sick_hrs”=&gt;“3.5”, “reason”=&gt;“CHILD”,               “location”=&gt;“56.1669506,9.5618007,location retrieved!”,               “punched_pupils”=&gt;{“pupil_2”=&gt;“on”, “pupil_6”=&gt;“on”}, “<a href="FILTERED">api_key”=>“</a>”, “id”=&gt;“4”, “employee”=&gt;{}}.</p>
 </div></span>
   
 </li>
@@ -296,11 +296,6 @@
   
   
   
-  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../AssetsController.html" title="AssetsController (class)">AssetsController</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../AssetsController.html#create_resource-instance_method" title="AssetsController#create_resource (method)">#create_resource</a></span>, <span class='object_link'><a href="../AssetsController.html#delete_it-instance_method" title="AssetsController#delete_it (method)">#delete_it</a></span>, <span class='object_link'><a href="../AssetsController.html#update_resource-instance_method" title="AssetsController#update_resource (method)">#update_resource</a></span></p>
-
-  
-  
   
   
   
@@ -332,7 +327,7 @@
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="../ParentControl.html" title="ParentControl (module)">ParentControl</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../ParentControl.html#find_parent-instance_method" title="ParentControl#find_parent (method)">#find_parent</a></span>, <span class='object_link'><a href="../ParentControl.html#parent-instance_method" title="ParentControl#parent (method)">#parent</a></span>, <span class='object_link'><a href="../ParentControl.html#parent%3F-instance_method" title="ParentControl#parent? (method)">#parent?</a></span>, <span class='object_link'><a href="../ParentControl.html#parent_class-instance_method" title="ParentControl#parent_class (method)">#parent_class</a></span>, <span class='object_link'><a href="../ParentControl.html#parent_class=-instance_method" title="ParentControl#parent_class= (method)">#parent_class=</a></span>, <span class='object_link'><a href="../ParentControl.html#parent_reflections-instance_method" title="ParentControl#parent_reflections (method)">#parent_reflections</a></span>, <span class='object_link'><a href="../ParentControl.html#parent_url-instance_method" title="ParentControl#parent_url (method)">#parent_url</a></span>, <span class='object_link'><a href="../ParentControl.html#recognise_parent-instance_method" title="ParentControl#recognise_parent (method)">#recognise_parent</a></span>, <span class='object_link'><a href="../ParentControl.html#recognise_path-instance_method" title="ParentControl#recognise_path (method)">#recognise_path</a></span>, <span class='object_link'><a href="../ParentControl.html#recognise_resource-instance_method" title="ParentControl#recognise_resource (method)">#recognise_resource</a></span>, <span class='object_link'><a href="../ParentControl.html#set_ancestry-instance_method" title="ParentControl#set_ancestry (method)">#set_ancestry</a></span>, <span class='object_link'><a href="../ParentControl.html#set_parents-instance_method" title="ParentControl#set_parents (method)">#set_parents</a></span>, <span class='object_link'><a href="../ParentControl.html#update_parenthood-instance_method" title="ParentControl#update_parenthood (method)">#update_parenthood</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../ParentControl.html#find_parent-instance_method" title="ParentControl#find_parent (method)">#find_parent</a></span>, <span class='object_link'><a href="../ParentControl.html#parent-instance_method" title="ParentControl#parent (method)">#parent</a></span>, <span class='object_link'><a href="../ParentControl.html#parent%3F-instance_method" title="ParentControl#parent? (method)">#parent?</a></span>, <span class='object_link'><a href="../ParentControl.html#parent_class-instance_method" title="ParentControl#parent_class (method)">#parent_class</a></span>, <span class='object_link'><a href="../ParentControl.html#parent_class=-instance_method" title="ParentControl#parent_class= (method)">#parent_class=</a></span>, <span class='object_link'><a href="../ParentControl.html#parent_reflections-instance_method" title="ParentControl#parent_reflections (method)">#parent_reflections</a></span>, <span class='object_link'><a href="../ParentControl.html#parent_url-instance_method" title="ParentControl#parent_url (method)">#parent_url</a></span>, <span class='object_link'><a href="../ParentControl.html#recognise_parent-instance_method" title="ParentControl#recognise_parent (method)">#recognise_parent</a></span>, <span class='object_link'><a href="../ParentControl.html#recognise_path-instance_method" title="ParentControl#recognise_path (method)">#recognise_path</a></span>, <span class='object_link'><a href="../ParentControl.html#recognise_resource-instance_method" title="ParentControl#recognise_resource (method)">#recognise_resource</a></span>, <span class='object_link'><a href="../ParentControl.html#set_account-instance_method" title="ParentControl#set_account (method)">#set_account</a></span>, <span class='object_link'><a href="../ParentControl.html#set_ancestry-instance_method" title="ParentControl#set_ancestry (method)">#set_ancestry</a></span>, <span class='object_link'><a href="../ParentControl.html#set_parents-instance_method" title="ParentControl#set_parents (method)">#set_parents</a></span>, <span class='object_link'><a href="../ParentControl.html#update_parenthood-instance_method" title="ParentControl#update_parenthood (method)">#update_parenthood</a></span></p>
 
   
   
@@ -569,9 +564,14 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Parameters: { “asset_work_transaction”=&gt;“state”=&gt;“IN”, </p>
+<p>Parameters: </p>
 
-<pre class="code ruby"><code class="ruby">&quot;punched_pupils&quot;=&gt;{&quot;pupil_2&quot;=&gt;&quot;on&quot;, &quot;pupil_6&quot;=&gt;&quot;on&quot;}, &quot;api_key&quot;=&gt;&quot;[FILTERED]&quot;, &quot;id&quot;=&gt;&quot;2&quot;, &quot;employee&quot;=&gt;{}}
+<pre class="code ruby"><code class="ruby">&quot;state&quot;=&gt;&quot;OUT&quot;, &quot;comment&quot;=&gt;&quot;blev bare hængende lidt&quot;, 
+&quot;state&quot;=&gt;&quot;IN&quot;, &quot;reason&quot;=&gt;&quot;XTRA&quot;, &quot;comment&quot;=&gt;&quot;en helt igennem speciel opgave&quot;,
+&quot;state&quot;=&gt;&quot;IN&quot;, &quot;reason&quot;=&gt;&quot;4&quot;, (substitute)
+&quot;state&quot;=&gt;&quot;SICK&quot;, &quot;sick_hrs&quot;=&gt;&quot;3.5&quot;, &quot;reason&quot;=&gt;&quot;CHILD&quot;, 
+&quot;location&quot;=&gt;&quot;56.1669506,9.5618007,location retrieved!&quot;, 
+&quot;punched_pupils&quot;=&gt;{&quot;pupil_2&quot;=&gt;&quot;on&quot;, &quot;pupil_6&quot;=&gt;&quot;on&quot;}, &quot;api_key&quot;=&gt;&quot;[FILTERED]&quot;, &quot;id&quot;=&gt;&quot;4&quot;, &quot;employee&quot;=&gt;{}}
 </code></pre>
 
 
@@ -586,23 +586,25 @@
       <pre class="lines">
 
 
-62
-63
-64
-65
-66
-67
-68
-69</pre>
+71
+72
+73
+74
+75
+76
+77
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/pos/employees_controller.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/pos/employees_controller.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_punch'>punch</span> 
   <span class='id identifier rubyid_head'>head</span> <span class='int'>301</span> <span class='kw'>and</span> <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_token_approved'>token_approved</span>
-  <span class='id identifier rubyid_res1'>res1</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../AssetWorkTransactionService.html" title="AssetWorkTransactionService (class)">AssetWorkTransactionService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_create_employee_punch_transaction'><span class='object_link'><a href="../AssetWorkTransactionService.html#create_employee_punch_transaction-instance_method" title="AssetWorkTransactionService#create_employee_punch_transaction (method)">create_employee_punch_transaction</a></span></span><span class='lparen'>(</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_resource_params'>resource_params</span> <span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_res1'>res1</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>IN</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>OUT</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>SICK</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_resource_params'>resource_params</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>state</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_res2'>res2</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../PupilTransactionService.html" title="PupilTransactionService (class)">PupilTransactionService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_create_pupil_transaction'><span class='object_link'><a href="../PupilTransactionService.html#create_pupil_transaction-instance_method" title="PupilTransactionService#create_pupil_transaction (method)">create_pupil_transaction</a></span></span><span class='lparen'>(</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_res1'>res1</span><span class='comma'>,</span> <span class='id identifier rubyid_resource_params'>resource_params</span> <span class='rparen'>)</span>
+  <span class='id identifier rubyid_event'>event</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../AssetWorkTransactionService.html" title="AssetWorkTransactionService (class)">AssetWorkTransactionService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_create_employee_punch_transaction'><span class='object_link'><a href="../AssetWorkTransactionService.html#create_employee_punch_transaction-instance_method" title="AssetWorkTransactionService#create_employee_punch_transaction (method)">create_employee_punch_transaction</a></span></span><span class='lparen'>(</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_resource_params'>resource_params</span> <span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_event'>event</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>OUT</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>SICK</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>BREAK</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>FREE</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_resource_params'>resource_params</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>state</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='const'><span class='object_link'><a href="../AssetWorkdaySumService.html" title="AssetWorkdaySumService (class)">AssetWorkdaySumService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_update_workday_sum'><span class='object_link'><a href="../AssetWorkdaySumService.html#update_workday_sum-instance_method" title="AssetWorkdaySumService#update_workday_sum (method)">update_workday_sum</a></span></span><span class='lparen'>(</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_event'>event</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_ev'>ev</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../PupilTransactionService.html" title="PupilTransactionService (class)">PupilTransactionService</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_close_active_pupils'><span class='object_link'><a href="../PupilTransactionService.html#close_active_pupils-instance_method" title="PupilTransactionService#close_active_pupils (method)">close_active_pupils</a></span></span><span class='lparen'>(</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_event'>event</span><span class='comma'>,</span> <span class='id identifier rubyid_resource_params'>resource_params</span> <span class='rparen'>)</span> 
   <span class='kw'>end</span>
   <span class='id identifier rubyid_head'>head</span> <span class='int'>200</span>
 <span class='kw'>end</span></pre>
@@ -688,13 +690,19 @@
 
 55
 56
-57</pre>
+57
+58
+59
+60</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/controllers/pos/employees_controller.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span> 
   <span class='id identifier rubyid_redirect_to'>redirect_to</span> <span class='id identifier rubyid_root_path'>root_path</span> <span class='kw'>and</span> <span class='kw'>return</span> <span class='kw'>unless</span> <span class='id identifier rubyid_token_approved'>token_approved</span>
+
+  <span class='comment'># xtra sub start pause stop sick free
+</span>  <span class='ivar'>@buttons</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../Current.html" title="Current (class)">Current</a></span></span><span class='period'>.</span><span class='id identifier rubyid_account'>account</span><span class='period'>.</span><span class='id identifier rubyid_system_parameters_include'>system_parameters_include</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pos/employee/buttons</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -706,7 +714,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:34 2022 by
+  Generated on Wed Feb 15 15:40:08 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

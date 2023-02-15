@@ -101,7 +101,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>load the concerns/parent_control.rb require “parent_control”</p>
+<p>require “parent_control” load the concerns/parent_control.rb</p>
 
 
   </div>
@@ -245,7 +245,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#edit_resource_url-instance_method" title="#edit_resource_url (instance method)">#<strong>edit_resource_url</strong>  &#x21d2; Object </a>
+      <a href="#edit_resource_url-instance_method" title="#edit_resource_url (instance method)">#<strong>edit_resource_url</strong>(options = {})  &#x21d2; Object </a>
     
 
     
@@ -571,7 +571,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#resource_form-instance_method" title="#resource_form (instance method)">#<strong>resource_form</strong>  &#x21d2; Object </a>
+      <a href="#resource_form-instance_method" title="#resource_form (instance method)">#<strong>resource_form</strong>(rs = nil)  &#x21d2; Object </a>
     
 
     
@@ -683,7 +683,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#resource_url-instance_method" title="#resource_url (instance method)">#<strong>resource_url</strong>(options = {})  &#x21d2; Object </a>
+      <a href="#resource_url-instance_method" title="#resource_url (instance method)">#<strong>resource_url</strong>(entity = {})  &#x21d2; Object </a>
     
 
     
@@ -933,14 +933,14 @@
       <pre class="lines">
 
 
-260
-261
-262
-263
-264</pre>
+271
+272
+273
+274
+275</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 260</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 271</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid__filter'>_filter</span> <span class='id identifier rubyid_r'>r</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_r'>r</span> <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:f</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
@@ -967,13 +967,13 @@
       <pre class="lines">
 
 
-97
-98
-99
-100</pre>
+101
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid__id'>_id</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='op'>==</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0</span><span class='tstring_end'>&quot;</span></span>
@@ -1010,24 +1010,33 @@
       <pre class="lines">
 
 
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298</pre>
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 284</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 303</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid__paginate'>_paginate</span> <span class='id identifier rubyid_r'>r</span>
   <span class='comment'>#
@@ -1038,9 +1047,18 @@
   <span class='kw'>return</span> <span class='id identifier rubyid_r'>r</span> <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:edit_all</span><span class='rbracket'>]</span><span class='op'>==</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>1</span><span class='tstring_end'>&#39;</span></span>
 
   <span class='comment'>#
-</span>  <span class='comment'># we wouldn&#39;t like a error here due to a &#39;nilled&#39; resources-set
+</span>  <span class='comment'># we wouldn&#39;t like an error here due to a &#39;nilled&#39; resources-set
 </span>  <span class='kw'>unless</span> <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-    <span class='ivar'>@pagy</span><span class='comma'>,</span> <span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='id identifier rubyid_pagy'>pagy</span><span class='lparen'>(</span><span class='id identifier rubyid_r'>r</span><span class='comma'>,</span> <span class='label'>items:</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:items</span><span class='comma'>,</span><span class='int'>10</span><span class='rparen'>)</span> <span class='rparen'>)</span>
+    <span class='kw'>begin</span>
+      <span class='ivar'>@pagy</span><span class='comma'>,</span> <span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='id identifier rubyid_pagy'>pagy</span><span class='lparen'>(</span><span class='id identifier rubyid_r'>r</span><span class='comma'>,</span> <span class='label'>items:</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:items</span><span class='comma'>,</span><span class='int'>10</span><span class='rparen'>)</span> <span class='rparen'>)</span>
+    <span class='kw'>rescue</span> <span class='const'>Pagy</span><span class='op'>::</span><span class='const'>OverflowError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+      <span class='kw'>if</span> <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\:page</span><span class='regexp_end'>/</span></span>
+        <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:page</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='int'>1</span>
+        <span class='ivar'>@pagy</span><span class='comma'>,</span> <span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='id identifier rubyid_pagy'>pagy</span><span class='lparen'>(</span><span class='id identifier rubyid_r'>r</span><span class='comma'>,</span> <span class='label'>items:</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:items</span><span class='comma'>,</span><span class='int'>10</span><span class='rparen'>)</span> <span class='rparen'>)</span>
+      <span class='kw'>else</span>
+        <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_e'>e</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_r'>r</span>
 <span class='kw'>end</span></pre>
@@ -1075,16 +1093,16 @@
       <pre class="lines">
 
 
-249
-250
-251
-252
-253
-254
-255</pre>
+260
+261
+262
+263
+264
+265
+266</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 249</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 260</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid__search'>_search</span> <span class='id identifier rubyid_options'>options</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:q</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
@@ -1112,6 +1130,12 @@
     
 <p>sort - it at all</p>
 
+<p>allow listings to be sorted by some of the columns - by tapping the column lead text the current selection of records will be sorted by that field in ASC order and tapping the same column once more will reverse the order to DESC</p>
+
+<p>use this helper in your listing column headers:</p>
+
+<p>&lt;%= sort_link_to t(‘.long_lat’), :long_lat, data: { turbo_action: “advance”} %&gt;</p>
+
 <p>%th{ role:“sort”, data{ field: “*barcode”, direction: “DESC”} } $(‘<a href="role="sort"">th</a>’)</p>
 
 
@@ -1126,12 +1150,12 @@
       <pre class="lines">
 
 
-271
-272
-273</pre>
+290
+291
+292</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 271</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 290</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid__sort'>_sort</span> <span class='id identifier rubyid_r'>r</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span>
   <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_reorder'>reorder</span> <span class='id identifier rubyid_sorting_direction'>sorting_direction</span>
@@ -1144,7 +1168,7 @@
       <div class="method_details ">
   <h3 class="signature " id="edit_resource_url-instance_method">
   
-    #<strong>edit_resource_url</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>edit_resource_url</strong>(options = {})  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1167,15 +1191,15 @@
       <pre class="lines">
 
 
-161
-162
-163</pre>
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 166</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_edit_resource_url'>edit_resource_url</span>
-  <span class='id identifier rubyid_url_for'>url_for</span><span class='lparen'>(</span><span class='id identifier rubyid_resource'>resource</span><span class='rparen'>)</span><span class='op'>+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/edit</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>def</span> <span class='id identifier rubyid_edit_resource_url'>edit_resource_url</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_url_for'>url_for</span><span class='lparen'>(</span><span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='op'>+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/edit</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1208,12 +1232,12 @@
       <pre class="lines">
 
 
-311
-312
-313</pre>
+339
+340
+341</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 311</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 339</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_find_all_resources'>find_all_resources</span> <span class='id identifier rubyid_options'>options</span>
   <span class='id identifier rubyid_policy_scope'>policy_scope</span><span class='lparen'>(</span><span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_default_scope'>default_scope</span><span class='rparen'>)</span>
@@ -1249,13 +1273,13 @@
       <pre class="lines">
 
 
-303
-304
-305
-306</pre>
+331
+332
+333
+334</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 303</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 331</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_find_parent_resources'>find_parent_resources</span> <span class='id identifier rubyid_options'>options</span> 
   <span class='id identifier rubyid_say'>say</span> <span class='id identifier rubyid_resources_name'>resources_name</span>
@@ -1292,17 +1316,6 @@
       <pre class="lines">
 
 
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
 217
 218
 219
@@ -1311,10 +1324,21 @@
 222
 223
 224
-225</pre>
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 206</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 217</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_find_resources'>find_resources</span> <span class='id identifier rubyid_options'>options</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_ids'>ids</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
@@ -1367,22 +1391,22 @@
       <pre class="lines">
 
 
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327
-328
-329
-330</pre>
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 318</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 346</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_find_resources_queried'>find_resources_queried</span> <span class='id identifier rubyid_options'>options</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_search'>search</span><span class='lparen'>(</span><span class='id identifier rubyid_policy_scope'>policy_scope</span><span class='lparen'>(</span><span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_default_scope'>default_scope</span><span class='rparen'>)</span><span class='comma'>,</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:q</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tags_included?</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -1417,27 +1441,27 @@
       <pre class="lines">
 
 
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
 238
 239
 240
 241
 242
 243
-244</pre>
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 227</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 238</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ids'>ids</span>
   <span class='ivar'>@ids</span> <span class='op'>||=</span> <span class='lparen'>(</span>
@@ -1503,7 +1527,11 @@
 92
 93
 94
-95</pre>
+95
+96
+97
+98
+99</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 84</span>
@@ -1515,8 +1543,12 @@
   
   <span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='id identifier rubyid_resource_params'>resource_params</span>
   <span class='id identifier rubyid_p'>p</span><span class='op'>=</span><span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span> <span class='kw'>if</span> <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='op'>==</span><span class='const'>Array</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Base</span>
-  <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_rr'>rr</span><span class='op'>=</span> <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span> <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Base</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_parent?'>parent?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_rr'>rr</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:assignments</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_rr'>rr</span><span class='period'>.</span><span class='id identifier rubyid_assignments'>assignments</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='label'>assignable:</span> <span class='lparen'>(</span><span class='id identifier rubyid_parent_class'>parent_class</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_parent'>parent</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> <span class='kw'>rescue</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_rr'>rr</span>
+
 <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_err'>err</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>new_resource failed due to </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_err'>err</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
@@ -1612,24 +1644,24 @@
       <pre class="lines">
 
 
-338
-339
-340
-341
-342
-343
-344
-345
-346</pre>
+366
+367
+368
+369
+370
+371
+372
+373
+374</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 338</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 366</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_policy_scope'>policy_scope</span> <span class='id identifier rubyid_arg'>arg</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_arg'>arg</span> <span class='kw'>if</span> <span class='id identifier rubyid_resource_class'>resource_class</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="Account.html" title="Account (class)">Account</a></span></span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>events.account_id = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_current_account'>current_account</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>event</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>return</span> <span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>assets.account_id = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_current_account'>current_account</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>asset</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>return</span> <span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>participants.account_id = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_current_account'>current_account</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>participant</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>events.account_id = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_current_account'>current_account</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>event</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>return</span> <span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account_id = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_current_account'>current_account</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>account</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>return</span> <span class='id identifier rubyid_arg'>arg</span> <span class='kw'>if</span> <span class='id identifier rubyid_current_user'>current_user</span> <span class='comment'>#and current_user.is_a_superuser?
 </span>  <span class='comment'># arg.where account: Account.current.id
@@ -1785,13 +1817,13 @@
       <pre class="lines">
 
 
-115
-116
-117
-118</pre>
+119
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_class'>resource_class</span>
   <span class='kw'>return</span> <span class='ivar'>@resource_class</span> <span class='kw'>if</span> <span class='id identifier rubyid_resource?'>resource?</span>
@@ -1817,12 +1849,12 @@
       <pre class="lines">
 
 
-120
-121
-122</pre>
+124
+125
+126</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_class='>resource_class=</span> <span class='id identifier rubyid_val'>val</span>
   <span class='ivar'>@resource_class</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
@@ -1835,7 +1867,7 @@
       <div class="method_details ">
   <h3 class="signature " id="resource_form-instance_method">
   
-    #<strong>resource_form</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>resource_form</strong>(rs = nil)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1858,10 +1890,6 @@
       <pre class="lines">
 
 
-128
-129
-130
-131
 132
 133
 134
@@ -1869,12 +1897,17 @@
 136
 137
 138
-139</pre>
+139
+140
+141
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 132</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_resource_form'>resource_form</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_resource_form'>resource_form</span> <span class='id identifier rubyid_rs'>rs</span><span class='op'>=</span><span class='kw'>nil</span>
   <span class='comment'>#
 </span>  <span class='comment'># this is a terrible hack :( 
 </span>  <span class='comment'># due to the fact that the &lt;form id=&quot;#{resource_form}&quot;&gt; does not change on
@@ -1883,9 +1916,10 @@
 </span>  <span class='comment'># TODO: make show pages with tabs change the &#39;resource_form&#39; id to the correct one
 </span>  <span class='comment'>#
 </span>  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>stock_form</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_url'>url</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>stocks.*stock_locations</span><span class='regexp_end'>/</span></span>
-
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%s_form</span><span class='tstring_end'>&quot;</span></span> <span class='op'>%</span> <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span>
-<span class='kw'>end</span></pre>
+  <span class='comment'># rs ||= resource
+</span>  <span class='kw'>return</span> <span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>form_%s</span><span class='tstring_end'>&quot;</span></span> <span class='op'>%</span> <span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Current.html" title="Current (class)">Current</a></span></span><span class='period'>.</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='kw'>rescue</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='comment'># if rs.nil?
+</span>  <span class='comment'># &quot;%s_%s_form&quot; % [rs.class.to_s.underscore, (rs.id rescue &#39;new&#39;)]
+</span><span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1906,12 +1940,12 @@
       <pre class="lines">
 
 
-102
-103
-104</pre>
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 106</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_name'>resource_name</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='ivar'>@resource_name</span> <span class='op'>||=</span> <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span>
@@ -1936,14 +1970,14 @@
       <pre class="lines">
 
 
-198
-199
-200
-201
-202</pre>
+209
+210
+211
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 198</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_options'>resource_options</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_prm'>prm</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='period'>.</span><span class='id identifier rubyid_permit!'>permit!</span>
@@ -2000,12 +2034,12 @@
       <pre class="lines">
 
 
-106
-107
-108</pre>
+110
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resource_symbol'>resource_symbol</span>
   <span class='ivar'>@resource_symbol</span> <span class='op'>||=</span> <span class='id identifier rubyid_resource_name'>resource_name</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
@@ -2018,7 +2052,7 @@
       <div class="method_details ">
   <h3 class="signature " id="resource_url-instance_method">
   
-    #<strong>resource_url</strong>(options = {})  &#x21d2; <tt>Object</tt> 
+    #<strong>resource_url</strong>(entity = {})  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -2041,24 +2075,36 @@
       <pre class="lines">
 
 
-170
-171
-172
-173
-174
 175
 176
 177
 178
 179
-180</pre>
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 170</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 175</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_resource_url'>resource_url</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
-  <span class='id identifier rubyid_url_for'>url_for</span><span class='lparen'>(</span><span class='id identifier rubyid_resource'>resource</span><span class='rparen'>)</span>
-  <span class='comment'># r=request.path
+<span class='kw'>def</span> <span class='id identifier rubyid_resource_url'>resource_url</span> <span class='id identifier rubyid_entity'>entity</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_url_for'>url_for</span> <span class='id identifier rubyid_resource'>resource</span>
+  <span class='comment'># parr = request.path.split(&quot;/&quot;)
+</span>  <span class='comment'># p = case params[:action]
+</span>  <span class='comment'>#   when &#39;new&#39;,&#39;edit&#39;,&#39;destroy&#39;; parr[0..-2].join(&quot;/&quot;)
+</span>  <span class='comment'>#   else parr.join(&quot;/&quot;)
+</span>  <span class='comment'>#   end
+</span>  <span class='comment'># url_for(p)
+</span>  <span class='comment'># r=request.path
 </span>  <span class='comment'># id=params[:id]
 </span>  <span class='comment'># options = case params[:action]
 </span>  <span class='comment'>#   when &#39;create&#39;,&#39;update&#39;,&#39;delete&#39;,&#39;destroy&#39;; &quot;&quot;
@@ -2098,12 +2144,12 @@
       <pre class="lines">
 
 
-154
-155
-156</pre>
+159
+160
+161</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resources'>resources</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='ivar'>@resources</span> <span class='op'>||=</span> <span class='id identifier rubyid_find_resources'>find_resources</span> <span class='id identifier rubyid_options'>options</span>
@@ -2128,13 +2174,13 @@
       <pre class="lines">
 
 
-110
-111
-112
-113</pre>
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resources_name'>resources_name</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_table_name'>table_name</span>
@@ -2171,12 +2217,12 @@
       <pre class="lines">
 
 
-145
-146
-147</pre>
+150
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 150</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resources_target'>resources_target</span>
   <span class='id identifier rubyid_resource_class'>resource_class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_pluralize'>pluralize</span><span class='period'>.</span><span class='id identifier rubyid_underscore'>underscore</span> 
@@ -2212,21 +2258,21 @@
       <pre class="lines">
 
 
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196</pre>
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 185</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 196</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resources_url'>resources_url</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span>
   <span class='id identifier rubyid_r'>r</span><span class='op'>=</span><span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span>
@@ -2352,14 +2398,14 @@
       <pre class="lines">
 
 
-275
-276
-277
-278
-279</pre>
+294
+295
+296
+297
+298</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 275</span>
+      <pre class="code"><span class="info file"># File 'app/controllers/concerns/resource_control.rb', line 294</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sorting_direction'>sorting_direction</span>
   <span class='id identifier rubyid_s'>s</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='rbracket'>]</span> <span class='op'>?</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:s</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span> <span class='op'>:</span> <span class='symbol'>:id</span>
@@ -2376,7 +2422,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct 31 14:07:32 2022 by
+  Generated on Wed Feb 15 15:40:06 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
