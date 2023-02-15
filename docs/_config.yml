@@ -98,3 +98,6 @@ search:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+aux_links:
+  "Developer Documentation":
+    - "/dev"
