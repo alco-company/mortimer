@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+/.yardoc
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -26,6 +27,7 @@
 !/tmp/storage/.keep
 
 /public/assets
+/docs
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

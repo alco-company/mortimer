@@ -9,6 +9,10 @@ is pertaining to an Asset!
 
 In the REFERENCES you will find a lot of people, resources, etc
 
+## KEEP AN EYE ON
+
+* [competition to TurboStream](https://github.com/unabridged/motion)
+
 ## TODO
 
 ### Consider using Railway
@@ -67,6 +71,7 @@ Entities to be added:
 ### 2023-02-15 
 
 publishing PDFs doesn't work either - 
+created bin/commit to automate rbc, yardoc, git add, and git commit
 ### 2023-02-01 
 
 changed to publishing pdf's in the docs folder

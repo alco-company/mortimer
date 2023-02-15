@@ -1,4 +1,12 @@
 rbc
-yardoc --output-dir docs/dev app/**/*.rb
+yardoc --output-dir ../doc/src/dev app/**/*.rb
+pushd ../doc/src \
+  && bundle exec jekyll build \
+  && cp -r _site/* ../ \
+  && git add . \
+  && echo $1 | git commit -F - \
+  && git push \
+  && popd
 git add .
 echo $1 | git commit -F -
+git push mortimer
