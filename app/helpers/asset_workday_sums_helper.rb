@@ -4,7 +4,7 @@ module AssetWorkdaySumsHelper
     return "0" if minutes.blank? or minutes < 1
     return "%dmin" % minutes if minutes < 60
     return "%dt" % minutes.divmod(60)[0] if minutes % 60 == 0
-    minutes_left = minutes.to_i % 60
+    # minutes_left = minutes.to_i % 60
     "%dt %dmin" % minutes.divmod(60)
   rescue 
     "-"
