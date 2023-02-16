@@ -1,21 +1,9 @@
-<tr id="<%= dom_id resource %>"  data-controller="list-item">
+<%= render_row attribs: { id: dom_id(resource), data: { controller: "list-item" }} do %>
   <%= render_component "resource/list_checkbox", resource: resource %>
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= resource.scheme %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= resource.purpose %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= resource.reference %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= resource.general_format %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= record_state resource %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-    <%= render_component "edit", resource: resource, url: edit_resource_url(resource) %>
-  </td>
-</tr>  
+  <%= render_column css: " text-gray-900 font-medium ", content: ( link_to( resource.scheme, uri_scheme_url(resource), data: { turbo_frame: "_top" } )rescue '-') %>
+  <%= render_column css: "hidden md:table-cell ", content:  resource.purpose %>
+  <%= render_column css: "hidden md:table-cell ", content:  resource.reference %>
+  <%= render_column css: "hidden md:table-cell ", content:  resource.general_format %>
+  <%= render_column css: "hidden md:table-cell ", content: record_state(resource) %>
+  <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
+<% end %>

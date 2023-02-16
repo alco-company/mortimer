@@ -1,21 +1,9 @@
-<tr id="<%= dom_id resource %>"  data-controller="list-item">
+<%= render_row attribs: { id: dom_id(resource), data: { controller: "list-item" }} do %>
   <%= render_component "resource/list_checkbox", resource: resource %>
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= link_to resource.name, punch_clock_path(resource), data: { turbo_frame: "_top" } %>
-  </td>
-  <td class="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= resource.location %>
-  </td>
-  <td class="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= resource.ip_addr %>
-  </td>
-  <td class="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= display_time resource.last_punch_at, user %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= record_state resource %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-    <%= render_component "edit", resource: resource, url: edit_resource_url(resource) %>
-  </td>
-</tr>  
+  <%= render_column css: " text-gray-900 font-medium ", content: link_to( resource.asset.name, punch_clock_url(resource), data: { 'turbo-frame': '_top' }) %>
+  <%= render_column css: "hidden sm:table-cell ", content: (link_to( resource.location.name, location_url(resource.location), data: { 'turbo-frame': '_top' }) rescue '-')  %>
+  <%= render_column css: "hidden md:table-cell ", content: resource.ip_addr %>
+  <%= render_column css: "hidden md:table-cell ", content: display_time(resource.last_punch_at, user) %>
+  <%= render_column css: "hidden md:table-cell ", content: record_state(resource.asset) %>
+  <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
+<% end %>
