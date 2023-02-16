@@ -120,7 +120,7 @@ export default class ListController extends Controller {
     e.cancelBubble = true;
 
     if( e.stopPropagation ) e.stopPropagation();
-    
+
     switch(e.key){
       // console.log("down " + e.key);
       // if (e.key === 'Escape') {
@@ -180,6 +180,19 @@ export default class ListController extends Controller {
         e.preventDefault()
         this.openForm(e.srcElement.id.split("_")[ e.srcElement.id.split("_").length - 2])
         break;
+
+      case '8':
+        if (e.altKey===true){
+          let re=/items=\d*/g
+          let url=window.location.href
+          if (url.match(re)){
+            url.replace(re, 'items=100')
+          } else {
+            if (url.indexOf('?')===-1) url = url + '?'
+            url = url + '&items=100'
+          }
+          window.location.href=url
+        }
   
       default: console.log(`down ${e.key}`); break;
 
