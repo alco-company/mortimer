@@ -182,21 +182,26 @@ export default class ListController extends Controller {
         break;
 
       case '8':
-        if (e.altKey===true){
-          let re=/items=\d*/g
-          let url=window.location.href
-          if (url.match(re)){
-            url.replace(re, 'items=100')
-          } else {
-            if (url.indexOf('?')===-1) url = url + '?'
-            url = url + '&items=100'
-          }
-          window.location.href=url
-        }
+        this.set100Items(e)
+        break;
   
       default: console.log(`down ${e.key}`); break;
 
     }
+  }
+
+  set100Items(e){
+    if (e.altKey===true){
+      let re=/items=\d*/g
+      let url=window.location.href
+      if (url.match(re)){
+        url.replace(re, 'items=100')
+      } else {
+        if (url.indexOf('?')===-1) url = url + '?'
+        url = url + '&items=100'
+      }
+      window.location.href=url
+    }    
   }
 
   deleteItems(e){
