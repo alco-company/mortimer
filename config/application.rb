@@ -9,9 +9,6 @@ Bundler.require(*Rails.groups)
 module Greybox
   class Application < Rails::Application
 
-    # Phlex needs this
-    config.autoload_paths << "#{root}/app"
-    
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.i18n.available_locales = %i[da de en]
@@ -42,7 +39,7 @@ module Greybox
     # we'll add a few in there, eventually
     # config.eager_load_paths << Rails.root.join("extras")
     #
-    config.eager_load_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join('lib') << Rails.root.join('app')
 
     #
     # previewing the components
