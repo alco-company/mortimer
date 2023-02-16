@@ -8,7 +8,7 @@ class PrintserversController < AssetsController
   end
 
   def new 
-    resource.assetable.port = Printserver.all.order(:port).last.port.to_i + 1
+    resource.assetable.port = Printserver.all.order(:port).last.port.to_i + 1 rescue 2000
     super
   end
 

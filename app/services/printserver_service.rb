@@ -1,0 +1,3 @@
+class PrintserverService < AssetService
+
+end
