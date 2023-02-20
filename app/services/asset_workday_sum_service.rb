@@ -54,25 +54,41 @@ class AssetWorkdaySumService < AbstractResourceService
   end
 
   def update_workday_sum( resource, event )
-    event.eventable.asset_workday_sum.calculate_on_transactions
+    event.eventable.asset_workday_sum.calculate_on_transactions self 
+  rescue => e
+    puts "AssetWorkdaySumService.update_workday_sum failed due to: #{e.message}"
   end
 
-  # def create( resource, resource_class )
-  #   result = super(resource)
-  #   if result.status != :created 
-  #     resource.assetable = resource_class.new if resource.assetable.nil?
-  #   end
-  #   result
-  # end
+  #
+  # This is how we calculate the work_minutes, ot1_minutes, ot2_minutes in standard Mortimer!
+  #
+  # Gets called from the AssetWorkdaySum model instance method calculate_on_transactions
+  #
+  def calc_work awds, minutes, punch_type      
+    return false unless %w( work_minutes ot1_minutes ot2_minutes ).include? punch_type.to_s
+    awds.asset.assetable.norm_time = 37 if awds.asset.assetable.norm_time.nil?
 
-  # def update( resource, resource_params, resource_class )
-  #   result = super(resource,resource_params)
-  #   if result.status != :updated 
-  #     resource.assetable = resource_class.new if resource.assetable.nil?
-  #   end
-  #   result
-  # end
+    if punch_type.to_s == 'work_minutes'
+      minutes = awds.work_minutes + minutes
+      if minutes > (awds.asset.assetable.norm_time * 60 / 5).round
+        minutes = awds.work_minutes - (awds.asset.assetable.norm_time * 60 / 5).round
+        awds.update_column :work_minutes, (awds.asset.assetable.norm_time * 60 / 5).round
+        punch_type = :ot1_minutes
+      else
+        awds.update_column :work_minutes, minutes
+      end
+    end
 
+    # if ot1_minutes
+    if (%w( ot1_minutes ot2_minutes ).include? punch_type.to_s) and (minutes > 0)
+      t1 = awds.ot1_minutes + awds.ot2_minutes + minutes 
+      t2 = t1 - 180
+      awds.update_column :ot1_minutes, t1 < 181 ? t1 : 180
+      awds.update_column :ot2_minutes, t2 if t2 > 0
+    end
+    return true
+
+  end
 
   
 end

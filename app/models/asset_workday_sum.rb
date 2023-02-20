@@ -67,7 +67,7 @@ class AssetWorkdaySum < AbstractResource
 
   # find all asset_work_transactions and
   # increment all counters
-  def calculate_on_transactions
+  def calculate_on_transactions service_callback
 
     # t.bigint "asset_id", null: false
     # t.bigint "asset_workday_sum_id"
@@ -82,7 +82,8 @@ class AssetWorkdaySum < AbstractResource
     from = punch_type = nil
     reset_values    
 
-    awts = asset_work_transactions.includes(:event).references(:event).order(punched_at: :asc)
+    # get all asset_work_transactions for this asset_workday_sum
+    awts = asset_work_transactions.includes(:event).references(:event).order(punched_at: :asc)    
     awts.each do |awt|
       case awt.state 
 
@@ -90,13 +91,13 @@ class AssetWorkdaySum < AbstractResource
       # ot1_minutes
       # ot2_minutes
       when 'IN'
-        calc_since_prev_punch awt, from, punch_type
+        calc_since_prev_punch awt, from, punch_type, service_callback
         from = awt.punched_at
         punch_type = for_reason awt, "XTRA", :ot1_minutes, :work_minutes
 
       # break_minutes
       when 'BREAK'
-        calc_since_prev_punch awt, from, punch_type
+        calc_since_prev_punch awt, from, punch_type, service_callback
         from = awt.punched_at
         punch_type = :break_minutes
         
@@ -106,7 +107,7 @@ class AssetWorkdaySum < AbstractResource
         # lost_work_revenue_minutes
         # pgf56_minutes
       when 'SICK'
-        calc_since_prev_punch awt, from, punch_type
+        calc_since_prev_punch awt, from, punch_type, service_callback
         from = awt.punched_at
         unless awt.reason.nil?
           punch_type = nil
@@ -131,7 +132,7 @@ class AssetWorkdaySum < AbstractResource
       # unpaid_free_minutes
       # leave_minutes
       when 'FREE'
-        calc_since_prev_punch awt, from, punch_type
+        calc_since_prev_punch awt, from, punch_type, service_callback
         from = awt.punched_at
         unless awt.reason.nil?
           punch_type = nil
@@ -151,7 +152,7 @@ class AssetWorkdaySum < AbstractResource
         end
 
       when 'OUT'
-        calc_since_prev_punch awt, from, punch_type
+        calc_since_prev_punch awt, from, punch_type, service_callback
         from = nil
         punch_type = nil
 
@@ -174,10 +175,10 @@ class AssetWorkdaySum < AbstractResource
   # they spent on this last stint doing whatever
   # by looking at the current awt.punched_at and the from datetime
   #
-  def calc_since_prev_punch awt, from, punch_type
+  def calc_since_prev_punch awt, from, punch_type, callback
     return if from.nil?
     minutes = calc_minutes from, awt.punched_at
-    unless calc_work(minutes,punch_type)
+    unless callback.calc_work(self,minutes,punch_type)
       minutes += self.attributes[punch_type.to_s]
       self.update_column punch_type, minutes
     end
@@ -193,32 +194,6 @@ class AssetWorkdaySum < AbstractResource
       minutes = ((to - from) / 60).round
     end
     minutes
-  end
-
-  def calc_work minutes, punch_type      
-    return false unless %w( work_minutes ot1_minutes ot2_minutes ).include? punch_type.to_s
-    asset.assetable.norm_time = 37 if asset.assetable.norm_time.nil?
-
-    if punch_type.to_s == 'work_minutes'
-      minutes = work_minutes + minutes
-      if minutes > (asset.assetable.norm_time * 60 / 5).round
-        minutes = work_minutes - (asset.assetable.norm_time * 60 / 5).round
-        update_column :work_minutes, (asset.assetable.norm_time * 60 / 5).round
-        punch_type = :ot1_minutes
-      else
-        update_column :work_minutes, minutes
-      end
-    end
-
-    # if ot1_minutes
-    if (%w( ot1_minutes ot2_minutes ).include? punch_type.to_s) and (minutes > 0)
-      t1 = ot1_minutes + minutes 
-      t2 = t1 - 180
-      update_column :ot1_minutes, t1 < 181 ? t1 : 180
-      update_column :ot2_minutes, t2 if t2 > 0
-    end
-    return true
-
   end
 
   def for_reason awt, reason, reason_type, otherwise

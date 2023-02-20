@@ -72,7 +72,8 @@ module Pos
       head 301 and return unless token_approved
       event = AssetWorkTransactionService.new.create_employee_punch_transaction( resource, resource_params )
       if event && (['OUT','SICK','BREAK','FREE'].include? resource_params['state'])
-        AssetWorkdaySumService.new.update_workday_sum( resource, event )
+        srv = resource.account.system_parameters_include("calc_asset_workday_sum") || "AssetWorkdaySumService"
+        srv.classify.constantize.new.update_workday_sum( resource, event )
         ev = PupilTransactionService.new.close_active_pupils( resource, event, resource_params ) 
       end
       head 200
