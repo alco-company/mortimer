@@ -15,6 +15,13 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## TODO
 
+how to handle supplier-id on products - when we have relabelled suppliers to organizations
+
+shit-list:
+/contacts
+/organizations
+/products
+
 ### Sending emails with TailwindCSS styling
 
 got a reference for the how-to - see REFERENCES!
@@ -76,15 +83,24 @@ Entities to be added:
 
 ### 2023-02-20
 
-add views/index/column_header 
+84758a7 (HEAD -> staging, mortimer/staging) allow for account asset_workday_sum calculation specialization
+b398600 added views/component/list/header
+  This is the third installment of Phlex - last on the list index action
+43d22d0 align text on index-column + few translations
+bb4f9f2 use rows/columns on asset_work & contacts
+5261264 comments reg dry-rb
+23a32a3 make rows/columns views/components
+  This is the first and second views/components of Phlex - the first/second on the list index action
+553758f move load_path to eager_load_path - was missing in helpers
+8e26b3e add the infinity-scroll in separate function
+23ceced small save in asset_workday_sum helper
+b42efb8 set row & columns on all lists
+57fb0d6 alt+8 in lists sets items=100 => infinity-scroll
+b832033 printserver was missing a few parts
+
+
 ### 2023-02-16
 
-how to handle supplier-id on products - when we have relabelled suppliers to organizations
-
-shit-list:
-/contacts
-/organizations
-/products
 
 
 ### 2023-02-15
