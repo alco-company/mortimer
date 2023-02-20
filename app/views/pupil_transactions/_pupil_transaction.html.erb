@@ -1,18 +1,8 @@
-<tr id="<%= dom_id resource %>"  data-controller="list-item">
+<%= render_row attribs: { id: dom_id(resource), data: { controller: "list-item2" }} do %>
   <%= render_component "resource/list_checkbox", resource: resource %>
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    <%= link_to resource.name, pupil_pupil_transaction_path(resource.pupil,resource), data: { turbo_frame: "_top" } %>
-  </td>
-  <td class="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= display_time resource.created_at, user %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= record_state resource.event %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-    <%= resource.work_minutes %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-    <%= render_component "edit", resource: resource, url: edit_pupil_pupil_transaction_url(resource.pupil,resource) %>
-  </td>
-</tr>  
+  <%= render_column css: " text-gray-900 font-medium ", content: ( link_to( resource.name, pupil_pupil_transaction_url(resource.pupil,resource), data: { turbo_frame: "_top" } ) rescue '-') %>
+  <%= render_column css: "hidden sm:table-cell ", content: display_time( resource.created_at, user ) %>
+  <%= render_column content: (record_state( resource.event ) rescue '-') %>
+  <%= render_column css: "text-right", content: display_hours_minutes(resource.work_minutes) %>
+  <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
+<% end %>

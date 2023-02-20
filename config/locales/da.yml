@@ -69,7 +69,7 @@ da:
 
   Account:
     index: "Oversigt over (SaaS) konti"
-    index_description: I denne oversigt finder du alle de kunder, der benytter en SaaS løsning fra SPEICHER. 
+    index_description: I denne oversigt finder du alle de kunder, der benytter en SaaS løsning fra MORTIMER. 
     new_button: "Ny kunde!"
 
   accounts:
@@ -163,6 +163,7 @@ da:
     products: "Produkter"
     punch_clocks: "Stempelure"
     pupils: Elever
+    pupil_transactions: Elev timer
     services: "Tjenester"
     stock_item_transactions: "Lagerbevægelser"
     stock_items: "Serier/Batch"
@@ -384,7 +385,7 @@ da:
 
   PunchClock: 
     index: "Oversigt over stempelure"
-    index_description: "Oversigten viser dig de stempelure, der er oprettet i Speicher."
+    index_description: "Oversigten viser dig de stempelure, der er oprettet i Mortimer."
 
   punch_clocks:
     index_columns: 
@@ -400,13 +401,24 @@ da:
 
   Pupil: 
     index: "Oversigt over elever"
-    index_description: "Oversigten viser dig de elever, der er oprettet i Speicher."
+    index_description: "Oversigten viser dig de elever, der er oprettet i Mortimer."
 
   pupils:
     index_columns: 
       name: Navn 
       time_spent_minutes: Forbrugt tid
       status: 
+
+  PupilTransaction: 
+    index: "Oversigt over elev timer"
+    index_description: "Oversigten viser dig de elev timer, der er oprettet i Mortimer."
+
+  pupil_transactions:
+    index_columns: 
+      name: Navn 
+      scanned_at: Ændring registreret
+      quantity: Forbrugt tid
+      state: Status 
 
   Role:
     index: Oversigt over roller
@@ -476,7 +488,7 @@ da:
 
   Stock:
     index: "Oversigt over lagre"
-    index_description: "Oversigten viser dig de lagre, der er oprettet i Speicher."
+    index_description: "Oversigten viser dig de lagre, der er oprettet i Mortimer."
     new_button: Nyt lager
     delete:
       title: "Slet lageret: %{name}"
@@ -521,7 +533,7 @@ da:
 
   StockLocation:
     index: "Oversigt over lagerlokationer"
-    index_description: "Oversigten viser dig de lagerlokationer, der er oprettet i Speicher."
+    index_description: "Oversigten viser dig de lagerlokationer, der er oprettet i Mortimer."
 
   stock_locations:
     index_columns:
@@ -529,7 +541,7 @@ da:
 
   StockItemTransaction:
     index: "Oversigt over lager bevægelser"
-    index_description: "Oversigten viser dig de lager bevægelser, der er oprettet i Speicher."
+    index_description: "Oversigten viser dig de lager bevægelser, der er oprettet i Mortimer."
     new_button: Ny lager bevægelse
     delete:
       title: "Slet lager bevægelse: %{name}"
@@ -544,7 +556,7 @@ da:
 
   Supplier:
     index: "Oversigt over leverandører"
-    index_description: "Oversigten viser dig de leverandører, der er oprettet i Speicher."
+    index_description: "Oversigten viser dig de leverandører, der er oprettet i Mortimer."
     new_button: Ny leverandør
     delete:
       title: "Slet leverandøren: %{name}"
@@ -621,7 +633,7 @@ da:
 
   User:
     index: "Oversigt over brugere"
-    index_description: I denne oversigt finder du alle der har adgang til Speicher. Hver adgang er knyttet til en email adresse (der kan være flere adgange knyttet til samme email adresse). Brugernavnet er unikt.
+    index_description: I denne oversigt finder du alle der har adgang til Mortimer. Hver adgang er knyttet til en email adresse (der kan være flere adgange knyttet til samme email adresse). Brugernavnet er unikt.
     listing:
       created_at: "Oprettet"
     send_invite: "Send invitation"
