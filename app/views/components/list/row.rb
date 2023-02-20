@@ -1,5 +1,5 @@
 module Views
-  class Index::Row < Phlex::HTML
+  class Components::List::Row < Phlex::HTML
 
     def initialize( attribs: )
       @attribs = attribs

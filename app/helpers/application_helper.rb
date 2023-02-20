@@ -130,11 +130,11 @@ module ApplicationHelper
   end
 
   def render_row(attribs: {}, &block)
-    render Views::Index::Row.new attribs:, &block
+    render Views::Components::List::Row.new attribs:, &block
   end
 
   def render_column(css: "", content:)
-    render Views::Index::Column.new css:, content:
+    render Views::Components::List::Column.new css:, content:
   end
 
   def form_header_title

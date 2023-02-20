@@ -1,5 +1,5 @@
 module Views
-  class Index::Column < Phlex::HTML
+  class Components::List::Column < Phlex::HTML
 
     def initialize( content: "", css: "" )
       @classes = css
