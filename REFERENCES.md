@@ -34,8 +34,21 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * Working with SQL, includes and joins especially [Julianna Seiki](https://medium.com/gusto-engineering/a-visual-guide-to-using-includes-in-rails-700a91cd3095)
 * Building of background_jobs, taking cues from Sidekiq [Mike Perham](https://github.com/mperham/sidekiq/wiki/Ent-Periodic-Jobs)
 * Custom Validations [Sylvia Vargas](https://dev.to/sylwiavargas/rails-custom-validations-58mo)
-* Authentication Zero [lazaronixon](https://github.com/lazaronixon/authentication-zero)
+* Authentication Zero [Simon Chiu](https://codewithrails.com/rails-authentication) and [lazaronixon](https://github.com/lazaronixon/authentication-zero)
 * Geolocation API with Promises [Adam Bar](https://whatwebcando.today/articles/use-geolocation-api-promises/)
+* Tricks and Treats [Yaroslav Shmarov](https://blog.corsego.com/)
+* Sending Emails with TailwindCSS styling [Cezar Halmagean](https://mixandgo.com/learn/ruby-on-rails/email-design-with-tailwindcss)
+* Custom TurboStream Actions [David Kimura](https://www.driftingruby.com/episodes/custom-turbo-stream-actions) and [Marco Roth](https://marcoroth.dev/posts/guide-to-custom-turbo-stream-actions)
+* Drawing in Realtime with ActionCable [Deanin](https://www.youtube.com/watch?v=VA19xZPCksQ)
+* Building Twitter Clone with Ruby [Typefast](https://www.youtube.com/watch?v=XxuPlSW4t6M)
+* 
+* 
+
+## Blogs
+
+* [Benito Serna](https://bhserna.com/) - [building a data grid with search and filters](https://bhserna.com/building-data-grid-with-search-rails-hotwire-ransack.html)
+* [Karol Bak](https://kukicola.io/posts/deploying-rails-6-application-with-dokku/) - on deploying Rails (6) with Dokku
+* [Andy Croll](https://andycroll.com) - on what infrastructure to [base a SaaS on](https://andycroll.com/ruby/infrastructure-software-we-use-to-run-our-saas/)
 
 ## Resources
 
@@ -63,6 +76,15 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * [How to embed open street map in a webpage](https://medium.com/@nargessmi87/how-to-embede-open-street-map-in-a-webpage-like-google-maps-8968fdad7fe4)
 * [How to use Percent signs in Ruby - Faraaz](https://deepsource.io/blog/ruby-percent-notation/)
 * [How to warn user of lost connection](https://webinuse.com/how-to-warn-users-when-the-connection-is-lost/)
+* [Setting up Twilio to handle SMS from Rails](https://blog.corsego.com/rails-twilio-sms-api)
+* [Show users online](https://blog.corsego.com/action-cable-broadcast-users-online)
+* [Use the Browser Geolocation API to place map at user's current location](https://blog.corsego.com/stimulus-get-browser-location)
+* [RGeo - key component for writing location-aware applications](https://github.com/rgeo/rgeo)
+* [Oneline beautiful maps with mapkick](https://chartkick.com/mapkick)
+* [Running things in parallel - hint: await](https://thoughtbot.com/blog/my-adventure-with-async-ruby)
+* [Building BI dashboard - using Blazer](https://www.honeybadger.io/blog/blazer-business-intelligence-ruby-on-rails/) and an example being [this](https://blazer.dokkuapp.com/dashboards/1-dashboard-demo)
+* [Add a sortable list using Hotwire](https://www.youtube.com/watch?v=FKAMRLQpypk)
+* 
 
 
 [ Concepts of doing Advanced Datebase Computing using PostgreSQL ](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)

@@ -1,3 +1,10 @@
+#
+# TODO:
+#
+# Probably should consider swapping out the x for ROM
+# https://rom-rb.org/
+#
+#
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 

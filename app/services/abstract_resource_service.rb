@@ -8,7 +8,15 @@
 # usually will be called from the controller
 # and will return a Result hash with a status
 #
+# TODO:
+# look to https://dry-rb.org/gems/dry-monads/1.3/
+# for inspiration regarding the Result hash
+#
 class AbstractResourceService
+
+  def self.find_by **args
+    self.class_name.to_s.gsub( /Service$/, '').constantize.find_by args
+  end
 
   def upsert( resource, resource_params )
     resource.new_record? ? create(resource) : update(resource, resource_params)

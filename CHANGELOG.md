@@ -15,6 +15,12 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## TODO
 
+### Sending emails with TailwindCSS styling
+
+got a reference for the how-to - see REFERENCES!
+### Validations
+
+Consider rewriting entire validation system to use [dry-validation](https://dry-rb.org/gems/dry-validation/1.5/) - it is a lot more flexible than Rails' validations
 ### Consider using Railway
 
 <https://railway.app/>
@@ -68,12 +74,48 @@ Entities to be added:
 
 ## DONE
 
+### 2023-02-16
+
+how to handle supplier-id on products - when we have relabelled suppliers to organizations
+
+shit-list:
+/contacts
+/organizations
+/products
+
+
 ### 2023-02-15
 
-publishing PDFs doesn't work either -
 created bin/commit to automate rbc, yardoc, git add, and git commit
 isolating doc in greybox/doc and using <https://www.honeybadger.io/blog/documentation-worklow-rails/> to generate docs @ <https://mortimer.guru>
 bin/commit will allow you to commit with a message from the command line - e.g. bin/commit "added documentation" - it will also commit the docs
+
+f124077 (HEAD -> staging, staging/staging, mortimer/staging) added Gemfile.lock
+741a2c0 small change to bin/commit
+00ed44c added text on Mortimer and row/columns on dashboards
+a5c1069 had to pull while separating the docs and src
+942e00c test af commit + push af doc
+5e8533d Create CNAME
+77524f1 added render_column and render_row to background_jobs
+f4106fa added bin/commit to automate rbc, yardoc, and commit in one go
+
+### 2023-02-14
+
+eb78863 setting dev link on documentation
+190d8bc added phlex-rails and lookbook and first components
+bc6f436 (mortimer/phlex, github/staging, github/phlex) prepare for phlex install
+1ba4cb1 list_controller - wip
+b0cb9e5 contacts - wip
+4079222 adding Lookbook
+
+### 2023-02-13
+
+publishing PDFs doesn't work either -
+
+b76853c save all uri - wip
+7935fd0 display time as %dt %dmin
+b59d9b6 rescue from page out of size
+7ddf349 add 15min button - wip
 
 ### 2023-02-01
 
