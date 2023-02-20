@@ -129,6 +129,13 @@ module ApplicationHelper
     end
   end
 
+  def render_header(**attribs, &block)
+    if attribs[:sort]
+      attribs[:label] = raw sort_link_to( attribs[:label], attribs[:column], data: { turbo_action: "advance"})
+    end
+    render Views::Components::List::Header.new **attribs, &block
+  end
+
   def render_row(attribs: {}, &block)
     render Views::Components::List::Row.new attribs:, &block
   end

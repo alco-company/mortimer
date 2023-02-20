@@ -1,27 +1,9 @@
-<th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= table_header_checkbox  %>
-</th>
-<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.name'), :name, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.stock_location'), :stock_location, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.batch_number'), :batch_number, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.expire_at'), :expire_at, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="hidden sm:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider ">
-  <%= t('.quantity_pallets') %>
-</th>
-<th scope="col" class="hidden sm:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider float-right">
-  <%= t('.quantity') %>
-</th>
-<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.state'), :state, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="relative px-6 py-3">
-  <span class="sr-only">Edit</span>
-</th>
+<%= render_header column: 'checkbox', css: 'hidden' %>
+<%= render_header sort: true, label: t('.name'), column: :name %>
+<%= render_header sort: true, label: t('.stock_location'), column: :stock_location %>
+<%= render_header sort: true, label: t('.batch_number'), column: :batch_number %>
+<%= render_header sort: true, label: t('.expire_at'), column: :expire_at %>
+<%= render_header label: t('.quantity_pallets'), css: 'text-right' %>
+<%= render_header label: t('.quantity'), css: 'text-right' %>
+<%= render_header sort: true, label: t('.state'), column: :state %>
+<%= render_header column: 'edit' %>

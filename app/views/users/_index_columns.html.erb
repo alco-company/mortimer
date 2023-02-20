@@ -1,21 +1,7 @@
-<th scope="col" class="hidden md:table-cell px-2 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= table_header_checkbox  %>
-</th>
-<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.user_name'), :user_name, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.email'), :email, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="hidden lg:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.logged_in_at'), :logged_in_at, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="hidden lg:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.since'), :created_at, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.state'), :state, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="relative px-6 py-3">
-  <span class="sr-only">Edit</span>
-</th>
+<%= render_header column: 'checkbox', css: 'hidden' %>
+<%= render_header sort: true, label: t('.user_name'), column: :user_name %>
+<%= render_header sort: true, label: t('.email'), column: :email %>
+<%= render_header sort: true, label: t('.logged_in_at'), column: :logged_in_at %>
+<%= render_header sort: true, label: t('.since'), column: :created_at %>
+<%= render_header sort: true, label: t('.state'), column: :state %>
+<%= render_header column: 'edit' %>

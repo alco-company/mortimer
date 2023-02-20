@@ -3,6 +3,6 @@
   <%= render_column css: " text-gray-900 font-medium ", content: link_to( resource.event.name, stock_item_transaction_url(resource), data: { 'turbo-frame': '_top' }) %>
   <%= render_column css: "hidden md:table-cell ", content: display_time(resource.created_at, user) %>
   <%= render_column css: "hidden md:table-cell ", content: record_state(resource.event) %>
-  <%= render_column css: "hidden md:table-cell ", content: "1 pll, %s / %s" % [(resource.quantity||0), resource.unit] %>
+  <%= render_column css: "hidden md:table-cell text-right ", content: "1 pll, %s / %s" % [(resource.quantity||0), resource.unit] %>
   <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
 <% end %>

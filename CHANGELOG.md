@@ -74,6 +74,9 @@ Entities to be added:
 
 ## DONE
 
+### 2023-02-20
+
+add views/index/column_header 
 ### 2023-02-16
 
 how to handle supplier-id on products - when we have relabelled suppliers to organizations

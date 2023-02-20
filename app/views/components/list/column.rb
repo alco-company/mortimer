@@ -8,7 +8,7 @@ module Views
 
     def template(&)
       # render Layout.new(title: "Index Column") do
-      td class: "#{@classes} px-6 py-4 whitespace-nowrap text-sm text-gray-500" do
+      td class: "px-6 py-4 whitespace-nowrap text-sm text-gray-500 #{@classes} " do
         @content
       end
       # end

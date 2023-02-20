@@ -1,62 +1,24 @@
-<th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= table_header_checkbox  %>
-</th>
+<%= render_header column: 'checkbox', css: 'hidden' %>
+
 <% unless parent? %>
-<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.name'), :name, data: { turbo_action: "advance"} %>
-</th>
+  <%= render_header sort: true, label: t('.name'), column: :name %>
 <% end %>
-<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.work_date'), :work_date, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.work_minutes'), :work_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.break_minutes'), :break_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.ot1_minutes'), :ot1_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.ot2_minutes'), :ot2_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.sick_minutes'), :sick_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.free_minutes'), :free_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.holiday_free_minutes'), :holiday_free_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.child_sick_minutes'), :child_sick_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.nursing_minutes'), :nursing_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.senior_minutes'), :senior_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.unpaid_free_minutes'), :unpaid_free_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.lost_work_revenue_minutes'), :lost_work_revenue_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.child_leave_minutes'), :child_leave_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.leave_minutes'), :leave_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.free_prev_minutes'), :free_prev_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to raw_t('.pgf56_minutes'), :pgf56_minutes, data: { turbo_action: "advance" } %>
-</th>
-<th scope="col" class="relative px-6 py-3">
-  <span class="sr-only">Edit</span>
-</th>
+
+<%= render_header sort: true, label: t('.work_date'), column: :work_date %>
+<%= render_header sort: true, label: t('.work_minutes'), column: :work_minutes %>
+<%= render_header sort: true, label: t('.break_minutes'), column: :break_minutes %>
+<%= render_header sort: true, label: t('.ot1_minutes'), column: :ot1_minutes %>
+<%= render_header sort: true, label: t('.ot2_minutes'), column: :ot2_minutes %>
+<%= render_header sort: true, label: t('.sick_minutes'), column: :sick_minutes %>
+<%= render_header sort: true, label: t('.free_minutes'), column: :free_minutes %>
+<%= render_header sort: true, label: t('.holiday_free_minutes'), column: :holiday_free_minutes %>
+<%= render_header sort: true, label: t('.child_sick_minutes'), column: :child_sick_minutes %>
+<%= render_header sort: true, label: t('.nursing_minutes'), column: :nursing_minutes %>
+<%= render_header sort: true, label: t('.senior_minutes'), column: :senior_minutes %>
+<%= render_header sort: true, label: t('.unpaid_free_minutes'), column: :unpaid_free_minutes %>
+<%= render_header sort: true, label: t('.lost_work_revenue_minutes'), column: :lost_work_revenue_minutes %>
+<%= render_header sort: true, label: t('.child_leave_minutes'), column: :child_leave_minutes %>
+<%= render_header sort: true, label: t('.leave_minutes'), column: :leave_minutes %>
+<%= render_header sort: true, label: t('.free_prev_minutes'), column: :free_prev_minutes %>
+<%= render_header sort: true, label: t('.pgf56_minutes'), column: :pgf56_minutes %>
+<%= render_header column: 'edit' %>

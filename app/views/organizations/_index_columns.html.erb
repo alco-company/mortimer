@@ -1,21 +1,7 @@
-<th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= table_header_checkbox  %>
-</th>
-<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.name'), :name, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.cvr_number'), :cvr_number, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.product_resource'), :product_resource, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.gtin_prefix'), :gtin_prefix, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-  <%= sort_link_to t('.state'), :state, data: { turbo_action: "advance"} %>
-</th>
-<th scope="col" class="relative px-6 py-3">
-  <span class="sr-only">Edit</span>
-</th>
+<%= render_header column: 'checkbox', css: 'hidden' %>
+<%= render_header sort: true, label: t('.name'), column: :name %>
+<%= render_header sort: true, label: t('.cvr_number'), column: :cvr_number %>
+<%= render_header sort: true, label: t('.product_resource'), column: :product_resource %>
+<%= render_header sort: true, label: t('.gtin_prefix'), column: :gtin_prefix %>
+<%= render_header sort: true, label: t('.state'), column: :state %>
+<%= render_header column: 'edit' %>
