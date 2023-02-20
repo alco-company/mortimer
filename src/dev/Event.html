@@ -107,33 +107,28 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <ul><li>
-<p>:account - which account does this event belong to</p>
-</li><li>
-<p>:eventable - what kind of event is this (call/todo/appointment/…)</p>
-</li><li>
-<p>:calendar_id - what calendar does this event belong to</p>
-</li><li>
-<p>:name - event description</p>
-</li><li>
-<p>:state - what is the current state of this event (dependable upon the eventable)</p>
-</li><li>
-<p>:position - if ordered somewhat - what position does this event hold</p>
-</li><li>
-<p>:ancestry - if hierachically ordered - where in the ‘tree’ does this event sit</p>
-</li><li>
-<p>:started_at - once started, we should know</p>
-</li><li>
-<p>:ended_at - once finished, we should know too</p>
-</li><li>
-<p>:minutes_spent - how many minutes did this event ‘take to finish’</p>
-</li></ul>
+    <ul>
+<li>:account - which account does this event belong to</li>
+<li>:eventable - what kind of event is this (call/todo/appointment/...)</li>
+<li>:calendar_id - what calendar does this event belong to</li>
+<li>:name - event description</li>
+<li>:state - what is the current state of this event (dependable upon the eventable)</li>
+<li>:position - if ordered somewhat - what position does this event hold</li>
+<li>:ancestry - if hierachically ordered - where in the &#39;tree&#39; does this event sit</li>
+<li>:started_at - once started, we should know</li>
+<li>:ended_at - once finished, we should know too</li>
+<li>:minutes_spent - how many minutes did this event &#39;take to finish&#39;</li>
+</ul>
 
-<p>TODO - RRULE - <a href="https://icalendar.org/rrule-tool.html">icalendar.org/rrule-tool.html</a> <a href="https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html">icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html</a></p>
+<p>TODO - RRULE - <a href="https://icalendar.org/rrule-tool.html">https://icalendar.org/rrule-tool.html</a>
+<a href="https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html">https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html</a></p>
 
-<p>on client - <a href="https://github.com/jakubroztocil/rrule">github.com/jakubroztocil/rrule</a> on server - gem ‘rrule’ - <a href="https://github.com/square/ruby-rrule">github.com/square/ruby-rrule</a></p>
+<p>on client - <a href="https://github.com/jakubroztocil/rrule">https://github.com/jakubroztocil/rrule</a>
+on server - gem &#39;rrule&#39; - <a href="https://github.com/square/ruby-rrule">https://github.com/square/ruby-rrule</a></p>
 
-<p>Event is one in 4 core entities - together with Participants, Assets, and Messages and together they make any data relation possible; with the supporting tables close by obviously! EventTransactions persist every manipulation of delegated events</p>
+<p>Event is one in 4 core entities - together with Participants, Assets, and Messages
+and together they make any data relation possible; with the supporting tables close by
+obviously! EventTransactions persist every manipulation of delegated events</p>
 
 
   </div>
@@ -173,8 +168,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>called by resource_control when creating new resources for the #new action.</p>
+    <span class="summary_desc"><div class='inline'><p>called by resource_control when creating new resources for the #new action.</p>
 </div></span>
   
 </li>
@@ -206,8 +200,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>will be called by “children” too - like Employees, Stocks, StockLocations, etc.</p>
+    <span class="summary_desc"><div class='inline'><p>will be called by &quot;children&quot; too - like Employees, Stocks, StockLocations, etc.</p>
 </div></span>
   
 </li>
@@ -230,8 +223,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>will be called by “children” too - like Employees, Stocks, StockLocations, etc.</p>
+    <span class="summary_desc"><div class='inline'><p>will be called by &quot;children&quot; too - like Employees, Stocks, StockLocations, etc.</p>
 </div></span>
   
 </li>
@@ -276,8 +268,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>used by clone_from method on abstract_resource to exclude has_many associations which should not be cloned when making a copy of some instance of a model.</p>
+    <span class="summary_desc"><div class='inline'><p>used by clone_from method on abstract_resource to exclude has_many associations which should not be cloned when making a copy of some instance of a model.</p>
 </div></span>
   
 </li>
@@ -368,8 +359,8 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>called by resource_control when creating new resources for the #new action</p>
+    <p>called by resource_control when creating new resources
+for the #new action</p>
 
 
   </div>
@@ -415,8 +406,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>will be called by “children” too - like Employees, Stocks, StockLocations, etc</p>
+    <p>will be called by &quot;children&quot; too - like Employees, Stocks, StockLocations, etc</p>
 
 
   </div>
@@ -466,8 +456,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>will be called by “children” too - like Employees, Stocks, StockLocations, etc</p>
+    <p>will be called by &quot;children&quot; too - like Employees, Stocks, StockLocations, etc</p>
 
 
   </div>
@@ -553,8 +542,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>used by clone_from method on abstract_resource to exclude has_many associations which should not be cloned when making a copy of some instance of a model</p>
+    <p>used by clone_from method on abstract_resource
+to exclude has_many associations which should not be cloned
+when making a copy of some instance of a model</p>
 
 
   </div>
@@ -648,7 +638,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 15 17:48:56 2023 by
+  Generated on Mon Feb 20 23:51:44 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

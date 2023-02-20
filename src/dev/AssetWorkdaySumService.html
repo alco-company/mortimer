@@ -103,8 +103,23 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>t.date “work_date” t.integer “work_minutes” - arbejde t.integer “break_minutes” - pauser t.integer “ot1_minutes” - overtid 50% t.integer “ot2_minutes” - overtid 100% t.integer “sick_minutes” - syg t.integer “pgf56_minutes” - pgf 56 sygdom t.integer “free_minutes” - ferie t.integer “free_prev_minutes” - ferie sidste år t.integer “holiday_free_minutes” - Feriefridage t.integer “child_sick_minutes” - Barns 1. sygedag t.integer “nursing_minutes” - Omsorgsdage t.integer “senior_minutes” - Seniordage t.integer “unpaid_free_minutes” - Fri uden løn t.integer “lost_work_revenue_minutes” - Tabt arbejdsfortjeneste t.integer “child_leave_minutes” - Barselsorlov t.integer “leave_minutes” - Orlov (sygdom forældre eller ægtefælle)</p>
+    <p>t.date &quot;work_date&quot;
+t.integer &quot;work_minutes&quot; - arbejde
+t.integer &quot;break_minutes&quot; - pauser
+t.integer &quot;ot1_minutes&quot; - overtid 50%
+t.integer &quot;ot2_minutes&quot; - overtid 100%
+t.integer &quot;sick_minutes&quot; - syg
+t.integer &quot;pgf56_minutes&quot; - pgf 56 sygdom
+t.integer &quot;free_minutes&quot; - ferie
+t.integer &quot;free_prev_minutes&quot; - ferie sidste år
+t.integer &quot;holiday_free_minutes&quot; - Feriefridage
+t.integer &quot;child_sick_minutes&quot; - Barns 1. sygedag
+t.integer &quot;nursing_minutes&quot; - Omsorgsdage
+t.integer &quot;senior_minutes&quot; - Seniordage
+t.integer &quot;unpaid_free_minutes&quot; - Fri uden løn
+t.integer &quot;lost_work_revenue_minutes&quot; - Tabt arbejdsfortjeneste
+t.integer &quot;child_leave_minutes&quot; - Barselsorlov
+t.integer &quot;leave_minutes&quot; - Orlov (sygdom forældre eller ægtefælle)</p>
 
 
   </div>
@@ -112,7 +127,11 @@
 <div class="tags">
   
 
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="ElmelundAssetWorkdaySumService.html" title="ElmelundAssetWorkdaySumService (class)">ElmelundAssetWorkdaySumService</a></span></p>
 </div>
+
 
 
 
@@ -126,6 +145,29 @@
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#calc_work-instance_method" title="#calc_work (instance method)">#<strong>calc_work</strong>(awds, minutes, punch_type)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>This is how we calculate the work_minutes, ot1_minutes, ot2_minutes in standard Mortimer!.</p>
+</div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -206,7 +248,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="AbstractResourceService.html" title="AbstractResourceService (class)">AbstractResourceService</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="AbstractResourceService.html#create-instance_method" title="AbstractResourceService#create (method)">#create</a></span>, <span class='object_link'><a href="AbstractResourceService.html#delete-instance_method" title="AbstractResourceService#delete (method)">#delete</a></span>, <span class='object_link'><a href="AbstractResourceService.html#edit_all-instance_method" title="AbstractResourceService#edit_all (method)">#edit_all</a></span>, <span class='object_link'><a href="AbstractResourceService.html#say-instance_method" title="AbstractResourceService#say (method)">#say</a></span>, <span class='object_link'><a href="AbstractResourceService.html#update-instance_method" title="AbstractResourceService#update (method)">#update</a></span>, <span class='object_link'><a href="AbstractResourceService.html#upsert-instance_method" title="AbstractResourceService#upsert (method)">#upsert</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="AbstractResourceService.html#create-instance_method" title="AbstractResourceService#create (method)">#create</a></span>, <span class='object_link'><a href="AbstractResourceService.html#delete-instance_method" title="AbstractResourceService#delete (method)">#delete</a></span>, <span class='object_link'><a href="AbstractResourceService.html#edit_all-instance_method" title="AbstractResourceService#edit_all (method)">#edit_all</a></span>, <span class='object_link'><a href="AbstractResourceService.html#find_by-class_method" title="AbstractResourceService.find_by (method)">find_by</a></span>, <span class='object_link'><a href="AbstractResourceService.html#say-instance_method" title="AbstractResourceService#say (method)">#say</a></span>, <span class='object_link'><a href="AbstractResourceService.html#update-instance_method" title="AbstractResourceService#update (method)">#update</a></span>, <span class='object_link'><a href="AbstractResourceService.html#upsert-instance_method" title="AbstractResourceService#upsert (method)">#upsert</a></span></p>
 
 
   <div id="instance_method_details" class="method_details_list">
@@ -214,7 +256,93 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="get_todays_worksum-instance_method">
+  <h3 class="signature first" id="calc_work-instance_method">
+  
+    #<strong>calc_work</strong>(awds, minutes, punch_type)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>This is how we calculate the work_minutes, ot1_minutes, ot2_minutes in standard Mortimer!</p>
+
+<p>Gets called from the AssetWorkdaySum model instance method calculate_on_transactions</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/services/asset_workday_sum_service.rb', line 67</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_calc_work'>calc_work</span> <span class='id identifier rubyid_awds'>awds</span><span class='comma'>,</span> <span class='id identifier rubyid_minutes'>minutes</span><span class='comma'>,</span> <span class='id identifier rubyid_punch_type'>punch_type</span>      
+  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='qwords_beg'>%w(</span><span class='words_sep'> </span><span class='tstring_content'>work_minutes</span><span class='words_sep'> </span><span class='tstring_content'>ot1_minutes</span><span class='words_sep'> </span><span class='tstring_content'>ot2_minutes</span><span class='words_sep'> </span><span class='tstring_end'>)</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_punch_type'>punch_type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_asset'>asset</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='period'>.</span><span class='id identifier rubyid_norm_time'>norm_time</span> <span class='op'>=</span> <span class='int'>37</span> <span class='kw'>if</span> <span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_asset'>asset</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='period'>.</span><span class='id identifier rubyid_norm_time'>norm_time</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_punch_type'>punch_type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>work_minutes</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_minutes'>minutes</span> <span class='op'>=</span> <span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_work_minutes'>work_minutes</span> <span class='op'>+</span> <span class='id identifier rubyid_minutes'>minutes</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_minutes'>minutes</span> <span class='op'>&gt;</span> <span class='lparen'>(</span><span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_asset'>asset</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='period'>.</span><span class='id identifier rubyid_norm_time'>norm_time</span> <span class='op'>*</span> <span class='int'>60</span> <span class='op'>/</span> <span class='int'>5</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span>
+      <span class='id identifier rubyid_minutes'>minutes</span> <span class='op'>=</span> <span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_work_minutes'>work_minutes</span> <span class='op'>-</span> <span class='lparen'>(</span><span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_asset'>asset</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='period'>.</span><span class='id identifier rubyid_norm_time'>norm_time</span> <span class='op'>*</span> <span class='int'>60</span> <span class='op'>/</span> <span class='int'>5</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span>
+      <span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_update_column'>update_column</span> <span class='symbol'>:work_minutes</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_asset'>asset</span><span class='period'>.</span><span class='id identifier rubyid_assetable'>assetable</span><span class='period'>.</span><span class='id identifier rubyid_norm_time'>norm_time</span> <span class='op'>*</span> <span class='int'>60</span> <span class='op'>/</span> <span class='int'>5</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span>
+      <span class='id identifier rubyid_punch_type'>punch_type</span> <span class='op'>=</span> <span class='symbol'>:ot1_minutes</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_update_column'>update_column</span> <span class='symbol'>:work_minutes</span><span class='comma'>,</span> <span class='id identifier rubyid_minutes'>minutes</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># if ot1_minutes
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='qwords_beg'>%w(</span><span class='words_sep'> </span><span class='tstring_content'>ot1_minutes</span><span class='words_sep'> </span><span class='tstring_content'>ot2_minutes</span><span class='words_sep'> </span><span class='tstring_end'>)</span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_punch_type'>punch_type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span> <span class='kw'>and</span> <span class='lparen'>(</span><span class='id identifier rubyid_minutes'>minutes</span> <span class='op'>&gt;</span> <span class='int'>0</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_t1'>t1</span> <span class='op'>=</span> <span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_ot1_minutes'>ot1_minutes</span> <span class='op'>+</span> <span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_ot2_minutes'>ot2_minutes</span> <span class='op'>+</span> <span class='id identifier rubyid_minutes'>minutes</span> 
+    <span class='id identifier rubyid_t2'>t2</span> <span class='op'>=</span> <span class='id identifier rubyid_t1'>t1</span> <span class='op'>-</span> <span class='int'>180</span>
+    <span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_update_column'>update_column</span> <span class='symbol'>:ot1_minutes</span><span class='comma'>,</span> <span class='id identifier rubyid_t1'>t1</span> <span class='op'>&lt;</span> <span class='int'>181</span> <span class='op'>?</span> <span class='id identifier rubyid_t1'>t1</span> <span class='op'>:</span> <span class='int'>180</span>
+    <span class='id identifier rubyid_awds'>awds</span><span class='period'>.</span><span class='id identifier rubyid_update_column'>update_column</span> <span class='symbol'>:ot2_minutes</span><span class='comma'>,</span> <span class='id identifier rubyid_t2'>t2</span> <span class='kw'>if</span> <span class='id identifier rubyid_t2'>t2</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='kw'>true</span>
+
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_todays_worksum-instance_method">
   
     #<strong>get_todays_worksum</strong>(employee_asset, dato)  &#x21d2; <tt>Object</tt> 
   
@@ -344,13 +472,17 @@
 
 56
 57
-58</pre>
+58
+59
+60</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'app/services/asset_workday_sum_service.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_workday_sum'>update_workday_sum</span><span class='lparen'>(</span> <span class='id identifier rubyid_resource'>resource</span><span class='comma'>,</span> <span class='id identifier rubyid_event'>event</span> <span class='rparen'>)</span>
-  <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_eventable'>eventable</span><span class='period'>.</span><span class='id identifier rubyid_asset_workday_sum'>asset_workday_sum</span><span class='period'>.</span><span class='id identifier rubyid_calculate_on_transactions'>calculate_on_transactions</span>
+  <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_eventable'>eventable</span><span class='period'>.</span><span class='id identifier rubyid_asset_workday_sum'>asset_workday_sum</span><span class='period'>.</span><span class='id identifier rubyid_calculate_on_transactions'>calculate_on_transactions</span> <span class='kw'>self</span> 
+<span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AssetWorkdaySumService.update_workday_sum failed due to: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -362,7 +494,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 15 17:48:57 2023 by
+  Generated on Mon Feb 20 23:51:45 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

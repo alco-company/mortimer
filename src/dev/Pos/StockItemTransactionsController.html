@@ -143,8 +143,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>stock_item_transactions are created in various use cases - ordinary/full RECEIVE, SHIP, INVENTORY, SCRAP scan sequence - sscs/short SHIP, INVENTORY, SCRAP scan sequence.</p>
+    <span class="summary_desc"><div class='inline'><p>stock_item_transactions are created in various use cases - ordinary/full RECEIVE, SHIP, INVENTORY, SCRAP scan sequence - sscs/short SHIP, INVENTORY, SCRAP scan sequence.</p>
 </div></span>
   
 </li>
@@ -334,24 +333,23 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>stock_item_transactions are created in various use cases</p>
-<ul><li>
-<p>ordinary/full RECEIVE, SHIP, INVENTORY, SCRAP scan sequence</p>
-</li><li>
-<p>sscs/short SHIP, INVENTORY, SCRAP scan sequence</p>
-</li></ul>
+    <p>stock_item_transactions are created in various use cases</p>
 
-<p>Second ‘thing’ is that StockItemTransactions may happen so quickly after each other that a traditional MVC pipeline is not applicable - thus they are ‘created’ using a modified Message Broker model like this:</p>
-<ol><li>
-<p>store the transaction ‘data’ in Redis</p>
-</li><li>
-<p>return a ‘200’ response as-if</p>
-</li><li>
-<p>process the events in the order they arrived</p>
-</li><li>
-<p>rewrite the ‘200’ responses if necessary</p>
-</li></ol>
+<ul>
+<li>ordinary/full RECEIVE, SHIP, INVENTORY, SCRAP scan sequence</li>
+<li>sscs/short SHIP, INVENTORY, SCRAP scan sequence</li>
+</ul>
+
+<p>Second &#39;thing&#39; is that StockItemTransactions may happen so quickly after each other that
+a traditional MVC pipeline is not applicable - thus they are &#39;created&#39;
+using a modified Message Broker model like this:</p>
+
+<ol>
+<li>store the transaction &#39;data&#39; in Redis</li>
+<li>return a &#39;200&#39; response as-if</li>
+<li>process the events in the order they arrived</li>
+<li>rewrite the &#39;200&#39; responses if necessary</li>
+</ol>
 
 
   </div>
@@ -463,7 +461,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 15 15:40:08 2023 by
+  Generated on Mon Feb 20 17:53:59 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

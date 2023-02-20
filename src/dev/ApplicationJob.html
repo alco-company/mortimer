@@ -103,77 +103,74 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Background jobs inherited from ApplicationJob and the ‘structure’ getting erected is like this</p>
+    <p>Background jobs inherited from ApplicationJob and
+the &#39;structure&#39; getting erected is like this</p>
 
-<p>“job”: {</p>
-
-<pre class="code ruby"><code class="ruby">&quot;retry&quot;: true,
-&quot;queue&quot;: &quot;default&quot;,
-&quot;class&quot;: &quot;ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper&quot;,
-&quot;wrapped&quot;: &quot;Turbo::Streams::ActionBroadcastJob&quot;,
-&quot;args&quot;: [
-  {
-    &quot;job_class&quot;: &quot;Turbo::Streams::ActionBroadcastJob&quot;,
-    &quot;job_id&quot;: &quot;adb7339e-61c7-4bfb-a693-c28e21364d6a&quot;,
-    &quot;provider_job_id&quot;: null,
-    &quot;queue_name&quot;: &quot;default&quot;,
-    &quot;priority&quot;: null,
-    &quot;arguments&quot;: [ 
-      &quot;background_jobs&quot;,
-      {
-        &quot;action&quot;: {
-          &quot;_aj_serialized&quot;: &quot;ActiveJob::Serializers::SymbolSerializer&quot;,
-          &quot;value&quot;: &quot;prepend&quot;
-        },
-        &quot;target&quot;: &quot;background_job_list&quot;,
-        &quot;targets&quot;: null,
-        &quot;partial&quot;: {
-          &quot;_aj_globalid&quot;: &quot;gid://greybox/BackgroundJob/2&quot;
-        },
-        &quot;locals&quot;: {
-          &quot;background_job&quot;: {
+<p>&quot;job&quot;: {
+  &quot;retry&quot;: true,
+  &quot;queue&quot;: &quot;default&quot;,
+  &quot;class&quot;: &quot;ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper&quot;,
+  &quot;wrapped&quot;: &quot;Turbo::Streams::ActionBroadcastJob&quot;,
+  &quot;args&quot;: [
+    {
+      &quot;job_class&quot;: &quot;Turbo::Streams::ActionBroadcastJob&quot;,
+      &quot;job_id&quot;: &quot;adb7339e-61c7-4bfb-a693-c28e21364d6a&quot;,
+      &quot;provider_job_id&quot;: null,
+      &quot;queue_name&quot;: &quot;default&quot;,
+      &quot;priority&quot;: null,
+      &quot;arguments&quot;: [ 
+        &quot;background_jobs&quot;,
+        {
+          &quot;action&quot;: {
+            &quot;_aj_serialized&quot;: &quot;ActiveJob::Serializers::SymbolSerializer&quot;,
+            &quot;value&quot;: &quot;prepend&quot;
+          },
+          &quot;target&quot;: &quot;background_job_list&quot;,
+          &quot;targets&quot;: null,
+          &quot;partial&quot;: {
             &quot;_aj_globalid&quot;: &quot;gid://greybox/BackgroundJob/2&quot;
           },
-          &quot;resource&quot;: {
-            &quot;_aj_globalid&quot;: &quot;gid://greybox/BackgroundJob/2&quot;
+          &quot;locals&quot;: {
+            &quot;background_job&quot;: {
+              &quot;_aj_globalid&quot;: &quot;gid://greybox/BackgroundJob/2&quot;
+            },
+            &quot;resource&quot;: {
+              &quot;_aj_globalid&quot;: &quot;gid://greybox/BackgroundJob/2&quot;
+            },
+            &quot;user&quot;: {
+              &quot;_aj_globalid&quot;: &quot;gid://greybox/User/1&quot;
+            },
+            &quot;_aj_symbol_keys&quot;: [
+              &quot;background_job&quot;,
+              &quot;resource&quot;
+              ,&quot;user&quot;
+              ]
           },
-          &quot;user&quot;: {
-            &quot;_aj_globalid&quot;: &quot;gid://greybox/User/1&quot;
-          },
-          &quot;_aj_symbol_keys&quot;: [
-            &quot;background_job&quot;,
-            &quot;resource&quot;
-            ,&quot;user&quot;
-            ]
-        },
-        &quot;_aj_ruby2_keywords&quot;: [
-          &quot;action&quot;,
-          &quot;target&quot;,
-          &quot;targets&quot;,
-          &quot;partial&quot;,
-          &quot;locals&quot;
-         ]
-      }
-    ],
-    &quot;executions&quot;: 0,
-    &quot;exception_executions&quot;: {},
-    &quot;locale&quot;: &quot;da&quot;,
-    &quot;timezone&quot;: &quot;Copenhagen&quot;,
-    &quot;enqueued_at&quot;: &quot;2022-11-30T19:41:40Z&quot;
-  }
-],
-&quot;jid&quot;: &quot;c452a423b63c0ba39dbee81e&quot;,
-&quot;created_at&quot;: 1669837300.247402,
-&quot;enqueued_at&quot;: 1669837398.703516,
-&quot;error_message&quot;: &quot;undefined method `generate_key&#39; for nil:NilClass\n\n          secret = request.key_generator.generate_key(request.encrypted_cookie_salt, key_len)\n                                        ^^^^^^^^^^^^^&quot;,
-&quot;error_class&quot;: &quot;ActionView::Template::Error&quot;,
-&quot;failed_at&quot;: 1669837300.286945,
-&quot;retry_count&quot;: 2, 
-&quot;retried_at&quot;: 1669837337.930997
-</code></pre>
-
-<p>}</p>
+          &quot;_aj_ruby2_keywords&quot;: [
+            &quot;action&quot;,
+            &quot;target&quot;,
+            &quot;targets&quot;,
+            &quot;partial&quot;,
+            &quot;locals&quot;
+           ]
+        }
+      ],
+      &quot;executions&quot;: 0,
+      &quot;exception_executions&quot;: {},
+      &quot;locale&quot;: &quot;da&quot;,
+      &quot;timezone&quot;: &quot;Copenhagen&quot;,
+      &quot;enqueued_at&quot;: &quot;2022-11-30T19:41:40Z&quot;
+    }
+  ],
+  &quot;jid&quot;: &quot;c452a423b63c0ba39dbee81e&quot;,
+  &quot;created_at&quot;: 1669837300.247402,
+  &quot;enqueued_at&quot;: 1669837398.703516,
+  &quot;error_message&quot;: &quot;undefined method `generate_key&#39; for nil:NilClass\n\n          secret = request.key_generator.generate_key(request.encrypted_cookie_salt, key_len)\n                                        ^^^^^^^^^^^^^&quot;,
+  &quot;error_class&quot;: &quot;ActionView::Template::Error&quot;,
+  &quot;failed_at&quot;: 1669837300.286945,
+  &quot;retry_count&quot;: 2, 
+  &quot;retried_at&quot;: 1669837337.930997
+}</p>
 
 
   </div>
@@ -217,8 +214,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>allow jobs to say what they need to say.</p>
+    <span class="summary_desc"><div class='inline'><p>allow jobs to say what they need to say.</p>
 </div></span>
   
 </li>
@@ -245,8 +241,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>allow jobs to say what they need to say</p>
+    <p>allow jobs to say what they need to say</p>
 
 
   </div>
@@ -284,7 +279,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 15 17:48:56 2023 by
+  Generated on Mon Feb 20 23:51:44 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

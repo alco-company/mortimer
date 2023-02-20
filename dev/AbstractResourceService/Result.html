@@ -101,8 +101,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Result is the hash returned by a service after creating, updating, or deleting it</p>
+    <p>Result is the hash returned by a service
+after creating, updating, or deleting it</p>
 
 
   </div>
@@ -139,8 +139,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute record.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute record.</p>
 </div></span>
   
 </li>
@@ -168,8 +167,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute status.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute status.</p>
 </div></span>
   
 </li>
@@ -251,8 +249,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A new instance of Result.</p>
+    <span class="summary_desc"><div class='inline'><p>A new instance of Result.</p>
 </div></span>
   
 </li>
@@ -297,8 +294,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns a new instance of Result.</p>
+    <p>Returns a new instance of Result.</p>
 
 
   </div>
@@ -312,17 +308,17 @@
       <pre class="lines">
 
 
-82
-83
-84
-85
-86
-87
-88
-89</pre>
+90
+91
+92
+93
+94
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>status:</span><span class='comma'>,</span> <span class='label'>record:</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='id identifier rubyid_status'>status</span>
@@ -355,8 +351,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the value of attribute record.</p>
+    <p>Returns the value of attribute record.</p>
 
 
   </div>
@@ -370,12 +365,12 @@
       <pre class="lines">
 
 
-81
-82
-83</pre>
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_record'>record</span>
   <span class='ivar'>@record</span>
@@ -398,8 +393,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the value of attribute status.</p>
+    <p>Returns the value of attribute status.</p>
 
 
   </div>
@@ -413,12 +407,12 @@
       <pre class="lines">
 
 
-81
-82
-83</pre>
+89
+90
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_status'>status</span>
   <span class='ivar'>@status</span>
@@ -472,12 +466,12 @@
       <pre class="lines">
 
 
-91
-92
-93</pre>
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 99</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_created?'>created?</span>
   <span class='ivar'>@status</span> <span class='op'>==</span> <span class='symbol'>:created</span>
@@ -524,12 +518,12 @@
       <pre class="lines">
 
 
-99
-100
-101</pre>
+107
+108
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 107</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_deleted?'>deleted?</span>
   <span class='ivar'>@status</span> <span class='op'>==</span> <span class='symbol'>:deleted</span>
@@ -576,12 +570,12 @@
       <pre class="lines">
 
 
-95
-96
-97</pre>
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'app/services/abstract_resource_service.rb', line 103</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_updated?'>updated?</span>
   <span class='ivar'>@status</span> <span class='op'>==</span> <span class='symbol'>:updated</span>
@@ -596,7 +590,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 15 17:48:57 2023 by
+  Generated on Mon Feb 20 23:51:45 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

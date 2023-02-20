@@ -256,8 +256,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>def self.find user_id    p = where( user_id: user_id).first   p.nil? ? new( user_id: user_id) : p end.</p>
+    <span class="summary_desc"><div class='inline'><p>def self.find user_id    p = where( user_id: user_id).first   p.nil? ? new( user_id: user_id) : p end.</p>
 </div></span>
   
 </li>
@@ -476,14 +475,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>def self.find user_id </p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span> <span class='label'>user_id:</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
-<span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span> <span class='label'>user_id:</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_p'>p</span>
-</code></pre>
-
-<p>end</p>
+    <p>def self.find user_id 
+  p = where( user_id: user_id).first
+  p.nil? ? new( user_id: user_id) : p
+end</p>
 
 
   </div>
@@ -547,7 +542,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 15 17:48:56 2023 by
+  Generated on Mon Feb 20 23:51:44 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>

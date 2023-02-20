@@ -78,14 +78,32 @@
   
   <dl>
     <dt>Defined in:</dt>
-    <dd>app/views/index/column.rb<span class="defines">,<br />
-  app/views/index/row.rb</span>
+    <dd>app/views/components/list/header.rb<span class="defines">,<br />
+  app/views/components/list/column.rb,<br /> app/views/components/list/row.rb</span>
 </dd>
   </dl>
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>The Views::Components::List::Header class is a component that renders a table header.</p>
 
+<p>One typical use case is to render a table header with a label and a sort link.
+That looks like this: <code>&lt;%= render_header sort: true, label: t(&#39;.name&#39;), column: :name %&gt;</code></p>
+
+<p>Most lists have a checkbox column. That looks like this: <code>&lt;%= render_header column: &#39;checkbox&#39;, css: &#39;hidden&#39; %&gt;</code></p>
+
+<p>The edit column is a special case. It looks like this: <code>&lt;%= render_header column: &#39;edit&#39; %&gt;</code> and offers the user
+a link to edit the record.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -97,7 +115,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 15 15:40:06 2023 by
+  Generated on Mon Feb 20 17:53:57 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.1.2).
 </div>
