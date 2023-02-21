@@ -205,6 +205,11 @@ da:
     new_button: 'Ny medarbejder'
 
   employees:
+    index_columns:
+      name: 'navn'
+      punched_at: 'seneste stempling'
+      state: 'status'
+      employee_token: 'link til POS'
     form:
       new: 'Ny medarbejder'
       edit: 'Ret medarbejder'
