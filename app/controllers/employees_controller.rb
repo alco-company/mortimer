@@ -11,7 +11,7 @@ class EmployeesController < AssetsController
   end
 
   def export
-    if params[:filename]
+    if params[:filename]      
       t= File.open Rails.root.join("tmp",params[:filename])
       (send_data( t.read, type: 'application/pdf', :disposition => 'attachment', filename: params[:filename]) && t.close) and return
     else
@@ -19,13 +19,20 @@ class EmployeesController < AssetsController
       # @resource = PunchClock.all.where(ip_addr: ip).first rescue nil
       # redirect_to root_url and return if @resource.nil?
 
-      debugger
       @from_date = Date.parse(params[:from]) rescue nil
       @to_date = Date.parse(params[:to]) rescue nil 
       @settled_at = Date.parse(params[:settled]) rescue nil 
 
       params[:context] = self
-      render "export", locals: {filename: Employee.print_record(params)} and return
+      if params[:instant]
+        fn = Employee.print_record(params)
+        if fn
+          t= File.open Rails.root.join("tmp", fn)
+          (send_data( t.read, type: 'application/pdf', :disposition => 'attachment', filename: "export.pdf") && t.close) and return
+        end
+      else
+        render "export", locals: {filename: Employee.print_record(params)} and return
+      end
     end
   end
 

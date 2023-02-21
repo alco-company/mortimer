@@ -33,12 +33,12 @@
           %td.date_col
             = asset_workday_sum.work_date.strftime("%d-%m-%y")
           = render "asset_workday_sums/excel", asset_workday_sum: asset_workday_sum
-          - elt_count = asset_workday_sum.asset_workday_sum_transactions.count - 2 
+          - elt_count = asset_workday_sum.asset_work_transactions.count - 2 
           - elt_count = elt_count + (elt_count / 2)
           - (elt_count..14).step do
             %td.pause_col
               &nbsp;
-          - if asset_workday_sum.asset_workday_sum_transactions.count > 1
+          - if asset_workday_sum.asset_work_transactions.count > 1
             = render "asset_work_transactions/excel", asset_work_transaction: asset_workday_sum.asset_work_transactions.order(punched_at: 'asc').last, last: true
           - if extra_time_on asset_workday_sum
             %td.extra_time.time_col 

@@ -97,9 +97,10 @@ class Employee < AbstractResource
     # @resources =Employee.search( Employee.all.where(account: params[:speicher_account]), params[:q]).order(social_security_number: "asc") unless params[:q].blank?
 
     html = params[:context].render_to_string "employees/time_sheet", layout: 'print_a4_landscape', encoding: "UTF-8", locals: {resources: @resources}
-    t = File.open Rails.root.join("tmp","export.html"), "wb"
+    t = File.open Rails.root.join("tmp","export_#{Current.user.id}.html"), "wb"
     t << html
     t.close
+
     #
     # solution maybee on https://github.com/mileszs/wicked_pdf/issues/754
     #
@@ -114,10 +115,10 @@ class Employee < AbstractResource
       extra: '--disable-smart-shrinking',
       lowquality: true
 
-    t = File.open Rails.root.join("tmp","export.pdf"), "wb"
+    t = File.open Rails.root.join("tmp","export_#{Current.user.id}.pdf"), "wb"
     t << pdf
     t.close
-    "export.pdf"
+    "export_#{Current.user.id}.pdf"
   end
 
 

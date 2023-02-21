@@ -1,7 +1,7 @@
-- count = assetworkday_sum.asset_work_transactions.count
+- count = asset_workday_sum.asset_work_transactions.count
 - adjourned_start = 0
 - adjourned_total = 0
-- enter_leave.asset_work_transactions.order(punched_at: 'asc').each do |asset_work_transaction|
+- asset_workday_sum.asset_work_transactions.order(punched_at: 'asc').each do |asset_work_transaction|
   - if count > 1
     = render "asset_work_transactions/excel", asset_work_transaction: asset_work_transaction, last: false
     - adjourned_start = asset_work_transaction.punched_at if asset_work_transaction.state == 'BREAK' && adjourned_start == 0

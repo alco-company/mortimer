@@ -81,16 +81,18 @@ Entities to be added:
 
 ## DONE
 
+### 2023-02-21
+
+start printing stuff in PDF - <http://localhost:3000/employees/export.pdf?from=2023-01-19&to=2023-01-19&instant=true> works
+
 ### 2023-02-20
 
 84758a7 (HEAD -> staging, mortimer/staging) allow for account asset_workday_sum calculation specialization
-b398600 added views/component/list/header
-  This is the third installment of Phlex - last on the list index action
+b398600 added views/component/list/header - This is the third installment of Phlex - last on the list index action
 43d22d0 align text on index-column + few translations
 bb4f9f2 use rows/columns on asset_work & contacts
 5261264 comments reg dry-rb
-23a32a3 make rows/columns views/components
-  This is the first and second views/components of Phlex - the first/second on the list index action
+23a32a3 make rows/columns views/components - This is the first and second views/components of Phlex - the first/second on the list index action
 553758f move load_path to eager_load_path - was missing in helpers
 8e26b3e add the infinity-scroll in separate function
 23ceced small save in asset_workday_sum helper
