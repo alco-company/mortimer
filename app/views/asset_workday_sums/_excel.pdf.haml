@@ -1,0 +1,13 @@
+- count = assetworkday_sum.asset_work_transactions.count
+- adjourned_start = 0
+- adjourned_total = 0
+- enter_leave.asset_work_transactions.order(punched_at: 'asc').each do |asset_work_transaction|
+  - if count > 1
+    = render "asset_work_transactions/excel", asset_work_transaction: asset_work_transaction, last: false
+    - adjourned_start = asset_work_transaction.punched_at if asset_work_transaction.state == 'BREAK' && adjourned_start == 0
+    - adjourned_total =  (asset_work_transaction.punched_at - adjourned_start) if asset_work_transaction.state == 'IN' && adjourned_start != 0
+    - if adjourned_total != 0
+      %td.greyed.pause_col= time_sheet_display_hours_minutes adjourned_total/60
+      - adjourned_total = 0
+      - adjourned_start = 0
+    - count -= 1

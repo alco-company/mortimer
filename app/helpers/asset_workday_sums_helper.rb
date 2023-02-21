@@ -10,6 +10,26 @@ module AssetWorkdaySumsHelper
     "-"
   end
 
+  def time_sheet_display_hours_minutes minutes 
+    "%02d:%02d" % minutes.divmod(60)
+  rescue 
+    "-"
+  end
+
+  def time_sheet_display_decimal_hours_minutes minutes 
+    "%.2f" % (minutes.to_i / 60.0)
+  rescue 
+    "-"
+  end
+
+  def extra_time_on awd
+    return awd.asset_work_transactions.order(punched_at: 'asc').last.extra_time == 15
+  rescue
+    false
+  end
+
+
+
 
   def display_awds_minutes resource, field, range
     display_hours_minutes resource.asset_workday_sums.where(work_date: range ).sum( field )

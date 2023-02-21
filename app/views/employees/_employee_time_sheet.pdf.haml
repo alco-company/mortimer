@@ -1,0 +1,23 @@
+- sums = [0,0]
+- line_number = 0
+- employee = locals[:employee]
+- pages = []
+- page = []
+- get_employee_paycheck_basis( employee, @from_date, @to_date).each do |asset_workday_sum|
+  //- asset_workday_sum.update_attributes( settled_at: @settled_at) unless @settled_at.nil?
+  - sums[0] += (asset_workday_sum.break_minutes || 0); sums[1] += (asset_workday_sum.work_minutes || 0)
+  - page.push asset_workday_sum
+  - line_number += 1
+  - if line_number > 14
+    - line_number = 0
+    - pages.push page 
+    - page = []
+
+- pages.push page unless page.empty?
+- page_count = pages.count
+- page_nbr = 0
+- pages.each do |page|
+  - page_nbr += 1
+  - last_page = (page_nbr == page_count)
+  - week = [page.first.created_at, page.last.created_at]
+  = render "employees/employee_time_sheet_page", locals: { employee: employee, page: page, sums: sums, week: week, last_page: last_page}

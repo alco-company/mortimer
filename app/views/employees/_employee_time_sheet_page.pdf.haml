@@ -1,0 +1,64 @@
+%section.sheet.padding-10mm
+  = "%s (%s)" % [ locals[:employee].name, locals[:employee].birthday ]
+  = ("Fra den %s til den %s, ialt %s arbejdsdage" % [@from_date,@to_date, get_employee_paycheck_basis(locals[:employee], @from_date, @to_date).count])
+  %table
+    %thead 
+      %tr
+        %th.bold.date_col
+        %th.bold.time_col Start
+        %th.bold.pause_col(colspan=15)
+        %th.bold.time_col Slut
+        %th.bold.time_col +15
+        %th.bold.total_col(colspan=2) Total
+      %tr
+        %th.bold.date_col Dato
+        %th.bold.time_col arbejde 
+        %th.bold.pause_col(colspan=15) Pauser
+        %th.bold.time_col arbejde 
+        %th.bold.time_col min
+        %th.bold.total_col( style="text-align: right;") pause 
+        %th.bold.total_col( style="text-align: right;") arbejde
+    %tbody
+      - page = locals[:page]
+      - week = 0 #locals[:week]
+      - page.each do |asset_workday_sum|
+        - if asset_workday_sum.work_date.to_date.cweek > week #[0] # I hate mondays
+          - week = asset_workday_sum.work_date.to_date.cweek
+          %tr
+            %td.underline
+              &nbsp;
+            %td.underline( colspan=20 style="text-align: left" ) 
+              = "Uge %i" % week
+        %tr
+          %td.date_col
+            = asset_workday_sum.work_date.strftime("%d-%m-%y")
+          = render "asset_workday_sums/excel", asset_workday_sum: asset_workday_sum
+          - elt_count = asset_workday_sum.asset_workday_sum_transactions.count - 2 
+          - elt_count = elt_count + (elt_count / 2)
+          - (elt_count..14).step do
+            %td.pause_col
+              &nbsp;
+          - if asset_workday_sum.asset_workday_sum_transactions.count > 1
+            = render "asset_work_transactions/excel", asset_work_transaction: asset_workday_sum.asset_work_transactions.order(punched_at: 'asc').last, last: true
+          - if extra_time_on asset_workday_sum
+            %td.extra_time.time_col 
+              00:15
+          - else 
+            %td.extra_time.time_col 
+              &nbsp;
+          %td.total_col
+            = time_sheet_display_hours_minutes(asset_workday_sum.break_minutes)
+          %td.total_col
+            = time_sheet_display_hours_minutes(asset_workday_sum.work_minutes)
+    - if locals[:last_page] == true
+      %tfoot
+        - sums = locals[:sums]
+        %tr
+          %td(colspan=19) Ialt
+          %td.total_col= time_sheet_display_hours_minutes(sums[0])
+          %td.total_col= time_sheet_display_hours_minutes(sums[1])
+        %tr
+          %td(colspan=19) Ialt, i decimal timer
+          %td.total_col= time_sheet_display_decimal_hours_minutes(sums[0])
+          %td.total_col= time_sheet_display_decimal_hours_minutes(sums[1])
+  .pagebreak

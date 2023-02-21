@@ -1,0 +1,2 @@
+%td.time_col( style="#{'background-color: red' if last && asset_work_transaction && asset_work_transaction.state!='OUT'}")
+  = asset_work_transaction.punched_at.strftime("%H:%M") rescue "-"
