@@ -2,6 +2,9 @@ class EmployeesController < AssetsController
 
   layout :find_layout
   skip_before_action :set_resource, only: :export 
+  skip_before_action :set_resources, only: :export 
+  skip_before_action :breadcrumbs, only: [:export]
+
 
   def set_resource_class 
     @resource_class= Employee
@@ -12,16 +15,16 @@ class EmployeesController < AssetsController
       t= File.open Rails.root.join("tmp",params[:filename])
       (send_data( t.read, type: 'application/pdf', :disposition => 'attachment', filename: params[:filename]) && t.close) and return
     else
-      ip = Rails.env.development? ? "10.4.3.170" : request.remote_ip
-      @resource = PunchClock.all.where(ip_addr: ip).first rescue nil
-      redirect_to root_url and return if @resource.nil?
+      # ip = Rails.env.development? ? "10.4.3.170" : request.remote_ip
+      # @resource = PunchClock.all.where(ip_addr: ip).first rescue nil
+      # redirect_to root_url and return if @resource.nil?
 
+      debugger
       @from_date = Date.parse(params[:from]) rescue nil
       @to_date = Date.parse(params[:to]) rescue nil 
       @settled_at = Date.parse(params[:settled]) rescue nil 
 
       params[:context] = self
-      params[:speicher_account] = Account.current
       render "export", locals: {filename: Employee.print_record(params)} and return
     end
   end

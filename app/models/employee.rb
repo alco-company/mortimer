@@ -91,4 +91,34 @@ class Employee < AbstractResource
 
   end
 
+
+  def self.print_record params
+    @resources = Employee.all.order(birthday: "asc")
+    # @resources =Employee.search( Employee.all.where(account: params[:speicher_account]), params[:q]).order(social_security_number: "asc") unless params[:q].blank?
+
+    html = params[:context].render_to_string "employees/time_sheet", layout: 'print_a4_landscape', encoding: "UTF-8", locals: {resources: @resources}
+    t = File.open Rails.root.join("tmp","export.html"), "wb"
+    t << html
+    t.close
+    #
+    # solution maybee on https://github.com/mileszs/wicked_pdf/issues/754
+    #
+    pdf=WickedPdf.new.pdf_from_string html, 
+      page_size: 'A4',
+      page_width: '210mm',
+      page_height: '297mm',
+      orientation: 'Landscape',
+      # dpi: 1200, 
+      margin: { top: 0, bottom: 0, left: 0, right: 0 },
+      print_media_type: true,  
+      extra: '--disable-smart-shrinking',
+      lowquality: true
+
+    t = File.open Rails.root.join("tmp","export.pdf"), "wb"
+    t << pdf
+    t.close
+    "export.pdf"
+  end
+
+
 end

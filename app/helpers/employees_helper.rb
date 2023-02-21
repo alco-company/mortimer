@@ -96,6 +96,10 @@ module EmployeesHelper
     )
   end
 
+  def get_employee_paycheck_basis employee, from_date, to_date
+    employee.asset_workday_sums.where("asset_workday_sums.created_at > ? and asset_workday_sums.created_at < ?", from_date.at_midnight.utc, (to_date+1.day).at_midnight.utc).order("asset_workday_sums.created_at asc")
+  end
+
   
 
 end

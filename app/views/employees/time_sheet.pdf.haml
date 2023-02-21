@@ -1,0 +1,99 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    / %meta{ name:"turbolinks-cache-control", content:"no-cache"}
+    %title Timesedler
+    // Roboto font and Material Design Icons, by Google
+    %link{ :rel=>"stylesheet", :href=>"https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons|Roboto+Mono"}
+
+    -# = stylesheet_link_tag    'application'# , media: 'all', 'data-turbolinks-track': 'reload'
+    -# = javascript_include_tag 'application'# , 'data-turbolinks-track': 'reload'
+
+    :css 
+      @page { margin: 0; size: A4 landscape; }
+      body { margin: 0 }
+      .sheet {
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+        box-sizing: border-box;
+        /** page-break-before: always;  **/
+      }
+      .pagebreak { page-break-after: always; }
+
+      /** Paper sizes **/
+      /** body.A3               .sheet { width: 297mm; height: 419mm } **/
+      /** body.A3.landscape     .sheet { width: 420mm; height: 296mm } **/
+      /** body.A4               .sheet { width: 210mm; height: 296mm } **/
+      /** body.A4.landscape     .sheet { width: 297mm; height: 209mm } **/
+      /** body.A5               .sheet { width: 148mm; height: 209mm } **/
+      /** body.A5.landscape     .sheet { width: 210mm; height: 147mm } **/
+      /** body.letter           .sheet { width: 216mm; height: 279mm } **/
+      /** body.letter.landscape .sheet { width: 280mm; height: 215mm } **/
+      /** body.legal            .sheet { width: 216mm; height: 356mm } **/
+      /** body.legal.landscape  .sheet { width: 357mm; height: 215mm } **/
+
+      /** Padding area **/
+      .sheet.padding-10mm { padding: 10mm }
+      .sheet.padding-15mm { padding: 15mm }
+      .sheet.padding-20mm { padding: 20mm }
+      .sheet.padding-25mm { padding: 25mm }
+
+      /** For screen preview **/
+      @media screen {
+        body { background: #e0e0e0 }
+        .sheet {
+          background: white;
+          box-shadow: 0 .5mm 2mm rgba(0,0,0,.3);
+          margin: 5mm auto;
+        }
+      }
+
+      /** Fix for Chrome issue #273306 **/
+      @media print {
+        /** body.A3.landscape          { width: 420mm } **/ 
+        /** body.A3, body.A4.landscape { width: 297mm } **/ 
+        /** body.A4, body.A5.landscape { width: 210mm } **/ 
+        /** body.A5                    { width: 148mm } **/ 
+        /** body.letter, body.legal    { width: 216mm } **/ 
+        /** body.letter.landscape      { width: 280mm } **/ 
+        /** body.legal.landscape       { width: 357mm } **/ 
+      }
+
+
+
+      .green {
+        background-color: green;
+      }
+      .yellow {
+        background-color: yellow;
+      }
+      .blue {
+        background-color: blue;
+      }
+      td {
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: right;
+      }
+      .time_col { width: .8cm; }
+      .date_col { width: 1.8cm; }
+      .total_col { width: 1.5cm; background-color: transparent }
+      .pause_col { width: .8cm; background-color: transparent }
+      .underline { border-bottom: 1px solid #aaa; }
+      .greyed { background-color: #eee;}
+      th.bold { font-weight: 700; }
+      thead tr th { font-size: 0.8em; font-weight: 600;}
+
+      .date_col, .time_col, .pause_col, .time_col, .total_col {
+        font-size: 0.85em;
+      }
+
+
+  %body.A4.landscape
+    %main
+      - resources.each do |employee|
+        - next unless get_employee_paycheck_basis(employee, @from_date, @to_date).count > 0
+        = render "employees/employee_time_sheet", locals: { employee: employee }
