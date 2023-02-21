@@ -56,7 +56,7 @@ class AssetWorkdaySumService < AbstractResourceService
   def update_workday_sum( resource, event )
     event.eventable.asset_workday_sum.calculate_on_transactions self 
   rescue => e
-    puts "AssetWorkdaySumService.update_workday_sum failed due to: #{e.message}"
+    Rails.logger.warn "AssetWorkdaySumService.update_workday_sum failed due to: #{e.message}"
   end
 
   #

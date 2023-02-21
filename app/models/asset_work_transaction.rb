@@ -38,6 +38,11 @@ class AssetWorkTransaction < AbstractResource
       partial: self,
       locals: { resource: self, user: Current.user }
 
+    broadcast_replace_later_to "employee_#{self.asset.id}_stats", 
+      partial: "pos/employees/employee_stats", 
+      target: "employee_stats", 
+      locals: { resource: self.asset, user: Current.user }
+
     broadcast_replace_later_to "employee_#{self.asset.id}_state", 
       partial: "pos/employees/employee_state", 
       target: "employee_state", 

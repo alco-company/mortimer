@@ -1,0 +1,39 @@
+<div id="employee_stats" class="px-4 sm:px-6 lg:px-8">
+  <div class="-mx-4 mt-8 flex flex-col sm:-mx-6 md:mx-0">
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead>
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0"> <%= t(".description") %></th>
+          <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell"><%= I18n.localize Date.today, format: :week_string %></th>
+          <th scope="col" class="py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:hidden"> <%= t(".minutes") %></th>
+          <th scope="col" class="hidden sm:table-cell py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0 w-48"> <%= I18n.localize Date.today, format: :month_name %> måned</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% fields = [ :work_minutes, :break_minutes, :ot1_minutes, :ot2_minutes, :sick_minutes, :child_sick_minutes ] %>
+        <% fields.each do |field| %>
+          <%= render partial: "asset_workday_sums/stats", locals: { resource: resource, field: field, label: t(".#{field}"), ranges: [Date.today.at_beginning_of_week..Date.today.at_end_of_week,Date.today.at_beginning_of_month..Date.today.at_end_of_month] } %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead>
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0"></th>
+          <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell"><%= I18n.localize Date.today, format: :week_string %></th>
+          <th scope="col" class="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0 sm:table-cell w-48"> <%= Date.today.year %>
+        </tr>
+      </thead>
+      <tbody>
+        <% fields = [ :free_minutes, :free_prev_minutes, :holiday_free_minutes, 
+          :nursing_minutes, :senior_minutes, :unpaid_free_minutes, 
+          :lost_work_revenue_minutes, :child_leave_minutes, :leave_minutes, :pgf56_minutes, ] %>
+        <% fields.each do |field| %>
+          <%= render partial: "asset_workday_sums/stats", 
+              locals: { resource: resource, field: field, label: t(".#{field}"), ranges: [Date.today.at_beginning_of_week..Date.today.at_end_of_week,Date.today.at_beginning_of_month..Date.today.at_end_of_month] } %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
