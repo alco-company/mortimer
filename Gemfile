@@ -37,7 +37,7 @@ gem "redis", "~> 4.0"
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
@@ -77,6 +77,10 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  # replace ERB generators with HAML equivalents
+  # gem "haml-rails"
+
 end
 
 group :test do
@@ -89,8 +93,6 @@ end
 gem "sidekiq", "~> 6.4"
 
 gem "pagy", "~> 5.10"
-
-gem "bcrypt", "~> 3.1"
 
 gem "ancestry", "~> 4.1"
 
@@ -112,3 +114,8 @@ gem "activerecord-session_store", "~> 2.0"
 gem "rrule", "~> 0.5.0"
 
 gem "phlex-rails", "~> 0.6.1"
+
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
+gem 'haml'
