@@ -15,7 +15,12 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## TODO
 
+add time_sheet to employee for registering time spent on weekly basis - see smartid
+
 how to handle supplier-id on products - when we have relabelled suppliers to organizations
+
+show assets on a team
+
 
 shit-list:
 /contacts
@@ -81,9 +86,33 @@ Entities to be added:
 
 ## DONE
 
+### 2023-02-23
+
+register from punch_clocks - wip
+
+### 2023-02-22
+
+256fe42 (HEAD -> staging) add show action to printservers/uri_schemes
+ae3d182 allow show on classes out-of-the-box
+b382c85 implemented show on teams/:id/show
+7686fc3 added views/components/show/show and  +show_header
+e49c2c9 group all views/components helpers
+afe5c47 show teams
+c9cd461 views/components/tab and -dictionary
+e41d69b added coffee-rails
+
+
 ### 2023-02-21
 
 start printing stuff in PDF - <http://localhost:3000/employees/export.pdf?from=2023-01-19&to=2023-01-19&instant=true> works
+
+0764071 (HEAD -> staging, mortimer/staging) time_sheet v1 ready
+4e3504a more employee resources for printing - wip
+ad6fed0 prepare employee resources to print time_sheets - wip
+bd60cef added WickedPDF, wkhtmltopdf, and HAML
+1f781da update employee POS stats on punches
+1f618cf last punched_at on /employees
+
 
 ### 2023-02-20
 
