@@ -211,14 +211,18 @@ web+...;Effectively namespaces web-based protocols from other, potentially less 
 "zoommtg zoomus";Used by Zoom conferencing software to launch the Zoom client.;Zoom developer community;zoommtg://zoom.us/join?confno=<confno>...;See more information at Zoom developer community;
 
 %>
+<%= render_show do %>
+  <%= render_show_header title: resource.name, breadcrumbs: @breadcrumbs, tabs: { info: t('.info') } %>
+  <%= render_tab id: "info_tab" do %>
+    <%= render_tab_header label: t('.uri_scheme'), description: t('.uri_scheme_description') %>
+    <%= render_dictionary do %>
+      <%= render_dictionary_item label: t('.scheme'), value: resource.scheme %>
+      <%= render_dictionary_item label: t('.purpose'), value: resource.purpose %>
+      <%= render_dictionary_item label: t('.reference'), value: resource.reference %>
+      <%= render_dictionary_item label: t('.general_format'), value: resource.general_format %>
+      <%= render_dictionary_item label: t('.state'), value: resource.state %>
+      <%= render_dictionary_item label: t('.notes'), value: resource.notes %>
+    <% end %>
+  <% end %>
+<% end %>
 
-<p style="color: green"><%= notice %></p>
-
-<%= render @uri_scheme %>
-
-<div>
-  <%= link_to "Edit this uri scheme", edit_uri_scheme_path(@uri_scheme) %> |
-  <%= link_to "Back to uri schemes", uri_schemes_path %>
-
-  <%= button_to "Destroy this uri scheme", @uri_scheme, method: :delete %>
-</div>
