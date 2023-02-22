@@ -1,7 +1,5 @@
-
 <%= render_show do %>
   <%= render_show_header title: resource.name, breadcrumbs: @breadcrumbs, tabs: { info: t('.info') } %>
-
   <%= render_tab id: "info_tab" do %>
     <%= render_tab_header label: t('.team'), description: t('.team_description') %>
     <%= render_dictionary do %>
@@ -11,12 +9,4 @@
       <%= render_dictionary_item label: t('.assets'), value: resource.assets.map(&:name).join(',') %>
     <% end %>
   <% end %>
-
 <% end %>
-
-
-</div>
-
-
-
-

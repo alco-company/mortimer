@@ -1,0 +1,11 @@
+<%= render_show do %>
+  <%= render_show_header title: resource.name, breadcrumbs: @breadcrumbs, tabs: { info: t('.info') } %>
+  <%= render_tab id: "info_tab" do %>
+    <%= render_tab_header label: t(".#{resource_class.to_s.underscore}"), description: t(".#{resource_class.to_s.underscore}_description") %>
+    <%= render_dictionary do %>
+      <% resource.attributes.each do |key, value| %>
+        <%= render_dictionary_item label: t(".#{key}"), value: value %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

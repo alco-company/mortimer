@@ -15,13 +15,9 @@ module Views
     end
 
     def template(&)
-      div class: @classes do
-        dt class: "text-sm font-medium text-gray-500" do
-          @label
-        end
-        dd class: "mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" do
-          @value
-        end
+      div( class: @classes) do
+        dt( class: "text-sm font-medium text-gray-500") {@label}
+        dd( class: "mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2") {"#{@value}"}
       end
     end
 

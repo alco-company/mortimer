@@ -13,8 +13,8 @@ module Views
     end
 
     def template(&)
-      div class: @classes do
-        dl class: "sm:divide-y sm:divide-gray-200" do
+      div( class: @classes) do
+        dl( class: "sm:divide-y sm:divide-gray-200") do
           yield
         end
       end
