@@ -140,6 +140,22 @@ module ApplicationHelper
     render Views::Components::List::Row.new attribs:, &block
   end
 
+  def render_tab(**attribs, &block)
+    render Views::Components::Show::Tab.new **attribs, &block
+  end
+
+  def render_tab_header(**attribs, &block)
+    render Views::Components::Show::TabHeader.new **attribs, &block
+  end
+
+  def render_dictionary(**attribs, &block)
+    render Views::Components::Show::Dictionary.new **attribs, &block
+  end
+
+  def render_dictionary_item(**attribs, &block)
+    render Views::Components::Show::DictionaryItem.new **attribs, &block
+  end
+
   def render_column(css: "", content:)
     render Views::Components::List::Column.new css:, content:
   end
