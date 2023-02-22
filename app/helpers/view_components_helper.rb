@@ -44,4 +44,13 @@ module ViewComponentsHelper
     render Views::Components::Show::DictionaryItem.new **attribs, &block
   end
 
+  # Show
+  def render_show(**attribs, &block)
+    render Views::Components::Show::Show.new **attribs, &block
+  end
+  
+  def render_show_header(**attribs, &block)
+    render Views::Components::Show::ShowHeader.new **attribs, &block
+  end
+
 end
