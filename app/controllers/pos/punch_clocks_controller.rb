@@ -2,10 +2,10 @@ module Pos
   class PunchClocksController < AssetsController
 
     layout :find_layout
-    skip_before_action :current_user, only: [:index, :show, :punch, :search]
+    skip_before_action :current_user, only: [ :show, :punch, :search ]
     skip_before_action :breadcrumbs
-    skip_before_action :current_account, only: [:index, :show, :punch, :search]
-    skip_before_action :authenticate_user!, only: [:index, :show, :punch, :search]
+    skip_before_action :current_account, only: [ :show, :punch, :search ]
+    skip_before_action :authenticate_user!, only: [ :show, :punch, :search ]
 
     #
     # we have to 'redefine' the resource calls to provide the proper 
@@ -18,19 +18,24 @@ module Pos
     end
 
     def resource
-      @resource ||= (_id.nil? ? new_resource : Asset.unscoped.where( assetable: PunchClock.unscoped.find(_id)).first )
+      @resource ||= (_id.nil? ? new_resource : Asset.unscoped.where( assetable: PunchClock.unscoped.find(_id)).first)
     end
 
     def resource_class
       @resource_class ||= PunchClock
     end
-    
+
+    # http://localhost:3000/pos/punch_clocks/2?api_key=X5mqvD4ythzGVoETDvjEWHvL
     def show 
       redirect_to root_path and return unless token_approved
+      @employee = nil
     end
 
+    # {"apikey"=>"X5mqvD4ythzGVoETDvjEWHvL", "q"=>"1234", "controller"=>"pos/punch_clocks", "action"=>"search"}
     def search
-      @resources=Pupil.search_by_model_fields Pupil.all, params[:q]
+      redirect_to root_path and return unless token_approved
+      @employee=Employee.find_by pin_code: params[:q]
+      render turbo_stream: turbo_stream.replace( "employee_punch_clock_info", partial: 'pos/employees/employee_punch_clock_info' ), locals: { resource: resource, employee: @employee }
     end
     
     #
@@ -51,6 +56,7 @@ module Pos
 
       def find_layout
         return false if request.path =~ /export_selection$/
+        return "time_pos" if request.path =~ /search$/
         return "time_pos" if params[:action] == "show"
         super
       end
@@ -73,8 +79,9 @@ module Pos
 
       def token_approved
         Current.account = resource.account
+        return false unless resource.assetable.access_token == params[:api_key]
         Current.user ||= Current.account.users.first
-        resource.assetable.access_token == params[:api_key]
+        true
       end
   
 

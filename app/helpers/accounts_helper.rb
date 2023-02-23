@@ -32,7 +32,7 @@ module AccountsHelper
     tabs = []
     account.system_parameters_include("pos/employee").split(" ").each do |tab|
       tabs << { id: "#{tab}_tab", url: "##{tab}_tab", label: t(".#{tab}"), icon: t(".#{tab}_icon"), action: "click->tabs#change" }
-    end
+    end if account
     tabs
   end
 

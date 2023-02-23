@@ -41,14 +41,12 @@
         <%#= render Topbar::Component.new( current_user: Current.user, placeholder: raw( t('topbar.search'))) %>
 
         <main>
-          <div class="py-6">
-            <%= yield %>
-          </div>
+          <%= yield %>
         </main>
 
       </div>
-      <%= turbo_frame_tag 'form_slideover'  %>
-      <%= render Resource::FormComponent.new %>
+      <%#= turbo_frame_tag 'form_slideover'  %>
+      <%#= render Resource::FormComponent.new %>
       <div id="modal_content"></div>
 
     </div>
@@ -56,7 +54,7 @@
     <%#= render "shared/takiro" %>
     <%= render partial: "shared/notifications" %>
 
-    <%= render partial: "pos/employees/footer" %>
+    <%= render partial: "pos/employees/footer" unless request.path =~ /pos\/punch_clocks/ %>
   </body>    
 
 

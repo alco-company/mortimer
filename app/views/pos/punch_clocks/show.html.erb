@@ -5,43 +5,42 @@
   <meta name="full-screen"  content="yes">
   <meta name="browsermode"  content="application">
   <meta name="screen-orientation"  content="portrait">
-  <script>
-    // window.App = {};
-    // App.webWorker = new Worker("/employee_pos_worker_1.js");
-  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">  
 <% end %>
-
 <div 
   class="max-w-full lg:max-w-screen-2xl mx-auto sm:px-6 lg:px-8" 
   data-controller="punch-clock"
   data-punch-clock-punch-clock-asset-id-value="<%= resource.id %>"
   data-punch-clock-apikey-value="<%= resource.assetable.access_token %>"
   data-punch-clock-url-value="<%= pos_punch_clock_url(resource.assetable) %>"
-  data-tabs-active-tab="border-indigo-500 text-indigo-600" 
   >
-    <div id="punch_clock_tab" class=" py-4 px-4  space-y-6" data-tabs-target="panel">
+  <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
+    <div class="relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 m-auto sm:rounded-lg sm:px-10">
+      <div class="md:flex space-x-4">
+        <div id="keypad" class="divide-y divide-gray-300/50">
+          <div>
+            <%= render partial: "punch_clock_state_buttons", locals: { resource: resource } %>
+          </div>
 
-      <!-- This example requires Tailwind CSS v2.0+ -->
-      <!-- Be sure to use this with a layout container that is full-width on mobile -->
-      <div id="work_status" class="bg-white overflow-hidden shadow sm:rounded-lg">
-        <div class="px-4 py-5 sm:p-6 flex h-30 w-full ">
-          <!-- Content goes here -->
-          <%= turbo_stream_from "punch_clock_#{resource.id}_state"  %>
-          <%= turbo_frame_tag "punch_clock_#{resource.id}_state" do %>
-            <%= render partial: "pos/punch_clocks/punch_clock_state", locals: { resource: resource } %>
-          <% end %>
+          <div class="hidden pt-8 text-base font-semibold leading-7">
+            <p class="text-gray-900">Want to dig deeper into Mortimer?</p>
+            <p>
+              <a href="https://mortimer.ltd/" class="text-sky-500 hover:text-sky-600">Visit https://mortimer.ltd &rarr;</a>
+            </p>
+          </div>
         </div>
-      </div>
 
-      <%= render partial: "punch_clock_state_buttons_turbo", locals: { resource: resource } %>
+        <%= turbo_stream_from "employee_#{resource.id}_punch_clock_info"  %>
+        <%= turbo_frame_tag "employee_punch_clock_info" do %>
+          <%= render partial: "pos/employees/employee_punch_clock_info", locals: { resource: resource, employee: @employee } if resource && @employee %>
+        <% end %>
+
+      </div>
     </div>
-    <form method="get" action="search" data-turbo-frame="search-results" data-punch-clock-target="form">
-      <input type="hidden" name="apikey" value="<%= resource.assetable.access_token %>" />
-      <input data-punch-clock-target="search" name="q" />
-    </form>
-    <turbo-frame id="search-results">
-      <div class="result">...</div>
-    </turbo-frame>
+  </div>
 
 </div>
 
+<span class="bg-blue-200"></span>

@@ -89,6 +89,7 @@ Entities to be added:
 ### 2023-02-23
 
 register from punch_clocks - wip
+add/edit asset_work_transactions from backoffice - wip
 
 ### 2023-02-22
 

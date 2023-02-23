@@ -30,6 +30,7 @@ export default class PunchClockController extends Controller {
   connect() {
     this.digitCount=0
     this.digitKeys=[]
+    console.log('bum')
   }
 
   disconnect() {
@@ -90,6 +91,7 @@ export default class PunchClockController extends Controller {
       t.classList.remove('bg-blue-200')
     }
     this.digitCount=0
+    window.location.href=`${this.urlValue}?api_key=${this.apikeyValue}`
   }
 
   backspaceTap(e){

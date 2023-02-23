@@ -84,7 +84,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * [Running things in parallel - hint: await](https://thoughtbot.com/blog/my-adventure-with-async-ruby)
 * [Building BI dashboard - using Blazer](https://www.honeybadger.io/blog/blazer-business-intelligence-ruby-on-rails/) and an example being [this](https://blazer.dokkuapp.com/dashboards/1-dashboard-demo)
 * [Add a sortable list using Hotwire](https://www.youtube.com/watch?v=FKAMRLQpypk)
-* 
+* [Using Postgres and ltree for hierarchical data](https://sqlfordevs.com/tree-as-materialized-path)
 
 
 [ Concepts of doing Advanced Datebase Computing using PostgreSQL ](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)

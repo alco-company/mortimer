@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   end
   
   # POS ----
+
+  get 'pos/punch_clocks/:id/search', to: 'pos/punch_clocks#search', as: 'pos_punch_clock_search'
   
   scope module: :pos, path: 'pos', as: 'pos' do 
     resources :employees do 
@@ -53,11 +55,6 @@ Rails.application.routes.draw do
       resources :pupil_transactions
     end
     resources :punch_clocks do
-      member do
-        get "register"
-        get "status"
-        get "search"
-      end
     end
     resources :stocks do
       member do
@@ -83,7 +80,7 @@ Rails.application.routes.draw do
   end
 
   resources :punch_clocks, concerns: [:cloneable, :modalable, :selectable] 
-  resources :asset_workday_sums
+  resources :asset_workday_sums, concerns: [:cloneable, :modalable, :selectable, :exportable] 
   resources :work_schedules, concerns: [:cloneable, :modalable, :selectable]
   resources :locations, concerns: [:cloneable, :modalable, :selectable] do
     resources :calendars
