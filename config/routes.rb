@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   
   # POS ----
 
-  get 'pos/punch_clocks/:id/search', to: 'pos/punch_clocks#search', as: 'pos_punch_clock_search'
+  post 'pos/punch_clocks/:id/search', to: 'pos/punch_clocks#search', as: 'pos_punch_clock_search'
   
   scope module: :pos, path: 'pos', as: 'pos' do 
     resources :employees do 
@@ -55,6 +55,9 @@ Rails.application.routes.draw do
       resources :pupil_transactions
     end
     resources :punch_clocks do
+      member do
+        post :punch
+      end
     end
     resources :stocks do
       member do

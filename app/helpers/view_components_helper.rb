@@ -53,4 +53,9 @@ module ViewComponentsHelper
     render Views::Components::Show::ShowHeader.new **attribs, &block
   end
 
+  # PunchClock 
+  def render_punch_clock_buttons(employee)
+    render Views::Components::PunchClock::Buttons.new employee_id: employee.id, state: employee.state
+  end
+
 end

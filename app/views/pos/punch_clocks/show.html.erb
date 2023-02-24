@@ -19,7 +19,7 @@
   <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
     <div class="relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 m-auto sm:rounded-lg sm:px-10">
       <div class="md:flex space-x-4">
-        <div id="keypad" class="divide-y divide-gray-300/50">
+        <div id="keypad" class="divide-y divide-gray-300/50" data-punch-clock-target="keypad">
           <div>
             <%= render partial: "punch_clock_state_buttons", locals: { resource: resource } %>
           </div>
@@ -34,7 +34,7 @@
 
         <%= turbo_stream_from "employee_#{resource.id}_punch_clock_info"  %>
         <%= turbo_frame_tag "employee_punch_clock_info" do %>
-          <%= render partial: "pos/employees/employee_punch_clock_info", locals: { resource: resource, employee: @employee } if resource && @employee %>
+          <%= render partial: "employee_info", locals: { resource: resource, employee: @employee } if resource && @employee %>
         <% end %>
 
       </div>
@@ -43,4 +43,4 @@
 
 </div>
 
-<span class="bg-blue-200"></span>
+<span class="text-gray-50  cursor-not-allowed bg-gray-200 bg-green-400 bg-yellow-400 bg-blue-400 bg-red-700"></span>

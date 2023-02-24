@@ -1,0 +1,8 @@
+<%  if resource && @employee %>
+  <%= turbo_stream.replace "employee_punch_clock_info" do %>
+    <%= render partial: "employee_info", locals: { resource: resource, employee: @employee } %>
+  <% end %>
+  <%= turbo_stream.replace "keypad" do %>
+    <template></template>
+  <% end %>
+<% end %>

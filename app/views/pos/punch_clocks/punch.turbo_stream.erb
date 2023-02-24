@@ -1,0 +1,10 @@
+<%  if resource && @employee %>
+  <%= turbo_stream.replace "employee_punch_clock_info" do %>
+    <template></template>
+  <% end %>
+  <%= turbo_stream.replace "keypad" do %>
+    <div>
+      <%= render partial: "punch_clock_state_buttons", locals: { resource: resource } %>
+    </div>
+  <% end %>
+<% end %>

@@ -15,6 +15,7 @@ impossible - thus heading the PETAL way really should be considered! Or things w
 * Progressier by [Kevin Basset](https://progressier.com/)
 * Rails Training [Chris Oliver](https://gorails.com/)
 * Better View Components by [Joel Drapper](https://github.com/joeldrapper/phlex)
+* Building a modal form with Turbo Stream by [David Colby](https://www.colby.so/posts/building-modal-forms-with-turbo-streams)
 * Display Table Anti Hero [Colin Toh](https://colintoh.com/blog/display-table-anti-hero)
 * Simple authentication [Ira Herman](https://gist.github.com/iscott/4618dc0c85acb3daa5c26641d8be8d0d)
 * ice_cube [John Crepezzi](https://github.com/seejohnrun/ice_cube)

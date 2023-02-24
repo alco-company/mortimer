@@ -42,6 +42,18 @@ module EmployeesHelper
     "%s %s" % [emp_parts.shift, emp_parts.map{|n| n.first}.join('.')]
   end
 
+  def display_employee_state_punch resource
+    case resource.state 
+    when "IN";    "Stemplet korrekt ind #{display_time resource.asset_work_transactions.last.punched_at, Current.user}"
+    when "OUT";   "Stemplet korrekt ud #{display_time resource.asset_work_transactions.last.punched_at, Current.user}"
+    when "BREAK"; "Gået til pause #{display_time resource.asset_work_transactions.last.punched_at, Current.user}"
+    when "SICK";  "Meldt syg #{display_time resource.asset_work_transactions.last.punched_at, Current.user}"
+    when "FREE";  "Meldt fri #{display_time resource.asset_work_transactions.last.punched_at, Current.user}"
+    when "LEAVE"; "Meldt ferie #{display_time resource.asset_work_transactions.last.punched_at, Current.user}"
+    else ""
+    end
+  end 
+
   def display_employee_state resource
     case resource.state 
     when "IN"; "er mødt (startet)"

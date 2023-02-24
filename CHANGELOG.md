@@ -86,10 +86,16 @@ Entities to be added:
 
 ## DONE
 
+### 2023-02-24
+
+add/edit asset_work_transactions from backoffice - wip
+teams/employees - should attendance
+
 ### 2023-02-23
 
 register from punch_clocks - wip
-add/edit asset_work_transactions from backoffice - wip
+c2110e4 (HEAD -> staging) added pos/punch_clock - wip
+
 
 ### 2023-02-22
 

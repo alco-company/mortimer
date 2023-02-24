@@ -11,6 +11,7 @@ export default class PunchClockController extends Controller {
     "digitTap",
     "digitbox",
     "key",
+    "keypad",
     "digit",
     "delete",
     "backspace",
@@ -30,7 +31,6 @@ export default class PunchClockController extends Controller {
   connect() {
     this.digitCount=0
     this.digitKeys=[]
-    console.log('bum')
   }
 
   disconnect() {
@@ -50,6 +50,16 @@ export default class PunchClockController extends Controller {
   
     this.searchTarget.value = this.digitKeys.join('')
     Turbo.navigator.submitForm(this.formTarget)
+    // let url = `${this.urlValue}?q=${this.digitKeys.join('')}&api_key=${this.apikeyValue}`
+    // fetch(url, {
+    //   headers: {
+    //     Accept: "text/vnd.turbo-stream.html",
+    //   },
+    // }).then(r => r.text())
+    // .then(html => {
+    //   // Turbo.renderStreamMessage(html)
+    //   // this.keypadTarget.classList.add('hidden')
+    // })
 
     // url = `${this.urlValue}/list_pupils?q=${this.digitKeys.join('')}&api_key=${this.apikeyValue}`
     // fetch(url)
@@ -98,14 +108,18 @@ export default class PunchClockController extends Controller {
     if (this.digitCount > 0){
       this.digitboxTargets[ --this.digitCount ].innerText = ''
       this.keyTargets[ this.digitCount ].classList.remove('bg-blue-200')
+      this.digitKeys.pop()
     }
   }
 
   playTap(e){
+    if (e.currentTarget.classList.contains('disabled'))
+      return
 
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "IN", 
+      "employee_id": e.currentTarget.dataset.employeeId,
       }
     }
 
@@ -114,9 +128,12 @@ export default class PunchClockController extends Controller {
   }
 
   pauseTap(e){
+    if (e.currentTarget.classList.contains('disabled'))
+      return
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
-      "state": "OUT", 
+      "state": "BREAK", 
+      "employee_id": e.currentTarget.dataset.employeeId,
       }
     }
 
@@ -124,10 +141,12 @@ export default class PunchClockController extends Controller {
   }
 
   stopTap(e){
+    if (e.currentTarget.classList.contains('disabled'))
+      return
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
       "state": "OUT", 
-      "punched_pupils": pupils,
+      "employee_id": e.currentTarget.dataset.employeeId,
       }
     }
 
@@ -282,8 +301,8 @@ export default class PunchClockController extends Controller {
       fetch(url, options)
       .then( response => {
         switch(response.status){
-          case 200: console.log('done'); return true;
-          case '200': console.log('done - string'); return true;
+          case 200: window.location.reload();; return true;
+          case '200': window.location.reload(); return true;
           case 201: window.location.reload(); return true; 
           case '201': window.location.reload(); return true; 
           case 301: console.log('bad api_key!'); return false;

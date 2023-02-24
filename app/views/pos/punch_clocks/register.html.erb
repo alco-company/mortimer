@@ -1,0 +1,78 @@
+<!--
+  Welcome to Tailwind Play, the official Tailwind CSS playground!
+
+  Everything here works just like it does when you're running Tailwind locally
+  with a real build pipeline. You can customize your config file, use features
+  like `@apply`, or even add third-party plugins.
+
+  Feel free to play with this example if you're just learning, or trash it and
+  start from scratch if you know enough to be dangerous. Have fun!
+-->
+<div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
+  <div class="relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 m-auto sm:rounded-lg sm:px-10">
+    <div class="md:flex space-x-4">
+      <div class="divide-y divide-gray-300/50">
+        <!--
+          This example requires some changes to your config:
+          
+          ```
+          // tailwind.config.js
+          module.exports = {
+            // ...
+            plugins: [
+              // ...
+              require('@tailwindcss/forms'),
+            ],
+          }
+          ```
+        -->
+        <div>
+          <fieldset class="mt-6 mb-6 bg-white">
+            <legend class="block text-sm font-medium text-gray-700">Employee Pincode</legend>
+            <div class="mt-1 -space-y-px rounded-none">
+              <div class="flex space-x-2 justify-center">
+                <label for="employee-pincode" class="sr-only">Employee Pincode</label>
+                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="relative block w-14 rounded-md h-20 border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="">
+                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="relative block w-14 rounded-md h-20 border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="">
+                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="relative block w-14 rounded-md h-20 border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="">
+                <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="relative block w-14 rounded-md h-20 border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="">
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="block text-sm font-medium text-gray-500">Tastatur</legend>
+            <div class="mt-1 -space-y-px rounded-md bg-white shadow-sm">
+              <div class="grid grid-cols-3 shadow-lg rounded-md justify-items-center text-gray-400">
+                <div class="py-4 text-center border-r w-full">7</div>
+                <div class="py-4 text-center border-r w-full">8</div>
+                <div class="py-4 text-center w-full">9</div>
+                <div class="py-4 text-center border-r border-t w-full">4</div>
+                <div class="py-4 text-center border-r border-t w-full">5</div>
+                <div class="py-4 text-center border-t w-full">6</div>
+                <div class="py-4 text-center border-r border-t w-full ">1</div>
+                <div class="py-4 text-center border-r border-t w-full">2</div>
+                <div class="py-4 text-center border-t w-full">3</div>
+                <div class="py-4 text-center border-r border-t w-full ">0</div>
+                <div class="py-4 text-center border-r border-t w-full"><span class="material-symbols-outlined"> backspace </span></div>
+                <div class="py-4 text-center border-t w-full"><span class="material-symbols-outlined"> delete </span></div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="pt-8 text-base font-semibold leading-7">
+          <p class="text-gray-900">Want to dig deeper into Mortimer?</p>
+          <p>
+            <a href="https://mortimer.ltd/" class="text-sky-500 hover:text-sky-600">Visit https://mortimer.ltd &rarr;</a>
+          </p>
+        </div>
+      </div>
+
+      <%= turbo_stream_from "employee_#{resource.id}_punch_clock_info"  %>
+      <%= turbo_frame_tag "employee_punch_clock_info" do %>
+        <%= render partial: "pos/employees/employee_punch_clock_info", locals: { resource: resource } if resource %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

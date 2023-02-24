@@ -17,6 +17,19 @@ module ApplicationHelper
     'N/A'
   end
 
+  def display_time_day_date(dt, user)
+    return '' if dt.blank?
+
+    I18n.localize dt.in_time_zone(user.time_zone), format: :time_day_date
+  rescue StandardError
+    Rails.logger.warn "user #{user}, dt #{dt}"
+    if user
+      raw "<span class='hidden'>dt is empty or not a date nor a (date)time</span>"
+    else
+      raw "#{dt}<span class='hidden'>user empty or not a User</span>"
+    end
+  end
+
   def display_time(dt, user)
     return '' if dt.blank?
 
@@ -28,6 +41,14 @@ module ApplicationHelper
     else
       raw "#{dt}<span class='hidden'>user empty or not a User</span>"
     end
+  end
+
+  def display_date_text(dt, user)
+    return '' if dt.blank?
+
+    I18n.localize dt.in_time_zone(user.time_zone), format: :date_long
+  rescue StandardError
+    raw "<span class='hidden'>dt is empty or not a date nor a (date)time</span>"
   end
 
   def display_date(dt, user)

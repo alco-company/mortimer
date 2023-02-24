@@ -38,9 +38,9 @@
   </div>
 </fieldset>
 <%= form_for :punch_clocks, 
-    method: :get,
+    class: 'hidden',
     url: pos_punch_clock_search_url(resource.assetable), 
-    data: { turbo_frame: "employee_punch_clock_info", punch_clock_target: "form" } do |f| %>
+    data: { turbo_frame: "employee_punch_clock_info", format: :turbo_stream, punch_clock_target: "form" } do |f| %>
   <input type="hidden" name="api_key" value="<%= resource.assetable.access_token %>" />
   <input data-punch-clock-target="search" name="q" />
 <% end %>

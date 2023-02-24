@@ -35,18 +35,21 @@ module Pos
     def search
       redirect_to root_path and return unless token_approved
       @employee=Employee.find_by pin_code: params[:q]
-      render turbo_stream: turbo_stream.replace( "employee_punch_clock_info", partial: 'pos/employees/employee_punch_clock_info' ), locals: { resource: resource, employee: @employee }
+      # render turbo_stream: turbo_stream.replace( "employee_punch_clock_info", partial: 'employee_info' ), locals: { resource: resource, employee: @employee }
     end
     
     #
-    # Parameters: { "asset_work_transaction"=>{"punched_at"=>"2022-10-13T07:48:37.239Z", "state"=>"IN", 
-    #               "punched_pupils"=>{"pupil_2"=>"on", "pupil_6"=>"on"}}, "api_key"=>"[FILTERED]", "id"=>"2", "employee"=>{}}
+    # Parameters:  { "asset_work_transaction"=>{
+    #   "punched_at"=>"2023-02-24T12:14:32.771Z", "state"=>"IN", "employee_id"=>"60"}, "api_key"=>"[FILTERED]", "id"=>"2", "punch_clock"=>{}
+    # }
+    #               
     def punch 
       head 301 and return unless token_approved
-      event = AssetWorkTransactionService.new.create_employee_punch_transaction( resource, resource_params )
+      employee_asset = Employee.find( resource_params[:employee_id]).asset
+      event = AssetWorkTransactionService.new.create_employee_punch_transaction( employee_asset, resource_params )
       if event && (['OUT','SICK','BREAK','FREE'].include? resource_params['state']) 
-        AssetWorkdaySumService.new.update_workday_sum( resource, event )
-        ev = PupilTransactionService.new.close_active_pupils( resource, event, resource_params ) if resource_params[:punched_pupils]
+        AssetWorkdaySumService.new.update_workday_sum( employee_asset, event )
+        ev = PupilTransactionService.new.close_active_pupils( employee_asset, event, resource_params ) if resource_params[:punched_pupils]
       end
       head 200
     end
@@ -66,7 +69,7 @@ module Pos
         params["asset_work_transaction"]["ip_addr"] = request.remote_ip
         params["asset_work_transaction"]["employee_asset_id"] = resource.id
         params["asset_work_transaction"]["punch_asset_id"] = resource.id # the user's own device
-        params.require(:asset_work_transaction).permit(:punched_at, :state, :ip_addr, :punch_asset_id, :p_time, :substitute, :employee_asset_id, punched_pupils: {} )
+        params.require(:asset_work_transaction).permit(:punched_at, :state, :employee_id, :ip_addr, :punch_asset_id, :p_time, :substitute, :employee_asset_id, punched_pupils: {} )
       end
 
       #
