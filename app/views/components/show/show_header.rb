@@ -41,7 +41,7 @@ module Views
               nav( class: " -mb-px flex space-x-8") do
                 @tabs.each do |tab|
                   link_to( tab[:label], tab[:url], 
-                    id: tab[:id],
+                    # id: tab[:id],
                     data: { tabs_target: "tab", action: tab[:action], turbo_frame: tab[:turbo_frame], content_loader_url_param: tab[:url], content_loader_target_param: tab[:turbo_frame]},
                     class: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-2 px-1 border-b-2 font-medium text-sm", 
                     role: "menuitem", 

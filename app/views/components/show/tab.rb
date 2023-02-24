@@ -13,7 +13,8 @@ module Views
     end
 
     def template(&)
-      div id: @id, class: @classes, data: { tabs: {target: "panel"}} do
+      # div id: @id, class: @classes, data: { tabs: {target: "panel"}} do
+      div class: @classes, data: { tabs: {target: "panel"}} do
         div class: "bg-white shadow overflow-hidden sm:rounded-lg" do
           yield
         end
