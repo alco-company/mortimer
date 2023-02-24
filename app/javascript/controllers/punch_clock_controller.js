@@ -17,12 +17,15 @@ export default class PunchClockController extends Controller {
     "backspace",
     "search",
     "form",
+    "modal",
+    "message",
   ]
+
   static values = {
     url: String,            // where to do the lookup for data values
     apikey: String,
     punchClockAssetId: String,
-}
+  }
 
   //
   // 1 Initialize/Connect
@@ -37,122 +40,6 @@ export default class PunchClockController extends Controller {
     super.disconnect()
   }
 
-  digitboxTap(e){
-    for (const t of this.digitboxTargets){
-      if (t.classList.contains('hidden'))
-        t.classList.remove('hidden')
-      else
-        t.classList.add('hidden')
-    }
-  }
-
-  getEmployee(url=''){
-  
-    this.searchTarget.value = this.digitKeys.join('')
-    Turbo.navigator.submitForm(this.formTarget)
-    // let url = `${this.urlValue}?q=${this.digitKeys.join('')}&api_key=${this.apikeyValue}`
-    // fetch(url, {
-    //   headers: {
-    //     Accept: "text/vnd.turbo-stream.html",
-    //   },
-    // }).then(r => r.text())
-    // .then(html => {
-    //   // Turbo.renderStreamMessage(html)
-    //   // this.keypadTarget.classList.add('hidden')
-    // })
-
-    // url = `${this.urlValue}/list_pupils?q=${this.digitKeys.join('')}&api_key=${this.apikeyValue}`
-    // fetch(url)
-    // .then( response => {
-    //   switch(response.status){
-    //     case 200: console.log('done'); return true;
-    //     case '200': console.log('done - string'); return true;
-    //     case 201: window.location.reload(); return true; 
-    //     case '201': window.location.reload(); return true; 
-    //     case 301: console.log('bad api_key!'); return false;
-    //     default: return false; 
-    //   }
-    //   return true
-    // } )
-    // .catch( err => {
-    //   console.log(`postPunch error: ${err}`)
-    // })
-
-  }
-
-  digitTap(e){
-    if (this.digitCount < 4){
-      this.keyTargets[ this.digitCount ].classList.add('bg-blue-200')
-      this.digitboxTargets[ this.digitCount++ ].innerText = e.srcElement.innerText
-      this.digitKeys.push(e.srcElement.innerText)
-      if(this.digitKeys.length==4){
-        this.getEmployee()
-      }
-    } else {
-      alert('Du skal kun indtaste 4 cifre')
-    }
-  }
-
-  deleteTap(e){
-    for (const t of this.digitboxTargets){
-      t.innerText=''
-    }
-    for (const t of this.keyTargets){
-      t.classList.remove('bg-blue-200')
-    }
-    this.digitCount=0
-    window.location.href=`${this.urlValue}?api_key=${this.apikeyValue}`
-  }
-
-  backspaceTap(e){
-    if (this.digitCount > 0){
-      this.digitboxTargets[ --this.digitCount ].innerText = ''
-      this.keyTargets[ this.digitCount ].classList.remove('bg-blue-200')
-      this.digitKeys.pop()
-    }
-  }
-
-  playTap(e){
-    if (e.currentTarget.classList.contains('disabled'))
-      return
-
-    let data = { "asset_work_transaction": { 
-      "punched_at": new Date().toISOString(), 
-      "state": "IN", 
-      "employee_id": e.currentTarget.dataset.employeeId,
-      }
-    }
-
-    this.postPunch( data )
-
-  }
-
-  pauseTap(e){
-    if (e.currentTarget.classList.contains('disabled'))
-      return
-    let data = { "asset_work_transaction": { 
-      "punched_at": new Date().toISOString(), 
-      "state": "BREAK", 
-      "employee_id": e.currentTarget.dataset.employeeId,
-      }
-    }
-
-    this.postPunch( data )
-  }
-
-  stopTap(e){
-    if (e.currentTarget.classList.contains('disabled'))
-      return
-    let data = { "asset_work_transaction": { 
-      "punched_at": new Date().toISOString(), 
-      "state": "OUT", 
-      "employee_id": e.currentTarget.dataset.employeeId,
-      }
-    }
-
-    this.postPunch( data )
-  }
-
   // -- initialize dependant functions
 
   setReload() {
@@ -161,12 +48,6 @@ export default class PunchClockController extends Controller {
     } else {
       this.shouldReload = true
       this.reloadWarningTarget.classList.remove('hidden')
-    }
-  }
-
-  setPostStatus(status){
-    if ( !"200 201".includes(status) ){
-      // console.log(`we posted - but got ${status} back!`)
     }
   }
 
@@ -186,6 +67,98 @@ export default class PunchClockController extends Controller {
     }
   }
 
+  // reveal the 4 digits filled by the user
+  //
+  digitboxTap(e){
+    for (const t of this.digitboxTargets){
+      if (t.classList.contains('hidden'))
+        t.classList.remove('hidden')
+      else
+        t.classList.add('hidden')
+    }
+  }
+
+  // respond to taps on the keypad
+  digitTap(e){
+    if (this.digitCount < 4){
+      this.keyTargets[ this.digitCount ].classList.add('bg-blue-200')
+      this.digitboxTargets[ this.digitCount++ ].innerText = e.srcElement.innerText
+      this.digitKeys.push(e.srcElement.innerText)
+      if(this.digitKeys.length==4){
+        this.getEmployee()
+      }
+    } else {
+      alert('Du skal kun indtaste 4 cifre')
+    }
+  }
+
+  // get back to the keypad
+  deleteTap(e){
+    for (const t of this.digitboxTargets){
+      t.innerText=''
+    }
+    for (const t of this.keyTargets){
+      t.classList.remove('bg-blue-200')
+    }
+    this.digitCount=0
+    window.location.href=`${this.urlValue}?api_key=${this.apikeyValue}`
+  }
+
+  // clear last input digit
+  backspaceTap(e){
+    if (this.digitCount > 0){
+      this.digitboxTargets[ --this.digitCount ].innerText = ''
+      this.keyTargets[ this.digitCount ].classList.remove('bg-blue-200')
+      this.digitKeys.pop()
+    }
+  }
+
+  // punch the employee IN
+  playTap(e){
+    
+    if (e.currentTarget.classList.contains('disabled'))
+    return
+    
+    let data = { "asset_work_transaction": { 
+      "punched_at": new Date().toISOString(), 
+      "state": "IN", 
+      "employee_id": e.currentTarget.dataset.employeeId,
+      }
+    }
+  
+    this.openModal('Du er nu stemplet ind!', data)
+
+  }
+
+  // punch the employee for BREAK
+  pauseTap(e){
+    if (e.currentTarget.classList.contains('disabled'))
+      return
+    let data = { "asset_work_transaction": { 
+      "punched_at": new Date().toISOString(), 
+      "state": "BREAK", 
+      "employee_id": e.currentTarget.dataset.employeeId,
+      }
+    }
+
+    this.openModal('Du er nu stemplet ud til pause!', data)
+  }
+
+  // punch the employee for OUT
+  stopTap(e){
+    if (e.currentTarget.classList.contains('disabled'))
+      return
+    let data = { "asset_work_transaction": { 
+      "punched_at": new Date().toISOString(), 
+      "state": "OUT", 
+      "employee_id": e.currentTarget.dataset.employeeId,
+      }
+    }
+
+    this.openModal('Du er nu stemplet ud!', data)
+  }
+
+
   // for now tapping the status row listing the queue in the background worker
   // will reload the web app
   emptyQueue(e){
@@ -193,19 +166,6 @@ export default class PunchClockController extends Controller {
     window.location.reload()
   }
 
-  // button to register employee punching pause/resume
-  punch_pause(e){
-
-    let data = { "asset_work_transaction": { 
-      "punched_at": new Date().toISOString(), 
-      "state": 'BREAK', 
-      "punched_pupils": pupils,
-      }
-    }
-
-    this.postPunch( data )
-  }
-  
   // -- input dependant functions
 
   //
@@ -214,6 +174,22 @@ export default class PunchClockController extends Controller {
   // process input - send good scans to the background worker
 
   // - process dependant function
+
+  openModal(msg,data){
+    this.messageTarget.innerText=msg
+    this.modalTarget.classList.remove('hidden')
+    setTimeout( () => {
+      this.modalTarget.classList.add('hidden')
+      this.postPunch(data)
+    }, 2000, this, data)
+  }
+
+  getEmployee(url=''){
+  
+    this.searchTarget.value = this.digitKeys.join('')
+    Turbo.navigator.submitForm(this.formTarget)
+
+  }
 
 
   //
@@ -278,6 +254,9 @@ export default class PunchClockController extends Controller {
   // postPunch(url, urlMethod, urlHeaders, { asset_work_transaction: post_data }, data)
 
   postPunch(data,url=null){
+
+    this.modalTarget.classList.add('hidden')
+    
     try{
       const csrfToken = document.querySelector("[name='csrf-token']").content
       let headers = { "X-CSRF-Token": csrfToken, "Content-Type": "application/json" }
