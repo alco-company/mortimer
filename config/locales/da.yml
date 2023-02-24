@@ -199,6 +199,18 @@ da:
     index: "Oversigt over instrumentbrædder/skabeloner"
     index_description: "Oversigten viser alle de instrumentbrædder, der er oprettet - uanset om de benyttes af konti eller brugere. "
 
+  element:
+    accordion_component:
+      Asset: Aktiver
+      hr: HR
+      pim: PIM
+      wms: Lagerstyring 
+      scm: Varekæde
+      scope: Overordnet
+      service: Service
+      supporting: Støtte funktioner
+      time: Tidsregistrering
+
   Employee:
     index: Oversigt over medarbejdere
     index_description: <span>Oversigten viser alle de medarbejdere, der er oprettet. Du kan se medarbejdernes &nbsp; <a class="text-indigo-500" target="_blank" href="/pos/employees"> fremmøde status her</a> &nbsp;og normtider definerer du &nbsp; <a class="text-indigo-500"  href="/work_schedules">her</a></span>.
@@ -226,10 +238,17 @@ da:
       work_schedules: Vagtskemaer
 
     show:
-      info: Generel
-      tasks: Opgaver
+      employee_description: Generelle oplysninger om medarbejderen
+      asset_workday_sums: Stempelkort
       pupils: Elever
+      info: Generel
+      name: Navn
+      created_at: Oprettet den
+      updated_at: Sidst rettet den
+      tasks: Opgaver
+      pupils_count: Antal elever
       employee: Medarbejder
+      teams: Afdeling/hold
       asset_work_transactions: Komme/Gå stemplinger
 
   Invitation:
@@ -286,6 +305,8 @@ da:
       Roles: Roller
       Teams: Brugergrupper
     service_component:
+      asset_work_transactions: Stemplinger
+      asset_workday_sums: Stempelkort
       accounts: Konti 
       background_jobs: Baggrundsjobs
       dashboards: Instrumentpaneler
@@ -629,6 +650,9 @@ da:
     index: Oversigt over grupper
     index_description: <span>Oversigten viser alle de grupper, der er oprettet, til at styre roller og arbejdsgrupper. </span>.
       
+  teams:
+    show: 
+      employees: team kollegaer
   topbar:
     search: "Søg overalt..."
 

@@ -165,7 +165,9 @@ Rails.application.routes.draw do
   resources :stock_item_transactions, concerns: [:cloneable, :modalable]
   resources :stocked_products
   resources :tasks, concerns: [:cloneable, :modalable]
-  resources :teams, concerns: [:cloneable, :modalable]
+  resources :teams, concerns: [:cloneable, :modalable] do
+    resources :employees
+  end
   resources :roles, concerns: [:cloneable, :modalable, :selectable]
   resources :services, concerns: [:cloneable, :modalable, :selectable]
   resources :users, concerns: [:cloneable, :modalable]

@@ -1,5 +1,6 @@
 <%= render_show do %>
-  <%= render_show_header title: resource.name, breadcrumbs: @breadcrumbs, tabs: { info: t('.info') } %>
+  <%= render_show_header title: resource.name, breadcrumbs: @breadcrumbs, tabs: { info_tab: t('.info'), employees_tab: t('.employees') } %>
+
   <%= render_tab id: "info_tab" do %>
     <%= render_tab_header label: t('.team'), description: t('.team_description') %>
     <%= render_dictionary do %>
@@ -9,4 +10,14 @@
       <%= render_dictionary_item label: t('.assets'), value: resource.assets.map(&:name).join(',') %>
     <% end %>
   <% end %>
+
+  <%= render_tab id: "employees_tab" do %>
+    <%= turbo_stream_from "team_#{resource.id}_employees"  %>
+    <%= turbo_frame_tag "employees", loading: "lazy", src: team_employees_url(resource) do %>
+      <span class="py-2 px2">
+        <%= t('loading') %>
+      </span>
+    <% end %>
+  <% end %>
+
 <% end %>
