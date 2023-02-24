@@ -60,13 +60,13 @@ module ParentControl
     paths.pop if %w{new edit show create update delete index attach detach prefer defer activate deactivate print clonez modal}.include? paths[-1].split(".")[0]
     return nil if (paths.size < 3)
     prnt = (paths[0].singularize.classify.constantize rescue nil)
-    return set_account(prnt.nil? ? nil : prnt.unscoped.find(paths[1])) if paths.size == 3
+    return set_account(find_unscoped_parent(prnt,paths,1)) if paths.size == 3
     
     prnt = (paths[1].singularize.classify.constantize rescue nil)
-    return set_account(prnt.nil? ? nil : prnt.unscoped.find(paths[2])) if paths.size == 4
+    return set_account(find_unscoped_parent(prnt,paths,2)) if paths.size == 4
 
     prnt = (paths[2].singularize.classify.constantize rescue nil)
-    return set_account(prnt.nil? ? nil : prnt.unscoped.find(paths[3])) if paths.size == 5 and parent_reflections(prnt, paths[4])
+    return set_account(find_unscoped_parent(prnt,paths,3)) if paths.size == 5 and parent_reflections(prnt, paths[4])
 
     nil
     # return paths[0].singularize.classify.constantize.find(paths[1])
@@ -77,9 +77,22 @@ module ParentControl
     # recognise_path paths.join("/")
   end
 
+  def find_unscoped_parent prnt, paths, index 
+    return prnt if prnt.nil?
+    prnt.unscoped.find(paths[index])
+  end
+
   def set_account prnt 
     return prnt if prnt.nil?
-    Current.account= Asset.unscoped.where( assetable: prnt).first.account
+    if prnt.respond_to? :asset
+      Current.account= Asset.unscoped.where( assetable: prnt).first.account
+    elsif prnt.respond_to? :event
+      Current.account= Event.unscoped.where( eventable: prnt).first.account
+    elsif prnt.respond_to? :participant
+      Current.account= Participant.unscoped.where( participantable: prnt).first.account
+    elsif prnt.respond_to? :message
+      # TODO add this once the message class is on board! Current.account= Message.unscoped.where( messageable: prnt).first.account
+    end
     prnt
   end
 
