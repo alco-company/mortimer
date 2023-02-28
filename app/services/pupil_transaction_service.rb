@@ -10,6 +10,8 @@ class PupilTransactionService < EventService
     end    
   end
 
+  #
+  # TODO: this probably should be more like employee.active_pupils.close_all !
   def close_active_pupils resource, event, params
     params['punched_pupils'].each do |p|
       pupil = Pupil.unscoped.find p[0].split("_")[1]

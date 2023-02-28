@@ -47,7 +47,6 @@ class EventsController < DelegatedController
   # end
 
   # def update_resource
-  #   debugger
   #   @resource = resource_class.find(_id).event
   #   begin        
   #     unless resource.update resource_params

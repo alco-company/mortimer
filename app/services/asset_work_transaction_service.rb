@@ -9,6 +9,21 @@ class AssetWorkTransactionService < EventService
     create_asset_work_transaction( resource, params )
   end
 
+  def create_employee_transaction resource, params
+    begin
+      params["punched_at"] = params["eventable_attributes"]["punched_at"]
+      params["reason"] = params["eventable_attributes"]["reason"]
+      resource = create_asset_work_transaction( resource, params )
+      Result.new record: resource, status: :created
+      
+    rescue Exception => exception
+      ActiveRecord::Base.connection.execute 'ROLLBACK' 
+      Rails.logger.warn "[asset_work_transaction] Error: (AssetWorkTransaction) #{exception.message}"
+      Result.new status: :error, record: resource      
+    end
+
+  end
+
   #
   # when doing automated punches - ie employees did mark their calendar
   # in advance saying what this day will be chalked up for - 
@@ -42,6 +57,7 @@ class AssetWorkTransactionService < EventService
 
   rescue RuntimeError => err
     Rails.logger.info "[asset_work_transaction] Error: (AssetWorkTransaction) #{err.message}"
+    nil
   end
 
   #
@@ -62,10 +78,10 @@ class AssetWorkTransactionService < EventService
         awt.asset = asset
         awt.punch_asset = punch_clock_asset
         awt.asset_workday_sum = awd
-        awt.punch_asset_ip_addr = params["ip_addr"]
+        awt.punch_asset_ip_addr = params["ip_addr"] rescue nil
         awt.punched_at = params["punched_at"]
-        awt.punched_geo = params["location"]
-        awt.reason = params["reason"]
+        awt.punched_geo = params["location"] rescue nil
+        awt.reason = params["reason"] rescue nil
 
         minutes = case params["state"]
         when "SICK";   get_decimal_minutes(params["sick_hrs"])
