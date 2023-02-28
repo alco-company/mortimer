@@ -26,8 +26,50 @@ module ViewComponentsHelper
     render Views::Components::List::Column.new css:, content:
   end
 
+  # Form
+  def render_form(**attribs, &block)
+    render Views::Components::Form::Form.new **attribs, &block
+  end
+
+  def render_form_header(**attribs, &block)
+    render Views::Components::Form::Header.new **attribs, &block
+  end
+
+  def render_form_divider(**attribs, &block)
+    render Views::Components::Form::Divider.new **attribs, &block
+  end
+
+  def render_form_action_buttons(**attribs, &block)
+    render Views::Components::Form::ActionButtons.new **attribs, &block
+  end
+
+  def render_form_errors(**attribs, &block)
+    render Views::Components::Form::Errors.new **attribs, &block
+  end
+
+  def render_form_fields_for(**attribs, &block)
+    render Views::Components::Form::FieldsFor.new **attribs, &block
+  end
+
+  def render_form_hidden_field(**attribs, &block)
+    render Views::Components::Form::HiddenField.new **attribs, &block
+  end
+
+  def render_form_text_field(**attribs, &block)
+    render Views::Components::Form::TextField.new **attribs, &block
+  end
+
+  def render_form_text_area(**attribs, &block)
+    render Views::Components::Form::TextArea.new **attribs, &block
+  end
+
+  def render_form_datetime_field(**attribs, &block)
+    render Views::Components::Form::DateTimeField.new **attribs, &block
+  end
+
   # Tabs
   def render_tab(**attribs, &block)
+    # attribs[:title] ||= t( ".#{attribs[:field]}")
     render Views::Components::Show::Tab.new **attribs, &block
   end
 

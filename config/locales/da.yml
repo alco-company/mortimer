@@ -682,6 +682,9 @@ da:
 # Standard localization ------------------------------
 
   activerecord:
+    attributes:
+      asset_work_transaction:
+        punched_at: "stemplet kl:"
     models:
       account:
         one: konto
@@ -864,6 +867,9 @@ da:
       create: Opret %{model}
       submit: Gem %{model}
       update: Opdater %{model}
+    label:
+      asset_work_transaction:
+        punched_at: "stemplet kl:"
   number:
     currency:
       format:

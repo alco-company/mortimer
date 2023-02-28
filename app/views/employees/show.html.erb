@@ -16,7 +16,7 @@
       ] %>
 
 
-  <%= render_tab id: "info_tab" do %>
+  <%= render_tab( id: "info_tab") do %>
     <%= render_tab_header label: t('.employee'), description: t('.employee_description') %>
     <%= render_dictionary do %>
       <%= render_dictionary_item label: t('.name'), value: resource.name %>

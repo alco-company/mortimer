@@ -18,6 +18,7 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/components/**/*.html.erb',
     './app/components/**/*.rb',
+    './app/views/components/**/*.rb',
     './config/locales/*.yml',
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js'

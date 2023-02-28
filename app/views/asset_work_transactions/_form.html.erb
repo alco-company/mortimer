@@ -1,46 +1,36 @@
-<%= form_with model: resource, url: resource_url(), id: resource_form, data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
-  <%= form.fields_for :eventable do |asset_work_transaction_form| %>
-    <%= form.hidden_field :account_id, value: current_account.id %>
-    <%= form.hidden_field :eventable_type, value: "AssetWorkTransaction" %>
-    <div class="flex-1 relative "
-      data-controller="form"
-      data-form-form-sleeve-outlet="#form-sleeve"
-      data-form-list-outlet="#list"
+<%= render_form( resource: resource) do |form| %>
+  <%= render_form_hidden_field resource: resource, form: form, field: :account_id, value: current_account.id %>
+  <%= render_form_hidden_field resource: resource, form: form, field: :eventable_type, value: "AssetWorkTransaction" %>
+  <%#= form.fields_for :eventable do |assoc_form| %>
+  <%= render_form_fields_for( form: form, field: :eventable, assoc: resource.eventable ) do |assoc_form| %>
+    <%= render_form_header( resource: resource, title: form_header_title, description: form_header_description ) %>
 
-      data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"    
-      >
-      <!-- Header -->
-      <%= render_component "resource/form_header", resource: resource, title: form_header_title, description: form_header_description %>
+    <!-- Divider container -->
+    <%= render_form_divider do %>
 
-      <!-- Divider container -->
-      <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+      <!-- Name -->
+      <%#= render_form_text_field( resource: resource, form: form, field: :name, title: t('.name'), focus: true, required: true) %>
 
-        <!-- Name -->
-        <%= render_component "resource/input_string", form: form, field: :name, resource: resource, title: t('.name'), focus: true, required: true %>
+      <!-- punch_asset_ip_addr -->
+      <%#= render_form_text_field( resource: resource.eventable, form: assoc_form, field: :punch_asset_ip_addr, title: t('.punch_asset_ip_addr')) %>
 
-        <!-- punch_asset_ip_addr -->
-        <%= render_component "resource/input_string", form: asset_work_transaction_form, field: :punch_asset_ip_addr, resource: resource, title: t('.punch_asset_ip_addr') %>
+      <!-- punched_at (date) -->
+      <%= render_form_datetime_field( resource: resource, form: assoc_form, field: :punched_at, required: true) %>
+      <%#= render_component "resource/input_date", form: assoc_form, field: :punched_at, resource: resource, title: t('.punched_at'), required: true %>
 
-        <!-- punched_at (date) -->
-        <%= render_component "resource/input_date", form: asset_work_transaction_form, field: :punched_at, resource: resource, title: t('.punched_at'), required: true %>
+      <!-- reason -->
+      <%= render_form_text_field( resource: resource, form: assoc_form, field: :reason, title: t('.reason')) %>
 
-        <!-- punched_at (time) -->
-        <%= render_component "resource/input_time", form: asset_work_transaction_form, field: :punched_at, resource: resource, title: t('.punched_at'), required: true %>
+      <!-- minutes_spent -->
+      <%#= render_form_text_field(resource: resource, form: form, field: :minutes_spent, title: t('.minutes_spent'), required: true) %>
 
-        <!-- reason -->
-        <%= render_component "resource/input_string", form: asset_work_transaction_form, field: :reason, resource: resource, title: t('.reason'), required: true %>
+      <!-- state -->
+      <%= render_form_text_field( resource: resource, form: form, field: :state, title: t('.state'), required: true ) %>
 
-        <!-- minutes_spent -->
-        <%= render_component "resource/input_string", form: form, field: :minutes_spent, resource: resource, title: t('.minutes_spent'), required: true %>
-
-        <!-- state -->
-        <%= render_component "resource/input_string", form: form, field: :state, resource: resource, title: t('.state'), required: true %>
-
-
-      </div>
-    </div>
+    <% end %>
   <% end %>
 
-  <%= render_component "action_button", resource: resource, delete_url: resource_url(), deleteable: !resource.new_record? %>
+  <%= render_form_action_buttons resource: resource, delete_url: resource_url(), deleteable: !resource.new_record? %>
+  <%#= render_component "action_button", resource: resource, delete_url: resource_url(), deleteable: !resource.new_record? %>
 
 <% end %>
