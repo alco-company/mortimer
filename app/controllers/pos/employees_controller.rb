@@ -70,6 +70,7 @@ module Pos
     #
     def punch 
       head 301 and return unless token_approved
+      do_punch_in if params['asset_work_transaction']['reason']=='15MIN'
       event = AssetWorkTransactionService.new.create_employee_punch_transaction( resource, resource_params )
       if event && (['OUT','SICK','BREAK','FREE'].include? resource_params['state'])
         srv = resource.account.system_parameters_include("calc_asset_workday_sum") || "AssetWorkdaySumService"
@@ -111,6 +112,24 @@ module Pos
         Current.user ||= Current.account.users.first
         resource.assetable.access_token == params[:api_key]
       end  
+
+      def do_punch_in
+        comment = params['asset_work_transaction']['comment']
+        params['asset_work_transaction']['comment'] = ''
+        params['asset_work_transaction']['reason'] = 'XTRA'
+        lp=set_punched_at
+        event = AssetWorkTransactionService.new.create_employee_punch_transaction( resource, resource_params )
+        params['asset_work_transaction']['reason'] = 'XTRA'
+        params['asset_work_transaction']['comment'] = comment + ' 15min'
+        params['asset_work_transaction']['state'] = 'OUT'
+        params['asset_work_transaction']['punched_at'] = lp.strftime("%Y-%m-%dT%H:%M:%S.%LZ")
+      end
+
+      def set_punched_at
+        last_punched_at = (resource.asset_work_transactions.joins(:event).where("events.state='OUT'").last.punched_at + 1.minutes) rescue nil
+        params['asset_work_transaction']['punched_at'] = last_punched_at.strftime("%Y-%m-%dT%H:%M:%S.%LZ") if last_punched_at
+        last_punched_at += 15.minutes
+      end
 
   end
 end

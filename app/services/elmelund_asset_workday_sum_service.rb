@@ -24,11 +24,18 @@ class ElmelundAssetWorkdaySumService < AssetWorkdaySumService
   # Gets called from the AssetWorkdaySum model instance method calculate_on_transactions
   #
   def calc_work awds, minutes, punch_type      
-    return false unless %w( work_minutes ).include? punch_type.to_s
-
-    if punch_type.to_s == 'work_minutes'
+    return false unless %w( work_minutes ot1_minutes ).include? punch_type.to_s
+    case punch_type.to_s
+    when 'work_minutes'
       minutes = awds.work_minutes + minutes
       awds.update_column :work_minutes, minutes
+    when 'ot1_minutes'
+      minutes = awds.ot1_minutes + minutes
+      if minutes > 180 
+        awds.update_column :ot2_minutes, (minutes - 180)
+        minutes = 180
+      end
+      awds.update_column :ot1_minutes, minutes
     end
 
     return true

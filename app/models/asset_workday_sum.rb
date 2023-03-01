@@ -40,7 +40,7 @@ class AssetWorkdaySum < AbstractResource
   # default_scope returns all posts that have not been marked for deletion yet
   #  
   def self.default_scope
-    AssetWorkdaySum.all.joins(:asset)
+    AssetWorkdaySum.all.where(deleted_at: nil, account: Current.account).joins(:asset)
   end
 
   #

@@ -22,6 +22,8 @@ export default class EmployeePosController extends Controller {
     "freeButton",
     "freeModal",
     "pupilsList",
+    "min15Button",
+    "min15Modal",
     "taskModal"
   ]
   static values = {
@@ -101,7 +103,7 @@ export default class EmployeePosController extends Controller {
   }
 
   enableButtons(focus, enabled,disabled){
-    let all_buttons = [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget]
+    let all_buttons = [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.min15ButtonTarget]
     all_buttons.forEach( (b) => {
       b.classList.remove("bg-green-400")
       b.disabled = true
@@ -120,7 +122,7 @@ export default class EmployeePosController extends Controller {
   // button to register employee punching in
   punch_in(e){
     this.find_my_location()
-    this.enableButtons([this.pauseButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget])    
+    this.enableButtons([this.pauseButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget, this.min15ButtonTarget])    
 
     let data = { "asset_work_transaction": { 
       "punched_at": new Date().toISOString(), 
@@ -167,7 +169,7 @@ export default class EmployeePosController extends Controller {
 
   punch_in_xtra_ok(e){
 
-    this.enableButtons([this.extraButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget])    
+    this.enableButtons([this.extraButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget, this.min15ButtonTarget])    
 
     let comment = document.getElementById('xtra_comment').value
     document.getElementById('xtra_comment').value = ''
@@ -197,7 +199,7 @@ export default class EmployeePosController extends Controller {
 
   punch_in_sub_ok(e){
 
-    this.enableButtons([this.substituteButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget])    
+    this.enableButtons([this.substituteButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget], [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget, this.min15ButtonTarget])    
 
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:20:32.079Z", "state"=>"IN", "location"=>"3", "substitute"=>"true"}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
     let location = document.getElementById('substitute_reason').value
@@ -226,7 +228,7 @@ export default class EmployeePosController extends Controller {
 
   // {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:57:59.644Z", "state"=>"OUT", "comment"=>"text"}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
   punch_out_ok(e){
-    this.enableButtons([this.stopButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget] )    
+    this.enableButtons([this.stopButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget, this.min15ButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget] )    
 
     let comment = document.getElementById('stop_comment').value
     document.getElementById('stop_comment').value = ''
@@ -249,7 +251,7 @@ export default class EmployeePosController extends Controller {
   // button to register employee punching pause/resume
   punch_pause(e){
     this.find_my_location()
-    this.enableButtons([this.pauseButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.freeButtonTarget] )    
+    this.enableButtons([this.pauseButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.freeButtonTarget, this.min15ButtonTarget] )    
 
     let pupils = {}
     let data = { "asset_work_transaction": { 
@@ -271,7 +273,7 @@ export default class EmployeePosController extends Controller {
   // button to register employee punching sick ok
   punch_in_sick_ok(e){
 
-    this.enableButtons([this.sickButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget] )    
+    this.enableButtons([this.sickButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.freeButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.min15ButtonTarget] )    
 
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:29:53.731Z", "state"=>"SICK", "sick_hrs"=>"3.5", "punched_pupils"=>{}}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
     let sick_hrs = document.getElementById('sick_hrs').value
@@ -304,7 +306,7 @@ export default class EmployeePosController extends Controller {
   // button to register employee punching free
   punch_in_free_ok(e){
 
-    this.enableButtons([this.freeButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.freeButtonTarget] )    
+    this.enableButtons([this.freeButtonTarget],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.freeButtonTarget, this.min15ButtonTarget] )    
 
     //  {"asset_work_transaction"=>{"punched_at"=>"2022-11-25T09:29:53.731Z", "state"=>"SICK", "sick_hrs"=>"3.5", "punched_pupils"=>{}}, "api_key"=>"[FILTERED]", "id"=>"7", "employee"=>{}}
     let free_hrs = document.getElementById('free_hrs').value
@@ -326,6 +328,35 @@ export default class EmployeePosController extends Controller {
   // button to register employee punching free cancel modal
   punch_in_free_cancel(e){
     this.freeModalTarget.classList.add("hidden")
+  }
+
+  punch_in_15min(e){
+    this.find_my_location()
+    this.min15ModalTarget.classList.remove("hidden")
+  }
+
+  punch_in_15min_ok(e){
+
+    this.enableButtons([, this.min15ButtonTarget ],  [this.extraButtonTarget,this.substituteButtonTarget, this.startButtonTarget, this.min15ButtonTarget], [this.pauseButtonTarget, this.stopButtonTarget, this.sickButtonTarget, this.freeButtonTarget] )    
+    let comment = document.getElementById('15min_comment').value
+    document.getElementById('15min_comment').value = ''
+
+    let data = { "asset_work_transaction": { 
+      "punched_at": new Date().toISOString(), 
+      "reason": "15MIN",
+      "comment": comment,
+      "state": "IN", 
+      }
+    }
+
+    this.postPunch( data )
+    this.min15ModalTarget.classList.add("hidden")
+
+  }    
+
+  // button to register employee punching free cancel modal
+  punch_in_15min_cancel(e){
+    this.min15ModalTarget.classList.add("hidden")
   }
 
   punch_in_task(e){

@@ -7,14 +7,16 @@
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.ot1_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.ot2_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.sick_minutes ) %>
+  <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.free_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.holiday_free_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.child_sick_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.nursing_minutes ) %>
+  <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.senior_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.unpaid_free_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.lost_work_revenue_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.child_leave_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.leave_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.free_prev_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.pgf56_minutes ) %>
-  <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
+  <%#= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
 <% end %>
