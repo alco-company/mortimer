@@ -28,7 +28,8 @@ module Views
           @form.datetime_field @field, 
             required: @required, 
             data: { "form-target" => "#{'focus' if @focus}" },
-            class: @input_classes 
+            class: @input_classes,
+            step: 60
           div( class:"text-sm text-red-800" ) { @resource.errors.where(@field).map( &:full_message).join( "og ") }
         end
       end
