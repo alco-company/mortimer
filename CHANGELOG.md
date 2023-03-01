@@ -86,16 +86,45 @@ Entities to be added:
 
 ## DONE
 
-### 2023-02-24
+### 2023-03-01
+
+Some inspiration for the asset management:
+* <https://www.youtube.com/watch?v=KZJVj6ncTvk>
+* <https://www.youtube.com/watch?v=IaIR_Ker6jI>
+* <https://www.youtube.com/watch?v=vJ2BziGAXHM>
+* <https://www.youtube.com/watch?v=W5ejuzuJ4K0>
+
+fccc8b2 (HEAD -> staging) register extra 15min OT
+304cb0a allow new asset_work_transaction from desktop
+a05ba0f fixing correct formating using Phlex - and errors reporting
+5956be3 start using Phlex - wip
+fd52c1a add/update asset_work_transactions
+
+
+
+### 2023-02-28
+
+Phlex is a wonderful lib providing easy to use components and offering great speedups in development - it is a must have for any Rails project
+and brilliant performance in production.
+
+5956be3 (HEAD -> staging) start using Phlex - wip
+fd52c1a add/update asset_work_transactions
+
+### 2023-02-27
 
 add/edit asset_work_transactions from backoffice - wip
-teams/employees - should attendance
+
+### 2023-02-24
+
+3960785 (HEAD -> staging, mortimer/staging) show teams/:id/employees
+bc454dd view components bugs
+295b1fa parent_control error
+44aa2e8 beta 2 on the punch_clock
 
 ### 2023-02-23
 
 register from punch_clocks - wip
 c2110e4 (HEAD -> staging) added pos/punch_clock - wip
-
 
 ### 2023-02-22
 
@@ -108,7 +137,6 @@ afe5c47 show teams
 c9cd461 views/components/tab and -dictionary
 e41d69b added coffee-rails
 
-
 ### 2023-02-21
 
 start printing stuff in PDF - <http://localhost:3000/employees/export.pdf?from=2023-01-19&to=2023-01-19&instant=true> works
@@ -119,7 +147,6 @@ ad6fed0 prepare employee resources to print time_sheets - wip
 bd60cef added WickedPDF, wkhtmltopdf, and HAML
 1f781da update employee POS stats on punches
 1f618cf last punched_at on /employees
-
 
 ### 2023-02-20
 
@@ -136,9 +163,7 @@ b42efb8 set row & columns on all lists
 57fb0d6 alt+8 in lists sets items=100 => infinity-scroll
 b832033 printserver was missing a few parts
 
-
 ### 2023-02-16
-
 
 
 ### 2023-02-15
