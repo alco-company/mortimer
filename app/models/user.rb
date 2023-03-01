@@ -124,7 +124,7 @@ class User < AbstractResource
     end
   end
 
-  def state
+  def confirmation_state
     return :created if confirmed_at.nil?
 
     # return :invited if self.confirmed_at.nil? and !self.invited_at.nil?
@@ -163,6 +163,7 @@ class User < AbstractResource
   end
 
   def can_list_service?(service)
+    say "User #{id} checking if can list #{service.index_url.split('/').last.singularize}"
     can :index, service.index_url.split('/').last.singularize
   end
 
@@ -174,7 +175,11 @@ class User < AbstractResource
   # by birth
   #
   def is_a_god?
-    id == 1
+    @is_god ||= set_god_mode  
+  end
+
+  def set_god_mode
+    (id == 1 || (all_roles.map( &:state).include? 'SUPER'))  
   end
 
   def all_roles
