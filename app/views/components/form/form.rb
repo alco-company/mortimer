@@ -45,8 +45,9 @@ module Views
       end
     end
 
-    def text_field resource: nil, field: nil, title: nil, required: false
-      render Views::Components::Form::TextField.new( resource: resource, form: @rails_form_builder, field: field, title: title, required: required )
+    def text_field(**attribs, &block)
+      attribs[:form] = @rails_form_builder
+      render Views::Components::Form::TextField.new **attribs, &block
     end
 
     def hidden_field(**attribs, &block)

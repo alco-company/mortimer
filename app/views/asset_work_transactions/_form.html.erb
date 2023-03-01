@@ -11,7 +11,7 @@
     <%= render_form_errors(resource: resource) if resource.errors.size > 0 %>
 
     <!-- state -->
-    <%= form.text_field( resource: resource, field: :state, title: t('.state'), required: true ) %>
+    <%= form.text_field( resource: resource, field: :state, title: t('.state'), required: true, focus: true ) %>
     <%= form.fields_for( :eventable, resource.eventable ) do |assoc_form| %>
 
       <!-- Divider container -->
