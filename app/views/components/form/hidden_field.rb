@@ -5,11 +5,10 @@ module Views
   class Components::Form::HiddenField < Phlex::HTML
     include Phlex::Rails::Helpers::HiddenField
 
-    def initialize( resource: nil, form: nil, field: nil, value: nil )
-      @resource = resource.class.to_s.underscore
-      @form = form
-      @field = field
-      @value = value
+    def initialize( **attribs, &block )
+      @form = attribs[:form]
+      @field = attribs[:field]
+      @value = attribs[:value]
     end
 
     def template()

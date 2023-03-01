@@ -13,6 +13,12 @@ class AssetWorkTransaction < AbstractResource
   belongs_to :asset_workday_sum, optional: true
   belongs_to :punch_asset, optional: true, class_name: "Asset"
 
+  validate :future_date
+
+  def future_date
+    errors.add(:punched_at, :invalid) if punched_at < Time.now
+  end
+
   def self.default_scope
     AssetWorkTransaction.all.joins(:event,:asset)
   end

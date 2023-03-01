@@ -47,25 +47,6 @@ module ViewComponentsHelper
     render Views::Components::Form::Errors.new **attribs, &block
   end
 
-  def render_form_fields_for(**attribs, &block)
-    render Views::Components::Form::FieldsFor.new **attribs, &block
-  end
-
-  def render_form_hidden_field(**attribs, &block)
-    render Views::Components::Form::HiddenField.new **attribs, &block
-  end
-
-  def render_form_text_field(**attribs, &block)
-    render Views::Components::Form::TextField.new **attribs, &block
-  end
-
-  def render_form_text_area(**attribs, &block)
-    render Views::Components::Form::TextArea.new **attribs, &block
-  end
-
-  def render_form_datetime_field(**attribs, &block)
-    render Views::Components::Form::DateTimeField.new **attribs, &block
-  end
 
   # Tabs
   def render_tab(**attribs, &block)

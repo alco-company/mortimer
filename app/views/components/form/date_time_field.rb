@@ -13,8 +13,6 @@ module Views
       @title = title
       @required = required
       @focus = focus
-      @field_name = @form.object_name
-      @field_value = @form.object.send(@field)
 
       @date_classes = "space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5 #{@date_css}"
       @label_classes = "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 #{@label_css}"
@@ -24,11 +22,10 @@ module Views
     def template()
       div class: @date_classes do
         div do
-          label( @form.object.class.to_s.underscore.to_sym, @field, class: @label_classes)
+          @form.label(@field, class: @label_classes)
         end
         div( class: "sm:col-span-2") do
-          datetime_field @field_name, @field, 
-            value: (@form.object.send(@field).strftime('%Y-%m-%d %H:%M') unless @form.object.send(@field).nil?), 
+          @form.datetime_field @field, 
             required: @required, 
             data: { "form-target" => "#{'focus' if @focus}" },
             class: @input_classes 

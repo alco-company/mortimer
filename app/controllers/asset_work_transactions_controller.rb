@@ -29,8 +29,7 @@ class AssetWorkTransactionsController < EventsController
   end
   
   def update_resource
-    # Each resource could have it's own - 
-    result = "#{resource_class.to_s}Service".constantize.new.update  resource(), resource_params
+    result = "#{resource_class.to_s}Service".constantize.new.update resource(), resource_params
     resource= result.record
     case result.status
     when :updated
@@ -47,16 +46,24 @@ class AssetWorkTransactionsController < EventsController
 
   private 
 
+    #
+    # id <- eventable id
+    # employee_id <- assetable id
+    #
     # Never trust parameters from the scary internet, only allow the white list through.
-    # Unpermitted parameters: 
-    # "event"=>{
-    #   "account_id"=>"3", "eventable_type"=>"AssetWorkTransaction", 
-    #   "eventable_attributes"=>{
-    #     "id"=>"34", "name"=>"AWT", "punch_asset_ip_addr"=>"188.228.54.88", "punched_at"=>"2022-10-19T11:25", "reason"=>""
+    # Parameters: {
+    #   "authenticity_token"=>"[FILTERED]", 
+    #   "event"=>{
+    #     "account_id"=>"3", 
+    #     "eventable_type"=>"AssetWorkTransaction", 
+    #     "state"=>"IN",
+    #     "eventable_attributes"=>{
+    #       "punched_at"=>"2022-10-19T11:26", "reason"=>"",  "id"=>"34"
+    #     }
     #   }, 
-    #   "state"=>"IN"
-    # }, 
-    # "controller"=>"asset_work_transactions", "action"=>"update", "employee_id"=>"2", "id"=>"34"
+    #   "employee_id"=>"2", 
+    #   "id"=>"34"
+    # }
     def resource_params
       params.require(:event).permit(:account_id, :state, :eventable_type, eventable_attributes: [ :id, :name, :punch_asset_ip_addr, :punched_at, :reason ])
     end
