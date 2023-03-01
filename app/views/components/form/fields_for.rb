@@ -12,17 +12,17 @@ module Views
     end
 
     def template(&)
-      # this doesn't work
-      @original_form = @form
-      @form.fields_for( @field, @assoc) do |assoc_form|
-        begin
-          @form = assoc_form
-            yield
-          end
-        ensure
-          @form = @original_form
-        end
-      end
+      # # this doesn't work
+      # @original_form = @form
+      # @form.fields_for( @field, @assoc) do |assoc_form|
+      #   begin
+      #     @form = assoc_form
+      #       yield
+      #     end
+      #   ensure
+      #     @form = @original_form
+      #   end
+      # end
     end
 
     def datetime_field(**attribs, &block)
