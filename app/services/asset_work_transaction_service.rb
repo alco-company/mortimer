@@ -19,6 +19,7 @@ class AssetWorkTransactionService < EventService
     rescue Exception => exception
       ActiveRecord::Base.connection.execute 'ROLLBACK' 
       Rails.logger.warn "[asset_work_transaction] Error: (AssetWorkTransaction) #{exception.message}"
+      resource.errors.add :base, exception.message
       Result.new status: :error, record: resource      
     end
 

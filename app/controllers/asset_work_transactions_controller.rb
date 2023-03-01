@@ -33,9 +33,9 @@ class AssetWorkTransactionsController < EventsController
     resource= result.record
     case result.status
     when :updated
+      srv = resource.account.system_parameters_include("calc_asset_workday_sum") || "AssetWorkdaySumService"
+      srv.classify.constantize.new.update_workday_sum( resource, result.record )
       if (['OUT','SICK','BREAK','FREE'].include? resource_params['state'])
-        srv = resource.account.system_parameters_include("calc_asset_workday_sum") || "AssetWorkdaySumService"
-        srv.classify.constantize.new.update_workday_sum( resource, result.record )
         ev = PupilTransactionService.new.close_active_pupils( resource, result.record, resource_params ) 
       end
       create_update_response
