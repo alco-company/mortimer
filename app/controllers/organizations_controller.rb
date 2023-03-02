@@ -4,13 +4,6 @@ class OrganizationsController < ParticipantsController
     @resource_class= Organization
   end
 
-  def lookup_resources 
-    @target=params[:target]
-    @value=params[:value]
-    @element_classes=params[:element_classes]
-    @selected_classes=params[:selected_classes]
-  end
-
   private 
 
     # Never trust parameters from the scary internet, only allow the white list through.
