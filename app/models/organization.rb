@@ -1,7 +1,7 @@
 class Organization < AbstractResource
   include Participantable
 
-  has_many :products, dependent: :destroy, foreign_key: :supplier_id 
+  has_many :products, dependent: :destroy, foreign_key: :organization_id 
   
   # validates :gtin_prefix, presence: true
 
@@ -14,7 +14,7 @@ class Organization < AbstractResource
   end
 
   def self.find_by_prefix barcode, account=nil 
-    # suppliers = account.nil? ? Supplier.all : Supplier.unscoped.joins(:participant).where('participants.account_id = ?', account.id)
+    # organizations = account.nil? ? Organization.all : Organization.unscoped.joins(:participant).where('participants.account_id = ?', account.id)
     Current.account = account unless account.nil? 
     organizations = Organization.all
     #
@@ -35,7 +35,7 @@ class Organization < AbstractResource
     id = organizations.pluck(:id, :gtin_prefix).select{ |k,v| barcode[4,7].match(Regexp.new(v)) ? k : nil  }.compact.flatten[0] rescue nil
     return nil if id.nil? 
     Organization.find(id)
-    # Supplier.find_by gtin_prefix: prefix
+    # Organization.find_by gtin_prefix: prefix
   end
 
   #
@@ -53,7 +53,7 @@ class Organization < AbstractResource
 
     
   #
-  # Suppliers - if updated without the participant being 'called'
+  # Organizations - if updated without the participant being 'called'
   #
   def broadcast_update
     if self.participant.deleted_at.nil? 

@@ -32,32 +32,32 @@
           </div>
         </div>
 
-        <!-- Supplier_id --
+        <!-- organization_id --
         <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
           <div>
-            <label for="supplier_id" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
-              <%#= t :supplier_id %>
+            <label for="organization_id" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+              <%#= t :organization_id %>
             </label>
           </div>
           <div class="sm:col-span-2">
-            <%#= asset_form.hidden_field :supplier_id, value: asset_form.object.supplier_id || Supplier.first.id %>
+            <%#= asset_form.hidden_field :organization_id, value: asset_form.object.organization_id || Organization.first.id %>
             <div class="text-sm text-red-800" >
-              <%#= form.object.errors.where(:supplier_id).map( &:full_message).join( "og ") %>
+              <%#= form.object.errors.where(:organization_id).map( &:full_message).join( "og ") %>
             </div>
           </div>
         </div> -->
 
 
-        <!--  Supplier_id -->
+        <!--  Organization id -->
         <div class="px-4 divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
           <div>
-            <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t(".supplier_title") %></h3>
-            <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t(".supplier_description") %></p>
+            <h3 class="text-lg leading-6 font-medium text-gray-900"><%= t(".organization_title") %></h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= t(".organization_description") %></p>
             <div class="pt-6 sm:pt-5">
-              <%= render_component "resource/combo", form: asset_form, attr: :supplier_id, label: t('.supplier'), type: :single_drop_search, url: "/suppliers" %>
+              <%= render_component "resource/combo", form: asset_form, attr: :organization_id, label: t('.organization'), type: :single_drop_search, url: "/organizations" %>
             </div>
             <div class="text-sm text-red-800" >
-              <%= form.object.errors.where(:supplier_id).map( &:full_message).join( "og ") %>
+              <%= form.object.errors.where(:organization_id).map( &:full_message).join( "og ") %>
             </div>
           </div>
         </div>

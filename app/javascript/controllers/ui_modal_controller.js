@@ -4,7 +4,7 @@ import { destroy } from '@rails/request.js'
 export default class UiModalController extends Controller {
   static targets = [ "container", "cancelaction" ]
   static values = {
-    url: String,        // /suppliers/lookup
+    url: String,        // /organizations/lookup
     ids: String
   }
 

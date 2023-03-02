@@ -4,7 +4,7 @@ export default class ListController extends Controller {
   static outlets = [ "form-sleeve" ]
 
   static values = {
-    url: String,        // /suppliers/lookup
+    url: String,        // /organizations/lookup
     cursorPosition: Number,
     listAwaitingFocus: Boolean,
     formAwaitingFocus: Boolean

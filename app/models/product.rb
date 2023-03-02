@@ -1,7 +1,7 @@
 class Product < AbstractResource
   include Assetable
 
-  belongs_to :supplier, class_name: "Organization", optional: true
+  belongs_to :organization, optional: true
   has_many :stocked_products, dependent: :destroy
   has_many :stock_locations, through: :stocked_products
   has_many :stock_item_transactions, through: :stocked_products
@@ -22,9 +22,9 @@ class Product < AbstractResource
     Product.all.joins(:asset)
   end
 
-  def combo_values_for_supplier_id 
-    return [{id: nil, name: ''}] if supplier.nil?
-    [{id: supplier.id, name: supplier.name}]
+  def combo_values_for_organization_id 
+    return [{id: nil, name: ''}] if organization.nil?
+    [{id: organization.id, name: organization.name}]
   end
 
   def nbr_pallets

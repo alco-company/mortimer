@@ -17,17 +17,17 @@ whd = Participant.create account: alco, name: "Uberspeicher", state: 'confirmed'
 profile = Profile.create user: whd.participantable, time_zone: "Copenhagen"
 Current.user = whd.participantable
 
-services = %w( Products StockedProducts Stocks Suppliers StockLocations Employees PunchClocks Roles Teams )
-sg = { "Products" => "pim", "StockedProducts" => "wms", "Stocks" => "wms", "StockLocations" => "wms", "Suppliers" => "scm", "Employees" => "hr", "Roles" => "hr", "Teams" => "hr", "PunchClocks" => "hr" }
+services = %w( Products StockedProducts Stocks StockLocations Employees PunchClocks Roles Teams )
+sg = { "Products" => "pim", "StockedProducts" => "wms", "Stocks" => "wms", "StockLocations" => "wms", "Organizations" => "scm", "Employees" => "hr", "Roles" => "hr", "Teams" => "hr", "PunchClocks" => "hr" }
 services.each{ |s| Service.create name: s, menu_label: s.underscore, index_url: "/#{s.underscore}", service_group: sg[s] }
 
 role_types = { 
   god: { name: 'super user', context: ' ', role: 'ISNECUDPF' }, 
-  user: { name: 'users and teams', context: 'users teams', role: 'ISNECUDPF' },  
-  role: { name: 'role', context: 'roles', role: 'ISNECUDPF' },  
-  pim: { name: 'pim', context: 'suppliers products', role: 'ISNECUDPF' },  
-  stock: { name: 'stock', context: 'stocked_products stocks stock_items stock_locations stock_item_transactions', role: 'ISNECUDPF' },  
-  time: { name: 'enter_leave', context: 'employees punch_clocks enter_leaves', role: 'ISNECUDPF' }, 
+  user: { name: 'users and teams', context: 'user team', role: 'ISNECUDPF' },  
+  role: { name: 'role', context: 'role', role: 'ISNECUDPF' },  
+  pim: { name: 'pim', context: 'organization product', role: 'ISNECUDPF' },  
+  stock: { name: 'stock', context: 'stocked_product stock stock_item stock_location stock_item_transaction', role: 'ISNECUDPF' },  
+  time: { name: 'attendance', context: 'employee punch_clock asset_work_transaction', role: 'ISNECUDPF' }, 
 }
 roles = {}
 role_types.each{ |k,v| roles[k] = Role.create account: Account.first, name: v[:name], context: v[:context], role: v[:role] }

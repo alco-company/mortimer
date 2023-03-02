@@ -36,8 +36,8 @@
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= resource.supplier_barcode %></dd>
           </div>
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500"><%= t '.supplier' %></dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= link_to resource.supplier.name, supplier_url(resource.supplier) rescue '-' %></dd>
+            <dt class="text-sm font-medium text-gray-500"><%= t '.organization' %></dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= link_to resource.organization.name, organization_url(resource.organization) rescue '-' %></dd>
           </div>
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt class="text-sm font-medium text-gray-500"><%= t '.quantity_pallets' %></dt>

@@ -35,7 +35,7 @@
             <%= render_component "resource/combo", form: form, attr: :time_zone, label: t('.time_zone'), type: :single_drop_search, url: "/time_zones", focus: true %>
           </div>
           <div class="text-sm text-red-800" >
-            <%= form.object.errors.where(:supplier_id).map( &:full_message).join( "og ") %>
+            <%= form.object.errors.where(:time_zone).map( &:full_message).join( "og ") %>
           </div>
            
         </div>
