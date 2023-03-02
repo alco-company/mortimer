@@ -1,0 +1,29 @@
+<div id="today_stats" class="px-4 sm:px-6 lg:px-8">
+  <div class="-mx-4 mt-8 flex flex-col sm:-mx-6 md:mx-0">
+
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead>
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0"></th>
+          <th scope="col" class="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell"></th>
+          <th scope="col" class="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0 sm:table-cell w-48"><%= I18n.localize Date.today, format: :short %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% resource.asset_work_transactions.where( punched_at: [DateTime.now.at_beginning_of_day..DateTime.now]).each do |awt| %>
+          <tr class="bg-white">
+            <td class="py-3.5 pl-4 pr-3 text-left text-sm font-medium text-gray-900 sm:pl-6 md:pl-0">
+              <%= link_to( awt.asset.name, employee_asset_work_transaction_url(asset.assetable,awt), data: { turbo_frame: "_top" }) rescue '-' %>
+            </td>
+            <td class="hidden py-3.5 px-3 text-right text-sm font-medium text-gray-900 sm:table-cell">
+              <%= display_time(awt.punched_at, Current.user) %>
+            </td>
+            <td class="py-3.5 pl-3 pr-4 text-right text-sm font-medium text-gray-900 sm:pr-6 md:pr-0 sm:table-cell">
+              <%= record_state(awt.event) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

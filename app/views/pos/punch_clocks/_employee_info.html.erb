@@ -53,6 +53,7 @@
       </li>
 
       <li class="h-96 overflow-y-scroll">
+        <%= render partial: "pos/employees/today_stats", locals: { resource: employee.asset } %>
         <%= render partial: "pos/employees/employee_stats", locals: { resource: employee.asset } %>      
       </li>
 
