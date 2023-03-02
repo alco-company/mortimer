@@ -15,6 +15,8 @@ In the REFERENCES you will find a lot of people, resources, etc
 
 ## TODO
 
+go through seeds.rb - overhaul long time overdue!!
+
 add time_sheet to employee for registering time spent on weekly basis - see smartid
 
 how to handle supplier-id on products - when we have relabelled suppliers to organizations
@@ -85,6 +87,29 @@ Entities to be added:
 * all the documents should be pixel perfect 'on screen' as well as in print
 
 ## DONE
+
+### 2023-03-03
+
+
+### 2023-03-02
+
+allow multiple users to login as super_user - set role state to SUPER
+remove all traces of supplier - they are organizations with a partner_role of supplier
+
+38338c5 (HEAD -> staging) use radio-field on asset_work_transactions
+a4770d9 added a Phlex based radio-field
+5596789 move all references to Obsidian note
+bda7df3 push methods off participant and product
+6e68c62 remove comment used on debug
+9cccedf make lookup.json.jbuilder generic
+d1ab163 remove old example comments on abstract_resources_controller
+bf831a2 document and fix minors on combo_select
+8de8ba9 remove all traces of supplier
+ea5c6bb (HEAD -> staging, mortimer/staging) manage state=SUPER on role
+4733574 fix regression on profile
+52f0e50 put reload function on pos/employees
+c410502 make life easy with focus on add/edit awt's
+
 
 ### 2023-03-01
 
