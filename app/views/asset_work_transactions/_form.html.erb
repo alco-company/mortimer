@@ -42,7 +42,35 @@
         <%#= render_component "resource/input_date", form: assoc_form, field: :punched_at, resource: resource, title: t('.punched_at'), required: true %>
 
         <!-- reason -->
-        <%= assoc_form.text_field( resource: resource.eventable, field: :reason, title: t('.reason')) %>
+        <%= assoc_form.radio_field( 
+          resource: resource.eventable, 
+          form: assoc_form, 
+          field: :reason, 
+          description: t('.state_description'),
+          buttons: [
+            {value: "",           label: "ingen årsag", checked: true},
+            {value: "-",          label: "ferie"},
+            {value: "XTRA",       label: "på overtid for at lave "},
+            {value: "SUB",        label: "som vikar for at hjælpe på "},
+            {value: "ME",         label: "er selv syg"},
+            {value: "RR",         label: "ferie/fri"},
+            {value: "CHILD",      label: "pga barn syg"},
+            {value: "NURSING",    label: "omsorg"},
+            {value: "SENIOR",     label: "senior"},
+            {value: "UNPAID",     label: "selvbetalt"},
+            {value: "LOST_WORK",  label: "efter reglen om tabt arbejdsfortjeneste"},
+            {value: "MATERNITY",  label: "barsel"},
+            {value: "LEAVE",      label: "orlov"},
+            {value: "P56",        label: "efter paragraf 56"},
+          ],
+          required: true, 
+          focus: true) 
+          %>
+
+        <%# <%= assoc_form.text_field( resource: resource.eventable, field: :reason, title: t('.reason')) %>
+
+        <!-- comment -->
+        <%= assoc_form.text_field( resource: resource.eventable, field: :comment, title: t('.comment')) %>
 
         <!-- minutes_spent - not applicable on adds/edits -->
         <%#= render_form_text_field(resource: resource, form: form, field: :minutes_spent, title: t('.minutes_spent'), required: true) %>

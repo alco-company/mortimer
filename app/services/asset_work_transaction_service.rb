@@ -124,6 +124,66 @@ class AssetWorkTransactionService < EventService
     e
   end
 
+  def update event, params
+    begin
+      update_transaction event.eventable, params[:eventable_attributes]
+      Result.new record: event, status: :created
+      
+    rescue Exception => exception
+      Rails.logger.warn "[asset_work_transaction] Error: (AssetWorkTransaction) #{exception.message}"
+      resource.errors.add :base, exception.message
+      Result.new status: :error, record: resource      
+    end
+  end
+
+  def update_transaction awt, params
+    e = nil
+    return e unless [ "IN", "OUT", "BREAK", "SICK", "FREE" ].include? params["state"]
+
+    AssetWorkTransaction.transaction do
+      begin      
+        comment = params["comment"] rescue ""
+
+        awt.punched_at = params["punched_at"]
+        awt.reason = params["reason"] rescue nil
+
+        minutes = case params["state"]
+        when "SICK";   get_decimal_minutes(params["sick_hrs"])
+        when "FREE";   get_decimal_minutes(params["free_hrs"])
+        else;          0
+        end
+
+        comment = case awt.reason 
+        when nil;           comment
+        when "";            comment
+        when "-";           "ferie"
+        when "XTRA";        "på overtid for at lave " + comment
+        when "SUB";         "som vikar for at hjælpe på " + (Location.find(comment).name rescue '-')
+        when "ME";          "er selv syg"
+        when "RR";          "ferie/fri"
+        when "CHILD";       "pga barn syg"
+        when "NURSING";     "omsorg"
+        when "SENIOR";      "senior"
+        when "UNPAID";      "selvbetalt"
+        when "LOST_WORK";   "efter reglen om tabt arbejdsfortjeneste"
+        when "MATERNITY";   "barsel"
+        when "LEAVE";       "orlov"
+        when "P56";         "efter paragraf 56"
+        end
+
+        awt.save
+        awt.event.update(name: comment, minutes_spent: minutes, state: params["state"])
+
+      rescue => err
+        Rails.logger.info "[asset_work_transaction] Error: (create_transaction) #{err.message}"
+        raise ActiveRecord::Rollback
+        nil
+      end
+    end
+    awt.event
+
+  end
+
   def get_decimal_minutes time
     hrs,min = time.split(",")
     min ||= "0"

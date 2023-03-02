@@ -3,6 +3,6 @@
   <%= render_column css: " text-gray-900 font-medium ", content: (link_to( resource.asset.name, employee_asset_work_transaction_url(resource.asset.assetable,resource), data: { turbo_frame: "_top" }) rescue '-') %>
   <%= render_column css: "hidden sm:table-cell ", content: display_time(resource.punched_at, user) %>
   <%= render_column css: "hidden md:table-cell ", content: record_state(resource.event) %>
-  <%= render_column css: "hidden md:table-cell ", content: resource.name %>
+  <%= render_column css: "hidden md:table-cell ", content: resource.comment %>
   <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_employee_asset_work_transaction_url(resource.asset.assetable,resource)) %>
 <% end %>

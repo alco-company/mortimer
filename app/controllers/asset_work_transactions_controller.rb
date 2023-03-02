@@ -29,7 +29,10 @@ class AssetWorkTransactionsController < EventsController
   end
   
   def update_resource
-    result = "#{resource_class.to_s}Service".constantize.new.update resource(), resource_params
+    params[:event][:eventable_attributes][:state] = params[:event][:state]
+    params[:event][:eventable_attributes][:sick_hrs] = params[:event][:eventable_attributes][:sick_hrs] || 0
+    params[:event][:eventable_attributes][:free_hrs] = params[:event][:eventable_attributes][:free_hrs] || 0
+    result = "#{resource_class.to_s}Service".constantize.new.update resource, resource_params
     resource= result.record
     case result.status
     when :updated
@@ -65,7 +68,7 @@ class AssetWorkTransactionsController < EventsController
     #   "id"=>"34"
     # }
     def resource_params
-      params.require(:event).permit(:account_id, :state, :eventable_type, eventable_attributes: [ :id, :name, :punch_asset_ip_addr, :punched_at, :reason ])
+      params.require(:event).permit(:account_id, :state, :eventable_type, eventable_attributes: [ :id, :name,  :state, :sick_hrs, :free_hrs, :punch_asset_ip_addr, :punched_at, :reason, :comment ])
     end
 
     #

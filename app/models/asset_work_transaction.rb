@@ -35,6 +35,10 @@ class AssetWorkTransaction < AbstractResource
 
   end
 
+  def comment 
+    event.name == 'AWT' ? '' : event.name
+  end
+
   def broadcast_create
 
     buttons = Current.account.system_parameters_include("pos/employee/buttons")
@@ -58,6 +62,17 @@ class AssetWorkTransaction < AbstractResource
       partial: "pos/employees/employee_state_buttons", 
       target: "employee_state_buttons", 
       locals: { resource: self.asset, user: Current.user, buttons: buttons }
+  end
+
+  def broadcast_update
+    if deleted_at.nil?
+      broadcast_replace_later_to model_name.plural, 
+        target: "asset_work_transaction_#{self.id}", 
+        partial: self, 
+        locals: { resource: self, user: Current.user }
+    else
+      broadcast_remove_to model_name.plural, target: self
+    end
   end
 
 end
