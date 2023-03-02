@@ -22,6 +22,7 @@ module Views
     end
 
     def build_buttons state
+      state ||= "OUT"
       buttons = [
         { tap: "playTap", icon: "play_arrow", label: "IND", css: state == "IN" ? "disabled bg-transparent border-2 cursor-not-allowed" : "bg-green-400 text-gray-50 shadow-md" },
         { tap: "pauseTap", icon: "pause", label: "PAUSE", css: (state == "OUT" || state == "BREAK") ? "disabled bg-transparent border-2 cursor-not-allowed" : "bg-yellow-400 text-gray-50 shadow-md" },
