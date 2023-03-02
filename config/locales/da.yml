@@ -159,6 +159,7 @@ da:
     employees: "Medarbejdere"
     home: 'Instrumentbrædt'
     locations: "Arbejdssteder"
+    organizations: "Virksomheder"
     printservers: "Printservere"
     products: "Produkter"
     punch_clocks: "Stempelure"
@@ -327,6 +328,10 @@ da:
       teams: Arbejdsgrupper/Teams
       work_schedules: Vagtskemaer
 
+  Organization:
+    index: "Samarbejdspartnere"
+    index_description: Oversigten viser dig jeres samarbejdspartnere, om det er kunder, leverandører, eller andre.
+    
   passwords:
     new: 
       reset_password_title: "Nulstil dine oplysninger"
