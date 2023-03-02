@@ -148,7 +148,7 @@ class AbstractResourcesController < ApplicationController
   #
   # used by components like combo_component, and more
   #
-  # TODO! this obviously is a ways into the system and should be guarding
+  # TODO! this obviously is a ways into the system and should be guarded
   #
   def lookup
     request.format.symbol == :turbo_stream ? respond_with(:lookup) : not_authorized(true)
@@ -311,13 +311,31 @@ class AbstractResourcesController < ApplicationController
     end
 
     #
-    # will be serviced by application/lookup.turbo_stream.erb and views/[resource]/_lookup.turbo_stream.erb
+    # lookup_resources is a generic action that can be used to lookup resources
+    # particularly useful for combo_select form inputs, generating GET's like
+    #
+    # GET "/organizations/lookup?stimulus_controller=resource--combo-component&stimulus_lookup_target=selectOptions&lookup_target=organizations&values=&add=false&q=ki"
+    # 
+    # called by the /lookup action defined above
+    #
+    # on the resource being lookup'ed the following method are called: combo_values_for_FIELDNAME - eg combo_values_for_organization_id
+    # which should return an array of values id, name for each 'selected' value from the lookup'ed table - eg organizations
+    #
+    # selecting an item from the lookup will call the /index?ids=[] action defined above - with ids selected
+    # and expect to get back a JSON builder from views/{resource|application}/index.json.builder - eg /views/organizations/index.json.jbuilder
+    # which will require you to implement a partial for each resource - eg /views/organizations/_organization.json.jbuilder
+    #
+    # will be serviced by application/lookup.turbo_stream.erb and views/{resource|application}/_lookup.turbo_stream.erb
     # and because concerns/resource_control takes care of actually getting the content
     # no real code is needed in this method
     #
-    # this method only exists to be overwritten by you if necessary
+    # this method is the default implementation used by combo_select and can be overwritten by you if necessary
     #
-    def lookup_resources
+    def lookup_resources 
+      @target=params[:target]
+      @value=params[:value]
+      @element_classes=params[:element_classes]
+      @selected_classes=params[:selected_classes]
     end
 
     #
@@ -391,241 +409,3 @@ class AbstractResourcesController < ApplicationController
     end
 
 end
-
-
-
-# Another take on a generic way to handle most controller actions:
-# https://medium.com/@adrian_teh/refactoring-ruby-on-rails-controllers-using-blocks-bf78b1b292ca
-#
-# # app/controllers/posts_controller.rb
-# class PostsController < ApplicationController
-#   def create
-#     @post = Post.new(post_params)
-#     CreatePost.call(@post) do |success, failure|
-#       success.call { redirect_to posts_path, notice: 'Successfully created post.' }
-#       failure.call { render :new }
-#     end
-#   end
-# end
-
-# # app/services/create_post.rb
-# class CreatePost
-#   attr_reader :post
-
-#   def self.call(post, &block)
-#     new(post).call(&block)
-#   end
-
-#   def initialize(post)
-#     @post = post
-#   end
-#   private_class_method :new
-
-#   def call(&block)
-#     if post.save
-#       send_email
-#       track_activity
-#       yield(Trigger, NoTrigger)
-#     else
-#       yield(NoTrigger, Trigger)
-#     end
-#   end
-
-#   def send_email
-#     # Send email to all followers
-#   end
-
-#   def track_activity
-#     # Track in activity feed
-#   end
-# end
-
-# # app/services/trigger.rb
-# class Trigger
-#   def self.call
-#     yield
-#   end
-# end
-
-# # app/services/no_trigger.rb
-# class NoTrigger
-#   def self.call
-#     # Do nothing
-#   end
-# end
-
-
-
-
-# from former versions of abstracted_resources_controller:
-#
-  # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  # before_action :set_fab_button_options
-  # before_action :set_variant_template
-  # after_action :verify_authorized
-
-
-# INDEX
-  #   respond_with resources do |format|
-  #     # format.xlsx {
-  #     #   # response.headers['Content-Disposition'] = 'attachment; filename="current_tyre_stock.xlsx"'
-  #     #   render xlsx: 'stock_items/index', template: 'current_tyre_stock', filename: "current_tyre_stock.xlsx", disposition: 'inline', xlsx_created_at: Time.current, xlsx_author: "http://wheelstore.space"
-  #     # }
-  #   end
-
-
-    # your can override this on your controller
-    # def render_on_create format
-    #   resource.save && update_parenthood
-    #   respond_with resource
-    #   # if params.include? "edit_all"
-    #   #   if update_all_resources
-    #   #     notice = t('all selected posts were updated correctly')
-    #   #   else
-    #   #     notice = t('all selected posts were not updated correctly')
-    #   #   end
-    #   # else
-    #   #   if resource.save && update_parenthood
-    #   #     flash[:notice] = t('.success.created', resource: resource_class.to_s )
-    #   #     format.html { render :show, status: :created, notice: t('.success.created', resource: resource_class.to_s ) }
-    #   #     format.json { render :show, status: :created, location: resource }
-    #   #   else
-    #   #     flash[:error] = t('.error.created', resource: resource_class.to_s )
-    #   #     format.html { render :new, status: :unprocessable_entity  }
-    #   #     format.json { render json: resource.errors, status: :unprocessable_entity }
-    #   #   end
-    #   # end
-    # end
-
-    # your can override this on your controller
-    # def render_on_update format
-    #   resource.update(resource_params) && update_parenthood
-    #   respond_with parent, resource
-    #   # if resource.update(resource_params) && update_parenthood
-    #   #   flash[:notice] = t('.success.updated', resource: resource_class.to_s )
-    #   #   format.html { render :show, status: :ok, notice: t('.success.updated', resource: resource_class.to_s ) }
-    #   #   format.json { render :show, status: :ok, location: resource }
-    #   # else
-    #   #   flash[:notice] = t('.error.updated', resource: resource_class.to_s )
-    #   #   format.html { render :edit, status: :unprocessable_entity }
-    #   #   format.json { render json: resource.errors, status: :unprocessable_entity }
-    #   # end
-    # end
-
-
-#
-# load the lib/abstracted_responder.rb
-# require "abstracted_responder"
-
-  # self.responder = ::AbstractedResponder
-
-
-
-  # def create
-  #   authorize resource
-  #   ok= resource.save && update_parenthood
-  #   respond_with(resource,location: redirect_after_create) do |format|
-  #     flash[:notice] = t('.success.created', resource: resource_class.to_s ) if ok
-  #   end
-  # end
-
-  # def update
-  #   authorize resource
-  #   ok = resource.update_attributes(resource_params) && update_parenthood
-  #   respond_with(resource, location: redirect_after_update) do |format|
-  #     flash[:notice] = t('.success.created', resource: resource_class.to_s ) if ok
-  #   end
-  # end
-  # def create
-  #   authorize resource
-  #   flash[:notice] = t('.success.created',
-  #     resource: resource_class.to_s ) if resource.save && update_parenthood
-  #   respond_with(resource, location: redirect_after_create ) #do |format|
-  #   #   if result_ok
-  #   #     flash[:notice] = t('.success.created', resource: resource_class.to_s )
-  #   #   else
-  #   #     format.html { render action: :new, status: :unprocessable_entity }
-  #   #     format.js { render action: :new, status: :unprocessable_entity }
-  #   #   end
-  #   # end
-  # rescue Exception => e
-  #   scoop_from_error e
-  # end
-
-  # def update
-  #   authorize resource
-  #   flash[:notice] = t('.success.updated',
-  #     resource: resource_class.to_s ) if resource.update_attributes(resource_params) && update_parenthood
-  #   respond_with(resource, location: redirect_after_update) # do |format|
-  #   #   if result_ok
-  #   #     flash[:notice] = t('.success.updated', resource: resource_class.to_s )
-  #   #   else
-  #   #     format.html { render action: :edit, status: :unprocessable_entity }
-  #   #     format.js { render action: :edit, status: :unprocessable_entity }
-  #   #   end
-  #   # end
-  # rescue Exception => e
-  #   scoop_from_error e
-  # end
-
-
-
-  # def destroy
-  #   authorize resource
-  #   result = true if delete_resource && update_parenthood
-  #   result ? (flash.now[:notice] = t('.success', resource: resource_class.to_s)) : (flash.now[:error] = t('.deleted.error',resource: resource_class.to_s) + " " + resource.errors.messages.values.join( " / "))
-  #   if result==true
-  #     render layout:false, status: 200, locals: { result: true }
-  #   else
-  #     render layout:false, status: 301, locals: { result: true, errors: resource.errors.messages.values.join( " / ") }
-  #   end
-  # rescue Exception => e
-  #   scoop_from_error e
-  # end
-
-      # # you can override this on your controller
-    # def redirect_after_create
-    #   resources_url {}
-    # end
-
-    # # you can override this on your controller
-    # def redirect_after_update
-    #   resources_url {}
-    # end
-
-    # def caught_an_error_already?
-    #   result = @caught_an_error_already
-    #   @caught_an_error_already ||= true
-    #   result
-    # end
-
-    # def error_counter
-    #   @error_counter ||= 0
-    #   @error_counter = @error_counter + 1
-    # end
-
-
-    #
-    # use views/../$action.html+mobile.erb if request originates from an iPad
-    #
-    # def set_variant_template
-    #   request.variant = :mobile if request.user_agent =~ /iPad/
-    # end
-
-
-    #
-    # build options for fixed action button - implement on each controller to customize
-    # raise an exception
-    # def set_fab_button_options
-    #   opt = { items: {}}
-    #   case params[:action]
-    #   when 'nothing'; opt = opt
-    #   # when 'new';   #opt[:items].merge! print: { ajax: 'get', icon: 'print', class: 'blue lighten-2', url: '/stock_items/print?print_list=true', browser: 'new' }
-    #   # when 'edit';  #opt[:items].merge! print: { ajax: 'get', icon: 'print', class: 'blue lighten-2', url: '/stock_items/print?print_list=true', browser: 'new' }
-    #   # when 'show';  opt[:items].merge! print: { ajax: 'get', icon: 'print', class: 'blue lighten-2', url: '/stock_items/print', browser: 'new' }
-    #   # when 'index'; opt[:items].merge! print: { ajax: 'get', icon: 'print', class: 'blue lighten-2', url: '/stock_items/print?print_list=true', browser: 'new' }
-    #   end
-
-    #   # = build_print_link(f.object, list: false, print_options: "print_cmd=print_label", button: 'icon-tag', text: 'Udskriv dæk label')
-    #   @fab_button_options = opt
-    # end
