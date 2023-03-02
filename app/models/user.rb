@@ -163,7 +163,6 @@ class User < AbstractResource
   end
 
   def can_list_service?(service)
-    say "User #{id} checking if can list #{service.index_url.split('/').last.singularize}"
     can :index, service.index_url.split('/').last.singularize
   end
 

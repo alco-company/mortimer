@@ -29,6 +29,7 @@ class AbstractResourceService
       
     rescue Exception => exception
       ActiveRecord::Base.connection.execute 'ROLLBACK' 
+      resource.errors.add(:base, exception)
       Result.new status: :error, record: resource      
     end
   end
