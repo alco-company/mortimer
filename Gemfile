@@ -121,3 +121,5 @@ gem 'wkhtmltopdf-binary'
 gem 'haml'
 
 gem 'coffee-rails'
+
+gem "sendgrid-ruby", "~> 6.6"
