@@ -28,7 +28,7 @@ class UserMailer < ApplicationMailer
     mail to: @user.email, subject: "Invitation to sign up"
   end
   
-  def reminder(user, invitation_token)
+  def reminder(user, invitation_token='fisk')
     @user = user 
     @invitation_token = invitation_token 
 
