@@ -18,6 +18,14 @@ module ViewComponentsHelper
   end
 
   # Lists
+  def render_list_header(**attribs, &block)
+    render Views::Components::List::ListHeader.new **attribs, &block
+  end
+
+  def render_breadcrumbs(**attribs, &block)
+    render Views::Components::Breadcrumbs.new **attribs, &block
+  end
+
   def render_row(attribs: {}, &block)
     render Views::Components::List::Row.new attribs:, &block
   end
@@ -25,6 +33,7 @@ module ViewComponentsHelper
   def render_column(css: "", content:)
     render Views::Components::List::Column.new css:, content:
   end
+
 
   # Form
   def render_form(**attribs, &block)
