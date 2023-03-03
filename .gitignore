@@ -41,3 +41,4 @@
 
 # ignore Mac file descriptors
 .DS_Store
+sendgrid.env
