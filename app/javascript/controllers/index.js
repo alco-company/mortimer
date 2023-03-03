@@ -31,6 +31,9 @@ application.register("list-item-actions", ListItemActionsController)
 import ListItemController from "./list_item_controller"
 application.register("list-item", ListItemController)
 
+import MoreController from "./more_controller"
+application.register("more", MoreController)
+
 import PaginationController from "./pagination_controller"
 application.register("pagination", PaginationController)
 

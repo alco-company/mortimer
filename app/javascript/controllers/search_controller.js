@@ -6,12 +6,9 @@ export default class SearchController extends Controller {
 
   connect() {
     super.connect()
-    console.log(this.inputTarget)
-    console.log(this.formTarget)
   }
 
   search() {
-    console.log(this.inputTarget.value)
     // this.formTarget.requestSubmit()
   }
   
