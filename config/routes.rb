@@ -144,6 +144,8 @@ Rails.application.routes.draw do
   end
   
   # resources :events
+  resources :equipment, concerns: [:cloneable, :modalable, :selectable]
+
   resources :employees, concerns: [:cloneable, :modalable, :exportable] do
     resources :asset_work_transactions, concerns: [:cloneable, :modalable, :exportable]
     resources :asset_workday_sums, concerns: [:cloneable, :modalable, :exportable]

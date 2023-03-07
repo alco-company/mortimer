@@ -16,6 +16,7 @@ In the REFERENCES you will find a lot of people, resources, etc
 ## TODO
 
 go through seeds.rb - overhaul long time overdue!!
+go through all delegated tables and remove timestamp fields - they are entirely superfluous
 
 add time_sheet to employee for registering time spent on weekly basis - see smartid
 
@@ -88,7 +89,24 @@ Entities to be added:
 
 ## DONE
 
+### 2023-03-06
+
+show search/filter on all index pages
+add equipments table
+
 ### 2023-03-03
+
+Not a lot to show for today
+
+76319df (HEAD -> staging, mortimer/staging) test email with user_mailer - wip
+3b4342e change new button + table search to Phlex - wip
+4c6d8e2 make list_header Phlex component
+2e3cecb configure email through SendGrid
+11517b6 add sendgrid-ruby for email
+cee5b56 add stimulus-use for animations + update stimulus
+cf26425 show todays punches on punch_clocks - wip
+b019cc5 allow punch from user w/o any punches
+ed1ddf3 edit reason / comment on punches - wip
 
 
 ### 2023-03-02

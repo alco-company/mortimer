@@ -1,0 +1,3 @@
+class EquipmentService < AssetService
+
+end

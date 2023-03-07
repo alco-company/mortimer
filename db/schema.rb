@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_02_094247) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_06_184050) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -204,6 +204,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_094247) do
     t.bigint "pupil_id", null: false
     t.index ["employee_id", "pupil_id"], name: "index_employees_pupils_on_employee_id_and_pupil_id"
     t.index ["pupil_id", "employee_id"], name: "index_employees_pupils_on_pupil_id_and_employee_id"
+  end
+
+  create_table "equipment", force: :cascade do |t|
+    t.string "access_token"
+    t.text "description"
+    t.datetime "bought_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "events", force: :cascade do |t|
