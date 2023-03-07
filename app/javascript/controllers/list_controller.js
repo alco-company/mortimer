@@ -15,7 +15,7 @@ export default class ListController extends Controller {
     this.listAwaitingFocus = false
     this.formAwaitingFocus = false
     document.getElementById('form_slideover').dataset.current_form_slideover=document.getElementById('form_slideover').querySelectorAll('form')[0].id
-    console.log( 'focusing ', document.getElementById('form_slideover').dataset.current_form_slideover )
+    // console.log( 'focusing ', document.getElementById('form_slideover').dataset.current_form_slideover )
   }
 
   connect() {
@@ -39,7 +39,7 @@ export default class ListController extends Controller {
 
   focusList(){
     try{
-      console.log(document.getElementById("form-sleeve"))
+      // console.log(document.getElementById("form-sleeve"))
       document.getElementById("form-sleeve").classList.add("hidden")
       this.element.querySelectorAll("input[type=checkbox]")[this.cursorPositionValue].focus()
     } catch( err ){
@@ -47,7 +47,7 @@ export default class ListController extends Controller {
     }
     document.getElementById('form_slideover').querySelectorAll('form')[0].id = document.getElementById('form_slideover').dataset.current_form_slideover
 
-    console.log('focusing -')
+    // console.log('focusing -')
     this.listAwaitingFocus = false
   }
 

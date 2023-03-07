@@ -3,6 +3,7 @@ import { useTransition } from 'stimulus-use';
 
 export default class MoreController extends Controller {
   static targets = [ "listmoremenu" ]
+  static outlets = [ "search" ]
 
   connect() {
     super.connect()
@@ -20,6 +21,10 @@ export default class MoreController extends Controller {
     });
     
     // this.focus()
+  }
+  
+  toggleSearchPane(e){
+    this.searchOutlet.toggleSearchPane()
   }
 
   close() {

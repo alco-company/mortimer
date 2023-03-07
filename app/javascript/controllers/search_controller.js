@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class SearchController extends Controller {
-  static targets = [ "input", "form" ]
+  static targets = [ "input", "form", "filterwrapper" ]
   static values = {}
 
   connect() {
@@ -11,7 +11,10 @@ export default class SearchController extends Controller {
   search() {
     // this.formTarget.requestSubmit()
   }
-  
+
+  toggleSearchPane(e){
+    this.filterwrapperTarget.classList.toggle('hidden')
+  }
 
   keydownHandler(e){
     
