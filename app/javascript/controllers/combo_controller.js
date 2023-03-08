@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 import { get, post } from '@rails/request.js'
  
-export default class ComboComponentController extends Controller {
+export default class ComboController extends Controller {
     static targets = [ "input", "button", "tags", "select", "selectOptions" ]
     static values = {
         url: String,            // where to do the lookup for data values
@@ -138,12 +138,12 @@ export default class ComboComponentController extends Controller {
     }
 
     // get lookup data for the list - fill'in using TurboStream
-    // GET "/organizations/lookup?stimulus_controller=resource--combo-component&stimulus_lookup_target=selectOptions&lookup_target=organizations&values=&add=false&q=ki"
+    // GET "/organizations/lookup?stimulus_controller=combo&stimulus_lookup_target=selectOptions&lookup_target=organizations&values=&add=false&q=ki"
     getData(query=''){
         try {            
             if( (query=='*') || (query.length>1 && query !== '  ') ){
                 let params = new URLSearchParams()
-                params.append('stimulus_controller', 'resource--combo-component')
+                params.append('stimulus_controller', 'combo')
                 params.append('stimulus_lookup_target', "selectOptions")
                 params.append('lookup_target', this.selectOptionsTarget.id)
                 params.append('values', this.selectedValue)

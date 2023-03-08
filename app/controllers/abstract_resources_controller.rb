@@ -314,7 +314,7 @@ class AbstractResourcesController < ApplicationController
     # lookup_resources is a generic action that can be used to lookup resources
     # particularly useful for combo_select form inputs, generating GET's like
     #
-    # GET "/organizations/lookup?stimulus_controller=resource--combo-component&stimulus_lookup_target=selectOptions&lookup_target=organizations&values=&add=false&q=ki"
+    # GET "/organizations/lookup?stimulus_controller=combo&stimulus_lookup_target=selectOptions&lookup_target=organizations&values=&add=false&q=ki"
     # 
     # called by the /lookup action defined above
     #

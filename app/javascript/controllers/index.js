@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ComboController from "./combo_controller"
+application.register("combo", ComboController)
+
 import ContentLoaderController from "./content_loader_controller"
 application.register("content-loader", ContentLoaderController)
 

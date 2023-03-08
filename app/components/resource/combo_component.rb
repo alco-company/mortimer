@@ -62,7 +62,7 @@ class Resource::ComboComponent < ViewComponent::Base
       @focus = focus
       @lookup_target = lookup_target || "#{@url.underscore}".gsub('/','')       # '/locations' -> 'locations'
       @values = values 
-      @values ||= form ? @form.object.send("combo_values_for_#{attr}") : []
+      @values ||= values_for attr
       @items = items || []
       @api_key = api_key
       @api_class = api_class
@@ -76,6 +76,11 @@ class Resource::ComboComponent < ViewComponent::Base
       @is_search = !(type_s =~ /search/).nil?
       @is_add    = !(type_s =~ /add/).nil?
       
+    end
+
+    def values_for attr 
+      obj = @form.object.nil? ? @form.resource : @form.object
+      obj.send("combo_values_for_#{attr}") || []
     end
 
 end

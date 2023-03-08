@@ -60,19 +60,6 @@ class EmployeesController < AssetsController
         assetable_attributes: [ :id, :pin_code, :pbx_extension, :hired_at, :job_title, :birthday, :base_salary, :norm_time, :description, :mug_shot, signed_pupils: {} ] )
     end
 
-    # def punch_params
-    #   parms = {
-    #     asset_work_transaction: {
-    #       ip_addr: request.remote_ip,
-    #       employee_asset_id: resource.id,
-    #       punched_at: DateTime.now,
-    #       state: params[:asset][:state],
-    #       force: true
-    #     }
-    #   }
-    #   ActionController::Parameters.new(parms).require(:asset_work_transaction).permit(:punched_at, :state, :ip_addr, :punch_asset_id, :employee_asset_id, punched_pupils: {} )
-    # end
-
     #
     # implement on every controller where search makes sense
     # geet's called from resource_control.rb 

@@ -29,7 +29,7 @@ module Views
     def fields_for(*args, **kwargs) # takes a block (we don't need to specify that because we're yielding)
       # save the current value of @form. We'll need it later.
       original_form = @rails_form_builder
-
+      
       begin
         # render Views::Components::Form::FieldsFor.new( form: @rails_form_builder, field: field, assoc: assoc, &block)
         # temporarily set @form to point to the fields_for form builder
@@ -50,6 +50,11 @@ module Views
       render Views::Components::Form::TextField.new **attribs, &block
     end
 
+    def token_field(**attribs, &block)
+      attribs[:form] = @rails_form_builder
+      render Views::Components::Form::TokenField.new **attribs, &block
+    end
+
     def radio_field(**attribs, &block)
       attribs[:form] = @rails_form_builder
       render Views::Components::Form::RadioField.new **attribs, &block
@@ -61,12 +66,18 @@ module Views
     end
 
     def text_area(**attribs, &block)
+      attribs[:form] = @rails_form_builder
       render Views::Components::Form::TextArea.new **attribs, &block
     end
 
     def datetime_field(**attribs, &block)
       attribs[:form] = @rails_form_builder
       render Views::Components::Form::DateTimeField.new **attribs, &block
+    end
+
+    def combo_field(**attribs, &block)
+      attribs[:form] = @rails_form_builder
+      render Views::Components::Form::ComboField.new **attribs, &block
     end
 
   end

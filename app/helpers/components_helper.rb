@@ -27,15 +27,15 @@ module ComponentsHelper
 
   def build_form_select form, attrib, items, values, is_multi
     if form.nil? 
-      return hidden_field_tag( attrib, combo_input_value(values,:id), {data: { resource__combo_component_target: "select"}})
+      return hidden_field_tag( attrib, combo_input_value(values,:id), {data: { combo_target: "select"}})
     end
     if is_multi 
       form.select attrib, 
         options_from_collection_for_select(items,"id","name",{selected: ([values].flatten.any? ? [values].flatten.pluck(:id) : nil)}), 
         {},
-        { multiple: true, class: "hidden", data: { resource__combo_component_target: "select"}}
+        { multiple: true, class: "hidden", data: { combo_target: "select"}}
     else
-      form.hidden_field attrib, value: combo_input_value(values,:id), data: { resource__combo_component_target: "select"}
+      form.hidden_field attrib, value: combo_input_value(values,:id), data: { combo_target: "select"}
     end
   end
 

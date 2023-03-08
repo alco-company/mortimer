@@ -15,9 +15,6 @@ application.register("navigation--sidebar-component", Navigation__SidebarCompone
 import Navigation__TopbarComponentController from "./navigation/topbar_component_controller"
 application.register("navigation--topbar-component", Navigation__TopbarComponentController)
 
-import Resource__ComboComponentController from "./resource/combo_component_controller"
-application.register("resource--combo-component", Resource__ComboComponentController)
-
 import Resource__FileuploadComponentController from "./resource/fileupload_component_controller"
 application.register("resource--fileupload-component", Resource__FileuploadComponentController)
 
