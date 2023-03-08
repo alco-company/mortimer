@@ -7,6 +7,7 @@ module StocksHelper
     case resource.class.to_s
     when "Stock"; "#{host}#{pos_stock_path(resource)}?api_key=#{resource.access_token}"
     when "Employee"; "#{host}#{pos_employee_path(resource)}?api_key=#{resource.access_token}"
+    when "Equipment"; "#{host}#{equipment_path(resource)}?api_key=#{resource.access_token}"
     else host
     end
   end
@@ -18,7 +19,7 @@ module StocksHelper
     svg = qrcode.as_svg(
       color: "333",
       shape_rendering: "crispEdges",
-      module_size: 3,
+      module_size: 2,
       standalone: true,
       use_path: true
     ).html_safe    

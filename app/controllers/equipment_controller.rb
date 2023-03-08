@@ -6,6 +6,10 @@ class EquipmentController < AssetsController
     @resource_class= Equipment
   end
 
+  def book
+    render turbo_stream: turbo_stream.replace( resource_form, partial: 'book', locals: { resource: resource } )
+  end
+
   private 
 
 
@@ -25,10 +29,13 @@ class EquipmentController < AssetsController
       #   AssetWorkTransactionService.new.create_Equipment_punch_transaction( resource, punch_params )
       # end
       #
-      params[:asset][:assetable_attributes][:bought_at] = DateTime.parse params[:asset][:assetable_attributes][:bought_at]
+      # params[:asset][:assetable_attributes][:purchased_at] = DateTime.parse params[:asset][:assetable_attributes][:purchased_at]
       params.require(:asset).permit(:assetable_type, :name, :state, :account_id, work_schedules: [], 
-        assetable_attributes: [ :id, :bought_at, :description ] )
+        assetable_attributes: [ :id, :access_token, :brand, :model, :location_id, :organization_id, :purchased_at, :purchase_price, :residual_value, :warranty_ends_at, :serial_number, :description ] )
     end
+
+      
+
 
     # def punch_params
     #   parms = {

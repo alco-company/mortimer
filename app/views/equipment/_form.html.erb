@@ -1,73 +1,27 @@
-<%= form_with model: resource, 
-  url: resource_url(), 
-  id: resource_form, 
-  data: { form_sleeve_target: 'form' }, 
-  class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
-  <%= form.fields_for :assetable do |equipment| %>
-    <%= form.hidden_field :account_id, value: current_account.id %>
-    <%= form.hidden_field :assetable_type, value: "Equipment" %>
-    <div class="flex-1 relative "
-      data-controller="form"
-      data-form-form-sleeve-outlet="#form-sleeve"
-      data-form-list-outlet="#list"
+<%= render_form( resource: resource) do |form| %> 
+  <%= form.hidden_field form: form, field: :account_id, value: current_account.id %>
+  <%= form.hidden_field form: form, field: :assetable_type, value: "Equipment" %>
+  <div class="flex-1 relative "
+    data-controller="form"
+    data-form-form-sleeve-outlet="#form-sleeve"
+    data-form-list-outlet="#list"
 
-      data-form-clipboard-prefix-value="<%#= pos_equipment_url(resource.assetable) unless resource.new_record? %>"
-      data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"    
-      >
-      <!-- Header -->
-      <%= render_component "resource/form_header", resource: resource, title: form_header_title, description: form_header_description %>
+    data-form-clipboard-prefix-value="<%#= pos_equipment_url(resource.assetable) unless resource.new_record? %>"
+    data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"    
+    >
+    <%= render_form_header( resource: resource, title: form_header_title, description: form_header_description ) %>
+    <%= render_form_errors(resource: resource) if resource.errors.size > 0 %>
+
+    <!-- Name -->
+    <%= form.text_field( resource: resource, field: :name, required: true, focus: true, title: t(".#{:name}"), input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
+
+    <%= form.fields_for( :assetable, resource.assetable ) do |equipment_form| %>
 
       <!-- Divider container -->
       <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
 
         <!-- access_token -->
-        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
-          <div>
-            <label for="access_token" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
-              <%= t ".access_token" %>
-            </label>
-          </div>
-          <div class="sm:col-span-2 flex">
-            <%#= equipment.hidden_field :access_token %>
-            <%= equipment.text_field :access_token, 
-              disabled: true, 
-              data: { "form-target" => "copytext" },
-              class: "disabled w-full shrink shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
-            <button class="grow ml-1" type="button" data-action="form#copy_text" >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-              </svg>            
-            </button>
-            <div class="text-sm text-red-800" >
-              <%= resource.errors.where(:access_token).map( &:full_message).join( "og ") %>
-            </div>
-          </div>
-          <div class="col-start-2">
-            <% unless resource.new_record? %>
-                <!-- insert your custom barcode setting your data in the GET parameter "data" -->
-                <%= svg_qr_code_link access_token_for(equipment.object) %>
-            <% end %>
-          </div>
-
-        </div>
-
-        <!-- Name -->
-        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
-          <div>
-            <label for="name" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
-              <%= t ".name" %>
-            </label>
-          </div>
-          <div class="sm:col-span-2">
-            <%= form.text_field :name, 
-              required: true, 
-              data: { "form-target" => "focus" },
-              class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
-            <div class="text-sm text-red-800" >
-              <%= resource.errors.where(:name).map( &:full_message).join( "og ") %>
-            </div>
-          </div>
-        </div>
+        <%= equipment_form.token_field( resource: resource.assetable, field: :access_token, title: t(".access_token")) %>
 
         <!-- mug_shot 
         <div class="px-4 pt-8 ">
@@ -79,7 +33,23 @@
         </div> -->
 
         <!-- bought_at --> 
-        <%= render_component "resource/input_date", form: equipment, field: :bought_at, resource: resource, title: t('.bought_at'), required: true %>
+        <%#= render_component "resource/input_date", form: equipment, field: :bought_at, resource: resource, title: t('.bought_at'), required: true %>
+
+        <%= equipment_form.text_field( resource: resource.assetable, field: :brand, title: t(".#{:brand}"), input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
+        <%= equipment_form.text_field( resource: resource.assetable, field: :model, title: t(".#{:model}"), input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
+        <%= equipment_form.text_field( resource: resource.assetable, field: :location_id, title: t(".#{:location_id}"), input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
+
+        <%#= equipment_form.text_field( resource: resource.assetable, field: :supplier_id, title: t(".#{:supplier_id}"), input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
+
+        <!--  Organization id -->
+        <%= equipment_form.combo_field( resource: resource.assetable, form: equipment_form, field: :organization_id, title: t('.organization'), type: :single_drop_search, url: "/organizations") %>
+
+        <%= equipment_form.datetime_field( resource: resource.assetable, field: :purchased_at, title: t(".#{:purchased_at}"), input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
+        <%= equipment_form.text_field( resource: resource.assetable, field: :purchase_price, title: t(".#{:purchase_price}"), input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
+        <%= equipment_form.text_field( resource: resource.assetable, field: :residual_value, title: t(".#{:residual_value}"), input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
+        <%= equipment_form.datetime_field( resource: resource.assetable, field: :warranty_ends_at, title: t(".#{:warranty_ends_at}"), input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
+        <%= equipment_form.text_field( resource: resource.assetable, field: :serial_number, title: t(".#{:serial_number}"), input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" ) %>
+        <%= equipment_form.text_area( resource: resource.assetable, field: :description, title: t(".#{:description}"), input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
 
         <!-- state -->
         <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
@@ -89,7 +59,7 @@
             </label>
           </div>
           <div class="sm:col-span-2 flex">
-            <%= display_equipment_state form.object %>
+            <%= display_equipment_state resource %>
           </div>
         </div>
 
@@ -105,10 +75,7 @@
         <%# end %>
 
       </div>
-    </div>
-  <% end %>
-
-
-  <%= render_component "action_button", resource: resource, delete_url: resource_url(resource.assetable), deleteable: !resource.new_record? %>
-
+    <% end %>
+  </div>
+  <%= render_form_action_buttons resource: resource, delete_url: resource_url(), deleteable: !resource.new_record? %>
 <% end %>

@@ -1,0 +1,1280 @@
+<div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full max-h-full pl-10">
+  <div class="pointer-events-auto h-screen w-screen max-w-md ">
+    <form id="form_1" class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll" data-form-sleeve-target="form" action="/work_schedules/1" accept-charset="UTF-8" method="post"><input type="hidden" name="_method" value="patch" autocomplete="off"><input type="hidden" name="authenticity_token" value="F5MwD0pJ2gPh4T6aZmpfp4X7BDKqd-btOvh6YFTxzcExOYUOhYjhrEOS6FiSyncVyorRoh_2oAT_OfvjydOnew" autocomplete="off">
+    
+      <input value="1" autocomplete="off" type="hidden" name="event[account_id]" id="event_account_id">
+      <input value="WorkSchedule" autocomplete="off" type="hidden" name="event[eventable_type]" id="event_eventable_type">
+
+      <div class="flex-1 relative " data-controller="form" data-form-form-sleeve-outlet="#form-sleeve" data-form-list-outlet="#list" data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages">
+        <!-- Header -->
+        <div class="sticky z-20 top-0 right-0 px-4 py-6 bg-gray-50 sm:px-6">
+          <div class="flex items-start justify-between space-x-3">
+            <div class="space-y-1">
+              <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
+                <span class="translation_missing" title="translation missing: da.work_schedules.form.edit">Ret reservation</span>
+              </h2>
+              <p class="text-sm text-gray-500">
+                <span class="translation_missing" title="translation missing: da.work_schedules.form.edit_description">Du kan rette din reservation her. Røde felter viser dage hvor andre har reserveret aktivet hele dagen. Gule viser at aktivet er reserveret enten formiddag eller eftermiddag. Grønne reservationer er dine egne.</span>
+              </p>
+            </div>
+            <div class="h-7 flex items-center">
+              <button name="button" type="button" data-action="form-sleeve#cancel" class="text-gray-400 hover:text-gray-500">
+                <span class="sr-only">close form</span>
+                <!-- Heroicon name: outline/x -->
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Form error resumé container -->
+
+        <!-- Divider container -->
+        <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+
+          <!-- Name -->
+          <!-- string -->
+          <div data-controller="resource--input-string-component" class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+                <span class="translation_missing" title="translation missing: da.work_schedules.form.name">Aktivet</span>
+              </label>
+            </div>
+            <div class="sm:col-span-2">
+              <input required="required" data-form-target="focus" class="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" type="text" value="Sne slynge 4" name="event[name]" id="event_name">
+              <div class="text-sm text-red-800">
+                
+              </div>
+            </div>
+          </div>
+
+
+          <!-- first- and last-occurence -->
+          <div data-controller="resource--input-string-component" class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+            <div>
+              <label for="" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+                <span class="translation_missing" title="translation missing: da.work_schedules.form.dtstart_dtend">Start/Slut dato</span>
+              </label>
+            </div>
+            <div class="sm:col-span-1">
+              <input required="required" class="flex w-50% shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" value="2022-10-28" type="date" name="event[first_occurence]" id="event_first_occurence">
+              <div class="text-sm text-red-800">
+                
+              </div>
+            </div>
+            <div class="sm:col-span-1">
+              <input required="required" class="flex w-50% shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" value="2022-10-28" type="date" name="event[first_occurence]" id="event_first_occurence">
+              <div class="text-sm text-red-800">
+                
+              </div>
+            </div>
+          </div>
+
+          <!-- roll 
+          <div data-controller="resource--input-boolean-component" class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+            <div>
+              <span class="flex flex-grow flex-col">
+                <span class="text-sm font-medium text-gray-900" id="availability-label"> <span class="translation_missing" title="translation missing: da.work_schedules.form.roll">Roll</span> </span>
+              </span>
+            </div>
+            <div class="sm:col-span-2">
+              <input data-resource--input-boolean-component-target="input" autocomplete="off" type="hidden" value="true" name="event[eventable_attributes][roll]" id="event_eventable_attributes_roll">
+              
+              <button type="button" data-action="resource--input-boolean-component#toggleBoolean" data-resource--input-boolean-component-target="toggler" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 bg-indigo-600" role="switch" aria-checked="false" aria-labelledby="availability-label" aria-describedby="availability-description">
+              
+                <span aria-hidden="true" data-resource--input-boolean-component-target="slider" class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out translate-x-5"></span>
+                  <div class="text-sm text-red-800">
+                    
+                  </div>
+              </button>
+
+            </div>
+          </div> -->
+
+
+          <!-- start- and end-minute -->
+          <div data-controller="resource--input-string-component" class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+            <div>
+              <label for="" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
+                <span class="translation_missing" title="translation missing: da.work_schedules.form.start_end_minute">Start/Slut klokken</span>
+              </label>
+            </div>
+            <div class="sm:col-span-1">
+              <input required="required" type="time" class="block w-1/2 shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" name="event[start_minute]" id="event_start_minute">
+              <div class="text-sm text-red-800">
+                
+              </div>
+            </div>
+            <div class="sm:col-span-1">
+              <input required="required" type="time" class="block w-1/2 shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" name="event[end_minute]" id="event_end_minute">
+              <div class="text-sm text-red-800">
+                
+              </div>
+            </div>
+          </div>
+
+          <!-- Calendar rrule -->
+          <div data-controller="resource--input-calendar-component" class="space-y-1 px-4 sm:space-y-0  sm:px-6 sm:py-5">
+            <input data-resource--input-calendar-component-target="input" autocomplete="off" type="hidden" value="6,13,20,34,41,22,23,24,25,26,28" name="event[rrule]" id="event_rrule">
+            <div class="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
+              <div class="mt-6 grid grid-cols-8 text-xs leading-7 text-gray-500">
+                  <div class="cursor-pointer" data-action="click->resource--input-calendar-component#toggleDay" data-range="weekday" data-range-index="36" data-resource--input-calendar-component-target="weekday">
+                    &lt;
+                  </div>
+                  <div class="col-span-6 border rounded-md items-center">
+                    <span>Marts</span>
+                    <span class="material-symbols-outlined float-right mr-1">
+                      expand_more
+                    </span>
+                  </div>
+                  <div class="cursor-pointer" data-action="click->resource--input-calendar-component#toggleDay" data-range="weekday" data-range-index="36" data-resource--input-calendar-component-target="weekday">
+                    &gt;
+                  </div>
+              </div>
+              <div class="mt-6 grid grid-cols-8 text-xs leading-7 text-gray-500">
+                <div class="cursor-pointer" data-action="click->resource--input-calendar-component#toggleDay" data-range="all" data-range-index="all" data-resource--input-calendar-component-target="weekday">U</div>
+                  <div class="cursor-pointer" data-action="click->resource--input-calendar-component#toggleDay" data-range="weekday" data-range-index="36" data-resource--input-calendar-component-target="weekday">
+                    M
+                  </div>
+                  <div class="cursor-pointer" data-action="click->resource--input-calendar-component#toggleDay" data-range="weekday" data-range-index="37" data-resource--input-calendar-component-target="weekday">
+                    T
+                  </div>
+                  <div class="cursor-pointer" data-action="click->resource--input-calendar-component#toggleDay" data-range="weekday" data-range-index="38" data-resource--input-calendar-component-target="weekday">
+                    O
+                  </div>
+                  <div class="cursor-pointer" data-action="click->resource--input-calendar-component#toggleDay" data-range="weekday" data-range-index="39" data-resource--input-calendar-component-target="weekday">
+                    T
+                  </div>
+                  <div class="cursor-pointer" data-action="click->resource--input-calendar-component#toggleDay" data-range="weekday" data-range-index="40" data-resource--input-calendar-component-target="weekday">
+                    F
+                  </div>
+                  <div class="cursor-pointer" data-action="click->resource--input-calendar-component#toggleDay" data-range="weekday" data-range-index="41" data-resource--input-calendar-component-target="weekday">
+                    L
+                  </div>
+                  <div class="cursor-pointer" data-action="click->resource--input-calendar-component#toggleDay" data-range="weekday" data-range-index="42" data-resource--input-calendar-component-target="weekday">
+                    S
+                  </div>
+              </div>
+              <div class="isolate mt-2 grid grid-cols-8 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200">
+                <!-- Week -->
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="week" data-range-index="1" data-resource--input-calendar-component-target="week" type="button" class="rounded-tl-lg bg-gray-100 border-r border-r-gray-300 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-09-26" class=" mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    9
+                  </time>
+                </button>
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="1" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-09-26" class="text-gray-200 mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    27
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="2" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-09-27" class="text-gray-200 mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    28
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="3" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-09-28" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    1
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="4" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-09-29" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    2
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="5" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-09-30" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    3
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="6" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-01" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    4
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="7" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-02" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    5
+                  </time>
+                </button>
+
+                  <!-- Week -->
+                  <button data-action="resource--input-calendar-component#toggleDay" data-range="week" data-range-index="8" data-resource--input-calendar-component-target="week" type="button" class=" bg-gray-100 border-r border-r-gray-300 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                    <time datetime="2022-10-03" class=" mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                      10
+                    </time>
+                  </button>
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="8" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-03" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    6
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="9" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-04" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    7
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="10" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-05" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    8
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="11" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-06" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    9
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="12" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-07" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    10
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="13" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-08" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    11
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="14" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-09" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    12
+                  </time>
+                </button>
+
+                  <!-- Week -->
+                  <button data-action="resource--input-calendar-component#toggleDay" data-range="week" data-range-index="15" data-resource--input-calendar-component-target="week" type="button" class=" bg-gray-100 border-r border-r-gray-300 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                    <time datetime="2022-10-10" class=" mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                      11
+                    </time>
+                  </button>
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="15" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-10" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    13
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="16" data-resource--input-calendar-component-target="day" type="button" class=" bg-red-500 py-1.5 text-gray-50 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-11" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    14
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="17" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-12" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    15
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="18" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-13" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    16
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="19" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-14" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    17
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="20" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-15" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    18
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="21" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-16" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    19
+                  </time>
+                </button>
+
+                  <!-- Week -->
+                  <button data-action="resource--input-calendar-component#toggleDay" data-range="week" data-range-index="22" data-resource--input-calendar-component-target="week" type="button" class=" bg-gray-100 border-r border-r-gray-300 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                    <time datetime="2022-10-17" class=" mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                      12
+                    </time>
+                  </button>
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="22" data-resource--input-calendar-component-target="day" type="button" class=" bg-green-400 py-1.5 text-gray-100 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-17" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    20
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="23" data-resource--input-calendar-component-target="day" type="button" class=" bg-yellow-400 py-1.5 text-gray-50 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-18" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    21
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="24" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-19" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    22
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="25" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-20" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    23
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="26" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-21" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    24
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="27" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-22" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    25
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="28" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-23" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    26
+                  </time>
+                </button>
+
+                  <!-- Week -->
+                  <button data-action="resource--input-calendar-component#toggleDay" data-range="week" data-range-index="29" data-resource--input-calendar-component-target="week" type="button" class=" bg-gray-100 border-r border-r-gray-300 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                    <time datetime="2022-10-24" class=" mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                      13
+                    </time>
+                  </button>
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="29" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-24" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    27
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="30" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-25" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    28
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="31" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-26" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    29
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="32" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-27" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    30
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="33" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-28" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    31
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="34" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-29" class="text-gray-200 mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    1
+                  </time>
+                </button>
+
+
+                <!-- 
+
+                    button content when used to add appointments and free/busy
+                    each day has an intensity thermometer, going from gray through green, yellow, to red
+
+                    <div class="grid grid-cols-3 gap-0 p-0 m-0">
+                      <div class="grid grid-rows-4 h-7 mx-1">
+                        <div class="row-start-1 row-end-1 bg-red-200">&nbsp;</div>
+                        <div class="row-start-2 row-end-2 bg-yellow-200">&nbsp;</div>
+                        <div class="row-start-3 row-end-3 bg-green-200">&nbsp;</div>
+                        <div class="row-start-4 row-end-4 bg-green-200">&nbsp;</div>
+                      </div>
+                      <div class="bg-white m-0">
+                        <time datetime="2022-10-31" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                          31
+                        </time>
+                      </div>
+                      <div class="h-7 bg-gray-300 m-0">&nbsp;</div>
+                    </div>
+                
+                -->
+
+                <button data-action="resource--input-calendar-component#toggleDay" data-range="day" data-range-index="35" data-resource--input-calendar-component-target="day" type="button" class=" bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10">
+                  <time datetime="2022-10-30" class="text-gray-200 mx-auto flex h-7 w-7 items-center justify-center rounded-full">
+                    2
+                  </time>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <input autocomplete="off" type="hidden" value="1" name="event[eventable_attributes][id]" id="event_eventable_attributes_id">
+
+        <!-- Action buttons -->
+      <div class="sticky bottom-0 flex justify-start px-4 border-t border-gray-200 bg-gray-50 py-5 sm:px-6 z-10">
+        <div class="flex-none w-1/3 h-14">
+              <a class=" shadow-md sm:inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-white bg-red-400 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" data-turbo-confirm="Are you sure?" data-turbo-method="delete" data-action="click->form-sleeve#toggle" href="/work_schedules/1">
+                Slet
+      </a>  </div>
+        <div class="flex justify-end w-2/3">
+          <div class="flex-initial sm:space-x-3">
+            <button data-form-sleeve-target="save" type="submit" class="float-right shadow-md sm:inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-white bg-green-500 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <span class="group-disabled:hidden">Opdatér</span>
+              <span class="hidden group:disabled:block group-disabled:cursor-wait"><span class="translation_missing" title="translation missing: da.action_button_component.updating">Updating</span></span>
+            </button>
+            <button data-form-sleeve-target="cancel" data-action="click->form-sleeve#cancel" type="button" class="mr-2 float-right shadow-md sm:inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-slate-400 bg-slate-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Fortryd
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="hidden absolute top-1/2 z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+      <div class="fixed right-5 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <!--
+            Modal panel, show/hide based on modal state.
+
+            Entering: "ease-out duration-300"
+              From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              To: "opacity-100 translate-y-0 sm:scale-100"
+            Leaving: "ease-in duration-200"
+              From: "opacity-100 translate-y-0 sm:scale-100"
+              To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          -->
+          <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+            <div>
+              <div class="mx-auto flex h-12 w-22 text-md font-medium items-center justify-center ">
+                Dagens bookninger
+              </div>
+              <ul>
+                <li class="border-b-2 pb-4">
+                  <div class="mt-3 text-center sm:mt-5">
+                    <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Sne slynge 4</h3>
+                    <div class="mt-2">
+                      <p class="text-sm text-gray-500">Reserveret af Jørgen E. Madsen, Flidsbo SFO, tirsdag 21/3 08.00 - 11.30</p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="mt-3 text-center sm:mt-5">
+                    <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Sne slynge 4</h3>
+                    <div class="mt-2">
+                      <p class="text-sm text-gray-500">Reserveret af Michael Mortensen, Tune Realskole, tirsdag 21/3 13:45 - 14</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-5 sm:mt-6">
+              <button type="button" class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

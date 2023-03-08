@@ -157,6 +157,7 @@ da:
     background_jobs: 'Baggrundsjobs'
     dashboards: "Instrumentbrædder/skabeloner"
     employees: "Medarbejdere"
+    equipment: "Udstyr"
     home: 'Instrumentbrædt'
     locations: "Arbejdssteder"
     organizations: "Virksomheder"
@@ -202,7 +203,7 @@ da:
 
   element:
     accordion_component:
-      Asset: Aktiver
+      asset: Aktiver
       hr: HR
       pim: PIM
       wms: Lagerstyring 
@@ -252,6 +253,14 @@ da:
       teams: Afdeling/hold
       asset_work_transactions: Komme/Gå stemplinger
 
+  Equipment:
+    index: Oversigt over udstyr
+    index_description: <span>Oversigten viser alt det udstyr, der er oprettet. .
+    new_button: 'Nyt udstyr'
+
+  equipment:
+    form:
+      organization: "Leverandør"
   Invitation:
     new: 'Ny bruger (invitation)'
     new_description: 'Du opretter en ny bruger ved at sende hen en invitation'
@@ -315,6 +324,7 @@ da:
       services: Tjenester 
       users: Brugere
       employees: Medarbejdere
+      equipment: Udstyr
       locations: Lokationer
       printservers: Printservere
       products: Produkter

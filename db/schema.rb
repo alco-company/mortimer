@@ -208,8 +208,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_184050) do
 
   create_table "equipment", force: :cascade do |t|
     t.string "access_token"
+    t.string "brand"
+    t.string "model"
+    t.bigint "location_id"
+    t.string "organization_id"
+    t.datetime "purchased_at"
+    t.integer "purchase_price"
+    t.integer "residual_value"
+    t.datetime "warranty_ends_at"
+    t.string "serial_number"
     t.text "description"
-    t.datetime "bought_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
