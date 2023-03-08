@@ -26,6 +26,10 @@ module ViewComponentsHelper
     render Views::Components::Breadcrumbs.new **attribs, &block
   end
 
+  def render_search_filter(**attribs, &block)
+    render Views::Components::List::SearchFilter.new **attribs, &block
+  end
+
   def render_row(attribs: {}, &block)
     render Views::Components::List::Row.new attribs:, &block
   end

@@ -16,7 +16,7 @@ module Views
     end
 
     def template()
-      div(id: "searchpane", class:" bg-white", data_controller: "search", data_search_target:"filterwrapper",  data_search_change_class: 'hidden') do
+      div(id: "searchpane", class:"hidden bg-white", data_controller: "search", data_search_target:"filterwrapper",  data_search_change_class: 'hidden') do
 
         #<!-- Filters -->
         section( aria_labelledby:"filter-heading", class:"grid items-center border-t border-b border-gray-200") do
