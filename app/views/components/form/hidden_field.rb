@@ -5,15 +5,18 @@ module Views
   class Components::Form::HiddenField < Phlex::HTML
     include Phlex::Rails::Helpers::HiddenField
 
-    def initialize( **attribs, &block )
-      @form = attribs[:form]
-      @field = attribs[:field]
-      @value = attribs[:value]
+    def initialize( field, **attribs )
+      @resource = attribs[:resource]
+      @field = field
+      @assoc = attribs[:assoc] || nil
+      @field_value = attribs[:value] || ( @assoc.nil? ? @resource.send(@field) : @resource.send(@assoc).send(@field) )
+      @field_name = attribs[:name] || ( @assoc.nil? ? "#{@resource.class.to_s.underscore}[#{@field}]" : "#{@resource.class.to_s.underscore}[#{@assoc}_attributes][#{@field}]" )
     end
 
     def template()
-      # this doesn't work
-      @form.hidden_field @field, value: @value
+      hidden_field( @resource, @field, 
+        name: @field_name,
+        value: @field_value)
     end
   end
 end

@@ -2,6 +2,7 @@ class Equipment < AbstractResource
   include Assetable
 
   belongs_to :organization, optional: true
+  belongs_to :location, optional: true
   has_secure_token :access_token
   has_one_attached :mug_shot
 
@@ -24,6 +25,11 @@ class Equipment < AbstractResource
   def combo_values_for_organization_id 
     return [{id: nil, name: ''}] if organization.nil?
     [{id: organization.id, name: organization.name}]
+  end
+
+  def combo_values_for_location_id 
+    return [{id: nil, name: ''}] if location.nil?
+    [{id: location.id, name: location.name}]
   end
 
 end

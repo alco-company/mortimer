@@ -1,7 +1,6 @@
 module Views
   #
-  # the date component is a wrapper for the date_field form input field
-  #
+  # the combo_field component is a wrapper for the select form input field helper
   #
   # form*           - the form element (or nil if no form present)
   # attr*           - the attribute or association holding the data element
@@ -49,33 +48,41 @@ module Views
   #                    const response = await get(`${this.urlValue}?ids=${encoded}${apikey}`, { responseKind: "json" })
 
   class Components::Form::ComboField < Phlex::HTML
+    include Phlex::Rails::Helpers::HiddenField
     include Phlex::Rails::Helpers::Label
+    include Phlex::Rails::Helpers::Select
     include Phlex::Rails::Helpers::TextField
 
-    def initialize( resource: nil, form: nil, field: nil, title: nil, type: 'single_drop', 
-      data: {}, required: false, focus: false, disabled: false, 
-      url: nil, partial: nil, lookup_target: nil, values: nil, items: nil, api_key: nil, api_class: nil, text_css: "", label_css: "", input_css: "" )
 
-      @resource = resource
-      @form = form
+    # arguments: field, assoc: nil, title: nil, data: {}, required: false, focus: false, disabled: false, 
+    # type: 'single_drop', url: nil, partial: nil, lookup_target: nil, lookup_label: 'name', values: nil, items: nil, api_key: nil, api_class: nil, 
+    # text_css: "", label_css: "", input_css: ""
+    #
+    def initialize( field, **attribs, &block )
+      @resource = attribs[:resource]
+      @assoc = attribs[:assoc] || nil
+      @obj = @assoc.nil? ? @resource : @resource.send(@assoc)
       @field = field
-      @title = title
-      @required = required
-      @focus = focus
-      @disabled = disabled
-      @data = data
-      @type = type 
-      @url = url || ""
-      @partial = partial || @url
-      @focus = focus
-      @lookup_target = lookup_target || "#{@url.underscore}".gsub('/','')       # '/locations' -> 'locations'
-      @values = values 
-      @values ||= values_for field
-      @items = items || []
-      @api_key = api_key
-      @api_class = api_class
+      @title = attribs[:title] || I18n.translate('activerecord.attributes.' + @resource.class.to_s.underscore + '.' + field.to_s)
+      @required = attribs[:required] || false
+      @focus = attribs[:focus] || false
+      @disabled = attribs[:disabled]
+      @data = attribs[:data] ||  { "form-target" => "#{'focus' if @focus}" }
+      @type = attribs[:type] || :single_drop
+      @url = attribs[:url] || ""
+
+      @field_value = @assoc.nil? ? @resource.send(@field) : @resource.send(@assoc).send(@field)
+      @field_name = @assoc.nil? ? "#{@resource.class.to_s.underscore}[#{@field}]" : "#{@resource.class.to_s.underscore}[#{@assoc}_attributes][#{@field}]"
+
+      @partial = attribs[:partial] || @url
+      @lookup_target = attribs[:lookup_target] || "#{@url.underscore}".gsub('/','')       # '/locations' -> 'locations'
+      @values = attribs[:values] || @obj.send("combo_values_for_#{field}") || []
+      @lookup_label = attribs[:lookup_label] || 'name'
+      @items = attribs[:items] || []
+      @api_key = attribs[:api_key]
+      @api_class = attribs[:api_class]
  
-      type_s = type.to_s
+      type_s = @type.to_s
       @is_single  = !(type_s =~ /single/).nil?
       @is_multi   = !@is_single
       @is_drop   = !(type_s =~ /drop/).nil?
@@ -83,10 +90,10 @@ module Views
       @is_tags   = !(type_s =~ /tag/).nil?
       @is_search = !(type_s =~ /search/).nil?
       @is_add    = !(type_s =~ /add/).nil?
-            
-      @text_classes = "space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5 #{@text_css}"
-      @label_classes = "block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2 #{@label_css}"
-      @input_classes = "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md #{@input_css}}"
+
+      @text_classes = "space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5 #{attribs[:text_css]}"
+      @label_classes = "block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2 #{attribs[:label_css]}"
+      @input_classes = "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md #{attribs[:input_css]}}"
     end
 
     def template()
@@ -103,13 +110,17 @@ module Views
         data_combo_api_class_value: @api_class,
         data_combo_account_id_value: Current.account.id,
         class: "space-y-1 z-10 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5") do
-        label( @resource, @field, class:"block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2" ) do
-          text @title
+        div do
+          if @title =~ /translation missing/i
+            label( @obj, @field, class: @label_classes) { span( class:"translation_missing", title: @title) { @field.to_s } }
+          else
+            label( @obj, @field, @title, class: @label_classes)
+          end
         end
-        helpers.build_form_select( @form, @field, @items, @values, @is_multi)
+        build_form_select( @field, @items, @values, @is_multi, @lookup_label)
         div( class:"relative mt-1 col-span-2" ) do
           if ( @is_drop || @is_search || @is_add )
-            input( value: helpers.combo_input_value( @values),
+            input( value: combo_input_value( @values, @lookup_label.to_sym),
               placeholder:"Select value",
               autocomplete:"off",
               id:"#{@field}_combobox" ,
@@ -174,7 +185,7 @@ module Views
               aria_labelledby: "listbox-label", 
               aria_activedescendant: "listbox-option-3") do
               @items.each do |item|
-                render partial: "%s/lookup" % @partial, locals: { resource: item, values: @values, form: @form }
+                render partial: "%s/lookup" % @partial, locals: { resource: item, values: @values }
               end
             end
           end    
@@ -187,12 +198,43 @@ module Views
       end
     end
 
-    def values_for attr 
-      obj = @form.object.nil? ? @form.resource : @form.object
-      obj.send("combo_values_for_#{attr}") || []
+    # def values_for attr 
+    #   obj = @form.object.nil? ? @form.resource : @form.object
+    #   obj.send("combo_values_for_#{attr}") || []
+    # end
+
+    def build_form_select attrib, items, values, is_multi, lbl
+      # if form.nil? 
+      #   return hidden_field_tag( attrib, combo_input_value(values,:id), {data: { combo_target: "select"}})
+      # end
+      if is_multi 
+        select @resource, 
+          attrib, 
+          options_from_collection_for_select(items,"id",lbl,{selected: ([values].flatten.any? ? [values].flatten.pluck(:id) : nil)}), 
+          {},
+          { multiple: true, class: "hidden", data: { combo_target: "select"}}
+      else
+        hidden_field( @resource, attrib, 
+          name: @field_name,
+          value: combo_input_value(values,:id),
+          data: { combo_target: "select"}
+        )
+      end
     end
+
+    def combo_input_value value, key=:name 
+      if [value].flatten.first.is_a? String 
+        return [value].flatten.join(', ')
+      end
+      if [value].flatten.first.keys.include? key
+        [value].flatten.pluck(key).join(', ') rescue ''
+      else
+        [value].flatten.join(', ')
+      end
+    rescue 
+      ''
+    end
+
     
   end
 end
-
-# text_field field_name(:asset,:assetable_attributes), :pin_code, value: employee.object.pin_code
