@@ -89,7 +89,8 @@ module ResourceControl
     p = resource_params
     p=p.compact.first if p.class==Array
     rr= r.ancestors.include?( ActiveRecord::Base) ? r.new(p) : r.new
-    if parent? && rr.respond_to?(:assignments)
+
+    if parent? && rr.respond_to?(:assignments) && %w(Event Task).include?(parent.class.to_s)
       rr.assignments.new( assignable: (parent_class.find(parent.id) rescue nil))
     end
     rr
@@ -137,7 +138,7 @@ module ResourceControl
     #
     # TODO: make show pages with tabs change the 'resource_form' id to the correct one
     #
-    return "stock_form" if request.url =~ /stocks.*stock_locations/
+    # return "stock_form" if request.url =~ /stocks.*stock_locations/
     # rs ||= resource
     return ("form_%s" % (Current.user.id rescue '0')) # if rs.nil?
     # "%s_%s_form" % [rs.class.to_s.underscore, (rs.id rescue 'new')]
