@@ -3,8 +3,6 @@
   class="shadow overflow-hidden overflow-x-auto border-b border-gray-200 sm:rounded-lg">
   <%= turbo_frame_tag resources_target do %>
 
-    <%#= render_component "element/search_and_button" %>
-
     <%= render_search_filter %>
     <table 
       id="list"
@@ -20,7 +18,7 @@
       <thead class="bg-gray-50">
         <tr id="tr-action-buttons" class="collapse" colspan="99">
           <th>&nbsp;</th>
-          <th class=""><%= render_component "element/action_button" %></th>
+          <th class=""><%#= render_component "element/action_button" %></th>
         </tr>
         <tr>
           <%= render partial: "index_columns", locals: {resource: resource} %>

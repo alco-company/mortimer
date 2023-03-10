@@ -106,7 +106,7 @@ da:
       child_leave_minutes: Barsel
       leave_minutes: Orlov 
       senior_minutes: senior 
-      pg56_minutes: pgf56
+      pgf56_minutes: pgf56
       free_prev_minutes: FSÅ
 
   AssetWorkTransaction:

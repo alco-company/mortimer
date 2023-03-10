@@ -30,12 +30,16 @@ module ViewComponentsHelper
     render Views::Components::List::SearchFilter.new **attribs, &block
   end
 
+  def render_search_and_more_button(**attribs, &block)
+    render Views::Components::SearchAndMoreButton.new **attribs, &block
+  end
+
   def render_row(attribs: {}, &block)
     render Views::Components::List::Row.new attribs:, &block
   end
 
-  def render_column(css: "", content:)
-    render Views::Components::List::Column.new css:, content:
+  def render_column(**attribs, &block)
+    render Views::Components::List::Column.new **attribs, &block
   end
 
 
