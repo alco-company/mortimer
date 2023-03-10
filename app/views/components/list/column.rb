@@ -5,6 +5,7 @@ module Views
       @classes = attribs[:css]
       @content = attribs[:content]
       @type = attribs[:type] || nil
+      @attribs = attribs
     end
 
     def template(&)
@@ -13,9 +14,9 @@ module Views
       end
     end
 
-    def edit_column(**attribs)
+    def edit_column()
       case @type
-      when 'edit'; render Views::Components::List::EditColumn.new( **attribs)
+      when 'edit'; render Views::Components::List::EditColumn.new( **@attribs)
       else; @content
       end
     end
