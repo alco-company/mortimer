@@ -18,5 +18,5 @@
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.leave_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.free_prev_minutes ) %>
   <%= render_column css: "hidden md:table-cell text-right", content: display_hours_minutes( resource.pgf56_minutes ) %>
-  <%#= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
+  <%#= render_column css: " font-medium text-right ", type: "edit", resource: resource, url: edit_resource_url(resource) %>
 <% end %>

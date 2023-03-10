@@ -4,5 +4,5 @@
   <%= render_column css: "hidden sm:table-cell ", content: display_time( resource.created_at, user ) %>
   <%= render_column content: (record_state( resource.event ) rescue '-') %>
   <%= render_column css: "text-right", content: display_hours_minutes(resource.work_minutes) %>
-  <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
+  <%= render_column css: " font-medium text-right ", type: "edit", resource: resource, url: edit_resource_url(resource) %>
 <% end %>

@@ -6,5 +6,5 @@
   <%= render_column css: "hidden md:table-cell ", content: display_time(resource.last_punch_at, user) %>
   <%= render_column content: display_token_link(resource) %>
   <%= render_column css: "hidden md:table-cell ", content: record_state(resource.asset) %>
-  <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
+  <%= render_column css: " font-medium text-right ", type: "edit", resource: resource, url: edit_resource_url(resource) %>
 <% end %>

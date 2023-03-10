@@ -4,5 +4,5 @@
   <%= render_column css: "hidden sm:table-cell ", content: display_time(resource.punched_at, user) %>
   <%= render_column css: "hidden md:table-cell ", content: record_state(resource.event) %>
   <%= render_column css: "hidden md:table-cell ", content: resource.comment %>
-  <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_employee_asset_work_transaction_url(resource.asset.assetable,resource)) %>
+  <%= render_column css: " font-medium text-right ", type: "edit", resource: resource, url: edit_employee_asset_work_transaction_url(resource.asset.assetable,resource) %>
 <% end %>

@@ -3,5 +3,5 @@
   <%= render_column css: " text-gray-900 font-medium ", content: ( link_to( resource.name, work_schedule_url(resource), data: { turbo_frame: "_top" } )rescue '-') %>
   <%= render_column css: "hidden md:table-cell ", content:  resource.roll %>
   <%= render_column css: "hidden md:table-cell ", content: record_state(resource.event) %>
-  <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
+  <%= render_column css: " font-medium text-right ", type: "edit", resource: resource, url: edit_resource_url(resource) %>
 <% end %>

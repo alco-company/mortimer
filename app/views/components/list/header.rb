@@ -7,27 +7,37 @@
 #
 # Most lists have a checkbox column. That looks like this: `<%= render_header column: 'checkbox', css: 'hidden' %>`
 #
-# The edit column is a special case. It looks like this: `<%= render_header column: 'edit' %>` and offers the user
+# The edit column is a special case. It looks like this: `<%= render_header column: 'more' %>` and offers the user
 # a link to edit the record.
 #
 module Views
   class Components::List::Header < Phlex::HTML
 
-    def initialize( label: "", column: '', css: "", sort: false, &block )
-      @classes = "sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider #{css} "
-      case column
-      when 'checkbox'; @content = table_header_checkbox
-      when 'edit'; @content, @classes = ['<span class="sr-only">Edit</span>'.html_safe, 'relative px-6 py-3']
-      else; @content = label
-      end
+    def initialize( **attribs, &block )
+      @label = attribs[:label] || ""
+      @column = attribs[:column] || ''
+      @css = attribs[:css] || ""
+      @url = attribs[:url] || '' 
+      @sort = attribs[:sort] || false
+      @column = attribs[:column] || ''
+      @classes = "sm:table-cell px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider #{@css} "
     end
 
     def template(&)
-      # render Layout.new(title: "Index Column") do
+      column_content
       th scope: "col", class: @classes do
         @content
       end
-      # end
+    end
+
+    def column_content
+      case @column
+      when 'checkbox'; @content = table_header_checkbox
+      when 'edit'; @content, @classes = ['<span class="sr-only">Edit</span>'.html_safe, 'relative px-6 py-3']
+      when 'more'; @content = table_header_more
+      else
+        @content = @label
+      end
     end
 
     def table_header_checkbox
@@ -40,6 +50,11 @@ module Views
         data-action="click->list-item-actions#tap keydown->list-item-actions#keydownHandler speicherMessage@window->list-item-actions#handleMessages "
         class="h-4 w-4 mr-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
       </div>).html_safe
+    end
+
+    def table_header_more
+      helpers.render_search_and_more_button classes: "z-20 text-left flex float-right"
+      #render Views::Components::SearchAndMoreButton.new"
     end
 
   end

@@ -5,5 +5,5 @@
   <%= render_column css: "hidden md:table-cell ", content:  resource.reference %>
   <%= render_column css: "hidden md:table-cell ", content:  resource.general_format %>
   <%= render_column css: "hidden md:table-cell ", content: record_state(resource) %>
-  <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
+  <%= render_column css: " font-medium text-right ", type: "edit", resource: resource, url: edit_resource_url(resource) %>
 <% end %>

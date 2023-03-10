@@ -1,17 +1,23 @@
 module Views
   class Components::List::Column < Phlex::HTML
 
-    def initialize( content: "", css: "" )
-      @classes = css
-      @content = content
+    def initialize( **attribs )
+      @classes = attribs[:css]
+      @content = attribs[:content]
+      @type = attribs[:type] || nil
     end
 
     def template(&)
-      # render Layout.new(title: "Index Column") do
-      td class: "px-6 py-4 whitespace-nowrap text-sm text-gray-500 #{@classes} " do
-        @content
+      td( class: "px-6 py-4 whitespace-nowrap text-sm text-gray-500 #{@classes} ") do
+        edit_column
       end
-      # end
+    end
+
+    def edit_column(**attribs)
+      case @type
+      when 'edit'; render Views::Components::List::EditColumn.new( **attribs)
+      else; @content
+      end
     end
   end
 end

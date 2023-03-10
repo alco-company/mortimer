@@ -4,5 +4,5 @@
   <%= render_column css: "hidden sm:table-cell ", content: resource.schedule %>
   <%= render_column css: "hidden md:table-cell ", content: resource.active ? display_time( resource.next_run_at, user ) : "" %>
   <%= render_column content: delete_job( resource, user) %>
-  <%= render_column css: " font-medium text-right ", content: render_component( "edit", resource: resource, url: edit_resource_url(resource)) %>
+  <%= render_column css: " font-medium text-right ", type: "edit", resource: resource, url: edit_resource_url(resource) %>
 <% end %>
