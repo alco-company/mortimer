@@ -2,6 +2,8 @@
 module Eventable
   extend ActiveSupport::Concern
 
+  TYPES = %w[ Task StockItemTransaction AssetWorkTransaction PupilTransaction WorkSchedule ]
+
   included do
     has_one :event, as: :eventable, touch: true, dependent: :destroy
     has_many :assignments, through: :event

@@ -6,6 +6,8 @@
 module Assetable
   extend ActiveSupport::Concern
 
+  TYPES = %w[ Employee Equipment Location Printserver Product PunchClock Pupil Stock StockLocation ]
+
   included do
     has_one :asset, as: :assetable, touch: true, dependent: :destroy
 

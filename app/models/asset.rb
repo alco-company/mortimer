@@ -12,7 +12,7 @@ class Asset < AbstractResource
   has_many :asset_teams
   has_many :teams, through: :asset_teams
   
-  delegated_type :assetable, types: %w[ Employee Equipment Location Printserver Product PunchClock Pupil Stock StockLocation ], dependent: :destroy
+  delegated_type :assetable, types: Assetable::TYPES, inverse_of: :asset, dependent: :destroy
   delegate :access_token, to: :assetable
 
   accepts_nested_attributes_for :assetable

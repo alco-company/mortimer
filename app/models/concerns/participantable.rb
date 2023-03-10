@@ -6,6 +6,8 @@
 module Participantable
   extend ActiveSupport::Concern
 
+  TYPES = %w[ Contact Organization User Team ]
+
   included do
     has_one :participant, as: :participantable, touch: true, dependent: :destroy
 

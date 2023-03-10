@@ -33,7 +33,7 @@ class Event < AbstractResource
   has_many :teams, through: :participants, source: "participantable", source_type: "Team"
   # has_many :messages, through: :assignments, source: "assignable", source_type: "Message"
   # has_many :event_transactions
-  delegated_type :eventable, types: %w[ Task StockItemTransaction AssetWorkTransaction PupilTransaction WorkSchedule ], dependent: :destroy
+  delegated_type :eventable, types: Eventable::TYPES, inverse_of: :event, dependent: :destroy
 
   accepts_nested_attributes_for :eventable, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :assignments, reject_if: :all_blank, allow_destroy: true
