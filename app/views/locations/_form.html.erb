@@ -1,36 +1,20 @@
-<%= form_with model: resource, url: resource_url(), id: resource_form, data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
-  <%= form.fields_for :assetable do |location_form| %>
-    <%= form.hidden_field :account_id, value: current_account.id %>
-    <%= form.hidden_field :assetable_type, value: "Location" %>
-    <div class="flex-1 relative "
-      data-controller="form"
-      data-form-form-sleeve-outlet="#form-sleeve"
-      data-form-list-outlet="#list"
+<%= render_form( resource: resource, assoc: :assetable, 
+  # clipboard_prefix: (resource.new_record? ? nil : equipment_url(resource.assetable))
+  ) do |form| %> 
 
-      data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"    
-      >
-      <!-- Header -->
-      <%= render_component "resource/form_header", resource: resource, title: form_header_title, description: form_header_description %>
+  <%= render_form_header( resource: resource, title: form_header_title, description: form_header_description ) %>
+  <%= render_form_errors(resource: resource) if resource.errors.size > 0 %>
 
-      <!-- Divider container -->
-      <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+  <!-- Divider container -->
+  <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
 
-        <!-- Name -->
-        <%= render_component "resource/input_string", form: form, field: :name, resource: resource, title: t('.name'), focus: true, required: true %>
+    <!-- Name -->
+    <%= form.text_field( :name, required: true, focus: true ) %>
 
-        <!-- Long_lat -->
-        <%= render_component "resource/input_string", form: location_form, field: :long_lat, resource: resource, title: t('.long_lat') %>
-
-        <!-- asset_requirements -->
-        <%#= render_component "resource/input_text", form: location_form, field: :asset_requirements, resource: resource, title: t('.asset_requirements') %>
-
-        <!-- asset_requirements -->
-        <%#= render_component "resource/combo", form: location_form, attr: :asset_requirements, label: t('.asset_requirements'), type: :multi_tags_search_list, url: "/locations", items: Location.all %>
+    <%= form.text_field( :long_lat, assoc: :assetable ) %>
 
 
-      </div>
-    </div>
-  <% end %>
+  </div>
 
   <%= render_component "action_button", resource: resource, delete_url: resource_url(resource.assetable), deleteable: !resource.new_record? %>
 

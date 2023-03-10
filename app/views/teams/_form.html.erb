@@ -1,50 +1,26 @@
-<%= form_with model: resource, url: resource_url(), id: resource_form, data: { form_sleeve_target: 'form' }, class: "h-full flex flex-col bg-white shadow-xl overflow-y-scroll" do |form| %>
-  <%= form.fields_for :participantable do |participant_form| %>
-    <%= form.hidden_field :account_id, value: current_account.id %>
-    <%= form.hidden_field :participantable_type, value: "Team" %>
-    <div class="flex-1 relative "
-      data-controller="form"
-      data-form-form-sleeve-outlet="#form-sleeve"
-      data-form-list-outlet="#list"
-      data-action="keydown->form#keydownHandler speicherMessage@window->form#handleMessages"    
-      >
-      <!-- Header -->
-      <%= render_component "resource/form_header", resource: resource, title: form_header_title, description: form_header_description %>
+<%= render_form( resource: resource, assoc: :participantable, 
+  # clipboard_prefix: (resource.new_record? ? nil : equipment_url(resource.assetable))
+  ) do |form| %> 
 
-      <!-- Divider container -->
-      <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+  <%= render_form_header( resource: resource, title: form_header_title, description: form_header_description ) %>
+  <%= render_form_errors(resource: resource) if resource.errors.size > 0 %>
 
-        <!-- name -->
-        <div class="space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
-          <div>
-            <label for="name" class="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2">
-              <%= t :name %>
-            </label>
-          </div>
-          <div class="sm:col-span-2">
-            <%= form.text_field :name, 
-              required: true, 
-              data: { "form-target" => 'focus' },
-              class: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md" %>
-            <div class="text-sm text-red-800" >
-              <%= resource.errors.where(:name).map( &:full_message).join( "og ") %>
-            </div>
-          </div>
-        </div>
+  <!-- Divider container -->
+  <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
 
-        <% unless resource.new_record? %>
-          <!-- roles -->
-          <%= render_component "resource/combo", form: form, attr: :roles, label: t('.roles'), type: :multi_list, url: "/roles", items: Role.all %>
+    <!-- Name -->
+    <%= form.text_field( :name, required: true, focus: true, input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
 
-        <!-- WorkSchedules -->
-        <%= render_component "resource/combo", form: form, attr: :work_schedules, label: t('.work_schedules'), type: :multi_list, url: "/work_schedules", items: WorkSchedule.all %>
+    <% unless resource.new_record? %>
+      <!-- roles -->
+      <%= form.combo_field( :roles, parent: parent, type: :multi_list, url: "/roles", items: Role.all ) %>
 
-        <% end %>
-      </div>
+      <!-- WorkSchedules -->
+      <%= form.combo_field( :work_schedules, parent: parent, type: :multi_list, url: "/work_schedules", items: WorkSchedule.all ) %>
 
-      <%= render_component "action_button", resource: resource, delete_url: resource_url(resource), deleteable: (resource != current_user && !resource.new_record?) %>
+    <% end %>
+  </div>
 
-    </div>
-  <% end %>
+  <%= render_form_action_buttons resource: resource, delete_url: resource_url(), deleteable: !resource.new_record? %>
 <% end %>
 
