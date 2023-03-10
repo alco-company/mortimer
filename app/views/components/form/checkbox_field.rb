@@ -2,11 +2,11 @@ module Views
   #
   # the date component is a wrapper for the date_field form input field
   #
-  class Components::Form::RadioField < Phlex::HTML
+  class Components::Form::CheckboxField < Phlex::HTML
     include Phlex::Rails::Helpers::Label
-    include Phlex::Rails::Helpers::RadioButton
+    include Phlex::Rails::Helpers::Checkbox
 
-    def initialize(field, **attribs, &block )
+    def initialize( field, **attribs, &block )
       @resource = attribs[:resource]
       @assoc = attribs[:assoc] || nil
       @obj = @assoc.nil? ? @resource : @resource.send(@assoc)
@@ -21,8 +21,8 @@ module Views
 
       @field_value = attribs[:value] || @obj.send(@field)
       @field_name = @assoc.nil? ? "#{@resource.class.to_s.underscore}[#{@field}]" : "#{@resource.class.to_s.underscore}[#{@assoc}_attributes][#{@field}]"
-      
-      @buttons = attribs[:buttons] || []
+
+      @input_classes = "h-4 w-4 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded #{attribs[:css][:input] rescue ''}"
 
       @radio_field_classes = "space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5  #{attribs[:css][:radio_field] rescue ''}"
       @group_label_classes = "text-base col-span-1 font-semibold text-gray-900 #{attribs[:css][:group_label] rescue ''}"
@@ -35,35 +35,41 @@ module Views
 
     def template()
       div class: @radio_field_classes do
-        @form.label( @field, class: @group_label_classes )
-        p( class: @group_description_classes ) { @description }
-        fieldset( class: @fieldset_classes ) do
-          legend( class: @legend_classes ) {"Notification method"}
-
-          @buttons.each do |button|
-            div( class: "space-y-4" ) do
-              div( class: "flex items-top" ) do
-                @form.radio_button( @field, 
-                  button[:value], 
-                  class: @radio_button_classes, 
-                    checked: is_set?(button), 
-                    required: @required, 
-                    data: { "form-target" => "#{'focus' if @focus}" } )
-                @form.label( @field, class: @radio_button_label_classes ) { button[:label] }
-              end
-            end
+        div do
+          if @title =~ /translation missing/i
+            label( @obj, @field, class: @group_label_classes) { span( class:"translation_missing", title: @title) { @field.to_s } }
+          else
+            label( @obj, @field, @title, class: @group_label_classes)
           end
-
         end
+        div( class: "sm:col-span-2") do
+          check_box( @obj, @field, 
+            name: @field_name,
+            value: @field_value,
+            checked: is_checked?,
+            disabled: @disabled,
+            autocomplete: @autocomplete,
+            required: @required, 
+            data: @data,
+            class: @input_classes) do |f|
+              yield
+            end
+          div( class:"text-sm text-red-800" ) { @obj.errors.where(@field).map( &:full_message).join( "og ") }
+        end
+
       end          
     end
 
-    def is_set? button 
-      button[:value] == @field_value ? true : false
+    def is_checked? 
+      case @field_value.class
+      when Date, Time, DateTime, ActiveSupport::TimeWithZone; @field_value.present?
+      when String; @field_value.present? && (@field_value != "0" && @field_value != "false")
+      when Integer; @field_value != 0
+      else @field_value.present?
+      end
     rescue
       false
     end
   end
 end
 
-# text_field field_name(:asset,:assetable_attributes), :pin_code, value: employee.object.pin_code

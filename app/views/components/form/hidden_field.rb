@@ -9,7 +9,8 @@ module Views
       @resource = attribs[:resource]
       @field = field
       @assoc = attribs[:assoc] || nil
-      @field_value = attribs[:value] || ( @assoc.nil? ? @resource.send(@field) : @resource.send(@assoc).send(@field) )
+      @obj = @assoc.nil? ? @resource : @resource.send(@assoc)
+      @field_value = attribs[:value] || @obj.send(@field)
       @field_name = attribs[:name] || ( @assoc.nil? ? "#{@resource.class.to_s.underscore}[#{@field}]" : "#{@resource.class.to_s.underscore}[#{@assoc}_attributes][#{@field}]" )
     end
 

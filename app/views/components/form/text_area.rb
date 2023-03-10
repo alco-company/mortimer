@@ -14,12 +14,16 @@ module Views
       @obj = @assoc.nil? ? @resource : @resource.send(@assoc)
       @field = field
       @title = attribs[:title] || I18n.translate('activerecord.attributes.' + @resource.class.to_s.underscore + '.' + field.to_s)
+      @description = attribs[:description] || nil
       @required = attribs[:required] || false
       @focus = attribs[:focus] || false
       @disabled = attribs[:disabled]
+      @autocomplete = attribs[:autocomplete] || "off"
       @data = attribs[:data] ||  { "form-target" => "#{'focus' if @focus}" }
-      @field_value = @assoc.nil? ? @resource.send(@field) : @resource.send(@assoc).send(@field)
+
+      @field_value = attribs[:value] || @obj.send(@field)
       @field_name = @assoc.nil? ? "#{@resource.class.to_s.underscore}[#{@field}]" : "#{@resource.class.to_s.underscore}[#{@assoc}_attributes][#{@field}]"
+      
       @text_classes = "space-y-1 px-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5 #{attribs[:text_css]}"
       @label_classes = "block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2 #{attribs[:label_css]}"
       @input_classes = "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md #{attribs[:input_css]}}"
