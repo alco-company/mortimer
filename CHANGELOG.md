@@ -89,6 +89,49 @@ Entities to be added:
 
 ## DONE
 
+### 2023-03-10
+
+todays work:
+
+8f2ba50 (HEAD -> staging) handle edit column og index easy
+7d6d9de make text_field common assigns like the rest
+1bf7361 update form component to handle new fields
+b29ad57 new field components and common assigns
+cf1321c widen the index header title and description
+6daadd3 hack to handle assignments
+692717c refactor *able delegations
+c624558 remove combo_component
+811d78f refactor combo_field on location, team, product, stock_location
+10d2d2e refactor combo_select on forms users, equipment
+9a0d2ff refactor edit button on rows in lists
+2f03293 refactor search_and_more button on lists
+
+
+
+### 2023-03-09
+
+build display switch into user's profile - frontdesk vs backdesk
+refactor remaining views to use Phlex components
+
+### 2023-03-08
+
+refactor Phlex to supporting nested forms - quite a bit of work/challenge - but it is done now, no small part thanks to the great support from the Phlex team, especially Joel Drapper
+4c992e8 (HEAD -> staging) refactor equipment with new Phlex components
+235d990 refactor text_field
+ff8aaec added token_field
+fecfaf4 refactor text_area
+72bf7d5 effectively shutting down fields_for phlex
+7b62a2e refactor search_filter pane on #index
+8f6812f forgot the combo_field itself ^^
+236fdd9 refactor equipment
+95f3c9a refactor the combo(_field)
+
+### 2023-03-07
+
+de8ab40 refactor search and filter - wip
+2fbaed4 fixing misaligned action buttons
+30ed300 added equipment
+
 ### 2023-03-06
 
 show search/filter on all index pages
