@@ -29,7 +29,7 @@ module Views
           hidden_field( :account_id, value: Current.account.id )
           unless @assoc.nil?
             hidden_field( "#{@assoc}_type", value: @resource.send(@assoc).class.to_s) 
-            hidden_field( :id, assoc: :assetable) 
+            hidden_field( :id, assoc: @assoc) 
           end
           div( 
             class:"flex-1 relative ",
@@ -49,9 +49,29 @@ module Views
       render Views::Components::Form::TextField.new field, **attribs, &block
     end
 
+    def email_field(field, **attribs, &block)
+      attribs[:resource] ||= @resource
+      render Views::Components::Form::EmailField.new field, **attribs, &block
+    end
+
+    def password_field(field, **attribs, &block)
+      attribs[:resource] ||= @resource
+      render Views::Components::Form::PasswordField.new field, **attribs, &block
+    end
+
+    def number_field(field, **attribs, &block)
+      attribs[:resource] ||= @resource
+      render Views::Components::Form::NumberField.new field, **attribs, &block
+    end
+
     def token_field(field, **attribs, &block)
       attribs[:resource] ||= @resource
       render Views::Components::Form::TokenField.new field, **attribs, &block
+    end
+
+    def checkbox_field(field, **attribs, &block)
+      attribs[:resource] ||= @resource
+      render Views::Components::Form::CheckboxField.new field, **attribs, &block
     end
 
     def radio_field(field, **attribs, &block)
