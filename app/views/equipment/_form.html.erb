@@ -5,11 +5,11 @@
   <%= render_form_header( resource: resource, title: form_header_title, description: form_header_description ) %>
   <%= render_form_errors(resource: resource) if resource.errors.size > 0 %>
 
-  <!-- Name -->
-  <%= form.text_field( :name, required: true, focus: true, input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
-
   <!-- Divider container -->
   <div class="h-full py-6 space-y-6 sm:py-0 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+
+    <!-- Name -->
+    <%= form.text_field( :name, required: true, focus: true, input_css: "block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md") %>
 
     <!-- access_token -->
     <%= form.token_field( :access_token, assoc: :assetable) %>

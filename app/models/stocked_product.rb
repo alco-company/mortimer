@@ -17,6 +17,11 @@ class StockedProduct < AbstractResource
     StockedProduct.all.joins(:asset)
   end
 
+  def combo_values_for_stock_id
+    return [{id: nil, name: ''}] if stock.nil?
+    [{id: stock.id, name: stock.name}]
+  end
+
   def nbr_pallets
     q = stock_item_transactions.pluck :state
     p = 0
